@@ -1,6 +1,11 @@
 #include "game.h"
 
-Game::Game(int hasGraphics){
+bool Game::Init(char *config_file){
+	return true;
+}
+
+Game::Game(/*int hasGraphics*/){
+#if 0
 	if(hasGraphics){
 		allegro_init();
 		install_keyboard();
@@ -19,10 +24,12 @@ Game::Game(int hasGraphics){
 	clear_keybuf();
 	//Inniting double buffering crap;
 	buffy = create_bitmap(SCREEN_W, SCREEN_H);
+#endif
 }
 
 
 void Game::play(void){
+#if 0
 	while( !(key[KEY_ESC]) ){
 		the_ball->move();
 		if(key[KEY_LEFT]){
@@ -37,6 +44,7 @@ void Game::play(void){
 		the_board->display(buffy);
 		blit(buffy, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 	}
+#endif
 }
 Game::~Game(void){
 	//delete the_ball;

@@ -1,7 +1,11 @@
 #ifndef __GAME_H__
 #define __GAME_H__
 
+//Start of arcanoid incudes
+#include "KeyLogger.h"
 #include "allegro.h"
+
+//Various includes TODO: elliminate all of them.
 #include "ball.h"
 #include "board.h"
 
@@ -15,7 +19,8 @@ private:
 	BITMAP *buffy;
 
 public:
-	Game(int hasGraphics);
+	Game(void);
+	bool Init(char *config_file);
 	void play(void);
 	~Game(void);
 };

@@ -6,7 +6,8 @@
 
 int main( int argc, char *argv[]){
 
-	Game *the_game = new Game(GRAPHICS);
+	Game *the_game = new Game();
+
 
 	the_game->play();
 /*

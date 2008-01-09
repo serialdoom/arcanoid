@@ -2,6 +2,8 @@
  *author: koutsop
  */
 
+
+
 #ifndef BRICK_H
 #define BRICK_H
 

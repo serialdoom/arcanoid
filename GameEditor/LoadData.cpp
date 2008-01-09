@@ -20,7 +20,7 @@ LoadData::LoadData(void){
 }
 LoadData::~LoadData(void){}
 
-//auth 8a einai dikia ths 
+
 void LoadData::LoadFileNameToWrite(void){
 	fileNameToWrite = get_config_string("FILE_NAME_CFG", "file_name_file", "");
 	if( !fileNameToWrite.compare("") ) { assert(0); } 

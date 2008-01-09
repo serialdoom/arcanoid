@@ -2,7 +2,6 @@
  * author: koutsop
  */
 
-//TODO exw na pros8esw tis metanlites gia to coortX kai coortY you ok_cancel
 #ifndef LOADDATA_H
 #define LOADDATA_H
 

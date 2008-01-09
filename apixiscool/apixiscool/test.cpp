@@ -6,7 +6,7 @@
 
 int main( int argc, char *argv[]){
 
-	Game *the_game = new Game();
+	Game *the_game = new Game(1);
 
 
 	the_game->play();

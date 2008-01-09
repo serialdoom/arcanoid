@@ -19,7 +19,7 @@ private:
 	BITMAP *buffy;
 
 public:
-	Game(void);
+	Game(int x);
 	bool Init(char *config_file);
 	void play(void);
 	~Game(void);

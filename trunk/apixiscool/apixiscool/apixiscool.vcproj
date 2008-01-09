@@ -198,7 +198,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\koutsop.cpp"
+				RelativePath=".\KeyLogger.cpp"
 				>
 			</File>
 			<File
@@ -238,6 +238,10 @@
 			</File>
 			<File
 				RelativePath=".\InputManager.h"
+				>
+			</File>
+			<File
+				RelativePath=".\KeyLogger.h"
 				>
 			</File>
 			<File

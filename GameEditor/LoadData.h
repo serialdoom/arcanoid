@@ -16,7 +16,6 @@
 #include "BricksFilm.h"
 
 
-
 using namespace std;
 
 class LoadData {

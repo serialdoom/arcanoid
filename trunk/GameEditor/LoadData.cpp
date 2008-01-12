@@ -125,7 +125,6 @@ void LoadData::LoadBricksFilm(BricksFilm& film){
 	return;
 }
 const char * LoadData::AppendIntegerToString( string str, int i){
-	assert( (str.size()+ i) < MAX_TMP_SIZE);
 	sprintf_s(tmpString, MAX_TMP_SIZE, "%s%d", str.c_str(), i);
 	return tmpString;
 }

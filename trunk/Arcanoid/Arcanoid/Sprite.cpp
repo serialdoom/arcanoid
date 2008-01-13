@@ -1,25 +1,33 @@
-/* Sprite implementation*/
-
-/* ama kanw auto to include einai ok. 
-   des to Sprite.h gia more info */
-#include <allegro.h>
+/*
+ * author: koutsop
+ */
 
 #include "Sprite.h"
 
-Sprite::Sprite(){
-	return;
+Sprite::Sprite(int x, int y, AnimationFilm* film) : currFilm(film){
+	isVisible	= true;
+	frameNo		= currFilm->GetTotalFrames();
+	SetFrame(0);
+	SetPointUpLeft(x, y);
 }
 
-/*
-int Sprite::LoadBitmap(const char *_bmp_name){
-	if(!(bmp = load_bitmap(_bmp_name, 0)) ){
-		allegro_message("Unable to load the Ball.");
-		exit(1);
+
+Sprite::Sprite(Point point, AnimationFilm* film) : currFilm(film){
+	SetPointUpLeft(point);
+}
+
+
+Sprite::Sprite(const Point * const point, AnimationFilm* film) : currFilm(film){
+	SetPointUpLeft(point);
+}
+
+void Sprite::SetFrame (char i) {	
+	if (i != frameNo) {
+		assert(i < currFilm->GetTotalFrames());
+		const Oblong *tmp  = currFilm->GetFrameBox(frameNo = i);
+		this->SetWidth( tmp->GetWidth() );
+		this->SetHeight( tmp->GetHeight() );
+		this->SetPointUpLeft( tmp->GetPointUpLeft() );
 	}
-	return 0;
-}
-*/
-
-Sprite::~Sprite(){
 	return;
 }

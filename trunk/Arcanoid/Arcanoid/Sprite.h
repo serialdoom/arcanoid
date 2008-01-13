@@ -1,20 +1,37 @@
-/* dummy sprite header  for the implementation of colision checker.*/
+/*
+ * author: koutsop
+ */
 
-#ifndef __SPRITE_H__
-#define __SPRITE_H__
+#ifndef SPRITE_H
+#define SPRITE_H
 
-// ama kanw auto to include gamietai. Lol.
-//#include <allegro.h>
+#include <cassert>
+#include <allegro.h>		//Eidea den exw giati xriazete ala stamata na peta la8oi h allgero
 
-class Sprite {
+#include "Point.h"
+#include "Oblong.h"
+#include "AnimationFilm.h"
+
+class Sprite : public Oblong {
 private:
-//	BITMAP *bmp;
+	char		frameNo;
+    bool		isVisible;
+    AnimationFilm*	currFilm;
+
 public:
-	Sprite();
-//	int LoadBitmap(const char *_bmp_name);
-	virtual ~Sprite();
+    char GetFrame(void)		const { return frameNo; }
+	bool IsVisible(void)	const { return isVisible; }
+
+	void SetFrame(char i);
+    void SetVisibility(bool v) { isVisible = v; }
+    
+    bool CollisionCheck(Sprite* s);
+
+	Sprite(Point point, AnimationFilm* film);
+	Sprite(int x, int y, AnimationFilm* film);
+	Sprite(const Point * const point, AnimationFilm* film);
+
+	virtual~Sprite(){}
 };
-
-
 
 #endif

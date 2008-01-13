@@ -59,7 +59,7 @@ bool TerrainBuilder::Load(const char *filename){
 								getNumber(buffy, PREFIX_TIMES_TO_BREAK) //Times to break
 								);
 		KeyLogger::Write("DONE !!!\n");
-std::cout << "I have a new brick with " << newBrick->frameNo << " times to break: " << newBrick->timesToBreak << " and score : " << newBrick->score << std::endl;
+//std::cout << "I have a new brick with " << newBrick->frameNo << " times to break: " << newBrick->timesToBreak << " and score : " << newBrick->score << std::endl;
 		/*
 		newBrick = new Brick(	getNumber(buffy, PREFIX_FRAME_NUMBER),
 								new Point(getNumber(buffy, PREFIX_UP_POINT_X), getNumber(buffy, PREFIX_UP_POINT_Y)),

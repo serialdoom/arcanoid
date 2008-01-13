@@ -1,5 +1,9 @@
 /* Sprite implementation*/
 
+/* ama kanw auto to include einai ok. 
+   des to Sprite.h gia more info */
+#include <allegro.h>
+
 #include "Sprite.h"
 
 Sprite::Sprite(){

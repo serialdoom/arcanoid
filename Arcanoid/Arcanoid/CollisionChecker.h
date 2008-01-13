@@ -3,9 +3,14 @@
 #ifndef __COLLISIONCHECKER_H_
 #define __COLLISIONCHECKER_H_
 
-#include "Sprite.h"
+
+
 #include <list>
 #include <iostream>
+
+#include "Sprite.h"
+
+
 
 class CollisionChecker {
 private:

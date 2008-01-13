@@ -3,8 +3,8 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <allegro.h>
 
+#include <allegro.h>
 
 #include "KeyLogger.h"
 #include "TerrainBuilder.h"

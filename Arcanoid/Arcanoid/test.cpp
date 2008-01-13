@@ -1,6 +1,6 @@
 /* Testing file for Acranoid project */
 
-#include <allegro.h>
+
 #include "Game.h"
 
 int main(){

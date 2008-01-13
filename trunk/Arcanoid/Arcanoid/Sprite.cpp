@@ -5,6 +5,7 @@
 #include "Sprite.h"
 
 Sprite::Sprite(int x, int y, AnimationFilm* film) : currFilm(film){
+	assert(film);
 	isVisible	= true;
 	frameNo		= currFilm->GetTotalFrames();
 	SetFrame(0);
@@ -13,11 +14,19 @@ Sprite::Sprite(int x, int y, AnimationFilm* film) : currFilm(film){
 
 
 Sprite::Sprite(Point point, AnimationFilm* film) : currFilm(film){
+	assert(film);
+	isVisible	= true;
+	frameNo		= currFilm->GetTotalFrames();
+	SetFrame(0);
 	SetPointUpLeft(point);
 }
 
 
 Sprite::Sprite(const Point * const point, AnimationFilm* film) : currFilm(film){
+	assert(film);
+	isVisible	= true;
+	frameNo		= currFilm->GetTotalFrames();
+	SetFrame(0);
 	SetPointUpLeft(point);
 }
 

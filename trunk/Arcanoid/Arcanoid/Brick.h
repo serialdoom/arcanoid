@@ -13,26 +13,18 @@
 #include "Point.h"
 #include "Sprite.h"
 #include "AnimationFilm.h"
-#include "KeyLogger.h"
 
 using namespace std;
 
 class Brick : public Sprite{
 private:
-//	int  score;
-//	char timesToBreak; 
-//	bool canBreak, isActive;	
+	int  score;
+	char timesToBreak; 
+	bool canBreak, isActive;	
 	//To isActive 8a to xriastoume gia na 3eroume an ena brick tou pinaka exei
 	//sxediastei apo ton xristi h' oxi.
 
 public:
-
-	//Dbugging purposes
-	int  score;
-	char timesToBreak; 
-	bool canBreak, isActive;	
-
-
 	//constructor
 	Brick(	int x, int y,
 			AnimationFilm* film,

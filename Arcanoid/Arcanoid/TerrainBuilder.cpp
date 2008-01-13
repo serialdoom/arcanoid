@@ -32,12 +32,13 @@ bool TerrainBuilder::Load(const char *filename){
 
 
 	// DEBUG:
-	KeyLogger::Write("Load::Opening file \"%s\" ...", filename);
+	KeyLogger::Write("Opening file \"%s\" ...", filename);
 	input.open(filename);
 	if(!input.good()) {
 		KeyLogger::Write("FAIL.\n");
 		exit(1);
 	}
+	KeyLogger::Write("DONE.\n");
 	while(input.good()){
 		memset(buffy, 0, BUFF_SZ);
 		input.getline(buffy, BUFF_SZ, '\n');
@@ -61,7 +62,7 @@ bool TerrainBuilder::Load(const char *filename){
 		//KeyLogger::Write("The string has the value :%s:\n", test);
 		// DEBUG: std::cout << "I have a new brick with " << newBrick->frameNum << " times to break: " << newBrick->timesToBreak << " and score : " << newBrick->score << std::endl; 
 	}
-	std::cout << "You have :" << counter << " bricks." << std::endl;
+	//DEBUG:: std::cout << "You have :" << counter << " bricks." << std::endl;
 	return true;
 }
 
@@ -74,7 +75,7 @@ int TerrainBuilder::getNumber(char *buffer, const char *pattern){
 	tmp = strstr(buffer, pattern);
 	tmp += strlen(pattern);
 	counter = 0;
-	KeyLogger::Write("The string im trying to print is \"%s\" and  pattern \"%s\".\n", buffer, pattern);
+	//DEBUG:: KeyLogger::Write("The string im trying to print is \"%s\" and  pattern \"%s\".\n", buffer, pattern);
 	while(tmp && isdigit(*tmp)) temp[counter++] = *(tmp++);
 	return atoi(temp);
 }

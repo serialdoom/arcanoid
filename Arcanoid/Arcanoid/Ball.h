@@ -18,6 +18,6 @@ public:
 	bool isActive();
 	~Ball();
 };
-
 */
+
 #endif

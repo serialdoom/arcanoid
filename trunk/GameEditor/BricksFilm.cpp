@@ -45,6 +45,6 @@ Brick* BricksFilm::GetBrick(unsigned int i) const {
 	return bricks.at(i);
 }
 
-brickContainer BricksFilm::GetAllBricks(void)	const{
+brickContainer BricksFilm::GetAllBricks(void) const{
 	return bricks;
 }

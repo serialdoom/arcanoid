@@ -7,52 +7,60 @@
 
 #include <string>
 #include <cassert>
+#include <allegro.h>	//Eidea den exw giati xriazete ala stamata na peta la8oi h allgero
 
 #include "Oblong.h"
 #include "Point.h"
 #include "Sprite.h"
+#include "AnimationFilm.h"
 
 using namespace std;
 
-class Brick : public Oblong, public Sprite{
+class Brick : public Sprite{
 private:
-	int frameNum, timesToBreak, score;
+	int  score;
+	char timesToBreak; 
 	bool canBreak, isActive;	
 	//To isActive 8a to xriastoume gia na 3eroume an ena brick tou pinaka exei
 	//sxediastei apo ton xristi h' oxi.
 
 public:
 	//constructor
-	Brick(	const int _frameNum, 
-			const Point _up, 
-			const Point _down, 
-			const int w, const int h, 
+	Brick(	int x, int y,
+			AnimationFilm* film,
+			const int w, const int h,
+			const int _score,
+			const bool _isActive,
 			const bool _canBreak, 
-			const int _timesToBreak, 
-			const int _score, 
-			const bool _isActive);
+			const char _timesToBreak );
 
-	//overload constructor
-	Brick(	const int _frameNum, 
-			const Point * const _up, 
-			const Point * const _down, 
-			const int w, const int h, 
+	//overload constructor 1
+	Brick(	const Point  point,
+			AnimationFilm* film,
+			const int w, const int h,
+			const int _score,
+			const bool _isActive,
 			const bool _canBreak, 
-			const int _timesToBreak, 
-			const int _score, 
-			const bool _isActive);
+			const char _timesToBreak ); 
+
+	//overload constructor 2
+	Brick(	const Point * const point,
+			AnimationFilm* film,
+			const int w, const int h,
+			const int _score,
+			const bool _isActive,
+			const bool _canBreak, 
+			const char _timesToBreak );
 
 	//destructor
-	~Brick(void);
+	~Brick(void){}
 
 	int GetScore(void)			const { return score; }
-	int GetFrameNum(void)		const { return frameNum; }
 	bool GetCanBreak(void)		const { return canBreak; }
 	bool IsActive(void)			const { return isActive; }
 	int GetTimesToBreak(void)	const { return timesToBreak; }
 
 	void SetScore(const int score)	{ this->score = score; }
-	void SetFrameNum(const int num)	{ frameNum = num; }
 	void SetCanBreak(const bool cn) { canBreak = cn; }
 	void SetIsActive(const bool is) { isActive = is; }
 	void SetTimesToBreak(const int times) {timesToBreak = times; }

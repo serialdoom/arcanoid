@@ -3,6 +3,7 @@
 #ifndef __STATE_HOLDER_H__
 #define __STATE_HOLDER_H__
 
+
 class StateHolder {
 	enum state {STATE_RUNNING, STATE_PAUSED, STATE_FINISHED};
 	static state theState;

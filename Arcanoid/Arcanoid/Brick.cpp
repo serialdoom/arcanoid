@@ -3,43 +3,68 @@
  */
 #include "Brick.h"
 
+	int  score;
+	char timesToBreak; 
+	bool canBreak, isActive;	
 
-Brick::Brick(	const int _frameNum, 
-				const Point up, 
-				const Point down, 
-				const int w, const int h, 
+
+//constructor
+Brick::Brick(	int x, int y,
+				AnimationFilm* film,
+				const int w, const int h,
+				const int _score,
+				const bool _isActive,
 				const bool _canBreak, 
-				const int _timesToBreak, 
-				const int _score, 
-				const bool _isActive) :	frameNum(_frameNum),
-										Oblong(up, down, w, h),
-										canBreak(_canBreak),
-										timesToBreak(_timesToBreak),
-										score(_score),
-										isActive(_isActive){ }
+				const char _timesToBreak ) :	Sprite(x, y, film),								
+												score(_score),
+												isActive(_isActive),
+												canBreak(_canBreak),
+												timesToBreak(_timesToBreak)
+{
+	SetWidth(w);
+	SetHeight(h);
+}
 
-Brick::Brick(	const int _frameNum, 
-				const Point * const up, 
-				const Point * const down, 
-				const int w, const int h, 
+
+
+//overload constructor 1
+Brick::Brick(	const Point  point,
+				AnimationFilm* film,
+				const int w, const int h,
+				const int _score,
+				const bool _isActive,
 				const bool _canBreak, 
-				const int _timesToBreak, 
-				const int _score, 
-				const bool _isActive) :	frameNum(_frameNum),
-										Oblong(up, down, w, h),
-										canBreak(_canBreak),
-										timesToBreak(_timesToBreak),
-										score(_score),
-										isActive(_isActive){ }
+				const char _timesToBreak ) :	Sprite(point, film),
+												score(_score),
+												isActive(_isActive),
+												canBreak(_canBreak),
+												timesToBreak(_timesToBreak)
+{
+	SetWidth(w);
+	SetHeight(h);
+}
 
-
-Brick::~Brick(void){}
-
+//overload constructor 2
+Brick::Brick(	const Point * const point,
+				AnimationFilm* film,
+				const int w, const int h,
+				const int _score,
+				const bool _isActive,
+				const bool _canBreak, 
+				const char _timesToBreak ) :	Sprite(point, film),
+												score(_score),
+												isActive(_isActive),
+												canBreak(_canBreak),
+												timesToBreak(_timesToBreak)
+{
+	SetWidth(w);
+	SetHeight(h);
+}
 
 void Brick::Copy(Brick* brick){
 	assert(brick);
 	
-	this->SetFrameNum( brick->GetFrameNum() );
+	this->SetFrame( brick->GetFrame() );
 	this->GetPointUpLeft().SetX( brick->GetPointUpLeft().GetX() );
 	this->GetPointUpLeft().SetY( brick->GetPointUpLeft().GetY() );
 	
@@ -57,3 +82,4 @@ void Brick::Copy(Brick* brick){
 
 	return;
 }
+

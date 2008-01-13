@@ -30,15 +30,17 @@ public:
 			AnimationFilm* film,
 			const int w, const int h,
 			const int _score,
+			const char frameNo,
 			const bool _isActive,
 			const bool _canBreak, 
-			const char _timesToBreak );
+			const char _timesToBreak ); 
 
 	//overload constructor 1
 	Brick(	const Point  point,
 			AnimationFilm* film,
 			const int w, const int h,
 			const int _score,
+			const char frameNo,
 			const bool _isActive,
 			const bool _canBreak, 
 			const char _timesToBreak ); 
@@ -48,9 +50,10 @@ public:
 			AnimationFilm* film,
 			const int w, const int h,
 			const int _score,
+			const char frameNo,
 			const bool _isActive,
 			const bool _canBreak, 
-			const char _timesToBreak );
+			const char _timesToBreak ); 
 
 	//destructor
 	~Brick(void){}

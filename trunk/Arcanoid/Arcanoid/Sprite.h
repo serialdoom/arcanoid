@@ -14,12 +14,19 @@
 
 class Sprite : public Oblong {
 private:
-	char		frameNo;
-    bool		isVisible;
-    AnimationFilm*	currFilm;
+//	char		frameNo;
+//    bool		isVisible;
+//    AnimationFilm*	currFilm;
 
 public:
-    char GetFrame(void)		const { return frameNo; }
+
+	//Debugging
+		char		frameNo;
+    bool		isVisible;
+    AnimationFilm*	currFilm;
+	//end
+	
+	char GetFrame(void)		const { return frameNo; }
 	bool IsVisible(void)	const { return isVisible; }
 
 	void SetFrame(char i);

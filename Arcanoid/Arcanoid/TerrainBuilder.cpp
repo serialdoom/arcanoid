@@ -31,9 +31,13 @@ bool TerrainBuilder::Load(const char *filename){
 	Brick *newBrick = 0;
 
 
-	// DEBUG: std::cout << "Opening file\n";
+	// DEBUG:
+	KeyLogger::Write("Load::Opening file \"%s\" ...", filename);
 	input.open(filename);
-	if(!input.good()) return false;
+	if(!input.good()) {
+		KeyLogger::Write("FAIL.\n");
+		exit(1);
+	}
 	while(input.good()){
 		memset(buffy, 0, BUFF_SZ);
 		input.getline(buffy, BUFF_SZ, '\n');
@@ -66,9 +70,11 @@ int TerrainBuilder::getNumber(char *buffer, const char *pattern){
 	char temp[BUFF_SZ];
 	int counter = 0;
 
+	memset(temp, 0, BUFF_SZ);
 	tmp = strstr(buffer, pattern);
 	tmp += strlen(pattern);
 	counter = 0;
+	KeyLogger::Write("The string im trying to print is \"%s\" and  pattern \"%s\".\n", buffer, pattern);
 	while(tmp && isdigit(*tmp)) temp[counter++] = *(tmp++);
 	return atoi(temp);
 }

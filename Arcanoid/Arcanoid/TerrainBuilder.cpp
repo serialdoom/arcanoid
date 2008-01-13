@@ -47,6 +47,20 @@ bool TerrainBuilder::Load(const char *filename){
 
 		++counter;
 		// Get the frame number
+		KeyLogger::Write("Writing the bricks....\n");
+		newBrick = new Brick(	new Point(getNumber(buffy, PREFIX_UP_POINT_X), getNumber(buffy, PREFIX_UP_POINT_Y)), //point
+								0, //AnimationFilm
+								getNumber(buffy, PREFIX_WIDTH), // w
+								getNumber(buffy, PREFIX_HEIGHT), //h
+								getNumber(buffy, PREFIX_SCORE), //score
+								getNumber(buffy, PREFIX_FRAME_NUMBER), //frameNo
+								true, // isActive
+								(getNumber(buffy, PREFIX_CAN_BREAK))?(true):(false), //CanBreak
+								getNumber(buffy, PREFIX_TIMES_TO_BREAK) //Times to break
+								);
+		KeyLogger::Write("DONE !!!\n");
+std::cout << "I have a new brick with " << newBrick->frameNo << " times to break: " << newBrick->timesToBreak << " and score : " << newBrick->score << std::endl;
+		/*
 		newBrick = new Brick(	getNumber(buffy, PREFIX_FRAME_NUMBER),
 								new Point(getNumber(buffy, PREFIX_UP_POINT_X), getNumber(buffy, PREFIX_UP_POINT_Y)),
 								new Point(getNumber(buffy, PREFIX_DOWN_POINT_X), getNumber(buffy, PREFIX_DOWN_POINT_Y)),
@@ -57,6 +71,7 @@ bool TerrainBuilder::Load(const char *filename){
 								getNumber(buffy, PREFIX_SCORE),
 								true // _isActive
 								);
+*/
 		cc->AddUnmovable(dynamic_cast<Sprite *>(newBrick));
 		sp->Insert(test = AppendIntegerToString(BRICK_NAME_PREFIX, counter), dynamic_cast<Sprite *>(newBrick));
 		//KeyLogger::Write("The string has the value :%s:\n", test);

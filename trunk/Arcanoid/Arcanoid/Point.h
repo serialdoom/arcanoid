@@ -50,7 +50,7 @@ public:
 	 */
 	 void SetY(const int y) { this->y = y; }
 
-	 /* @target: Kanei seihrisei an duo points einai idia.
+	 /* @target: Kanei seighrisei an duo points einai idia.
 	  * @return: true an ta duo point exoun to idio x,y ena pors ena
 	  *		     false an diaferei ena apo ta x,y
 	  */

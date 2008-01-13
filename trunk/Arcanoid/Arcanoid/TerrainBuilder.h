@@ -2,14 +2,16 @@
 #ifndef __TERRAINBUILDER_H__
 #define __TERRAINBUILDER_H__
 
+#include <fstream>
+#include <cstring>
+#include <cstdlib>
+
+
 #include "CollisionChecker.h"
 #include "SpriteHolder.h"
 #include "Point.h"
 #include "Brick.h"
 #include "KeyLogger.h"
-#include <fstream>
-#include <cstring>
-#include <cstdlib>
 
 class TerrainBuilder {
 private:

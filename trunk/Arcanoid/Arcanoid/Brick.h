@@ -7,6 +7,7 @@
 
 #include <string>
 #include <cassert>
+
 #include "Oblong.h"
 #include "Point.h"
 #include "Sprite.h"

@@ -13,6 +13,7 @@ Brick::Brick(	int x, int y,
 				AnimationFilm* film,
 				const int w, const int h,
 				const int _score,
+				const char frameNo,
 				const bool _isActive,
 				const bool _canBreak, 
 				const char _timesToBreak ) :	Sprite(x, y, film),								
@@ -23,6 +24,7 @@ Brick::Brick(	int x, int y,
 {
 	SetWidth(w);
 	SetHeight(h);
+	SetFrame(frameNo);
 }
 
 
@@ -32,6 +34,7 @@ Brick::Brick(	const Point  point,
 				AnimationFilm* film,
 				const int w, const int h,
 				const int _score,
+				const char frameNo,
 				const bool _isActive,
 				const bool _canBreak, 
 				const char _timesToBreak ) :	Sprite(point, film),
@@ -42,6 +45,7 @@ Brick::Brick(	const Point  point,
 {
 	SetWidth(w);
 	SetHeight(h);
+	SetFrame(frameNo);
 }
 
 //overload constructor 2
@@ -49,6 +53,7 @@ Brick::Brick(	const Point * const point,
 				AnimationFilm* film,
 				const int w, const int h,
 				const int _score,
+				const char frameNo,
 				const bool _isActive,
 				const bool _canBreak, 
 				const char _timesToBreak ) :	Sprite(point, film),
@@ -59,6 +64,7 @@ Brick::Brick(	const Point * const point,
 {
 	SetWidth(w);
 	SetHeight(h);
+	SetFrame(frameNo);
 }
 
 void Brick::Copy(Brick* brick){

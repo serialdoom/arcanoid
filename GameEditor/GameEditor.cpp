@@ -11,7 +11,9 @@ GameEditor::GameEditor(void){
 	areLoadData = false;
 }
 
-GameEditor::~GameEditor(void){}
+GameEditor::~GameEditor(void){
+	bitmaps.clear();
+}
 
 
 void GameEditor::SwitchIn(){

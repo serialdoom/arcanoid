@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameEditor", "GameEditor.vcproj", "{E5B494E2-767F-4DA2-AA3B-739575A0C080}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup1", "..\Setup1\Setup1.vdproj", "{1DA7D930-0C70-4065-BEFB-504FDA9FE607}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -13,6 +15,8 @@ Global
 		{E5B494E2-767F-4DA2-AA3B-739575A0C080}.Debug|Win32.Build.0 = Debug|Win32
 		{E5B494E2-767F-4DA2-AA3B-739575A0C080}.Release|Win32.ActiveCfg = Release|Win32
 		{E5B494E2-767F-4DA2-AA3B-739575A0C080}.Release|Win32.Build.0 = Release|Win32
+		{1DA7D930-0C70-4065-BEFB-504FDA9FE607}.Debug|Win32.ActiveCfg = Debug
+		{1DA7D930-0C70-4065-BEFB-504FDA9FE607}.Release|Win32.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

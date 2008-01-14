@@ -49,7 +49,8 @@ int main(){
 /////////////////////////////////////////////////////////////////////
 //xrhsh ths BitmapLoad
 
-	BitmapLoader bitmaps(filmsInfo);
+	BitmapLoader bitmaps;
+	bitmaps.LoadFilms(filmsInfo);
 	start = test.begin();
 
 	int i =  0;

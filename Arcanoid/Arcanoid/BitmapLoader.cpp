@@ -4,19 +4,6 @@
 
 #include "BitmapLoader.h"
 
-//cunstructor
-BitmapLoader::BitmapLoader(const LoadFilmsInfo & filmsInfo){
-	FilmsInfoMap films				= filmsInfo.GetFilmsInfo();
-	FilmsInfoMap::iterator start	= films.begin();
-	FilmsInfoMap::iterator end		= films.end();
-	
-	while( start != end ){			//Kanw load ola ta bitmap pou uparxoun.
-		Load( (*start).second.second.c_str() );
-		start++;
-	}
-}//end cunstructor
-
-////////////////////////////////////////////////////////////////////////////
 //destructor
 BitmapLoader::~BitmapLoader(void){ 
 	// Destroy all bitmaps in the map.
@@ -28,6 +15,19 @@ BitmapLoader::~BitmapLoader(void){
 		start++;
 	}
 	bitmaps.clear();
+}
+
+////////////////////////////////////////////////////////////////////////////
+
+void BitmapLoader::LoadFilms(const LoadFilmsInfo &filmsInfo){
+	FilmsInfoMap films				= filmsInfo.GetFilmsInfo();
+	FilmsInfoMap::iterator start	= films.begin();
+	FilmsInfoMap::iterator end		= films.end();
+	
+	while( start != end ){			//Kanw load ola ta bitmap pou uparxoun.
+		Load( (*start).second.second.c_str() );
+		start++;
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////////

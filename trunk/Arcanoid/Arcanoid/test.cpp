@@ -49,21 +49,37 @@ int main(){
 /////////////////////////////////////////////////////////////////////
 //xrhsh ths BitmapLoad
 
-	BitmapLoader bitmpas(filmsInfo);
+	BitmapLoader bitmaps(filmsInfo);
 	start = test.begin();
 
 	int i =  0;
 	while( start != end ){
-		cout<<i<<endl;
-		i++;
-		blit( bitmpas.Load( (*start).second.second.c_str() ) , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+		blit( bitmaps.Load( (*start).second.second.c_str() ) , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 		start++;
 	}
 
 	readkey();
 
 
-	//AnimationFilmHolder animationFilmHolder("./configs_files/bboxes/", filmsInfo);
+	AnimationFilmHolder holder("./configs_files/bboxes/", filmsInfo, bitmaps);
+
+	const AnimationFilm * film = holder.GetFilm("bricksFilm");
+	const Oblong * rect = film->GetFrameBox(0);
+
+	cout<<"===============================\n"<<endl;
+	cout<<rect->GetPointUpLeft().GetX()<<endl;
+	cout<<rect->GetPointUpLeft().GetY()<<endl;
+	cout<<rect->GetPointDownRight().GetX()<<endl;
+	cout<<rect->GetPointDownRight().GetY()<<endl;
+	cout<<rect->GetWidth()<<endl;
+	cout<<rect->GetHeight()<<endl;
+	cout<<film->GetId()<<endl;
+
+	int filmNo = film->GetTotalFrames();
+	cout<<">"<<filmNo<<"<"<<endl;
+
+
+	readkey();
 
 	return 0;
 }

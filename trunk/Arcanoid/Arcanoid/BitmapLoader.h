@@ -39,7 +39,7 @@ public:
 	/* @target: na kanei isagwgh mesa sto map ena neo zeugarh string bitmap
 	 * @return: to bitmap pou isagame. An uparxei idi mesa epistrefoume to idio
 	 */
-    BITMAP * Load (const char* path);
+    BITMAP * Load(const char* path);
 
     BitmapLoader(const LoadFilmsInfo &filmsInfo);
     ~BitmapLoader();

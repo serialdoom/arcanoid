@@ -318,10 +318,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\films.cfg"
-				>
-			</File>
-			<File
 				RelativePath=".\game.cfg"
 				>
 			</File>

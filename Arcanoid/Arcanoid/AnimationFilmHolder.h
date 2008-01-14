@@ -8,6 +8,7 @@
 #include <string>
 #include <cassert>
 
+#include "LoadFilmsInfo.h"
 #include "AnimationFilm.h"
 
 using std::string;

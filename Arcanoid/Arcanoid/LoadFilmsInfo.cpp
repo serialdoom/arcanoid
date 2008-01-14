@@ -5,6 +5,7 @@
 #include <allegro.h>
 #include "LoadFilmsInfo.h"
 
+
 #define MAX_TMP_SIZE 100
 static char tmpString[MAX_TMP_SIZE]; //tmp table gia to append string me ari8mou
 
@@ -16,25 +17,21 @@ static char * Append( string str, int i){
 }
 
 //////////////////////////////////////////////////////////////////////////////
-
+//constructor
 LoadFilmsInfo::LoadFilmsInfo(const char* path){
+	filmsNo = 0;
 	assert(path);
 	set_config_file(path);
-
+	LoadInfo();
 }
 
 //////////////////////////////////////////////////////////////////////////////
-
+//destructor
 LoadFilmsInfo::~LoadFilmsInfo(void){
-	FilmsMap::iterator start	= filmsMap.begin();
-	FilmsMap::iterator end		= filmsMap.end();
-
-	while( start != end ){			//Clear to eswteriko map apo to Arxiko mas map
-		(*start).second.clear();
-		start++;
-	}
-	filmsMap.clear();
+	filmsInfo.clear();
 }//end of cunstructor
+
+//////////////////////////////////////////////////////////////////////////////
 
 /*
 #[FILMS]
@@ -44,5 +41,14 @@ LoadFilmsInfo::~LoadFilmsInfo(void){
 #bboxes_i	= string path
 */
 void LoadFilmsInfo::LoadInfo(void){
-	
+	filmsNo = get_config_int("FILMS", "number_of_films", -1);	//O ari8mos ton film pou uparxoun
+	assert( filmsNo != -1 );
+
+	for(int i = 0; i < filmsNo; i++){			//Diabazw thn info gia to ka8e film
+		string id		= get_config_string("FILMS", Append("id_", i), "");
+		string bboxe	= get_config_string("FILMS", Append("bboxes_", i), "");	
+		string bitmap	= get_config_string("FILMS", Append("bitmap_", i), "");	
+		filmsInfo.insert( make_pair(id, std::pair<string, string>(bboxe, bitmap)) );
+	}//end for
+	return;
 }

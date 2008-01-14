@@ -2,7 +2,7 @@
  * author: koutsop
  */
 
-#ifndef LOADFILMSINFO_H
+#ifndef LOADFIMLSINFO_H
 #define LOADFIMLSINFO_H
 
 #include <map>

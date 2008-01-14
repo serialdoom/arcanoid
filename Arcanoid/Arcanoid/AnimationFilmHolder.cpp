@@ -1,7 +1,7 @@
 /*
  * author: koutsop
  */
-#include <allegro.h>
+//TODO:Line 69
 #include "AnimationFilmHolder.h"
 
 
@@ -22,60 +22,52 @@ AnimationFilmHolder::~AnimationFilmHolder(void){
 
 /////////////////////////////////////////////////////////////////////////////
 
-AnimationFilmHolder::AnimationFilmHolder(const char* path){
-	assert(path);
-	set_config_file(path);
-	LoadData();
+AnimationFilmHolder::AnimationFilmHolder(const string &path, const LoadFilmsInfo &filmsInfo){
+	FilmsInfoMap films				= filmsInfo.GetFilmsInfo();
+	FilmsInfoMap::iterator start	= films.begin();
+	FilmsInfoMap::iterator end		= films.end();
+
+	while( start != end ){
+		set_config_file( (path + (*start).second.first).c_str() );
+		LoadData((*start).first);
+		start++;
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////
 
-void AnimationFilmHolder::LoadData(void){
-	int filmsNo = get_config_int("FILMS", "number_of_films", -1);		//O ari8mos ton film pou uparxoun
-	assert( filmsNo != -1 );
+void AnimationFilmHolder::LoadData(string id){
+	int framesNo = get_config_int("BBOXES", "frames", -1);		//O ari8mos ton film pou uparxoun
+	assert( framesNo != -1 );
 
-	string filmsPath = get_config_string("FILMS", "films_path", "");	//Pou briskontai ta films
-	if( !filmsPath.compare("") ) { assert(0); }
-
-	for( int i = 0; i < filmsNo; i++ ){ LoadFilm(filmsPath, i); }
+	for( int i = 0; i < framesNo; i++ )
+		LoadFilm(id, i);
 	return;
 }
 
 ////////////////////////////////////////////////////////////////////////////
 /*
 H domh pou exei to configuretion file gia ta films
-[FILMS]
-number_of_films = integer
-films_path		= string	#gia to blit ./images/film_name_i
-film_name_i		= string
-snapshots_num_i	= integer
-film_x_i_j		= integer
-film_y_i_j		= integer
-film_width_i_j	= integer
-film_height_i_j	= integer
+[BBOXES]
+frames			= integer
+
+film_x_i		= integer
+film_y_i		= integer
+film_width_i	= integer
+film_height_i	= integer
 */
-void AnimationFilmHolder::LoadFilm(string path, int i){
+void AnimationFilmHolder::LoadFilm(string id, int i){
 	vector<Oblong> boxes;
-	BITMAP* bitmap	= NULL;
-	int snapshotsNo = 0;
 
-	string filmName = get_config_string("FILMS", Append("film_name_", i), "");
-	snapshotsNo		= get_config_int("FILMS", Append("snapshots_num_", i), -1);
-	
-	if( !filmName.compare("") ) { assert(0); }
-	assert(snapshotsNo != -1);
+	int x		= get_config_int("BBOXES", Append("film_x_", i), -1);
+	int y		= get_config_int("BBOXES", Append("film_y_", i), -1);
+	int width	= get_config_int("BBOXES", Append("film_width_", i), -1);
+	int height	= get_config_int("BBOXES", Append("film_height_", i), -1);
 
-	for( int j = 0; j < snapshotsNo; j++ ){
-		int x		= get_config_int("FILMS", Append(strcat(Append("film_x_", i), "_"), j), -1);
-		int y		= get_config_int("FILMS", Append(strcat(Append("film_y_", i), "_"), j), -1);
-		int width	= get_config_int("FILMS", Append(strcat(Append("film_width_", i), "_"), j), -1);
-		int height	= get_config_int("FILMS", Append(strcat(Append("film_height_", i), "_"), j), -1);
-		assert( (x != -1) && (y != -1) && (width != -1) && (height != -1) );
-		boxes.push_back( *(new Oblong(x, y, 0, 0, width, height)) );
-	}
+	assert( (x != -1) && (y != -1) && (width != -1) && (height != -1) );
+	boxes.push_back( *(new Oblong(x, y, 0, 0, width, height)) );
 
-	bitmap = load_bitmap( path.append(filmName).c_str(), NULL);
-	filmMap.insert( make_pair(filmName, new AnimationFilm(bitmap, boxes, filmName)) );
+	//filmMap.insert( make_pair(id, new AnimationFilm(bitmap, boxes, id)) );
 	return;
 }
 

@@ -32,8 +32,10 @@ AnimationFilmHolder::AnimationFilmHolder(const string &path,
 	FilmsInfoMap::iterator end		= films.end();
 
 	while( start != end ){	//diabazw olh thn pliroforia gia ta bbox twn films
+		//Elenxw poio apo ta bitmap einai film kai poio oxi
+		if( (*start).second.second.find(filmsInfo.GetIdentifire(), 0) == string::npos)
+			continue;
 		set_config_file( (path + (*start).second.first).c_str() );
-		
 		BITMAP * tmp = const_cast<BitmapLoader &>(bitmaps).Load( (*start).second.second.c_str() );
 		LoadData((*start).first, tmp);
 		start++;

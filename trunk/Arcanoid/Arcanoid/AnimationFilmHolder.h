@@ -28,7 +28,9 @@ public:
 
 	//const char* path to path pou briskete ta configs files
 	//dhl to ./configs_files/bboxes/
-    AnimationFilmHolder(const string &path, const LoadFilmsInfo &filmsInfo, const BitmapLoader &bitmaps);
+    AnimationFilmHolder(const string &path, 
+						const LoadFilmsInfo &filmsInfo, 
+						const BitmapLoader &bitmaps);
     ~AnimationFilmHolder();
 };
 

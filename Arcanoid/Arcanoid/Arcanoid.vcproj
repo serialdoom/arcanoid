@@ -182,6 +182,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\AnimationFilmHolder.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Ball.cpp"
 				>
 			</File>
@@ -240,6 +244,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\AnimationFilmHolder.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Ball.h"
 				>
 			</File>
@@ -291,6 +299,10 @@
 			>
 			<File
 				RelativePath=".\arcanoid.log"
+				>
+			</File>
+			<File
+				RelativePath=".\films.cfg"
 				>
 			</File>
 			<File

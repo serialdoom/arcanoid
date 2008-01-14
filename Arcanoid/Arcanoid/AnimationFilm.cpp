@@ -3,16 +3,18 @@
  */
 #include "AnimationFilm.h"
 
-AnimationFilm::AnimationFilm(BITMAP* , const std::vector<Oblong>, const std::string&)
-{
+AnimationFilm::AnimationFilm(BITMAP* _bitmap, 
+							 const vector<Oblong> &_boxes, 
+							 const string& _id) : bitmap(_bitmap),
+												  boxes(_boxes),
+												  id(_id){}
+
+AnimationFilm::~AnimationFilm(void){
+	boxes.clear();
 }
 
-AnimationFilm::~AnimationFilm(void)
-{
-}
 
-
-const Oblong *AnimationFilm::GetFrameBox(char frameNo) const { 
+const Oblong * AnimationFilm::GetFrameBox(char frameNo) const { 
 	assert(boxes.size() > frameNo); 
 	return &boxes[frameNo]; 
 }

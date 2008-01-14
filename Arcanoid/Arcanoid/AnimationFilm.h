@@ -1,6 +1,7 @@
 /*
  * author: koutsop
  */
+//TODO line:30
 #ifndef ANIMATIONFILM_H
 #define ANIMATIONFILM_H
 
@@ -26,12 +27,12 @@ public:
 	const string  GetId (void)	const { return id; }
     char GetTotalFrames (void) 	const { return static_cast<char>(boxes.size()); }
     
-
-    const Oblong *GetFrameBox(char frameNo) const;
+	//TODO na epistrefei ptr h' object
+    const Oblong * GetFrameBox(char frameNo) const;
     
 	void DisplayFrame(BITMAP* d, const Point& at,char frameNo) const;
     
-	AnimationFilm(BITMAP* , const vector<Oblong>, const string&);
+	AnimationFilm(BITMAP* , const vector<Oblong>&, const string&);
 
 	~AnimationFilm();
 };

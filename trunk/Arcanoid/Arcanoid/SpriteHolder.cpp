@@ -8,7 +8,9 @@
 
 SpriteHolder::SpriteHolder(void){}
 
-SpriteHolder::~SpriteHolder(void){}
+SpriteHolder::~SpriteHolder(void){
+	sprites.clear();
+}
 
 
 //void SpriteHolder::Move();			//kanei tis kuniseis

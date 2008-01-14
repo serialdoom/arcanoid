@@ -2,6 +2,7 @@
  * author: koutsop
  */
 //TODO line:30
+//TODO na ulopieisw thn DisplayFrame;
 #ifndef ANIMATIONFILM_H
 #define ANIMATIONFILM_H
 
@@ -11,6 +12,7 @@
 #include <cassert>
 #include <string.h>
 
+#include "Point.h"
 #include "Oblong.h"
 
 using std::string;
@@ -30,7 +32,7 @@ public:
 	//TODO na epistrefei ptr h' object
     const Oblong * GetFrameBox(char frameNo) const;
     
-	void DisplayFrame(BITMAP* d, const Point& at,char frameNo) const;
+	void DisplayFrame(BITMAP* dest, const Point& at,char frameNo) const;
     
 	AnimationFilm(BITMAP* , const vector<Oblong>&, const string&);
 

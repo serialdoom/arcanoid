@@ -41,7 +41,11 @@ public:
 	 */
     BITMAP * Load(const char* path);
 
-    BitmapLoader(const LoadFilmsInfo &filmsInfo);
+	/* @target: Na kanei load ola ta films pou mporei na xrisimopiei to paixnidi mas
+	 */
+	void LoadFilms(const LoadFilmsInfo &filmsInfo);
+
+	BitmapLoader(void){}
     ~BitmapLoader();
 
 };

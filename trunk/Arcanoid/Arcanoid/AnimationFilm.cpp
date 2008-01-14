@@ -20,3 +20,14 @@ const Oblong * AnimationFilm::GetFrameBox(char frameNo) const {
 }
 
 //void AnimationFilm::DisplayFrame (Bitmap d, const Point& at, byte frameNo) const
+void AnimationFilm::DisplayFrame(BITMAP* dest, const Point& at, char frameNo) const {
+	const Oblong *tmp = GetFrameBox(frameNo);    
+	masked_blit(bitmap, dest, 
+				tmp->GetPointUpLeft().GetX(), 
+				tmp->GetPointUpLeft().GetY(), 
+				tmp->GetWidth(), 
+				tmp->GetWidth(), 
+				at.GetX(), at.GetY());
+	return;
+}
+

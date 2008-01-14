@@ -190,6 +190,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\BitmapLoader.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Brick.cpp"
 				>
 			</File>
@@ -203,6 +207,10 @@
 			</File>
 			<File
 				RelativePath=".\KeyLogger.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\LoadFilmsInfo.cpp"
 				>
 			</File>
 			<File
@@ -252,6 +260,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\BitmapLoader.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Brick.h"
 				>
 			</File>
@@ -265,6 +277,10 @@
 			</File>
 			<File
 				RelativePath=".\KeyLogger.h"
+				>
+			</File>
+			<File
+				RelativePath=".\LoadFilmsInfo.h"
 				>
 			</File>
 			<File

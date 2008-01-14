@@ -23,7 +23,7 @@ private:
 public:
     const AnimationFilm *GetFilm(const string id) const;
 
-	//const char* path to path pou briskete to config file
+	//const char* path to path pou briskete ta configs files
     AnimationFilmHolder(const char* path); // Decoder constructor.
     ~AnimationFilmHolder();
 };

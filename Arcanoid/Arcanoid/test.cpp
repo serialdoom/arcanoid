@@ -60,6 +60,8 @@ int main(){
 
 	readkey();
 
+/////////////////////////////////////////////////////////////////////
+//xrhsh ths AnimationFilmHolder kai AnimationFilm
 
 	AnimationFilmHolder holder("./configs_files/bboxes/", filmsInfo, bitmaps);
 

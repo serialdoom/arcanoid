@@ -3,21 +3,17 @@
 #ifndef __BALL_H__
 #define __BALL_H__
 
-/*
-#include "Oblong.h"
 #include "Sprite.h"
+#include "AnimationFilmHolder.h"
 
-class Ball : public Oblong, public Sprite {
+
+class Ball : public Sprite {
 private:
-	bool isActive;
 
 public:
-	Ball(int start_x, int start_y);
-	void Activate();
-	void Deativate();
-	bool isActive();
+	Ball(int start_x, int start_y, AnimationFilmHolder *afm, const char *ball_string);
 	~Ball();
 };
-*/
+
 
 #endif

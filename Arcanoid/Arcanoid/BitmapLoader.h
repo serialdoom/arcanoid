@@ -30,7 +30,7 @@ private:
 
 public:
 
-	int GetSize(void) const { return bitmaps.size(); }
+	int GetSize(void) const { return (int)bitmaps.size(); } /* added typicast for a warning */
 
 	/* @target: na kanei isagwgh mesa sto map ena neo zeugarh string bitmap
 	 * @return: to bitmap pou isagame. An uparxei idi mesa epistrefoume to idio

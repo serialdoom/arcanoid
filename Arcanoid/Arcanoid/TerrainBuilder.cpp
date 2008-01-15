@@ -16,13 +16,14 @@
 #define PREFIX_SCORE "score = "
 #define BRICK_NAME_PREFIX "Brick_"
 
-TerrainBuilder::TerrainBuilder(CollisionChecker *_cc, SpriteHolder *_sp){
+TerrainBuilder::TerrainBuilder(CollisionChecker *_cc, SpriteHolder *_sp, AnimationFilmHolder *_afm){
 	cc = _cc;
 	sp = _sp;
+	afm = _afm;
 	return;
 }
 
-bool TerrainBuilder::Load(const char *filename){
+bool TerrainBuilder::Load(const char *filename, const char *brick_id){
 	std::ifstream input; // input stream
 	char buffy[BUFF_SZ];
 	const char *test;
@@ -48,8 +49,9 @@ bool TerrainBuilder::Load(const char *filename){
 		++counter;
 		// Get the frame number
 		KeyLogger::Write("Writing the bricks....\n");
+		std::string *brick_id_str= new std::string(brick_id);
 		newBrick = new Brick(	new Point(getNumber(buffy, PREFIX_UP_POINT_X), getNumber(buffy, PREFIX_UP_POINT_Y)), //point
-								0, //AnimationFilm
+								const_cast<AnimationFilm*>(afm->GetFilm(brick_id_str)), //AnimationFilm
 								getNumber(buffy, PREFIX_WIDTH), // w
 								getNumber(buffy, PREFIX_HEIGHT), //h
 								getNumber(buffy, PREFIX_SCORE), //score
@@ -58,6 +60,7 @@ bool TerrainBuilder::Load(const char *filename){
 								(getNumber(buffy, PREFIX_CAN_BREAK))?(true):(false), //CanBreak
 								getNumber(buffy, PREFIX_TIMES_TO_BREAK) //Times to break
 								);
+		delete(brick_id_str);
 		KeyLogger::Write("DONE !!!\n");
 //std::cout << "I have a new brick with " << newBrick->frameNo << " times to break: " << newBrick->timesToBreak << " and score : " << newBrick->score << std::endl;
 		/*

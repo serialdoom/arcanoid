@@ -11,13 +11,19 @@
 #include "CollisionChecker.h"
 #include "StateHolder.h"
 #include "SpriteHolder.h"
-
+#include "LoadFilmsInfo.h"
+#include "LoadFilmsInfo.h"
+#include "AnimationFilmHolder.h"
+#include "Ball.h"
 
 class Game {
 private:
 	CollisionChecker *cc;
 	TerrainBuilder *tbuilder;
 	SpriteHolder *sp;
+	LoadFilmsInfo *filmsInfo;
+	BitmapLoader *bitmaps;
+	AnimationFilmHolder *afh;
 
 public:
 	Game();

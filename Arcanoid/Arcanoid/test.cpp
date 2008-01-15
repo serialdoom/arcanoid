@@ -15,7 +15,9 @@ using std::endl;
 #include "Game.h"
 
 int main(){
-	//Game *theGame = new Game();
+	Game *theGame = new Game();
+
+/*
 	allegro_init();			// Initialize Allegro
 	install_timer();
 	install_keyboard();		// Initialize keyboard routines
@@ -118,6 +120,7 @@ int main(){
 
 
 	readkey();
+*/
 
 	return 0;
 }

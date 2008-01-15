@@ -5,6 +5,7 @@
 
 
 #include <allegro.h>
+#include <string>
 
 #include "KeyLogger.h"
 #include "TerrainBuilder.h"

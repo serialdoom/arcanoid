@@ -24,6 +24,9 @@ private:
 	//void LoadBBoxes(string id, int i, const BitmapLoader &bitmpas);
 	
 public:
+	
+	size_t GetSize(void) const { return filmMap.size(); }
+
     const AnimationFilm *GetFilm(const string id) const;
 
 	//const char* path to path pou briskete ta configs files

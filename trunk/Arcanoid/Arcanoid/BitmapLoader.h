@@ -14,12 +14,6 @@
 
 using std::string;
 
-
-
-	//BITMAP * LoadBitmap(const std::string& path);  einai h load_bitmap
-	//void	 DestroyBitmap(BITMAP *);				 einai h destroy_bitmap
-
-
 class BitmapLoader {
 
 private:
@@ -35,6 +29,8 @@ private:
 	BITMAP * GetBitmap(const string path) const;
 
 public:
+
+	int GetSize(void) const { return bitmaps.size(); }
 
 	/* @target: na kanei isagwgh mesa sto map ena neo zeugarh string bitmap
 	 * @return: to bitmap pou isagame. An uparxei idi mesa epistrefoume to idio

@@ -36,13 +36,14 @@ int main(){
 	FilmsInfoMap::iterator start	= test.begin();
 	FilmsInfoMap::iterator end		= test.end();
 
-	cout<<">"<<filmsInfo.GetFilmsNo()<<"<"<<endl;
+/*	cout<<">"<<filmsInfo.GetFilmsNo()<<"<"<<endl;
 	while( start != end ){
 		cout<<"id\t:"<<(*start).first<<endl;
 		cout<<"bboxes\t:"<<(*start).second.first<<endl;
 		cout<<"bitmap\t:"<<(*start).second.second<<endl;
 		start++;
 	}
+*/
 /////////////////////////////////////////////////////////////////////
 
 
@@ -53,11 +54,16 @@ int main(){
 	bitmaps.LoadFilms(filmsInfo);
 	start = test.begin();
 
+
 	int i =  0;
 	while( start != end ){
 		blit( bitmaps.Load( (*start).second.second.c_str() ) , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 		start++;
 	}
+
+	bitmaps.Load("./images/editorsScreen.bmp");
+	cout<<"Number of bitmaps"<<bitmaps.GetSize()<<endl;
+
 
 	readkey();
 
@@ -66,8 +72,12 @@ int main(){
 
 	AnimationFilmHolder holder("./configs_files/bboxes/", filmsInfo, bitmaps);
 
+	
+
 	const AnimationFilm * film = holder.GetFilm("bricksFilm");
 	const Oblong * rect = film->GetFrameBox(0);
+
+	cout<<"AnimationFilmHolder size"<<holder.GetSize()<<endl;;
 
 	cout<<"===============================\n"<<endl;
 	cout<<rect->GetPointUpLeft().GetX()<<endl;

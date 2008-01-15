@@ -41,10 +41,7 @@ LoadFilmsInfo::~LoadFilmsInfo(void){
 #bboxes_i	= string path
 */
 void LoadFilmsInfo::LoadInfo(void){
-	filmIdentifire =  get_config_string("FILMS", "film_identifire", "");
 	filmsNo = get_config_int("FILMS", "number_of_films", -1);	//O ari8mos ton film pou uparxoun
-	
-	if( !filmIdentifire.compare("") ) { assert(0); } 
 	assert( filmsNo != -1 );
 
 	for(int i = 0; i < filmsNo; i++){			//Diabazw thn info gia to ka8e film

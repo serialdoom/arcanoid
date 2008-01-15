@@ -22,10 +22,7 @@ class LoadFilmsInfo
 {
 private:
 	int filmsNo;
-	string filmIdentifire;			//Mas leei pos 8a 3exwrizoume ta apla bitmap apo ta film
-	FilmsInfoMap filmsInfo;
-	
-	
+	FilmsInfoMap filmsInfo;	
 	
 	/* @target: Na diavazei ena config file
 	 */
@@ -33,10 +30,6 @@ private:
 
 public:
 	
-	/* @target: Epistrefei to anagnwristiko gia an ena bitmap einai film h' oxi
-	 */
-	const string GetIdentifire(void) const { return filmIdentifire; } 
-
 	/* @return: Twn ari8mo twn films
 	 */
 	int GetFilmsNo(void) const { return filmsNo; }

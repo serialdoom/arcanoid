@@ -101,7 +101,7 @@ int main(){
 	film->DisplayFrame(screen, new Point(320,240), 17);
 
 	//film->DisplayFrame(film->GetBitmap, new Poit(4,4), 3);
-
+	//
 	cout<<"AnimationFilmHolder size"<<holder.GetSize()<<endl;;
 
 	cout<<"===============================\n"<<endl;

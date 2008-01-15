@@ -1,7 +1,7 @@
 /*
  * author: koutsop
  */
-//TODO:Line 69
+
 #include "AnimationFilmHolder.h"
 
 #define MAX_TMP_SIZE 100
@@ -33,7 +33,7 @@ AnimationFilmHolder::AnimationFilmHolder(const string &path,
 	while( start != end ){	//diabazw olh thn pliroforia gia ta bbox twn films
 		set_config_file( (path + (*start).second.first).c_str() );
 		BITMAP * tmp = const_cast<BitmapLoader &>(bitmaps).Load( (*start).second.second.c_str() );
-		LoadData((*start).first, tmp);
+		LoadBBoxes((*start).first, tmp);
 		start++;
 	}
 }
@@ -49,7 +49,7 @@ film_y_i		= integer
 film_width_i	= integer
 film_height_i	= integer
 */
-void AnimationFilmHolder::LoadData(string id,BITMAP * bitmap){
+void AnimationFilmHolder::LoadBBoxes(string id,BITMAP * bitmap){
 	assert(bitmap);
 	vector<Oblong> boxes;
 	int framesNo = get_config_int("BBOXES", "frames", -1);		//O ari8mos ton film pou uparxoun

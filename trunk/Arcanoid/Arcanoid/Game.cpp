@@ -37,7 +37,7 @@ Game::Game(void){
 	bitmaps->LoadFilms(*(filmsInfo));
 
 	KeyLogger::Write("Initiallizing	Animation Film Holder...\n");
-	afh = new AnimationFilmHolder(get_config_string("GENERAL", "animationHolder", ""), filmsInfo, bitmaps);
+	afh = new AnimationFilmHolder(get_config_string("GENERAL", "animationHolder", ""), (*filmsInfo), (*bitmaps));
 
 
 	KeyLogger::Write("Initiallizing Terrain Builder...\n");

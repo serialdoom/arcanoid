@@ -9,6 +9,8 @@
 
 
 Game::Game(void){
+	const char *tmp;
+
 	KeyLogger::Write("Alegro initiallization...\n");
 	allegro_init();
 
@@ -25,24 +27,36 @@ Game::Game(void){
 	KeyLogger::Write("Initiallizing SpriteHolder...\n");
 	sp = new SpriteHolder();
 
-	//Open file for data extraction
-	KeyLogger::Write("Opening \"%s\" to read the data...\n", CONFIG_FILE);
 	set_config_file(CONFIG_FILE);
 
 	KeyLogger::Write("Initiallizing filmsInfo...\n");
-	filmsInfo = new LoadFilmsInfo(get_config_string("GENERAL", "films", ""));
+	tmp = get_config_string("GENERAL", "films", "");
+	if(!strcmp(tmp, "")) assert(0);
+	push_config_state();
+	filmsInfo = new LoadFilmsInfo(tmp);
+	pop_config_state();
+
 
 	KeyLogger::Write("Initiallizing BitMapLoader...\n");
 	bitmaps = new BitmapLoader();
-	bitmaps->LoadFilms(*(filmsInfo));
+	assert(filmsInfo);
+	bitmaps->LoadFilms(*(filmsInfo)); // problem...
 
 	KeyLogger::Write("Initiallizing	Animation Film Holder...\n");
-	afh = new AnimationFilmHolder(get_config_string("GENERAL", "animationHolder", ""), (*filmsInfo), (*bitmaps));
+	tmp = get_config_string("GENERAL", "animationHolder", "");
+	if(!strcmp(tmp, "")) assert(0);
+	assert(filmsInfo);
+	assert(bitmaps);
+
+	push_config_state();
+	afh = new AnimationFilmHolder(tmp, (*filmsInfo), (*bitmaps));
+	pop_config_state();
 
 
 	KeyLogger::Write("Initiallizing Terrain Builder...\n");
 	tbuilder = new TerrainBuilder(cc, sp, afh);
 
+	set_config_file(CONFIG_FILE);
 	KeyLogger::Write("Loading the terrain...\n");
 	tbuilder->Load(get_config_string("GENERAL", "level_file", ""), get_config_string("FILMS", "brick", ""));
 

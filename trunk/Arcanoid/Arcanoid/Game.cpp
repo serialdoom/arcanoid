@@ -46,10 +46,10 @@ Game::Game(void){
 	KeyLogger::Write("Loading the terrain...\n");
 	tbuilder->Load(get_config_string("GENERAL", "level_file", ""), get_config_string("FILMS", "brick", ""));
 
-	KeyLogger::Write("Creating the ball...\n");
-	Ball *theBall = new Ball(get_config_int("BALL", "start_x", 0), get_config_int("BALL", "start_y", 0), afh, get_config_string("FILMS", "ball", ""));
-	cc->AddMovable(dynamic_cast<Sprite *>(theBall));
-	sp->Insert(BALL, dynamic_cast<Sprite *>(theBall));
+//	KeyLogger::Write("Creating the ball...\n");
+//	Ball *theBall = new Ball(get_config_int("BALL", "start_x", 0), get_config_int("BALL", "start_y", 0), afh, get_config_string("FILMS", "ball", ""));
+//	cc->AddMovable(dynamic_cast<Sprite *>(theBall));
+//	sp->Insert(BALL, dynamic_cast<Sprite *>(theBall));
 
 	return;
 }

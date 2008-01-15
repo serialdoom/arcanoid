@@ -194,6 +194,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Board.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Brick.cpp"
 				>
 			</File>
@@ -261,6 +265,10 @@
 			</File>
 			<File
 				RelativePath=".\BitmapLoader.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Board.h"
 				>
 			</File>
 			<File

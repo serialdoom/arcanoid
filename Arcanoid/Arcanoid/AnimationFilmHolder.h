@@ -19,19 +19,31 @@ class AnimationFilmHolder {
 private:
 	typedef std::map<string, AnimationFilm*> FilmMap;
     FilmMap		filmMap;
-
-	void LoadData(string id, BITMAP* bitmap);
-	//void LoadBBoxes(string id, int i, const BitmapLoader &bitmpas);
-	
+	/* @target: Na diabazei ola ta bboxes pou uparxoun se ena cfg file
+	 *		  :gia ena sugkekrimeno film. Kai telos na kanei thn eisagwnei tou neou
+	 *		  :animationFilm mesa sto FilmMap
+	 */
+	void LoadBBoxes(string id, BITMAP* bitmap);	
 public:
 	
+	/* @target: Ka8ara gia debug skopous
+	 * @return: To pli8os ton AnimationFilms pou exei.
+	 */
 	size_t GetSize(void) const { return filmMap.size(); }
 
+
+	/* @param : To id gia ena sugkekrimeno AnimationFilm
+	 * @return: To animationFilm me to sugkekrimeno Id. An
+	 *		  :den uparxei AfinmationFilm me tetio id xtipa assert
+	 */
     const AnimationFilm *GetFilm(const string id) const;
 
-	//const char* path to path pou briskete ta configs files
-	//dhl to ./configs_files/bboxes/
-    AnimationFilmHolder(const string &path, 
+    /* @param : const char* path to path pou briskete ta configs files
+	 *		  :dhl to ./configs_files/bboxes/
+	 * @param : LoadFilmsInfo, 
+	 * @param : BitmapLoader
+	 */
+	AnimationFilmHolder(const string &path, 
 						const LoadFilmsInfo &filmsInfo, 
 						const BitmapLoader &bitmaps);
     ~AnimationFilmHolder();

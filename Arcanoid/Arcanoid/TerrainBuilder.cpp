@@ -49,9 +49,9 @@ bool TerrainBuilder::Load(const char *filename, const char *brick_id){
 		++counter;
 		// Get the frame number
 		KeyLogger::Write("Writing the bricks....\n");
-		std::string *brick_id_str= new std::string(brick_id);
+		std::string *brick_id_str = new std::string(brick_id);
 		newBrick = new Brick(	new Point(getNumber(buffy, PREFIX_UP_POINT_X), getNumber(buffy, PREFIX_UP_POINT_Y)), //point
-								const_cast<AnimationFilm*>(afm->GetFilm(brick_id_str)), //AnimationFilm
+								const_cast<AnimationFilm*>(afm->GetFilm( (*brick_id_str) )), //AnimationFilm
 								getNumber(buffy, PREFIX_WIDTH), // w
 								getNumber(buffy, PREFIX_HEIGHT), //h
 								getNumber(buffy, PREFIX_SCORE), //score

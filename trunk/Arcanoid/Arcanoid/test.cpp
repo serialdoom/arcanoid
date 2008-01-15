@@ -7,6 +7,7 @@
 using std::cout;
 using std::endl;
 
+#include "Point.h"
 #include "BitmapLoader.h"
 #include "LoadFilmsInfo.h"
 #include "AnimationFilmHolder.h"
@@ -36,14 +37,14 @@ int main(){
 	FilmsInfoMap::iterator start	= test.begin();
 	FilmsInfoMap::iterator end		= test.end();
 
-/*	cout<<">"<<filmsInfo.GetFilmsNo()<<"<"<<endl;
+	cout<<">"<<filmsInfo.GetFilmsNo()<<"<"<<endl;
 	while( start != end ){
 		cout<<"id\t:"<<(*start).first<<endl;
 		cout<<"bboxes\t:"<<(*start).second.first<<endl;
 		cout<<"bitmap\t:"<<(*start).second.second<<endl;
 		start++;
 	}
-*/
+
 /////////////////////////////////////////////////////////////////////
 
 
@@ -55,13 +56,16 @@ int main(){
 	start = test.begin();
 
 
+	bitmaps.Load("./images/editorsScreen.bmp");
+	//blit(bitmaps.Load("./images/editorsScreen.bmp"), screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+
 	int i =  0;
 	while( start != end ){
 		blit( bitmaps.Load( (*start).second.second.c_str() ) , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 		start++;
 	}
 
-	bitmaps.Load("./images/editorsScreen.bmp");
+	//bitmaps.Load("./images/editorsScreen.bmp");
 	cout<<"Number of bitmaps"<<bitmaps.GetSize()<<endl;
 
 
@@ -76,6 +80,27 @@ int main(){
 
 	const AnimationFilm * film = holder.GetFilm("bricksFilm");
 	const Oblong * rect = film->GetFrameBox(0);
+
+	film->DisplayFrame(screen, new Point(20,240), 0);
+	film->DisplayFrame(screen, new Point(40,240), 1);
+	film->DisplayFrame(screen, new Point(60,240), 2);
+	film->DisplayFrame(screen, new Point(80,240), 3);
+	film->DisplayFrame(screen, new Point(100,240), 4);
+	film->DisplayFrame(screen, new Point(120,240), 5);
+	film->DisplayFrame(screen, new Point(130,240), 6);
+	film->DisplayFrame(screen, new Point(140,240), 7);
+	film->DisplayFrame(screen, new Point(160,240), 8);
+	film->DisplayFrame(screen, new Point(180,240), 9);
+	film->DisplayFrame(screen, new Point(200,240), 10);
+	film->DisplayFrame(screen, new Point(210,240), 11);
+	film->DisplayFrame(screen, new Point(220,240), 12);
+	film->DisplayFrame(screen, new Point(240,240), 13);
+	film->DisplayFrame(screen, new Point(260,240), 14);
+	film->DisplayFrame(screen, new Point(280,240), 15);
+	film->DisplayFrame(screen, new Point(300,240), 16);
+	film->DisplayFrame(screen, new Point(320,240), 17);
+
+	//film->DisplayFrame(film->GetBitmap, new Poit(4,4), 3);
 
 	cout<<"AnimationFilmHolder size"<<holder.GetSize()<<endl;;
 

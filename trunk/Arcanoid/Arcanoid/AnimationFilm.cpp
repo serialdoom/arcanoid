@@ -1,6 +1,8 @@
 /*
  * author: koutsop
  */
+
+#include <iostream>
 #include "AnimationFilm.h"
 
 AnimationFilm::AnimationFilm(BITMAP* _bitmap, 
@@ -19,15 +21,15 @@ const Oblong * AnimationFilm::GetFrameBox(char frameNo) const {
 	return &boxes[frameNo]; 
 }
 
-//void AnimationFilm::DisplayFrame (Bitmap d, const Point& at, byte frameNo) const
 void AnimationFilm::DisplayFrame(BITMAP* dest, const Point& at, char frameNo) const {
-	const Oblong *tmp = GetFrameBox(frameNo);    
+	const Oblong *tmp = GetFrameBox(frameNo); 
 	masked_blit(bitmap, dest, 
 				tmp->GetPointUpLeft().GetX(), 
-				tmp->GetPointUpLeft().GetY(), 
+				tmp->GetPointUpLeft().GetY(),
+				at.GetX(), at.GetY(),
 				tmp->GetWidth(), 
-				tmp->GetWidth(), 
-				at.GetX(), at.GetY());
+				tmp->GetWidth()
+				);
 	return;
 }
 

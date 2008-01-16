@@ -59,6 +59,7 @@ int main(){
 
 
 	bitmaps.Load("./images/editorsScreen.bmp");
+	BITMAP * buffy = load_bitmap("./images/editorsScreen.bmp", NULL);
 	//bitmaps.Load("./images/ballFilm.bmp");
 	//blit(bitmaps.Load("./images/editorsScreen.bmp"), screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 
@@ -126,11 +127,13 @@ cout<<"++++++++++++++++++++++++++++++++++++++++++"<<endl;
 	int x = 200;
 
 	while( !key[KEY_ESC] ) {
-		film4->DisplayFrame(screen, new Point(x, 240), 0);
-		while( delay != 0 ){ delay--; }
-		blit( bitmaps.Load("./images/editorsScreen.bmp" ) , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+		blit( bitmaps.Load("./images/editorsScreen.bmp" ) , buffy, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+		film4->DisplayFrame(buffy, new Point(x, 240), 0);
+		//while( delay != 0 ){ delay--; }
+		blit(buffy , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+		
 		delay = MAX_DELAY;
-		x += 10;
+		x += 1;
 		if( x == 550 )
 			x = 200;
 	}

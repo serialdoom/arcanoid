@@ -17,6 +17,9 @@ int Ball::GetSpeed(void){
 	return speed;
 }
 
+Ball::~Ball(){
+	return;
+}
 /*
 void Ball::Activate(){
 	isActive = true;
@@ -33,7 +36,5 @@ bool Ball::isActive(){
 	return;
 }
 
-Ball::~Ball(){
-	return;
-}
+
 */

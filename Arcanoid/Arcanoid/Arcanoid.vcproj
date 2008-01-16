@@ -178,6 +178,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\Animation.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\AnimationFilm.cpp"
 				>
 			</File>
@@ -218,6 +222,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\MovingAnimation.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Oblong.cpp"
 				>
 			</File>
@@ -252,6 +260,10 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\Animation.h"
+				>
+			</File>
+			<File
 				RelativePath=".\AnimationFilm.h"
 				>
 			</File>
@@ -280,6 +292,22 @@
 				>
 			</File>
 			<File
+				RelativePath=".\FrameListAnimation.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\FrameListAnimation.h"
+				>
+			</File>
+			<File
+				RelativePath=".\FrameRangeAnimation.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\FrameRangeAnimation.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Game.h"
 				>
 			</File>
@@ -289,6 +317,10 @@
 			</File>
 			<File
 				RelativePath=".\LoadFilmsInfo.h"
+				>
+			</File>
+			<File
+				RelativePath=".\MovingAnimation.h"
 				>
 			</File>
 			<File

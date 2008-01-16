@@ -2,12 +2,23 @@
 
 #include "Ball.h"
 
-/*
-Ball::Ball(int start_x, int start_y);{
-	isActive = true;
-	SetPointUpLeft(new Point(x, y));
+Ball::Ball(int start_x, int start_y, AnimationFilm *af, const char *ball_string) {
+	currFilm = af;
+	SetPointUpLeft(start_x, start_y);
+	speed = 0;
 	return;
 }
+
+void Ball::SetSpeed(int _newspeed){
+	speed = _newspeed;
+	return;
+}
+
+int Ball::GetSpeed(void){
+	return speed;
+}
+
+/*
 void Ball::Activate(){
 	isActive = true;
 	return;

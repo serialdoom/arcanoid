@@ -14,8 +14,8 @@
 
 class Sprite : public Oblong {
 private:
-	char		frameNo;
-    bool		isVisible;
+	char			frameNo;
+    bool			isVisible;
     AnimationFilm*	currFilm;
 
 public:	

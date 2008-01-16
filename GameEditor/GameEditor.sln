@@ -5,6 +5,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameEditor", "GameEditor.vc
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ArcanoidGameEditorSetup", "..\ArcanoidGameEditorSetup\ArcanoidGameEditorSetup.vdproj", "{274F33FD-F995-43EB-9EEC-0EF8E56498E1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GameEditorFolder", "GameEditorFolder", "{539FE3A7-C0BE-40DA-AD9E-E55074430D83}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Setup", "Setup", "{3C63BE35-9066-47D8-947D-8F8D308FB77C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -20,5 +24,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E5B494E2-767F-4DA2-AA3B-739575A0C080} = {539FE3A7-C0BE-40DA-AD9E-E55074430D83}
+		{274F33FD-F995-43EB-9EEC-0EF8E56498E1} = {3C63BE35-9066-47D8-947D-8F8D308FB77C}
 	EndGlobalSection
 EndGlobal

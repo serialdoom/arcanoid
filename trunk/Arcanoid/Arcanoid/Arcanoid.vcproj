@@ -190,6 +190,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Animator.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Ball.cpp"
 				>
 			</File>
@@ -281,6 +285,10 @@
 			</File>
 			<File
 				RelativePath=".\AnimationFilmHolder.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Animator.h"
 				>
 			</File>
 			<File

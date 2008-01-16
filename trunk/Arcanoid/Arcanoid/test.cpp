@@ -15,9 +15,9 @@ using std::endl;
 #include "Game.h"
 
 int main(){
-	Game *theGame = new Game();
+	//Game *theGame = new Game();
 
-/*
+
 	allegro_init();			// Initialize Allegro
 	install_timer();
 	install_keyboard();		// Initialize keyboard routines
@@ -59,19 +59,23 @@ int main(){
 
 
 	bitmaps.Load("./images/editorsScreen.bmp");
+	//bitmaps.Load("./images/ballFilm.bmp");
 	//blit(bitmaps.Load("./images/editorsScreen.bmp"), screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 
-	int i =  0;
+	blit( bitmaps.Load("./images/editorsScreen.bmp" ) , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+
+	/*int i =  0;
 	while( start != end ){
+cout<<"++++++++++++++++++++++++++++++++++++++++++"<<endl;
 		blit( bitmaps.Load( (*start).second.second.c_str() ) , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 		start++;
-	}
+	}*/
 
 	//bitmaps.Load("./images/editorsScreen.bmp");
 	cout<<"Number of bitmaps"<<bitmaps.GetSize()<<endl;
 
 
-	readkey();
+	//readkey();
 
 /////////////////////////////////////////////////////////////////////
 //xrhsh ths AnimationFilmHolder kai AnimationFilm
@@ -80,9 +84,13 @@ int main(){
 
 	
 
-	const AnimationFilm * film = holder.GetFilm("bricksFilm");
-	const Oblong * rect = film->GetFrameBox(0);
+	const AnimationFilm * film	= holder.GetFilm("bricksFilm");
+	const AnimationFilm * film2 = holder.GetFilm("ballFilm");
+	const AnimationFilm * film3 = holder.GetFilm("ballsFilm");
+	const AnimationFilm * film4 = holder.GetFilm("boardFilm");
 
+	const Oblong * rect = film->GetFrameBox(0);
+/*
 	film->DisplayFrame(screen, new Point(20,240), 0);
 	film->DisplayFrame(screen, new Point(40,240), 1);
 	film->DisplayFrame(screen, new Point(60,240), 2);
@@ -102,8 +110,30 @@ int main(){
 	film->DisplayFrame(screen, new Point(300,240), 16);
 	film->DisplayFrame(screen, new Point(320,240), 17);
 
+	film2->DisplayFrame(screen, new Point(30, 240), 0);
+	film3->DisplayFrame(screen, new Point(42, 240), 0);
+	film3->DisplayFrame(screen, new Point(52, 240), 1);
+	film3->DisplayFrame(screen, new Point(62, 240), 2);
+	film3->DisplayFrame(screen, new Point(72, 240), 3);
+*/
+	//film4->DisplayFrame(screen, new Point(500, 240), 0);
+
 	//film->DisplayFrame(film->GetBitmap, new Poit(4,4), 3);
 	//
+
+#define MAX_DELAY 25000000
+	unsigned int delay = MAX_DELAY;
+	int x = 200;
+
+	while( !key[KEY_ESC] ) {
+		film4->DisplayFrame(screen, new Point(x, 240), 0);
+		while( delay != 0 ){ delay--; }
+		blit( bitmaps.Load("./images/editorsScreen.bmp" ) , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+		delay = MAX_DELAY;
+		x += 10;
+		if( x == 550 )
+			x = 200;
+	}
 	cout<<"AnimationFilmHolder size"<<holder.GetSize()<<endl;;
 
 	cout<<"===============================\n"<<endl;
@@ -119,8 +149,8 @@ int main(){
 	cout<<">"<<filmNo<<"<"<<endl;
 
 
-	readkey();
-*/
+	//readkey();
+
 
 	return 0;
 }

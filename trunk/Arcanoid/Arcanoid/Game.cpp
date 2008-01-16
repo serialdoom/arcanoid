@@ -96,7 +96,7 @@ Game::Game(void){
 	if(temp1 == -1) assert(0);
 	if(temp2 == -1) assert(0);
 
-	Ball *theBall = new Ball(temp1, temp2, afh->GetFilm(tmp1), tmp1);
+	Ball *theBall = new Ball(temp1, temp2, const_cast<AnimationFilm *>(afh->GetFilm(tmp1)), tmp1);
 	assert(theBall);
 //	cc->AddMovable(dynamic_cast<Sprite *>(theBall));
 //	sp->Insert(BALL, dynamic_cast<Sprite *>(theBall));

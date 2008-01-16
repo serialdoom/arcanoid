@@ -19,13 +19,21 @@ private:
     AnimationFilm*	currFilm;
 
 public:	
-	char GetFrame(void)		const { return frameNo; }
-	bool IsVisible(void)	const { return isVisible; }
+	
+	
+	char GetFrame(void) const { return frameNo; }
+
+	bool IsVisible(void) const { return isVisible; }
 
 	void SetFrame(char i);
+
     void SetVisibility(bool v) { isVisible = v; }
     
     bool CollisionCheck(Sprite* s);
+
+	void Move(const int dx, const int dy);
+	void Move(const Point point);
+	void Move(const Point* point);
 
 	Sprite(Point point, AnimationFilm* film);
 	Sprite(int x, int y, AnimationFilm* film);

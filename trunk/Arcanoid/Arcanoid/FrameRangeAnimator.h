@@ -17,16 +17,13 @@ private:
 
 public:
 	void Progress (timestamp_t currTime);
-	void Start (Sprite* s, FrameRangeAnimation* a, timestamp_t t) {
-		sprite = s;
-		anim = a;
-		lastTime = t;
-		state = ANIMATOR_RUNNING;
-		sprite->SetFrame(currFrame = anim->GetStartFrame());
-	}
 
+	void Start (Sprite* s, FrameRangeAnimation* a, timestamp_t t);
+
+	
 	FrameRangeAnimator (void):  sprite((Sprite*) 0), 
-								anim((FrameRangeAnimation*) 0), currFrame(0xFF){}
+								anim((FrameRangeAnimation*) 0), 
+								currFrame(0xFF){}
 	~FrameRangeAnimator(){}
 };
 

@@ -35,7 +35,7 @@ void TerrainEditor::Init(void){
 	set_gfx_mode(GFX_AUTODETECT, 640,480,0,0); 
 	//set_gfx_mode(GFX_AUTODETECT_WINDOWED, 640,480,0,0); // Change our graphics mode to 640x480
 	
-	set_window_title("Game Editor (koutsop@csd.uoc.gr)");	
+	set_window_title("Terrain Editor (koutsop@csd.uoc.gr)");	
 	set_display_switch_mode(SWITCH_AMNESIA);
 	set_display_switch_callback(SWITCH_IN, TerrainEditor::SwitchIn);
 

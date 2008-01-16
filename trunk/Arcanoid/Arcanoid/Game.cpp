@@ -6,11 +6,15 @@
 #define CONFIG_FILE "./game.cfg"
 #define BUFF_SZ 20321
 #define BALL "ball"
-
+#define BOARD "board"
 
 Game::Game(void){
 	const char *tmp1, *tmp2;
 	int temp1, temp2;
+
+	//Innits
+	KeyLogger::Init("arcanoid.log");
+	KeyLogger::Write("KeyLogger is up and running.\n");
 
 	KeyLogger::Write("Alegro initiallization...\n");
 	allegro_init();
@@ -23,9 +27,6 @@ Game::Game(void){
 	set_gfx_mode(GFX_AUTODETECT_WINDOWED, 640,480,0,0); // Change our graphics mode to 640x480
 
 
-	//Innits
-	KeyLogger::Init("arcanoid.log");
-	KeyLogger::Write("KeyLogger is up and running.\n");
 
 	KeyLogger::Write("Initiallizing ColLision Checker...\n");
 	cc = 0;
@@ -43,7 +44,6 @@ Game::Game(void){
 	set_config_file(CONFIG_FILE);
 
 	KeyLogger::Write("Initiallizing filmsInfo...\n");
-	tmp1 = 0;
 	tmp1 = get_config_string("GENERAL", "films", "");
 	if(!strcmp(tmp1, "")) assert(0);
 	push_config_state();
@@ -60,7 +60,6 @@ Game::Game(void){
 	bitmaps->LoadFilms(*(filmsInfo));
 
 	KeyLogger::Write("Initiallizing	Animation Film Holder...\n");
-	tmp1 = 0;
 	tmp1 = get_config_string("GENERAL", "animationHolder", "");
 	if(!strcmp(tmp1, "")) assert(0);
 
@@ -77,7 +76,6 @@ Game::Game(void){
 	assert(tbuilder);
 
 	KeyLogger::Write("Loading the terrain...\n");
-	tmp1 = tmp2 = 0;
 	tmp1 = get_config_string("GENERAL", "level_file", "");
 	tmp2 = get_config_string("FILMS", "brick", "");
 	if(!strcmp(tmp1, "")) assert(0);
@@ -88,18 +86,32 @@ Game::Game(void){
 	pop_config_state();
 
 	KeyLogger::Write("Creating the ball...\n");
-	tmp1 = 0;
-	temp1 = temp2 = -1;
-	temp1 = get_config_int("BALL", "start_x", 0);
-	temp2 = get_config_int("BALL", "start_y", 0);
+	temp1 = get_config_int("BALL", "start_x", -1);
+	temp2 = get_config_int("BALL", "start_y", -1);
 	tmp1 = get_config_string("FILMS", "ball", "");
 	if(temp1 == -1) assert(0);
 	if(temp2 == -1) assert(0);
 
 	Ball *theBall = new Ball(temp1, temp2, const_cast<AnimationFilm *>(afh->GetFilm(tmp1)), tmp1);
 	assert(theBall);
-//	cc->AddMovable(dynamic_cast<Sprite *>(theBall));
-//	sp->Insert(BALL, dynamic_cast<Sprite *>(theBall));
+	cc->AddMovable(dynamic_cast<Sprite *>(theBall));
+	sp->Insert(BALL, dynamic_cast<Sprite *>(theBall));
+
+	KeyLogger::Write("Creating the board...\n");
+	temp1 = get_config_int("BOARD", "start_x", -1);
+	temp2 = get_config_int("BOARD", "start_y", -1);
+	tmp1 = get_config_string("FILMS", "board", "");
+	if(temp1 == -1) assert(0);
+	if(temp2 == -1) assert(0);
+
+	Board *theBoard = new Board(temp1, temp2, const_cast<AnimationFilm *>(afh->GetFilm(tmp1)), tmp1);
+	assert(theBoard);
+	cc->AddMovable(dynamic_cast<Sprite *>(theBoard));
+	sp->Insert(BALL, dynamic_cast<Sprite *>(theBoard));
+
+	KeyLogger::Write("Creating the Walls...\n");
+	tmp1 = get_config_string("GENERAL", "walls", "");
+	if(!strcmp(tmp1, "")) assert(0);
 
 	return;
 }

@@ -261,6 +261,10 @@
 				RelativePath=".\test.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\Wall.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -345,6 +349,10 @@
 			</File>
 			<File
 				RelativePath=".\TerrainBuilder.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Wall.h"
 				>
 			</File>
 		</Filter>

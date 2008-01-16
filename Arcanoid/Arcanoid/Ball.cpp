@@ -4,7 +4,7 @@
 
 Ball::Ball(int start_x, int start_y, 
 		   AnimationFilm *af, 
-		   const char *ball_string) : Sprite(x, y, af){
+		   const char *ball_string) : Sprite(start_x, start_y, af){
 	speed = 0;
 }
 

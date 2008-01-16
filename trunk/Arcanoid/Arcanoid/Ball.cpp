@@ -2,11 +2,10 @@
 
 #include "Ball.h"
 
-Ball::Ball(int start_x, int start_y, AnimationFilm *af, const char *ball_string) {
-	currFilm = af;
-	SetPointUpLeft(start_x, start_y);
+Ball::Ball(int start_x, int start_y, 
+		   AnimationFilm *af, 
+		   const char *ball_string) : Sprite(x, y, af){
 	speed = 0;
-	return;
 }
 
 void Ball::SetSpeed(int _newspeed){

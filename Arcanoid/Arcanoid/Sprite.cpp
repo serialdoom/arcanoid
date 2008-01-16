@@ -18,7 +18,7 @@ Sprite::Sprite(int x, int y, AnimationFilm* film) : currFilm(film){
 	frameNo		= currFilm->GetTotalFrames();
 	SetFrame(0);
 	SetPointUpLeft(x, y);
-	SetPointDownRight( x+GetWidth(), y + GetHeight())
+	SetPointDownRight( x+GetWidth(), y + GetHeight());
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -29,7 +29,7 @@ Sprite::Sprite(Point point, AnimationFilm* film) : currFilm(film){
 	frameNo		= currFilm->GetTotalFrames();
 	SetFrame(0);
 	SetPointUpLeft(point);
-	SetPointDownRight( x+GetWidth(), y + GetHeight())
+	SetPointDownRight( point.GetX() + GetWidth(), point.GetY() + GetHeight());
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -40,6 +40,7 @@ Sprite::Sprite(const Point * const point, AnimationFilm* film) : currFilm(film){
 	frameNo		= currFilm->GetTotalFrames();
 	SetFrame(0);
 	SetPointUpLeft(point);
+	SetPointDownRight( point->GetX() + GetWidth(), point->GetY() + GetHeight());
 }
 
 /////////////////////////////////////////////////////////////////////

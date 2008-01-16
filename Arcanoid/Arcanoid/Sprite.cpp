@@ -4,6 +4,15 @@
 
 #include "Sprite.h"
 
+
+//test
+Sprite::Sprite(int upper_x, int upper_y, int down_x, int down_y){
+	SetPointUpLeft(new Point(upper_x, upper_y));
+	SetPointDownRight(new Point(down_x, down_y));
+}
+//end of test
+
+
 Sprite::Sprite(int x, int y, AnimationFilm* film) : currFilm(film){
 	assert(film);
 	isVisible	= true;

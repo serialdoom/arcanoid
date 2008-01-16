@@ -1,0 +1,28 @@
+/*
+ *author: koutsop
+ */
+//TODO na elen3w thn Move sto sprite giati den uparxei:
+//TODO na dw an xriazete h while
+#include "FrameRangeAnimator.h"
+
+void FrameRangeAnimator::Progress (timestamp_t currTime) {
+
+	while (currTime - lastTime >= anim->GetDelay()) {
+
+	    if (currFrame == anim->GetEndFrame())
+			currFrame = anim->GetStartFrame();
+	    else
+			++currFrame;
+//TODO
+//	    sprite->Move( anim->GetDx(), anim->GetDy() );
+	    sprite->SetFrame(currFrame);
+	    lastTime += anim->GetDelay();
+
+	    if (currFrame == anim->GetEndFrame() && !anim->GetContinuous()) {
+			state = ANIMATOR_FINISHED;
+			NotifyStopped();
+			return;
+	    }
+	}//end of while
+	return;
+}

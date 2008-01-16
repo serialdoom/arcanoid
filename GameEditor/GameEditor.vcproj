@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8,00"
-	Name="GameEditor"
+	Name="TerrainEditor"
 	ProjectGUID="{E5B494E2-767F-4DA2-AA3B-739575A0C080}"
 	RootNamespace="GameEditor"
 	Keyword="Win32Proj"
@@ -188,10 +188,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\GameEditor.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\InputManager.cpp"
 				>
 			</File>
@@ -223,6 +219,10 @@
 				RelativePath=".\Terrain.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\TerrainEditor.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -235,10 +235,6 @@
 			</File>
 			<File
 				RelativePath=".\BricksFilm.h"
-				>
-			</File>
-			<File
-				RelativePath=".\GameEditor.h"
 				>
 			</File>
 			<File
@@ -267,6 +263,10 @@
 			</File>
 			<File
 				RelativePath=".\Terrain.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TerrainEditor.h"
 				>
 			</File>
 		</Filter>

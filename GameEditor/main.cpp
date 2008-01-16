@@ -4,11 +4,11 @@
 
 
 #include <allegro.h>
-#include "GameEditor.h"
+#include "TerrainEditor.h"
 
 int main() {
-	GameEditor gameEditor;
-	gameEditor.StartEditor();
+	TerrainEditor terrainEditor;
+	terrainEditor.StartEditor();
 	return 0;
 }
 END_OF_MAIN()

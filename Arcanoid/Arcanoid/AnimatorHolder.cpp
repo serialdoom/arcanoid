@@ -6,6 +6,8 @@
 std::list<Animator*> AnimatorHolder::running;
 std::list<Animator*> AnimatorHolder::suspended;
 
+/////////////////////////////////////////////////////////////////////
+
 void AnimatorHolder::Register(Animator* a){ 
 	suspended.push_back(a); 
 }

@@ -17,12 +17,7 @@ private:
 public:
 	void Progress (timestamp_t currTime);
 
-	void Start (Sprite* s, MovingAnimation* a, timestamp_t t) {
-		sprite	= s;
-		anim 	= a;
-		lastTime 	= t;
-		state 	= ANIMATOR_RUNNING;
-	}
+	void Start (Sprite* s, MovingAnimation* a, timestamp_t t);
 
 	MovingAnimator (void): sprite((Sprite*) 0), anim((MovingAnimation*) 0){}
 	

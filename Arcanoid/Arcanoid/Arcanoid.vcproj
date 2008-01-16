@@ -194,6 +194,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\AnimatorHolder.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Ball.cpp"
 				>
 			</File>
@@ -222,6 +226,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\FrameRangeAnimator.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Game.cpp"
 				>
 			</File>
@@ -235,6 +243,10 @@
 			</File>
 			<File
 				RelativePath=".\MovingAnimation.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\MovingAnimator.cpp"
 				>
 			</File>
 			<File
@@ -292,6 +304,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\AnimatorHolder.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Ball.h"
 				>
 			</File>
@@ -320,6 +336,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\FrameRangeAnimator.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Game.h"
 				>
 			</File>
@@ -333,6 +353,10 @@
 			</File>
 			<File
 				RelativePath=".\MovingAnimation.h"
+				>
+			</File>
+			<File
+				RelativePath=".\MovingAnimator.h"
 				>
 			</File>
 			<File

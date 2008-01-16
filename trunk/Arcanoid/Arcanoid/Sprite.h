@@ -35,6 +35,8 @@ public:
 	void Move(const Point point);
 	void Move(const Point* point);
 
+	//apix's constructor
+	Sprite(int upper_x, int upper_y, int down_x, int down_y);
 	Sprite(Point point, AnimationFilm* film);
 	Sprite(int x, int y, AnimationFilm* film);
 	Sprite(const Point * const point, AnimationFilm* film);

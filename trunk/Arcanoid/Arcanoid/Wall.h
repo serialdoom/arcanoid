@@ -5,13 +5,13 @@
 
 
 #include "Sprite.h"
-#include "AnimationFilm.h"
+
 
 class Wall: public Sprite {
 private:
 	//Someday, something will be in here...
 public:
-	Wall(int upper_left_x, int upper_left_y, AnimationFilm *Null);
+	Wall(int upper_left_x, int upper_left_y, int down_x, int down_y);
 	~Wall();
 };
 

@@ -86,7 +86,7 @@ cout<<"++++++++++++++++++++++++++++++++++++++++++"<<endl;
 	
 
 	const AnimationFilm * film	= holder.GetFilm("bricksFilm");
-	const AnimationFilm * film2 = holder.GetFilm("ballFilm");
+	//const AnimationFilm * film2 = holder.GetFilm("ballFilm");
 	const AnimationFilm * film3 = holder.GetFilm("ballsFilm");
 	const AnimationFilm * film4 = holder.GetFilm("boardFilm");
 
@@ -132,9 +132,9 @@ cout<<"++++++++++++++++++++++++++++++++++++++++++"<<endl;
 		//while( delay != 0 ){ delay--; }
 		blit(buffy , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 		
-		delay = MAX_DELAY;
-		x += 1;
-		if( x == 550 )
+		//delay = MAX_DELAY;
+		x += 15;
+		if( x >= 550 )
 			x = 200;
 	}
 	cout<<"AnimationFilmHolder size"<<holder.GetSize()<<endl;;

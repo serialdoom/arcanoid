@@ -69,7 +69,8 @@ int main(){
 
 		/////------------- All den blits
 		blit(baground, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-		board->DisplayFrame(buffer, space.GetPointUpLeft(), 0);
+		if( space.IsVisible() )
+			board->DisplayFrame(buffer, space.GetPointUpLeft(), 0);
 		blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 	}
 	

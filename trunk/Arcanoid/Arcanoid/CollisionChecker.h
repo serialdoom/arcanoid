@@ -19,10 +19,12 @@ private:
 	bool CheckSprites( Sprite *first, Sprite *sec);
 
 public:
-	CollisionChecker();
 	void AddMovable(Sprite *toadd);
 	void AddUnmovable(Sprite *toadd);
 	void CollisionCheck(void);
+
+	CollisionChecker(void){}
+	~CollisionChecker(void);
 };
 
 #endif

@@ -9,7 +9,8 @@
 Board::Board(int start_x, int start_y, 
 			 AnimationFilm *af, 
 			 const char *id) : 	startY(start_y),
-								Sprite(start_x, start_y, af){}
+								Sprite(start_x, start_y, af)
+{SetVisibility(true);}
 
 
 

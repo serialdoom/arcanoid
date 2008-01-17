@@ -17,6 +17,7 @@
 #include "AnimationFilmHolder.h"
 #include "Ball.h"
 #include "Board.h"
+#include "Wall.h"
 
 class Game {
 private:

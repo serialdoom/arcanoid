@@ -10,7 +10,7 @@
 
 Game::Game(void){
 	const char *tmp1, *tmp2;
-	int temp1, temp2;
+	int temp1, temp2, temp3, temp4;
 
 	//Innits
 	KeyLogger::Init("arcanoid.log");
@@ -91,7 +91,9 @@ Game::Game(void){
 	tmp1 = get_config_string("FILMS", "ball", "");
 	if(temp1 == -1) assert(0);
 	if(temp2 == -1) assert(0);
+	if(!strcmp(tmp1, "")) assert(0);
 
+	// asserting
 	Ball *theBall = new Ball(temp1, temp2, const_cast<AnimationFilm *>(afh->GetFilm(tmp1)), tmp1);
 	assert(theBall);
 	cc->AddMovable(dynamic_cast<Sprite *>(theBall));
@@ -110,8 +112,53 @@ Game::Game(void){
 	sp->Insert(BALL, dynamic_cast<Sprite *>(theBoard));
 
 	KeyLogger::Write("Creating the Walls...\n");
-	tmp1 = get_config_string("GENERAL", "walls", "");
-	if(!strcmp(tmp1, "")) assert(0);
+	//Twelve oclock wall
+	temp1 = get_config_int("WALLS", "twelve_up_x", -1);
+	temp2 = get_config_int("WALLS", "twelve_up_y", -1);
+	temp3 = get_config_int("WALLS", "twelve_down_x", -1);
+	temp4 = get_config_int("WALLS", "twelve_down_y", -1);
+	if(temp1 == -1 || temp2 == -1 || temp3 == -1 || temp4 == -1) assert(0);
+	Wall *twelve = 0;
+	twelve = new Wall(temp1, temp2, temp3, temp4);
+	assert(twelve);
+	cc->AddMovable(dynamic_cast<Sprite *>(twelve));
+	sp->Insert(BALL, dynamic_cast<Sprite *>(twelve));
+
+	//three oclock wall
+	temp1 = get_config_int("WALLS", "three_up_x", -1);
+	temp2 = get_config_int("WALLS", "three_up_y", -1);
+	temp3 = get_config_int("WALLS", "three_down_x", -1);
+	temp4 = get_config_int("WALLS", "three_down_y", -1);
+	if(temp1 == -1 || temp2 == -1 || temp3 == -1 || temp4 == -1) assert(0);
+	Wall *three = 0;
+	three = new Wall(temp1, temp2, temp3, temp4);
+	assert(three);
+	cc->AddMovable(dynamic_cast<Sprite *>(three));
+	sp->Insert(BALL, dynamic_cast<Sprite *>(three));
+
+	//six oclock wall
+	temp1 = get_config_int("WALLS", "six_up_x", -1);
+	temp2 = get_config_int("WALLS", "six_up_y", -1);
+	temp3 = get_config_int("WALLS", "six_down_x", -1);
+	temp4 = get_config_int("WALLS", "six_down_y", -1);
+	if(temp1 == -1 || temp2 == -1 || temp3 == -1 || temp4 == -1) assert(0);
+	Wall *six = 0;
+	six = new Wall(temp1, temp2, temp3, temp4);
+	assert(six);
+	cc->AddMovable(dynamic_cast<Sprite *>(six));
+	sp->Insert(BALL, dynamic_cast<Sprite *>(six));
+
+	//Twelve oclock wall
+	temp1 = get_config_int("WALLS", "nine_up_x", -1);
+	temp2 = get_config_int("WALLS", "nine_up_y", -1);
+	temp3 = get_config_int("WALLS", "nine_down_x", -1);
+	temp4 = get_config_int("WALLS", "nine_down_y", -1);
+	if(temp1 == -1 || temp2 == -1 || temp3 == -1 || temp4 == -1) assert(0);
+	Wall *nine = 0;
+	nine = new Wall(temp1, temp2, temp3, temp4);
+	assert(nine);
+	cc->AddMovable(dynamic_cast<Sprite *>(nine));
+	sp->Insert(BALL, dynamic_cast<Sprite *>(nine));
 
 	return;
 }

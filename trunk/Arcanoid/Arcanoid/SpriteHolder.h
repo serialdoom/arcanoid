@@ -44,7 +44,7 @@ public:
 	 *		  :sptire einai to eno sprite.
 	 * @retrun: True an egine to set alios false.
 	 */
-	bool	SetSprite(string name, Sprite * sprite);
+	bool SetSprite(string name, Sprite * sprite);
 	
 
 	/* @target: Na epistrefei to prwto stoikxeio tou holder.

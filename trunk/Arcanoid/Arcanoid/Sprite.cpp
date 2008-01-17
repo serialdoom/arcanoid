@@ -65,24 +65,6 @@ void Sprite::Move(const int dx, const int dy){
 
 /////////////////////////////////////////////////////////////////////
 
-void Sprite::Move(const Point point){
-	SetPointUpLeft( GetPointUpLeft().GetX() + point.GetX(), 
-					GetPointUpLeft().GetY() + point.GetY()
-				  );
-	return;
-}
-
-/////////////////////////////////////////////////////////////////////
-
-void Sprite::Move(const Point* point){
-	SetPointUpLeft( GetPointUpLeft().GetX() + point->GetX(), 
-					GetPointUpLeft().GetY() + point->GetY()
-				  );
-	return;
-}
-
-/////////////////////////////////////////////////////////////////////
-
 bool Sprite::CollisionCheck(Sprite* s){
 	int x1, y1, x2, y2, x3, y3, x4, y4;
 

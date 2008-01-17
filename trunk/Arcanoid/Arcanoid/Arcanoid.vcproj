@@ -276,6 +276,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\InputManager.h"
+				>
+			</File>
+			<File
 				RelativePath=".\TerrainBuilder.h"
 				>
 			</File>
@@ -399,6 +403,10 @@
 			</File>
 			<File
 				RelativePath=".\Game.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\InputManager.cpp"
 				>
 			</File>
 			<File

@@ -35,10 +35,7 @@ public:
 	 */
     bool CollisionCheck(Sprite* s);
 
-	void Move(const int dx, const int dy);
-	void Move(const Point point);
-	void Move(const Point* point);
-
+	virtual void Move(const int dx, const int dy);
 	
 	Sprite(Point point, AnimationFilm* film);
 	Sprite(int x, int y, AnimationFilm* film);

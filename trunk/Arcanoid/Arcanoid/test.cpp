@@ -21,17 +21,16 @@ using std::endl;
 int main(){
 	//Game *theGame = new Game();
 
-
-	allegro_init();			// Initialize Allegro
+	/////_------------ Initialize all the necessary parts of alllegro
+	allegro_init();			
 	install_timer();
-	install_keyboard();		// Initialize keyboard routines
+	install_keyboard();		
 	install_mouse();
 
-	set_color_depth(16);	// Set the color depth
+	set_color_depth(16);	
 	set_gfx_mode(GFX_AUTODETECT, 640,480,0,0); 
-	//set_gfx_mode(GFX_AUTODETECT_WINDOWED, 640,480,0,0); // Change our graphics mode to 640x480
+	//set_gfx_mode(GFX_AUTODETECT_WINDOWED, 640,480,0,0); 
 	
-	set_window_title("Game Editor (koutsop@csd.uoc.gr)");	
 
 
 	/////_------------ Load films data
@@ -41,9 +40,9 @@ int main(){
 	/////------------- Load all den bitmaps
 	BitmapLoader bitmaps;
 	bitmaps.LoadFilms(filmsInfo);
-	bitmaps.Load("./images/editorsScreen.bmp");
-	bitmaps.Load("./images/bufferEditorsScreen.bmp");
-	blit( bitmaps.Load("./images/editorsScreen.bmp" ) , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+	BITMAP* baground	= bitmaps.Load("./images/editorsScreen.bmp");
+	BITMAP* buffer		= bitmaps.Load("./images/bufferEditorsScreen.bmp");
+	blit(baground, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 
 
 	/////------------- Add to Animation Holder all the films
@@ -58,17 +57,18 @@ int main(){
 	Board space( 244, 460, const_cast<AnimationFilm*>(board), "boardFilm");
 	spriteHolder.Insert("boardFilm", &space );
 	
+
 	/////------------- Create InputManager
 	InputManager input;
 
-	/////------------- Init State Holder
+	/////------------- Initialize State Holder
 	StateHolder::Init();
 	while( !key[KEY_ESC] ) {
-		/////------------- Check impit
+		/////------------- Check imput
 		input.CheckInput( spriteHolder.GetSprite("boardFilm")->second );
 
 		/////------------- All den blits
-		blit( bitmaps.Load("./images/editorsScreen.bmp" ) , buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+		blit(baground, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 		board->DisplayFrame(buffer, space.GetPointUpLeft(), 0);
 		blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 	}

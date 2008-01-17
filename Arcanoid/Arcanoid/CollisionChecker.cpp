@@ -1,9 +1,12 @@
 #include "CollisionChecker.h"
-#include <list>
+//#include <list>
 
-CollisionChecker::CollisionChecker(){
-	return;
+
+CollisionChecker::~CollisionChecker(void){
+	movable.clear();
+	unmovable.clear();
 }
+
 
 
 void CollisionChecker::AddMovable(Sprite *toadd){

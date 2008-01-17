@@ -46,6 +46,7 @@ public:
 	 */
 	void DisplayFrame(BITMAP* dest, const Point& at,char frameNo) const;
     
+	//To BTIMAP* einai to BITMAP tou film
 	AnimationFilm(BITMAP* , const vector<Oblong>&, const string&);
 
 	~AnimationFilm();

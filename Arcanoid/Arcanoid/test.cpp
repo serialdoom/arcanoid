@@ -8,7 +8,11 @@ using std::cout;
 using std::endl;
 
 #include "Point.h"
+#include "Board.h"
+#include "StateHolder.h"
+#include "SpriteHolder.h"
 #include "BitmapLoader.h"
+#include "InputManager.h"
 #include "LoadFilmsInfo.h"
 #include "AnimationFilmHolder.h"
 
@@ -31,141 +35,44 @@ int main(){
 
 
 
-//////////////////////////////////////////////////////////////////////
-//xrhsh ths LoadFilmsInfo
 	LoadFilmsInfo filmsInfo("./configs_files/films.cfg");
-
 	FilmsInfoMap test = filmsInfo.GetFilmsInfo();
-	FilmsInfoMap::iterator start	= test.begin();
-	FilmsInfoMap::iterator end		= test.end();
-
-	cout<<">"<<filmsInfo.GetFilmsNo()<<"<"<<endl;
-	while( start != end ){
-		cout<<"id\t:"<<(*start).first<<endl;
-		cout<<"bboxes\t:"<<(*start).second.first<<endl;
-		cout<<"bitmap\t:"<<(*start).second.second<<endl;
-		start++;
-	}
-
-/////////////////////////////////////////////////////////////////////
-
-
-/////////////////////////////////////////////////////////////////////
-//xrhsh ths BitmapLoad
 
 	BitmapLoader bitmaps;
 	bitmaps.LoadFilms(filmsInfo);
-	start = test.begin();
-
-
 	bitmaps.Load("./images/editorsScreen.bmp");
 	BITMAP * buffer = load_bitmap("./images/editorsScreen.bmp", NULL);
-	//bitmaps.Load("./images/ballFilm.bmp");
-	//blit(bitmaps.Load("./images/editorsScreen.bmp"), screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 
 	blit( bitmaps.Load("./images/editorsScreen.bmp" ) , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 
-	/*int i =  0;
-	while( start != end ){
-cout<<"++++++++++++++++++++++++++++++++++++++++++"<<endl;
-		blit( bitmaps.Load( (*start).second.second.c_str() ) , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-		start++;
-	}*/
-
-	//bitmaps.Load("./images/editorsScreen.bmp");
-	cout<<"Number of bitmaps"<<bitmaps.GetSize()<<endl;
-
-
-	//readkey();
-
-/////////////////////////////////////////////////////////////////////
-//xrhsh ths AnimationFilmHolder kai AnimationFilm
-
 	AnimationFilmHolder holder("./configs_files/bboxes/", filmsInfo, bitmaps);
-
+	const AnimationFilm * board = holder.GetFilm("boardFilm");
+	
+	
+	SpriteHolder spriteHolder;
+	Board space( 244, 460, const_cast<AnimationFilm*>(board), "boardFilm");
+	spriteHolder.Insert("boardFilm", &space );
 	
 
-	const AnimationFilm * film	= holder.GetFilm("bricksFilm");
-	//const AnimationFilm * film2 = holder.GetFilm("ballFilm");
-	const AnimationFilm * film3 = holder.GetFilm("ballsFilm");
-	const AnimationFilm * film4 = holder.GetFilm("boardFilm");
-
-	const Oblong * rect = film->GetFrameBox(0);
-/*
-	film->DisplayFrame(screen, new Point(20,240), 0);
-	film->DisplayFrame(screen, new Point(40,240), 1);
-	film->DisplayFrame(screen, new Point(60,240), 2);
-	film->DisplayFrame(screen, new Point(80,240), 3);
-	film->DisplayFrame(screen, new Point(100,240), 4);
-	film->DisplayFrame(screen, new Point(120,240), 5);
-	film->DisplayFrame(screen, new Point(130,240), 6);
-	film->DisplayFrame(screen, new Point(140,240), 7);
-	film->DisplayFrame(screen, new Point(160,240), 8);
-	film->DisplayFrame(screen, new Point(180,240), 9);
-	film->DisplayFrame(screen, new Point(200,240), 10);
-	film->DisplayFrame(screen, new Point(210,240), 11);
-	film->DisplayFrame(screen, new Point(220,240), 12);
-	film->DisplayFrame(screen, new Point(240,240), 13);
-	film->DisplayFrame(screen, new Point(260,240), 14);
-	film->DisplayFrame(screen, new Point(280,240), 15);
-	film->DisplayFrame(screen, new Point(300,240), 16);
-	film->DisplayFrame(screen, new Point(320,240), 17);
-
-	film2->DisplayFrame(screen, new Point(30, 240), 0);
-	film3->DisplayFrame(screen, new Point(42, 240), 0);
-	film3->DisplayFrame(screen, new Point(52, 240), 1);
-	film3->DisplayFrame(screen, new Point(62, 240), 2);
-	film3->DisplayFrame(screen, new Point(72, 240), 3);
-*/
-	//film4->DisplayFrame(screen, new Point(500, 240), 0);
-
-	//film->DisplayFrame(film->GetBitmap, new Poit(4,4), 3);
-	//
+	InputManager input;
 
 	int x = 200;
 	int y = 460;
+	StateHolder::Init();
 	while( !key[KEY_ESC] ) {
-
-		if(key[KEY_RIGHT])		{ x += 2;}
-		else if(key[KEY_LEFT])	{ x -= 2;}
-	//	else if(key[KEY_UP])	{ y -= 2; }
-	//	else if(key[KEY_DOWN])	{ y += 2; }
-		
-		if( x > 412 )
-			x = 412;
-
-		else if( x < 4 )
-			x = 4;
-
-		if( y > 466 )
-			y = 466;
-		
-		else if( y < 4 )
-			y = 4;
+		int l;
+		if( l = key[KEY_P]){ 
+			cout<<">"<< l <<"<"<<endl;
+			cout<<">"<< KEY_P <<"<"<<"\n\n\n"<<endl;
+			return 0;
+		}
+		input.CheckInput( spriteHolder.GetSprite("boardFilm")->second );
 
 		blit( bitmaps.Load("./images/editorsScreen.bmp" ) , buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-		film4->DisplayFrame(buffer, new Point(x, y), 0);
+		board->DisplayFrame(buffer, space.GetPointUpLeft(), 0);
 		blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-
 	}
-	cout<<"AnimationFilmHolder size"<<holder.GetSize()<<endl;;
-
-	cout<<"===============================\n"<<endl;
-	cout<<rect->GetPointUpLeft().GetX()<<endl;
-	cout<<rect->GetPointUpLeft().GetY()<<endl;
-	cout<<rect->GetPointDownRight().GetX()<<endl;
-	cout<<rect->GetPointDownRight().GetY()<<endl;
-	cout<<rect->GetWidth()<<endl;
-	cout<<rect->GetHeight()<<endl;
-	cout<<film->GetId()<<endl;
-
-	int filmNo = film->GetTotalFrames();
-	cout<<">"<<filmNo<<"<"<<endl;
-
-
-	//readkey();
-
-
+	
 	return 0;
 }
 END_OF_MAIN()

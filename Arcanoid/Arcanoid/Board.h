@@ -1,4 +1,6 @@
-/* Header file for the board */
+/*
+ * author: koutsop
+ */
 
 #ifndef __BOARD_H__
 #define __BOARD_H__
@@ -7,11 +9,13 @@
 #include "AnimationFilm.h"
 
 class Board: public Sprite {
+
 private:
-	//Someday, something will be in here...
+	const int startY;
 public:
-	Board(int start_x, int start_y, AnimationFilm *af, const char *board_string);
-	~Board();
+	void Move(const int dx, const int dy);
+	Board(int start_x, int start_y, AnimationFilm *af, const char* id);
+	~Board(){} 
 };
 
 

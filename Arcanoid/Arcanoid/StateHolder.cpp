@@ -2,10 +2,11 @@
 
 #include "StateHolder.h"
 
-
+enum Key StateHolder::theKey;
 StateHolder::state StateHolder::theState;
 
 void StateHolder::Init(void){
+	theKey		 = Key_No; 
 	theState = STATE_PAUSED;
 	return;
 }

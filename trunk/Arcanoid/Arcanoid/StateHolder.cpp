@@ -7,7 +7,7 @@ StateHolder::state StateHolder::theState;
 
 void StateHolder::Init(void){
 	theKey		 = Key_No; 
-	theState = STATE_PAUSED;
+	theState	 = STATE_PAUSED;
 	return;
 }
 

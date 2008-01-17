@@ -173,7 +173,7 @@
 	</References>
 	<Files>
 		<Filter
-			Name="Game Engine Source Files"
+			Name="Source Files"
 			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
@@ -198,7 +198,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Ball.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\BitmapLoader.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Board.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Brick.cpp"
 				>
 			</File>
 			<File
@@ -215,6 +227,14 @@
 			</File>
 			<File
 				RelativePath=".\FrameRangeAnimator.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Game.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\InputManager.cpp"
 				>
 			</File>
 			<File
@@ -253,61 +273,23 @@
 				RelativePath=".\StateHolder.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\TerrainBuilder.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\test.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Wall.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
-			Name="Game Header Files"
+			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
-			>
-			<File
-				RelativePath=".\Ball.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Board.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Brick.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Game.h"
-				>
-			</File>
-			<File
-				RelativePath=".\InputManager.h"
-				>
-			</File>
-			<File
-				RelativePath=".\TerrainBuilder.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Wall.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Resource Files"
-			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
-			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
-			>
-			<File
-				RelativePath=".\arcanoid.log"
-				>
-			</File>
-			<File
-				RelativePath=".\game.cfg"
-				>
-			</File>
-			<File
-				RelativePath=".\kanoniko.lvl"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Game Engine Header Files"
 			>
 			<File
 				RelativePath=".\Animation.h"
@@ -330,7 +312,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Ball.h"
+				>
+			</File>
+			<File
 				RelativePath=".\BitmapLoader.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Board.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Brick.h"
 				>
 			</File>
 			<File
@@ -347,6 +341,14 @@
 			</File>
 			<File
 				RelativePath=".\FrameRangeAnimator.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Game.h"
+				>
+			</File>
+			<File
+				RelativePath=".\InputManager.h"
 				>
 			</File>
 			<File
@@ -385,40 +387,30 @@
 				RelativePath=".\StateHolder.h"
 				>
 			</File>
+			<File
+				RelativePath=".\TerrainBuilder.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Wall.h"
+				>
+			</File>
 		</Filter>
 		<Filter
-			Name="Game Source Files"
+			Name="Resource Files"
+			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
+			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
-				RelativePath=".\Ball.cpp"
+				RelativePath=".\arcanoid.log"
 				>
 			</File>
 			<File
-				RelativePath=".\Board.cpp"
+				RelativePath=".\game.cfg"
 				>
 			</File>
 			<File
-				RelativePath=".\Brick.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Game.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\InputManager.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\TerrainBuilder.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\test.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Wall.cpp"
+				RelativePath=".\kanoniko.lvl"
 				>
 			</File>
 		</Filter>

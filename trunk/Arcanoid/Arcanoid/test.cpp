@@ -34,40 +34,40 @@ int main(){
 	set_window_title("Game Editor (koutsop@csd.uoc.gr)");	
 
 
-
+	/////_------------ Load films data
 	LoadFilmsInfo filmsInfo("./configs_files/films.cfg");
 	FilmsInfoMap test = filmsInfo.GetFilmsInfo();
 
+	/////------------- Load all den bitmaps
 	BitmapLoader bitmaps;
 	bitmaps.LoadFilms(filmsInfo);
 	bitmaps.Load("./images/editorsScreen.bmp");
-	BITMAP * buffer = load_bitmap("./images/editorsScreen.bmp", NULL);
-
+	bitmaps.Load("./images/bufferEditorsScreen.bmp");
 	blit( bitmaps.Load("./images/editorsScreen.bmp" ) , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 
+
+	/////------------- Add to Animation Holder all the films
 	AnimationFilmHolder holder("./configs_files/bboxes/", filmsInfo, bitmaps);
+
+	/////------------- Take specific AnimationFilm mporoume to kane auto gia megaliterh taxhthta
 	const AnimationFilm * board = holder.GetFilm("boardFilm");
 	
-	
+	/////------------- Create spriteHolder and sprites
 	SpriteHolder spriteHolder;
+	
 	Board space( 244, 460, const_cast<AnimationFilm*>(board), "boardFilm");
 	spriteHolder.Insert("boardFilm", &space );
 	
-
+	/////------------- Create InputManager
 	InputManager input;
 
-	int x = 200;
-	int y = 460;
+	/////------------- Init State Holder
 	StateHolder::Init();
 	while( !key[KEY_ESC] ) {
-		int l;
-		if( l = key[KEY_P]){ 
-			cout<<">"<< l <<"<"<<endl;
-			cout<<">"<< KEY_P <<"<"<<"\n\n\n"<<endl;
-			return 0;
-		}
+		/////------------- Check impit
 		input.CheckInput( spriteHolder.GetSprite("boardFilm")->second );
 
+		/////------------- All den blits
 		blit( bitmaps.Load("./images/editorsScreen.bmp" ) , buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 		board->DisplayFrame(buffer, space.GetPointUpLeft(), 0);
 		blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);

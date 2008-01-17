@@ -7,6 +7,10 @@
 #define BUFF_SZ 20321
 #define BALL "ball"
 #define BOARD "board"
+#define WALL_12 "upper_wall"
+#define WALL_3 "right_wall"
+#define WALL_6 "down_wall"
+#define WALL_9 "left wall"
 
 Game::Game(void){
 	const char *tmp1, *tmp2;
@@ -121,8 +125,8 @@ Game::Game(void){
 	Wall *twelve = 0;
 	twelve = new Wall(temp1, temp2, temp3, temp4);
 	assert(twelve);
-	cc->AddMovable(dynamic_cast<Sprite *>(twelve));
-	sp->Insert(BALL, dynamic_cast<Sprite *>(twelve));
+	cc->AddUnmovable(dynamic_cast<Sprite *>(twelve));
+	sp->Insert(WALL_12, dynamic_cast<Sprite *>(twelve));
 
 	//three oclock wall
 	temp1 = get_config_int("WALLS", "three_up_x", -1);
@@ -133,8 +137,8 @@ Game::Game(void){
 	Wall *three = 0;
 	three = new Wall(temp1, temp2, temp3, temp4);
 	assert(three);
-	cc->AddMovable(dynamic_cast<Sprite *>(three));
-	sp->Insert(BALL, dynamic_cast<Sprite *>(three));
+	cc->AddUnmovable(dynamic_cast<Sprite *>(three));
+	sp->Insert(WALL_3, dynamic_cast<Sprite *>(three));
 
 	//six oclock wall
 	temp1 = get_config_int("WALLS", "six_up_x", -1);
@@ -145,10 +149,10 @@ Game::Game(void){
 	Wall *six = 0;
 	six = new Wall(temp1, temp2, temp3, temp4);
 	assert(six);
-	cc->AddMovable(dynamic_cast<Sprite *>(six));
-	sp->Insert(BALL, dynamic_cast<Sprite *>(six));
+	cc->AddUnmovable(dynamic_cast<Sprite *>(six));
+	sp->Insert(WALL_6, dynamic_cast<Sprite *>(six));
 
-	//Twelve oclock wall
+	//Nine oclock wall
 	temp1 = get_config_int("WALLS", "nine_up_x", -1);
 	temp2 = get_config_int("WALLS", "nine_up_y", -1);
 	temp3 = get_config_int("WALLS", "nine_down_x", -1);
@@ -157,8 +161,8 @@ Game::Game(void){
 	Wall *nine = 0;
 	nine = new Wall(temp1, temp2, temp3, temp4);
 	assert(nine);
-	cc->AddMovable(dynamic_cast<Sprite *>(nine));
-	sp->Insert(BALL, dynamic_cast<Sprite *>(nine));
+	cc->AddUnmovable(dynamic_cast<Sprite *>(nine));
+	sp->Insert(WALL_9, dynamic_cast<Sprite *>(nine));
 
 	return;
 }

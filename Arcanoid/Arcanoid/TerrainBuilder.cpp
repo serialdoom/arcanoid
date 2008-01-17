@@ -75,7 +75,7 @@ bool TerrainBuilder::Load(const char *filename, const char *brick_id){
 								true // _isActive
 								);
 */
-		cc->AddUnmovable(dynamic_cast<Sprite *>(newBrick));
+		cc->AddMovable(dynamic_cast<Sprite *>(newBrick));
 		sp->Insert(test = AppendIntegerToString(BRICK_NAME_PREFIX, counter), dynamic_cast<Sprite *>(newBrick));
 		//KeyLogger::Write("The string has the value :%s:\n", test);
 		// DEBUG: std::cout << "I have a new brick with " << newBrick->frameNum << " times to break: " << newBrick->timesToBreak << " and score : " << newBrick->score << std::endl; 

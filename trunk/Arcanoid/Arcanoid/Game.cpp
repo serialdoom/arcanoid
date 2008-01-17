@@ -104,7 +104,7 @@ Game::Game(void){
 	if(temp1 == -1) assert(0);
 	if(temp2 == -1) assert(0);
 
-	Board *theBoard = new Board(temp1, temp2, const_cast<AnimationFilm *>(afh->GetFilm(tmp1)), tmp1);
+	Board *theBoard = new Board(temp1, temp2, const_cast<AnimationFilm *>(afh->GetFilm(tmp1)));
 	assert(theBoard);
 	cc->AddMovable(dynamic_cast<Sprite *>(theBoard));
 	sp->Insert(BALL, dynamic_cast<Sprite *>(theBoard));

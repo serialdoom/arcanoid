@@ -54,7 +54,7 @@ int main(){
 	/////------------- Create spriteHolder and sprites
 	SpriteHolder spriteHolder;
 	
-	Board space( 244, 460, const_cast<AnimationFilm*>(board), "boardFilm");
+	Board space( 244, 460, const_cast<AnimationFilm*>(board));
 	spriteHolder.Insert("boardFilm", &space );
 	
 

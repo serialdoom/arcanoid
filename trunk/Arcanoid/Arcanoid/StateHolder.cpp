@@ -2,7 +2,7 @@
 
 #include "StateHolder.h"
 
-enum Key StateHolder::theKey;
+Key StateHolder::theKey;
 StateHolder::state StateHolder::theState;
 
 void StateHolder::Init(void){

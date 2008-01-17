@@ -18,9 +18,19 @@ using std::endl;
 
 #include "Game.h"
 
-int main(){
-	//Game *theGame = new Game();
 
+#define _APIX_
+//#define _KOUTSOP_
+
+
+
+int main(){
+#ifdef _APIX_
+	Game *theGame = new Game();
+	return 0;
+#endif
+
+#ifdef _KOUTSOP_
 	/////_------------ Initialize all the necessary parts of alllegro
 	allegro_init();			
 	install_timer();
@@ -73,7 +83,8 @@ int main(){
 			board->DisplayFrame(buffer, space.GetPointUpLeft(), 0);
 		blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 	}
-	
 	return 0;
+#endif
+	assert(0);
 }
 END_OF_MAIN()

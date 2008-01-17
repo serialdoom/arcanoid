@@ -3,15 +3,15 @@
 #ifndef __STATE_HOLDER_H__
 #define __STATE_HOLDER_H__
 
-enum Key	{
-				Key_No		= -1, 
-				Key_Left	= 0,
-				Key_Right	= 1,
-				Key_Up		= 2,
-				Key_Down	= 3,
-				Key_P		= 4,
-				Key_Pause	= 5
-			};
+typedef enum Key	{
+						Key_No		= -1, 
+						Key_Left	= 0,
+						Key_Right	= 1,
+						Key_Up		= 2,
+						Key_Down	= 3,
+						Key_P		= 4,
+						Key_Pause	= 5
+					}Key;
 
 class StateHolder {
 	enum state  {
@@ -31,8 +31,8 @@ public:
 	static bool isPaused(void);
 	static bool isFinished(void);
 
-	static void SetKey(enum Key _key) { theKey = _key; }
-	static enum Key GetKey(void) { return theKey; }
+	static void SetKey(Key _key) { theKey = _key; }
+	static Key GetKey(void) { return theKey; }
 };
 
 #endif

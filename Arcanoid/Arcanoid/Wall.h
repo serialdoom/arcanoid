@@ -10,6 +10,7 @@
 class Wall: public Sprite {
 private:
 	//Someday, something will be in here...
+	//ok
 public:
 	Wall(int upper_left_x, int upper_left_y, int down_x, int down_y);
 	~Wall();

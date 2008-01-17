@@ -71,6 +71,9 @@ void AnimationFilmHolder::LoadBBoxes(string id,BITMAP * bitmap){
 //////////////////////////////////////////////////////////////////////////////
 
 const AnimationFilm *AnimationFilmHolder::GetFilm (const string id) const {
+	static int cnt = 0;
+
+	cout<<id<<""<< cnt++ <<""<<endl;
 	FilmMap::const_iterator i = filmMap.find(id);
 	assert(i != filmMap.end());
 	return i->second;

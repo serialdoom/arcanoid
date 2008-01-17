@@ -24,8 +24,8 @@ int main(){
 	install_mouse();
 
 	set_color_depth(16);	// Set the color depth
-	//set_gfx_mode(GFX_AUTODETECT, 640,480,0,0); 
-	set_gfx_mode(GFX_AUTODETECT_WINDOWED, 640,480,0,0); // Change our graphics mode to 640x480
+	set_gfx_mode(GFX_AUTODETECT, 640,480,0,0); 
+	//set_gfx_mode(GFX_AUTODETECT_WINDOWED, 640,480,0,0); // Change our graphics mode to 640x480
 	
 	set_window_title("Game Editor (koutsop@csd.uoc.gr)");	
 
@@ -59,7 +59,7 @@ int main(){
 
 
 	bitmaps.Load("./images/editorsScreen.bmp");
-	BITMAP * buffy = load_bitmap("./images/editorsScreen.bmp", NULL);
+	BITMAP * buffer = load_bitmap("./images/editorsScreen.bmp", NULL);
 	//bitmaps.Load("./images/ballFilm.bmp");
 	//blit(bitmaps.Load("./images/editorsScreen.bmp"), screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 
@@ -122,20 +122,31 @@ cout<<"++++++++++++++++++++++++++++++++++++++++++"<<endl;
 	//film->DisplayFrame(film->GetBitmap, new Poit(4,4), 3);
 	//
 
-#define MAX_DELAY 25000000
-	unsigned int delay = MAX_DELAY;
 	int x = 200;
-
+	int y = 460;
 	while( !key[KEY_ESC] ) {
-		blit( bitmaps.Load("./images/editorsScreen.bmp" ) , buffy, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-		film4->DisplayFrame(buffy, new Point(x, 240), 0);
-		//while( delay != 0 ){ delay--; }
-		blit(buffy , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+
+		if(key[KEY_RIGHT])		{ x += 2;}
+		else if(key[KEY_LEFT])	{ x -= 2;}
+	//	else if(key[KEY_UP])	{ y -= 2; }
+	//	else if(key[KEY_DOWN])	{ y += 2; }
 		
-		//delay = MAX_DELAY;
-		x += 15;
-		if( x >= 550 )
-			x = 200;
+		if( x > 412 )
+			x = 412;
+
+		else if( x < 4 )
+			x = 4;
+
+		if( y > 466 )
+			y = 466;
+		
+		else if( y < 4 )
+			y = 4;
+
+		blit( bitmaps.Load("./images/editorsScreen.bmp" ) , buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+		film4->DisplayFrame(buffer, new Point(x, y), 0);
+		blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+
 	}
 	cout<<"AnimationFilmHolder size"<<holder.GetSize()<<endl;;
 

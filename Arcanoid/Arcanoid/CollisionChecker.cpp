@@ -17,7 +17,7 @@ void CollisionChecker::AddMovable(Sprite *toadd){
 void CollisionChecker::AddUnmovable(Sprite *toadd){
 	//Debugging, use only with CollisionCHeckerTest.cpp std::cout << "Adding " << toadd->x << " to UNmovables.\n";
 	unmovable.push_back(toadd);
-}
+}-
 
 void CollisionChecker::CollisionCheck(void){
 	//Compare all the movable objects with all the movable objects.

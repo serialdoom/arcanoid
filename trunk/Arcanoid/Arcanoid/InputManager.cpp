@@ -2,6 +2,7 @@
 #include <allegro.h>
 #include <iostream>
 #include "StateHolder.h"
+#include "AnimatorHolder.h"
 
 InputManager::InputManager(void)
 {
@@ -13,23 +14,23 @@ InputManager::~InputManager(void)
 
 /////////////////////////////////////////////////////////////////////
 
-static void presedLeftKey(Animator* anim,  timestamp_t t){
+static void presedLeftKey(Animator* anim){
 	StateHolder::SetKey(Key_Left);
-	anim->Progress(t);
+	AnimatorHolder::MarkAsRunning(anim);
 	return;
 }
 
 /////////////////////////////////////////////////////////////////////
 
-static void presedRightKey(Animator* anim,  timestamp_t t){
+static void presedRightKey(Animator* anim){
 	StateHolder::SetKey(Key_Right);
-	anim->Progress(t);
+	AnimatorHolder::MarkAsRunning(anim);
 	return;
 }
 
 /////////////////////////////////////////////////////////////////////
 
-static void presedPKey(Animator* anim,  timestamp_t t){
+static void presedPKey(Animator* anim){
 
 	if( StateHolder::isRunning() ){
 		StateHolder::SetKey(Key_P);
@@ -44,7 +45,7 @@ static void presedPKey(Animator* anim,  timestamp_t t){
 
 /////////////////////////////////////////////////////////////////////
 
-static void prededPauseKey(Animator* anim,  timestamp_t t){
+static void prededPauseKey(Animator* anim){
 
 	if( StateHolder::isRunning() ){
 		StateHolder::SetKey(Key_Pause);
@@ -59,11 +60,17 @@ static void prededPauseKey(Animator* anim,  timestamp_t t){
 
 /////////////////////////////////////////////////////////////////////
 
-void InputManager::CheckInput(Animator* anim,  timestamp_t t){
+void InputManager::CheckInput(Animator* anim){
 	
-	if		( key[KEY_LEFT] )	{ presedLeftKey(anim, t); }
-	else if	( key[KEY_RIGHT] )	{ presedRightKey(anim, t); }
-	else if	( key[KEY_P] )		{ presedPKey(anim, t); }
-	else if	( key[KEY_PAUSE])	{ prededPauseKey(anim, t); }
+	bool hasInput = false;
+
+	if		( key[KEY_LEFT] )	{ presedLeftKey(anim);	hasInput = true;}
+	else if	( key[KEY_RIGHT] )	{ presedRightKey(anim);	hasInput = true; }
+	else if	( key[KEY_P] )		{ presedPKey(anim);		hasInput = true; }
+	else if	( key[KEY_PAUSE])	{ prededPauseKey(anim); hasInput = true; }
+	
+	if( !hasInput )
+		AnimatorHolder::MarkAsSuspended(anim);
+
 	return;
 }

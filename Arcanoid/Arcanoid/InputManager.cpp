@@ -13,23 +13,23 @@ InputManager::~InputManager(void)
 
 /////////////////////////////////////////////////////////////////////
 
-static void presedLeftKey(Sprite* sp){
+static void presedLeftKey(Animator* anim,  timestamp_t t){
 	StateHolder::SetKey(Key_Left);
-	sp->Move(0,0);
+	anim->Progress(t);
 	return;
 }
 
 /////////////////////////////////////////////////////////////////////
 
-static void presedRightKey(Sprite* sp){
+static void presedRightKey(Animator* anim,  timestamp_t t){
 	StateHolder::SetKey(Key_Right);
-	sp->Move(0,0);
+	anim->Progress(t);
 	return;
 }
 
 /////////////////////////////////////////////////////////////////////
 
-static void presedPKey(Sprite* sp){
+static void presedPKey(Animator* anim,  timestamp_t t){
 
 	if( StateHolder::isRunning() ){
 		StateHolder::SetKey(Key_P);
@@ -44,7 +44,7 @@ static void presedPKey(Sprite* sp){
 
 /////////////////////////////////////////////////////////////////////
 
-static void prededPauseKey(Sprite* sp){
+static void prededPauseKey(Animator* anim,  timestamp_t t){
 
 	if( StateHolder::isRunning() ){
 		StateHolder::SetKey(Key_Pause);
@@ -59,11 +59,11 @@ static void prededPauseKey(Sprite* sp){
 
 /////////////////////////////////////////////////////////////////////
 
-void InputManager::CheckInput(Sprite* sp){
+void InputManager::CheckInput(Animator* anim,  timestamp_t t){
 	
-	if		( key[KEY_LEFT] )	{ presedLeftKey(sp); }
-	else if	( key[KEY_RIGHT] )	{ presedRightKey(sp); }
-	else if	( key[KEY_P] )		{ presedPKey(sp); }
-	else if	( key[KEY_PAUSE])	{ prededPauseKey(sp); }
+	if		( key[KEY_LEFT] )	{ presedLeftKey(anim, t); }
+	else if	( key[KEY_RIGHT] )	{ presedRightKey(anim, t); }
+	else if	( key[KEY_P] )		{ presedPKey(anim, t); }
+	else if	( key[KEY_PAUSE])	{ prededPauseKey(anim, t); }
 	return;
 }

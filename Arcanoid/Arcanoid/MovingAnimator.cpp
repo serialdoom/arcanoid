@@ -8,15 +8,15 @@
 void MovingAnimator::Progress (timestamp_t currTime) {
 	if (currTime - lastTime >= anim->GetDelay()) {
 //TODO
-//		sprite->Move(anim->GetDx(), anim->GetDy());
+		sprite->Move(anim->GetDx(), anim->GetDy());
 		if (!anim->GetContinuous()) {
 			state = ANIMATOR_FINISHED;
 			NotifyStopped();
 		}
-		else {
-			lastTime += anim->GetDelay();
-			Progress(currTime);  // Recursion (make loop)
-		}
+		//else {
+			//lastTime += anim->GetDelay();
+			//Progress(currTime);  // Recursion (make loop)
+		//}
 	}
 	return;
 }
@@ -24,8 +24,8 @@ void MovingAnimator::Progress (timestamp_t currTime) {
 /////////////////////////////////////////////////////////////////////
 
 void MovingAnimator::Start(Sprite* s, MovingAnimation* a, timestamp_t t) {
-	sprite	= s;
-	anim 	= a;
+	sprite		= s;
+	anim 		= a;
 	lastTime 	= t;
-	state 	= ANIMATOR_RUNNING;
+	state 		= ANIMATOR_RUNNING;
 }

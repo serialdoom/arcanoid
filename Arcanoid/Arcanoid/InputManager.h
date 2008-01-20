@@ -9,7 +9,7 @@ class InputManager {
 
 public:
 
-	void CheckInput(Animator* anim,  timestamp_t t);
+	void CheckInput(Animator* anim);
 	InputManager(void);
 	~InputManager(void);
 };

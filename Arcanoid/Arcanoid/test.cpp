@@ -105,10 +105,10 @@ int main(){
 	while( !key[KEY_ESC] ) {
 		 SetGameTime();
 		/////------------- Check imput kanonika edw eprepe na einai o animatorHolder san orisma
-		input.CheckInput(&boardAnimator, GetGameTime());
+		input.CheckInput(&boardAnimator);
 
 		/////------------- Progress all animator in animator holder
-		//AnimatorHolder::Progress(2);
+		AnimatorHolder::Progress(GetGameTime());
 
 		/////------------- All ten blits
 		blit(baground, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);

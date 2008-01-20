@@ -6,6 +6,7 @@
 
 
 void MovingAnimator::Progress (timestamp_t currTime) {
+
 	if (currTime - lastTime >= anim->GetDelay()) {
 //TODO
 		sprite->Move(anim->GetDx(), anim->GetDy());

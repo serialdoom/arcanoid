@@ -4,12 +4,12 @@
 #ifndef INPUTMANAGER_H
 #define INPUTMANAGER_H
 
-#include "Sprite.h"
+#include "Animator.h"
 class InputManager {
 
 public:
 
-	void CheckInput(Sprite * sp);
+	void CheckInput(Animator* anim,  timestamp_t t);
 	InputManager(void);
 	~InputManager(void);
 };

@@ -1,7 +1,10 @@
 /* Testing file for Acranoid project */
 
-#include <allegro.h>
+
+#include <ctime>
 #include <iostream>
+#include <allegro.h>
+
 
 
 using std::cout;
@@ -9,28 +12,40 @@ using std::endl;
 
 #include "Point.h"
 #include "Board.h"
+#include "Animator.h"
 #include "StateHolder.h"
 #include "SpriteHolder.h"
 #include "BitmapLoader.h"
 #include "InputManager.h"
 #include "LoadFilmsInfo.h"
+#include "AnimatorHolder.h"
+#include "MovingAnimator.h"
+#include "MovingAnimation.h"
 #include "AnimationFilmHolder.h"
+
+
 
 #include "Game.h"
 
 
-#define _APIX_
+
+
+
+
+//#define _APIX_
 //#define _KOUTSOP_
 
-
+static unsigned long currTime = 0;
+void SetGameTime(){ currTime = time((time_t *)0); }
+unsigned long GetGameTime(void){ return currTime; }
 
 int main(){
-#ifdef _APIX_
-	Game *theGame = new Game();
-	return 0;
-#endif
+//#ifdef _APIX_
+//	Game *theGame = new Game();
+//	return 0;
+//#endif
 
-#ifdef _KOUTSOP_
+//#ifdef _KOUTSOP_
 	/////_------------ Initialize all the necessary parts of alllegro
 	allegro_init();			
 	install_timer();
@@ -38,8 +53,8 @@ int main(){
 	install_mouse();
 
 	set_color_depth(16);	
-	set_gfx_mode(GFX_AUTODETECT, 640,480,0,0); 
-	//set_gfx_mode(GFX_AUTODETECT_WINDOWED, 640,480,0,0); 
+	//set_gfx_mode(GFX_AUTODETECT, 640,480,0,0); 
+	set_gfx_mode(GFX_AUTODETECT_WINDOWED, 640,480,0,0); 
 	
 
 
@@ -71,20 +86,45 @@ int main(){
 	/////------------- Create InputManager
 	InputManager input;
 
+	/////------------- Create MovingAnimation for board
+	MovingAnimation boardAnimation(244,460,1,true,1);
+
+	/////------------- Create and start Moving animator for board
+	MovingAnimator boardAnimator;
+	boardAnimator.Start(spriteHolder.GetSprite("boardFilm")->second, &boardAnimation, 0);
+
+
+	/////------------- Register the animatorHolder
+	AnimatorHolder::Register(&boardAnimator);
+	AnimatorHolder::MarkAsRunning(&boardAnimator);
+
+
 	/////------------- Initialize State Holder
 	StateHolder::Init();
+	
 	while( !key[KEY_ESC] ) {
-		/////------------- Check imput
-		input.CheckInput( spriteHolder.GetSprite("boardFilm")->second );
+		 SetGameTime();
+		/////------------- Check imput kanonika edw eprepe na einai o animatorHolder san orisma
+		input.CheckInput(&boardAnimator, GetGameTime());
 
-		/////------------- All den blits
+		/////------------- Progress all animator in animator holder
+		//AnimatorHolder::Progress(2);
+
+		/////------------- All ten blits
 		blit(baground, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 		if( space.IsVisible() )
 			board->DisplayFrame(buffer, space.GetPointUpLeft(), 0);
+		/*rect(buffer, 
+				space.GetPointUpLeft().GetX(), 
+				space.GetPointUpLeft().GetY(), 
+				space.GetPointDownRight().GetX(), 
+				space.GetPointDownRight().GetY(), 
+				makecol(255, 0, 0));
+		*/
 		blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 	}
 	return 0;
-#endif
+//#endif
 	assert(0);
 }
 END_OF_MAIN()

@@ -6,9 +6,8 @@
 
 
 void MovingAnimator::Progress (timestamp_t currTime) {
-
 	if (currTime - lastTime >= anim->GetDelay()) {
-//TODO
+//TODO Problhma otan bazoume kai thn else mesa giati????
 		sprite->Move(anim->GetDx(), anim->GetDy());
 		if (!anim->GetContinuous()) {
 			state = ANIMATOR_FINISHED;

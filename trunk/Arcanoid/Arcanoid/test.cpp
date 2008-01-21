@@ -96,8 +96,6 @@ int main(){
 
 	/////------------- Register the animatorHolder
 	AnimatorHolder::Register(&boardAnimator);
-	AnimatorHolder::MarkAsRunning(&boardAnimator);
-
 
 	/////------------- Initialize State Holder
 	StateHolder::Init();

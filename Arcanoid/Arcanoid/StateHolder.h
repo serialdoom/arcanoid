@@ -4,13 +4,15 @@
 #define __STATE_HOLDER_H__
 
 typedef enum Key	{
-						Key_No		= -1, 
-						Key_Left	= 0,
-						Key_Right	= 1,
-						Key_Up		= 2,
-						Key_Down	= 3,
-						Key_P		= 4,
-						Key_Pause	= 5
+						Key_No			= -1, 
+						Key_Left		= 0,
+						Key_Right		= 1,
+						Key_Up			= 2,
+						Key_Down		= 3,
+						Key_P			= 4,
+						Key_Pause		= 5,
+						Key_Mouse_Left	= 6,
+						Key_Mouse_Right	= 7
 					}Key;
 
 class StateHolder {

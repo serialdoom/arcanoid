@@ -5,7 +5,7 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
-typedef signed char		offset_t;
+typedef unsigned short	offset_t;
 typedef unsigned short	delay_t;
 typedef unsigned short	animid_t;
 

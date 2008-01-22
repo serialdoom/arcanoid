@@ -53,8 +53,8 @@ int main(){
 	install_mouse();
 
 	set_color_depth(16);	
-	//set_gfx_mode(GFX_AUTODETECT, 640,480,0,0); 
-	set_gfx_mode(GFX_AUTODETECT_WINDOWED, 640,480,0,0); 
+	set_gfx_mode(GFX_AUTODETECT, 640,480,0,0); 
+	//set_gfx_mode(GFX_AUTODETECT_WINDOWED, 640,480,0,0); 
 	
 
 
@@ -103,7 +103,9 @@ int main(){
 	while( !key[KEY_ESC] ) {
 		 SetGameTime();
 		/////------------- Check imput kanonika edw eprepe na einai o animatorHolder san orisma
-		input.CheckInput(&boardAnimator);
+		if( input.CheckInput(&boardAnimator) ){
+			boardAnimation.SetDx(input.GetOldMouseX());
+		}
 
 		/////------------- Progress all animator in animator holder
 		AnimatorHolder::Progress(GetGameTime());

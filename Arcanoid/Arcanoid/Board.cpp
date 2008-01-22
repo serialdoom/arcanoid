@@ -20,5 +20,12 @@ void Board::Move(const int dx, const int dy){
 
 	else if( StateHolder::GetKey() == Key_Right )
 		SetPointUpLeft(GetPointUpLeft().GetX() + 1, startY);
+
+	else if( StateHolder::GetKey() == Key_Mouse_Left )
+		SetPointUpLeft(dx, startY);
+
+	else if( StateHolder::GetKey() == Key_Mouse_Right )
+		SetPointUpLeft(dx, startY);
+
 	return;
 }

@@ -6,10 +6,13 @@
 
 #include "Animator.h"
 class InputManager {
+private:
+	int oldMouseX, oldMouseY;
 
 public:
-
-	void CheckInput(Animator* anim);
+	int GetOldMouseX(void) const { return oldMouseX; }
+	int GetOldMouseY(void) const { return oldMouseY; }
+	bool CheckInput(Animator* anim);
 	InputManager(void);
 	~InputManager(void);
 };

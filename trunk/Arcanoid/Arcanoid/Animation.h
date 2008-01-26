@@ -5,6 +5,7 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
+//Na dw an exw kanei kala pou ekana thn alagh apo char se short
 typedef unsigned short	offset_t;
 typedef unsigned short	delay_t;
 typedef unsigned short	animid_t;

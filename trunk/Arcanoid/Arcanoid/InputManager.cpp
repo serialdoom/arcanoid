@@ -1,18 +1,16 @@
 #include "InputManager.h"
+
 #include <allegro.h>
 #include <iostream>
-#include "StateHolder.h"
-#include "AnimatorHolder.h"
+
+//#include "AnimatorHolder.h"
 
 InputManager::InputManager(void){
 	oldMouseX = mouse_x;
 	oldMouseY = mouse_y;
 }
 
-InputManager::~InputManager(void)
-{
-}
-
+#if 0
 /////////////////////////////////////////////////////////////////////
 
 static void presedLeftKey(Animator* anim){
@@ -73,6 +71,7 @@ static int mouseMovedX(Animator* anim, int oldMouseX){
 
 /////////////////////////////////////////////////////////////////////
 
+
 bool InputManager::CheckInput(Animator* anim){
 
 	bool hasInput = false;
@@ -87,4 +86,61 @@ bool InputManager::CheckInput(Animator* anim){
 		AnimatorHolder::MarkAsSuspended(anim);
 
 	return hasInput;
+}
+#endif
+
+
+
+/////////////////////////////////////////////////////////////////////
+
+static void presedPKey(){
+	if( StateHolder::isRunning() ){
+		StateHolder::SetKey(Key_P);
+		StateHolder::Pause();
+	}
+	else{
+		StateHolder::SetKey(Key_P);
+		StateHolder::Run();
+	}
+	return;
+}
+
+/////////////////////////////////////////////////////////////////////
+
+static void presedPauseKey(){
+	if( StateHolder::isRunning() ){
+		StateHolder::SetKey(Key_Pause);
+		StateHolder::Pause();
+	}
+	else{
+		StateHolder::SetKey(Key_Pause);
+		StateHolder::Run();
+	}
+	return;
+}
+
+/////////////////////////////////////////////////////////////////////
+
+static int mouseMovedX(int oldMouseX){
+	if( oldMouseX - mouse_x <= 0)			//mouse moved right
+		StateHolder::SetKey(Key_Mouse_Right);
+	else									//mouse moved left
+		StateHolder::SetKey(Key_Mouse_Left);
+	return mouse_x;
+}
+
+/////////////////////////////////////////////////////////////////////
+
+KEY InputManager::CheckInput(void){
+
+	if		(key[KEY_LEFT])		{ StateHolder::SetKey(Key_Left); }
+	else if	(key[KEY_RIGHT])	{ StateHolder::SetKey(Key_Right); }
+	else if	(key[KEY_P])		{ presedPKey(); }
+	else if	(key[KEY_PAUSE])	{ presedPauseKey(); }
+	else if (key[KEY_A])		{ StateHolder::SetKey(Key_A); }
+	else if (key[KEY_D])		{ StateHolder::SetKey(Key_D); }
+	else if (oldMouseX != mouse_x){ oldMouseX = mouseMovedX(oldMouseX); }
+	else	{ StateHolder::SetKey(Key_None); }	//None input
+	
+	return StateHolder::GetKey();
 }

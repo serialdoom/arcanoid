@@ -2,11 +2,11 @@
 
 #include "StateHolder.h"
 
-Key StateHolder::theKey;
+KEY StateHolder::theKey;
 StateHolder::state StateHolder::theState;
 
 void StateHolder::Init(void){
-	theKey		 = Key_No; 
+	theKey		 = Key_None; 
 	theState	 = STATE_PAUSED;
 	return;
 }

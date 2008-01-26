@@ -11,12 +11,15 @@ static char tmpString[MAX_TMP_SIZE]; //tmp table gia to append string me ari8mou
 
 //////////////////////////////////////////////////////////////////////////////
 
+
+
 static char * Append( string str, int i){
 	sprintf_s(tmpString, MAX_TMP_SIZE, "%s%d", str.c_str(), i);
 	return tmpString;
 }
-
 //////////////////////////////////////////////////////////////////////////////
+
+
 //constructor
 LoadFilmsInfo::LoadFilmsInfo(const char* path){
 	filmsNo = 0;
@@ -24,14 +27,16 @@ LoadFilmsInfo::LoadFilmsInfo(const char* path){
 	set_config_file(path);
 	LoadInfo();
 }
-
 //////////////////////////////////////////////////////////////////////////////
+
+
 //destructor
 LoadFilmsInfo::~LoadFilmsInfo(void){
 	filmsInfo.clear();
 }//end of cunstructor
-
 //////////////////////////////////////////////////////////////////////////////
+
+
 
 /*
 #[FILMS]

@@ -12,19 +12,23 @@ SpriteHolder::~SpriteHolder(void){
 	sprites.clear();
 }
 
+/////////////////////////////////////////////////////////////////////
 
-//void SpriteHolder::Move();			//kanei tis kuniseis
 
 //To sinolo twn stixiwn
 size_t SpriteHolder::Size(void){
 	return sprites.size();
 }
+/////////////////////////////////////////////////////////////////////
+
 
 //delete all
 void SpriteHolder::Clear(void){
 	sprites.clear();
 	return;
 }
+/////////////////////////////////////////////////////////////////////
+
 
 //an exei stixoia
 bool SpriteHolder::IsEmpty(void){
@@ -33,21 +37,29 @@ bool SpriteHolder::IsEmpty(void){
 	else
 		return false;
 }
+/////////////////////////////////////////////////////////////////////
+
 
 //return specific sprite or null
 SpriteMap::iterator SpriteHolder::GetSprite(string name){	
 	return sprites.find(name);
 }
+/////////////////////////////////////////////////////////////////////
 
 
 
 SpriteMap::iterator	SpriteHolder::GetFirst(void){
 	return sprites.begin();
 }
+/////////////////////////////////////////////////////////////////////
+
+
 
 SpriteMap::iterator	SpriteHolder::GetEnd(void){
 	return sprites.end();
 }
+/////////////////////////////////////////////////////////////////////
+
 
 
 //update sprite
@@ -61,6 +73,8 @@ bool SpriteHolder::SetSprite(string name, Sprite * sprite){
 	iter->second = sprite;
 	return true;
 }
+/////////////////////////////////////////////////////////////////////
+
 
 
 //add sprite

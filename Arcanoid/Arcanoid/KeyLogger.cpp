@@ -8,12 +8,18 @@
 
 std::ofstream KeyLogger::logfile;
 bool KeyLogger::enabled;
+/////////////////////////////////////////////////////////////////////
+
+
 
 bool KeyLogger::Init(char *filename){
 	logfile.open(filename);
 	enabled = true;
 	return logfile.is_open();
 }
+/////////////////////////////////////////////////////////////////////
+
+
 
 bool KeyLogger::Write(const char* const format, ...){
 	if(!(enabled) || !(logfile).is_open())
@@ -29,16 +35,24 @@ bool KeyLogger::Write(const char* const format, ...){
 	}
 	return true;
 }
+/////////////////////////////////////////////////////////////////////
+
+
 
 void KeyLogger::Enable(void){
 	enabled = true;
 }
+/////////////////////////////////////////////////////////////////////
+
+
 
 void KeyLogger::Disable(void){
 	enabled = false;
 }
+/////////////////////////////////////////////////////////////////////
+
+
 
 void KeyLogger::Terminate(void){
 	logfile.close();
 }
-

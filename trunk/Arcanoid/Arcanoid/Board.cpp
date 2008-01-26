@@ -2,9 +2,13 @@
  * author: koutsop
  */
 
-#include "Board.h"
-//#include "StateHolder.h"
 #include <iostream>
+
+#include "Board.h"
+
+
+#define BOARD_SPEED	1
+
 
 Board::Board(int start_x, int start_y, 
 			 AnimationFilm *af) : 	startY(start_y),
@@ -13,14 +17,14 @@ Board::Board(int start_x, int start_y,
 
 
 void Board::Move(const int dx, const int dy){
-	if( keyPressed == Key_Left || keyPressed == Key_A){
-		SetPointUpLeft(GetPointUpLeft().GetX() - 1, startY);
-		SetPointDownRight(GetPointDownRight().GetX() - 1, GetPointDownRight().GetY());
+	if( (keyPressed == Key_Left) || (keyPressed == Key_A)){
+		SetPointUpLeft(GetPointUpLeft().GetX() - BOARD_SPEED, startY);
+		SetPointDownRight(GetPointDownRight().GetX() - BOARD_SPEED, GetPointDownRight().GetY());
 	}
 
-	else if( keyPressed == Key_Right || keyPressed == Key_D ){
-		SetPointUpLeft(GetPointUpLeft().GetX() + 1, startY);
-		SetPointDownRight(GetPointDownRight().GetX() + 1, GetPointDownRight().GetY());
+	else if( (keyPressed == Key_Right) || (keyPressed == Key_D) ){
+		SetPointUpLeft(GetPointUpLeft().GetX() + BOARD_SPEED, startY);
+		SetPointDownRight(GetPointDownRight().GetX() + BOARD_SPEED, GetPointDownRight().GetY());
 
 	}
 

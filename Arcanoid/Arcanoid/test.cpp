@@ -122,14 +122,32 @@ int main(){
 
 		if( input.CheckInput() ){
 			space.SetKey(StateHolder::stateKey);
-			if( !isRunning ){		//Gia prwth fora mpenei sthn lista me ta running
-				AnimatorHolder::MarkAsRunning(&boardAnimator);
-				isRunning	= true;
-				isSuspended	= false;
-			}
-			if(StateHolder::stateKey.Key_Mouse_Left || StateHolder::stateKey.Key_Mouse_Right)
+			space2.SetKey(StateHolder::stateKey);
+
+			if( StateHolder::stateKey.Key_Mouse_Left	|| 
+				StateHolder::stateKey.Key_Mouse_Right	||
+				StateHolder::stateKey.Key_Left			||
+				StateHolder::stateKey.Key_Right) 
+			{
 				boardAnimation.SetDx(input.GetOldMouseX());
-		}
+				if( !isRunning ){		//Gia prwth fora mpenei sthn lista me ta running
+					AnimatorHolder::MarkAsRunning(&boardAnimator);
+					isRunning	= true;
+					isSuspended	= false;
+				}
+			}//
+
+			if( StateHolder::stateKey.Key_A ||
+				StateHolder::stateKey.Key_D)
+			{
+				if( !isRunning2 ){		//Gia prwth fora mpenei sthn lista me ta running
+					AnimatorHolder::MarkAsRunning(&boardAnimator2);
+					isRunning2	= true;
+					isSuspended2	= false;
+				}
+			}//
+
+		}//first if
 
 		else{
 			if( !isSuspended ){	//Gia prwth fora sthn lista me ta suspended
@@ -137,24 +155,14 @@ int main(){
 				isRunning	= false;
 				isSuspended	= true;
 			}
-		}
-///////////////////////////////////////////////////////////////////////////////////////////
-		if( input.CheckInput() ){
-			space2.SetKey(StateHolder::stateKey);
-			if( !isRunning2 ){		//Gia prwth fora mpenei sthn lista me ta running
-				AnimatorHolder::MarkAsRunning(&boardAnimator2);
-				isRunning2	= true;
-				isSuspended2	= false;
-			}
-		}
-
-		else{
 			if( !isSuspended2 ){	//Gia prwth fora sthn lista me ta suspended
 				AnimatorHolder::MarkAsSuspended(&boardAnimator2);
 				isRunning2	= false;
 				isSuspended2	= true;
 			}
 		}
+///////////////////////////////////////////////////////////////////////////////////////////
+	
 
 
 		/////------------- Progress all animator in animator holder

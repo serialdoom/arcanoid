@@ -2,12 +2,22 @@
 
 #include "StateHolder.h"
 
-KEY StateHolder::theKey;
+KEY StateHolder::stateKey;
 StateHolder::state StateHolder::theState;
 
 void StateHolder::Init(void){
-	theKey		 = Key_None; 
-	theState	 = STATE_PAUSED;
+	stateKey.Key_None			= true; 
+	stateKey.Key_Left			= false;
+	stateKey.Key_Right			= false;
+	stateKey.Key_Up				= false;
+	stateKey.Key_Down			= false;
+	stateKey.Key_P				= false;
+	stateKey.Key_Pause			= false;
+	stateKey.Key_Mouse_Left		= false;
+	stateKey.Key_Mouse_Right	= false;
+	stateKey.Key_A				= false;
+	stateKey.Key_D				= false;
+	theState					= STATE_PAUSED;
 	return;
 }
 

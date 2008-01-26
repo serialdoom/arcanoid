@@ -20,8 +20,9 @@ public:
 	 *		  :tote 8etei thn katastasei tou StateHolder gia to key.
 	 * @return: Ti eidos isodo exoume alios to Key_None.
 	 */
-	KEY CheckInput(void);
+	//KEY CheckInput(void);
 	//bool CheckInput(Animator* anim);
+	bool InputManager::CheckInput(void);
 	
 	InputManager(void);
 	virtual ~InputManager(void){}

@@ -83,8 +83,8 @@ int main(){
 	/////------------- Create spriteHolder and sprites
 	SpriteHolder spriteHolder;
 	
-	Board space( 244, 460, const_cast<AnimationFilm*>(board));
-	Board space2( 444, 460, const_cast<AnimationFilm*>(board2));
+	Board space( 244, 460, const_cast<AnimationFilm*>(board), 1);
+	Board space2( 444, 460, const_cast<AnimationFilm*>(board2), 2);
 	spriteHolder.Insert("boardFilm", &space );
 	spriteHolder.Insert("boardFilm2", &space2 );
 
@@ -115,36 +115,32 @@ int main(){
 	bool isRunning2		= false;
 	bool isSuspended2	= true;		//otan kanoume register mpenei kai sto suspend
 
-	KEY tmp;
+	//KEY tmp;
 
 	while( !key[KEY_ESC] ) {
 		SetGameTime();
-		
-///////////////////////////////////////////////////////////////////////////////////////////
-		if( ((tmp = input.CheckInput()) != Key_None) && (tmp != Key_A) && (tmp != Key_D) ){
-			//cout<<"Input is: "<<StateHolder::GetKey()<<endl;
-			space.SetKey(tmp);
+
+		if( input.CheckInput() ){
+			space.SetKey(StateHolder::stateKey);
 			if( !isRunning ){		//Gia prwth fora mpenei sthn lista me ta running
 				AnimatorHolder::MarkAsRunning(&boardAnimator);
 				isRunning	= true;
 				isSuspended	= false;
 			}
-			if(tmp == Key_Mouse_Left || tmp == Key_Mouse_Right)
+			if(StateHolder::stateKey.Key_Mouse_Left || StateHolder::stateKey.Key_Mouse_Right)
 				boardAnimation.SetDx(input.GetOldMouseX());
 		}
 
 		else{
-			//cout<<"None input from keyboard"<<std::endl;
 			if( !isSuspended ){	//Gia prwth fora sthn lista me ta suspended
 				AnimatorHolder::MarkAsSuspended(&boardAnimator);
 				isRunning	= false;
 				isSuspended	= true;
 			}
 		}
-/////////////////////////////////////////////////////////////////////////////////////////////
-
-		if( ((tmp = input.CheckInput()) != Key_None) && ((tmp == Key_A) || (tmp == Key_D))){
-			space2.SetKey(tmp);
+///////////////////////////////////////////////////////////////////////////////////////////
+		if( input.CheckInput() ){
+			space2.SetKey(StateHolder::stateKey);
 			if( !isRunning2 ){		//Gia prwth fora mpenei sthn lista me ta running
 				AnimatorHolder::MarkAsRunning(&boardAnimator2);
 				isRunning2	= true;
@@ -159,10 +155,6 @@ int main(){
 				isSuspended2	= true;
 			}
 		}
-
-
-
-
 
 
 		/////------------- Progress all animator in animator holder

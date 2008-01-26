@@ -10,137 +10,123 @@ InputManager::InputManager(void){
 	oldMouseY = mouse_y;
 }
 
-#if 0
-/////////////////////////////////////////////////////////////////////
 
-static void presedLeftKey(Animator* anim){
-	StateHolder::SetKey(Key_Left);
-	AnimatorHolder::MarkAsRunning(anim);
+static void presedLeftKey(void){
+	if(StateHolder::stateKey.Key_Right)
+		StateHolder::stateKey.Key_Right = false;
+	 
+	StateHolder::stateKey.Key_Left = true;
 	return;
 }
-
 /////////////////////////////////////////////////////////////////////
 
-static void presedRightKey(Animator* anim){
-	StateHolder::SetKey(Key_Right);
-	AnimatorHolder::MarkAsRunning(anim);
+
+
+static void presedRightKey(void){
+	if(StateHolder::stateKey.Key_Left)
+		StateHolder::stateKey.Key_Left = false;
+	 
+	StateHolder::stateKey.Key_Right = true;
 	return;
 }
-
 /////////////////////////////////////////////////////////////////////
 
-static void presedPKey(Animator* anim){
 
-	if( StateHolder::isRunning() ){
-		StateHolder::SetKey(Key_P);
-		StateHolder::Pause();
-	}
-	else{
-		StateHolder::SetKey(Key_P);
-		StateHolder::Run();
-	}
+
+static void presedAKey(void){
+	if(StateHolder::stateKey.Key_D)
+		StateHolder::stateKey.Key_D = false;
+	 
+	StateHolder::stateKey.Key_A = true;
 	return;
 }
-
 /////////////////////////////////////////////////////////////////////
 
-static void presedPauseKey(Animator* anim){
 
-	if( StateHolder::isRunning() ){
-		StateHolder::SetKey(Key_Pause);
-		StateHolder::Pause();
-	}
-	else{
-		StateHolder::SetKey(Key_Pause);
-		StateHolder::Run();
-	}
-	return;
-}
 
-/////////////////////////////////////////////////////////////////////
-
-static int mouseMovedX(Animator* anim, int oldMouseX){
-	if( oldMouseX - mouse_x <= 0)			//mouse moved right
-		StateHolder::SetKey(Key_Mouse_Right);
-	else									//mouse moved left
-		StateHolder::SetKey(Key_Mouse_Left);
+static void presedDKey(void){
+	if(StateHolder::stateKey.Key_A)
+		StateHolder::stateKey.Key_A = false;
 	
-	AnimatorHolder::MarkAsRunning(anim);
-	return mouse_x;
+	StateHolder::stateKey.Key_D = true;
+	return;
 }
-
 /////////////////////////////////////////////////////////////////////
 
 
-bool InputManager::CheckInput(Animator* anim){
-
-	bool hasInput = false;
-
-	if		( key[KEY_LEFT] )	{ presedLeftKey(anim);	hasInput = true;}
-	else if	( key[KEY_RIGHT] )	{ presedRightKey(anim);	hasInput = true; }
-	else if	( key[KEY_P] )		{ presedPKey(anim);		hasInput = true; }
-	else if	( key[KEY_PAUSE])	{ presedPauseKey(anim); hasInput = true; }
-	else if ( oldMouseX != mouse_x ){oldMouseX = mouseMovedX(anim, oldMouseX); hasInput = true;}
-	
-	if( !hasInput )
-		AnimatorHolder::MarkAsSuspended(anim);
-
-	return hasInput;
-}
-#endif
-
-
-
-/////////////////////////////////////////////////////////////////////
 
 static void presedPKey(){
-	if( StateHolder::isRunning() ){
-		StateHolder::SetKey(Key_P);
+	if( StateHolder::isRunning() )
 		StateHolder::Pause();
-	}
-	else{
-		StateHolder::SetKey(Key_P);
+	
+	else
 		StateHolder::Run();
-	}
+	
+	StateHolder::stateKey.Key_P = true;
 	return;
 }
-
 /////////////////////////////////////////////////////////////////////
+
+
 
 static void presedPauseKey(){
-	if( StateHolder::isRunning() ){
-		StateHolder::SetKey(Key_Pause);
+	if( StateHolder::isRunning() )
 		StateHolder::Pause();
-	}
-	else{
-		StateHolder::SetKey(Key_Pause);
+
+	else
 		StateHolder::Run();
-	}
+	
+	StateHolder::stateKey.Key_Pause = true;
 	return;
 }
-
 /////////////////////////////////////////////////////////////////////
+
+
 
 static int mouseMovedX(int oldMouseX){
 	if( oldMouseX - mouse_x <= 0)			//mouse moved right
-		StateHolder::SetKey(Key_Mouse_Right);
+		StateHolder::stateKey.Key_Mouse_Right = true;
 	else									//mouse moved left
-		StateHolder::SetKey(Key_Mouse_Left);
+		StateHolder::stateKey.Key_Mouse_Left = true;
 	return mouse_x;
 }
 
+
 /////////////////////////////////////////////////////////////////////
 
-KEY InputManager::CheckInput(void){
 
-	if		(key[KEY_LEFT])		{ StateHolder::SetKey(Key_Left); }
-	else if	(key[KEY_RIGHT])	{ StateHolder::SetKey(Key_Right); }
-	else if	(key[KEY_P])		{ presedPKey(); }
-	else if	(key[KEY_PAUSE])	{ presedPauseKey(); }
-	else if (key[KEY_A])		{ StateHolder::SetKey(Key_A); }
-	else if (key[KEY_D])		{ StateHolder::SetKey(Key_D); }
-	else if (oldMouseX != mouse_x){ oldMouseX = mouseMovedX(oldMouseX); }
-	else	{ StateHolder::SetKey(Key_None); }	//None input
+
+void noneInput(void){
+	StateHolder::stateKey.Key_None			= true; 
+	StateHolder::stateKey.Key_Left			= false;
+	StateHolder::stateKey.Key_Right			= false;
+	StateHolder::stateKey.Key_Up			= false;
+	StateHolder::stateKey.Key_Down			= false;
+	StateHolder::stateKey.Key_P				= false;
+	StateHolder::stateKey.Key_Pause			= false;
+	StateHolder::stateKey.Key_Mouse_Left	= false;
+	StateHolder::stateKey.Key_Mouse_Right	= false;
+	StateHolder::stateKey.Key_A				= false;
+	StateHolder::stateKey.Key_D				= false;
 	
-	return StateHolder::GetKey();
+	return;
+}
+/////////////////////////////////////////////////////////////////////
+
+
+
+bool InputManager::CheckInput(void){
+
+	bool hasInput = false;
+
+	if (key[KEY_A])		{ presedAKey(); hasInput = true; }
+	if (key[KEY_D])		{ presedDKey(); hasInput = true; }
+	if (key[KEY_LEFT])  { presedLeftKey(); hasInput = true;}
+	if (key[KEY_RIGHT])	{ presedRightKey(); hasInput = true; }
+	if (key[KEY_P])		{ presedPKey(); hasInput = true; }
+	if (key[KEY_PAUSE])	{ presedPauseKey(); hasInput = true; }
+	if (oldMouseX != mouse_x){ oldMouseX = mouseMovedX(oldMouseX); hasInput = true;}
+	if (!hasInput)		{ noneInput(); }	//None input
+	
+	return hasInput;
 }

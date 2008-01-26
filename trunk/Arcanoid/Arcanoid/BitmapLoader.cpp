@@ -16,8 +16,9 @@ BitmapLoader::~BitmapLoader(void){
 	}
 	bitmaps.clear();
 }
-
 ////////////////////////////////////////////////////////////////////////////
+
+
 
 void BitmapLoader::LoadFilms(const LoadFilmsInfo &filmsInfo){
 	FilmsInfoMap films				= filmsInfo.GetFilmsInfo();
@@ -29,15 +30,17 @@ void BitmapLoader::LoadFilms(const LoadFilmsInfo &filmsInfo){
 		start++;
 	}
 }
-
 ////////////////////////////////////////////////////////////////////////////
+
+
 
 BITMAP * BitmapLoader::GetBitmap(const string path) const {
 	BitmapMap::const_iterator i = bitmaps.find(path);
 	return i != bitmaps.end() ? i->second : (BITMAP*) 0;
 }
-
 ////////////////////////////////////////////////////////////////////////////
+
+
 
 BITMAP * BitmapLoader::Load (const char* path) {
 	BITMAP * b = GetBitmap(path);
@@ -47,5 +50,3 @@ BITMAP * BitmapLoader::Load (const char* path) {
 	}
 	return b;
 }
-
-

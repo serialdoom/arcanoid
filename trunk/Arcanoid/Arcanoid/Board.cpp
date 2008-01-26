@@ -29,6 +29,8 @@ Board::Board(int start_x,
 		player2 = true;
 	}
 }
+/////////////////////////////////////////////////////////////////////
+
 
 
 void Board::Move(const int dx, const int dy){

@@ -20,8 +20,9 @@ void MovingAnimator::Progress (timestamp_t currTime) {
 	}
 	return;
 }
-
 /////////////////////////////////////////////////////////////////////
+
+
 
 void MovingAnimator::Start(Sprite* s, MovingAnimation* a, timestamp_t t) {
 	sprite		= s;

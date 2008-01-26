@@ -4,13 +4,16 @@
 #include "Point.h"
 #define MAX_TMP_SIZE 100
 
-//**************************************************************
+/////////////////////////////////////////////////////////////////////
 
 
 Point::Point(const Point * const pointPtr){
 	x = pointPtr->GetX();
 	y = pointPtr->GetY();
 }
+/////////////////////////////////////////////////////////////////////
+
+
 
 bool Point::Compare(Point* point) const{
 	assert(point);						//Den mporei ena point na einai null 
@@ -19,9 +22,9 @@ bool Point::Compare(Point* point) const{
 	else
 		return false;
 }
+/////////////////////////////////////////////////////////////////////
 
 
-//**************************************************************
 
 string Point::ToString(void) const{
 	char tmp[MAX_TMP_SIZE];				//tmp table gia thn dimiourgia tou sring

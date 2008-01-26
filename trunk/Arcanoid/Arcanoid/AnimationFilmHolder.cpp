@@ -12,15 +12,16 @@ static char * Append( string str, int i){
 	sprintf_s(tmpString, MAX_TMP_SIZE, "%s%d", str.c_str(), i);
 	return tmpString;
 }
-
-
 //////////////////////////////////////////////////////////////////////////////
+
+
 
 AnimationFilmHolder::~AnimationFilmHolder(void){ 
 	filmMap.clear();
 }
-
 /////////////////////////////////////////////////////////////////////////////
+
+
 
 AnimationFilmHolder::AnimationFilmHolder(const string &path, 
 										 const LoadFilmsInfo &filmsInfo, 
@@ -37,8 +38,10 @@ AnimationFilmHolder::AnimationFilmHolder(const string &path,
 		start++;
 	}
 }
-
 //////////////////////////////////////////////////////////////////////////////
+
+
+
 /*
 H domh pou exei to configuretion file gia ta films
 [BBOXES]
@@ -67,8 +70,9 @@ void AnimationFilmHolder::LoadBBoxes(string id,BITMAP * bitmap){
 	filmMap.insert( make_pair(id, new AnimationFilm(bitmap, boxes, id)) );
 	return;
 }
-
 //////////////////////////////////////////////////////////////////////////////
+
+
 
 const AnimationFilm *AnimationFilmHolder::GetFilm (const string id) const {
 	static int cnt = 0;

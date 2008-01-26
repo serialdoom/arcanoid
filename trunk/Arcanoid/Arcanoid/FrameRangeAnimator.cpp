@@ -26,8 +26,9 @@ void FrameRangeAnimator::Progress (timestamp_t currTime) {
 	}//end of while
 	return;
 }
-
 /////////////////////////////////////////////////////////////////////
+
+
 
 void FrameRangeAnimator::Start(Sprite* s, FrameRangeAnimation* a, timestamp_t t) {
 	sprite = s;

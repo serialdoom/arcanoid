@@ -8,7 +8,7 @@
 #include "Board.h"
 
 
-#define BOARD_SPEED	1
+#define BOARD_SPEED	2
 
 
 Board::Board(int start_x, 

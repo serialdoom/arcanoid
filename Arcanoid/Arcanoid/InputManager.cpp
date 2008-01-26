@@ -1,10 +1,6 @@
 #include "InputManager.h"
 
 #include <allegro.h>
-#include <iostream>
-
-//#include "AnimatorHolder.h"
-
 InputManager::InputManager(void){
 	oldMouseX = mouse_x;
 	oldMouseY = mouse_y;
@@ -56,13 +52,16 @@ static void presedDKey(void){
 
 
 static void presedPKey(){
-	if( StateHolder::isRunning() )
+	if( StateHolder::isRunning() ){
 		StateHolder::Pause();
+		StateHolder::stateKey.Key_P = true;
+	}
 	
-	else
+	else{
 		StateHolder::Run();
+		StateHolder::stateKey.Key_P = false;
+	}
 	
-	StateHolder::stateKey.Key_P = true;
 	return;
 }
 /////////////////////////////////////////////////////////////////////
@@ -70,13 +69,17 @@ static void presedPKey(){
 
 
 static void presedPauseKey(){
-	if( StateHolder::isRunning() )
+	if( StateHolder::isRunning() ){
 		StateHolder::Pause();
+		StateHolder::stateKey.Key_Pause = true;
+	}
 
-	else
+	else{
 		StateHolder::Run();
+		StateHolder::stateKey.Key_Pause = false;
+	}
 	
-	StateHolder::stateKey.Key_Pause = true;
+	
 	return;
 }
 /////////////////////////////////////////////////////////////////////

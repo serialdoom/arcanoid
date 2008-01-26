@@ -9,8 +9,9 @@ Sprite::Sprite(int upper_x, int upper_y, int down_x, int down_y){
 	SetPointUpLeft(upper_x, upper_y);
 	SetPointDownRight(down_x, down_y);
 }
-
 /////////////////////////////////////////////////////////////////////
+
+
 
 Sprite::Sprite(int x, int y, AnimationFilm* film) : currFilm(film){
 	assert(film);
@@ -20,8 +21,9 @@ Sprite::Sprite(int x, int y, AnimationFilm* film) : currFilm(film){
 	SetPointUpLeft(x, y);
 	SetPointDownRight( x+GetWidth(), y + GetHeight());
 }
-
 /////////////////////////////////////////////////////////////////////
+
+
 
 Sprite::Sprite(Point point, AnimationFilm* film) : currFilm(film){
 	assert(film);
@@ -31,8 +33,9 @@ Sprite::Sprite(Point point, AnimationFilm* film) : currFilm(film){
 	SetPointUpLeft(point);
 	SetPointDownRight( point.GetX() + GetWidth(), point.GetY() + GetHeight());
 }
-
 /////////////////////////////////////////////////////////////////////
+
+
 
 Sprite::Sprite(const Point * const point, AnimationFilm* film) : currFilm(film){
 	assert(film);
@@ -42,8 +45,9 @@ Sprite::Sprite(const Point * const point, AnimationFilm* film) : currFilm(film){
 	SetPointUpLeft(point);
 	SetPointDownRight( point->GetX() + GetWidth(), point->GetY() + GetHeight());
 }
-
 /////////////////////////////////////////////////////////////////////
+
+
 
 void Sprite::SetFrame (char i) {	
 	if (i != frameNo) {
@@ -55,15 +59,17 @@ void Sprite::SetFrame (char i) {
 	}
 	return;
 }
-
 /////////////////////////////////////////////////////////////////////
+
+
 
 void Sprite::Move(const int dx, const int dy){
 	SetPointUpLeft( GetPointUpLeft().GetX() + dx, GetPointUpLeft().GetY() + dy);
 	return;
 }
-
 /////////////////////////////////////////////////////////////////////
+
+
 
 bool Sprite::CollisionCheck(Sprite* s){
 	int x1, y1, x2, y2, x3, y3, x4, y4;

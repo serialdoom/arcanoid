@@ -20,6 +20,9 @@ const Oblong * AnimationFilm::GetFrameBox(char frameNo) const {
 	assert(boxes.size() > frameNo); 
 	return &boxes[frameNo]; 
 }
+/////////////////////////////////////////////////////////////////////
+
+
 
 void AnimationFilm::DisplayFrame(BITMAP* dest, const Point& at, char frameNo) const {
 	const Oblong *tmp = GetFrameBox(frameNo); 

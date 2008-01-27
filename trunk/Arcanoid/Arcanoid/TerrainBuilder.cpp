@@ -50,17 +50,25 @@ bool TerrainBuilder::Load(const char *filename, const char *brick_id){
 		// Get the frame number
 		KeyLogger::Write("Writing the bricks....\n");
 		std::string *brick_id_str = new std::string(brick_id);
-		newBrick = new Brick(	new Point(getNumber(buffy, PREFIX_UP_POINT_X), getNumber(buffy, PREFIX_UP_POINT_Y)), //point
-								const_cast<AnimationFilm*>(afm->GetFilm( (*brick_id_str) )), //AnimationFilm
-								getNumber(buffy, PREFIX_WIDTH), // w
-								getNumber(buffy, PREFIX_HEIGHT), //h
-								getNumber(buffy, PREFIX_SCORE), //score
-								getNumber(buffy, PREFIX_FRAME_NUMBER), //frameNo
-								true, // isActive
-								(getNumber(buffy, PREFIX_CAN_BREAK))?(true):(false), //CanBreak
-								getNumber(buffy, PREFIX_TIMES_TO_BREAK) //Times to break
-								);
-		delete(brick_id_str);
+int x		= getNumber(buffy, PREFIX_UP_POINT_X);
+int y		= getNumber(buffy, PREFIX_UP_POINT_Y);
+int w		= getNumber(buffy, PREFIX_WIDTH);
+int h		= getNumber(buffy, PREFIX_HEIGHT);
+int score	= getNumber(buffy, PREFIX_SCORE);
+int frameNo = getNumber(buffy, PREFIX_FRAME_NUMBER);
+
+newBrick = new Brick(	x, y, //point
+						const_cast<AnimationFilm*>(afm->GetFilm( (*brick_id_str) )), //AnimationFilm
+						w, // w
+						h, //h
+						score, //score
+						frameNo, //frameNo
+						true, // isActive
+						(getNumber(buffy, PREFIX_CAN_BREAK))?(true):(false), //CanBreak
+						getNumber(buffy, PREFIX_TIMES_TO_BREAK) //Times to break
+					);
+		
+delete(brick_id_str);
 		KeyLogger::Write("DONE !!!\n");
 
 		cc->AddMovable(dynamic_cast<Sprite *>(newBrick));

@@ -4,12 +4,14 @@
 #include <ctime>
 #include <iostream>
 #include <allegro.h>
+#include <string>
 
 
 
 using std::cout;
 using std::endl;
 
+#include "Game.h"
 #include "Point.h"
 #include "Board.h"
 #include "Animator.h"
@@ -18,17 +20,19 @@ using std::endl;
 #include "BitmapLoader.h"
 #include "InputManager.h"
 #include "LoadFilmsInfo.h"
+#include "TerrainBuilder.h"
 #include "AnimatorHolder.h"
 #include "MovingAnimator.h"
 #include "MovingAnimation.h"
+#include "CollisionChecker.h"
 #include "AnimationFilmHolder.h"
 
 
 
-#include "Game.h"
 
 
 
+#define CONFIG_FILE "./game.cfg"
 
 
 
@@ -43,13 +47,7 @@ unsigned long GetGameTime(void){ return currTime; }
 
 
 int main(){
-//#ifdef _APIX_
-//	Game *theGame = new Game();
-//	return 0;
-//#endif
-
-//#ifdef _KOUTSOP_
-	/////_------------ Initialize all the necessary parts of alllegro
+	/////------------- Initialize all the necessary parts of alllegro
 	allegro_init();			
 	install_timer();
 	install_keyboard();		
@@ -60,6 +58,7 @@ int main(){
 	set_gfx_mode(GFX_AUTODETECT_WINDOWED, 640,480,0,0); 
 	
 
+	
 
 	/////_------------ Load films data
 	LoadFilmsInfo filmsInfo("./configs_files/films.cfg");
@@ -72,7 +71,8 @@ int main(){
 	BITMAP* baground	= bitmaps.Load("./images/editorsScreen.bmp");
 	BITMAP* buffer		= bitmaps.Load("./images/bufferEditorsScreen.bmp");
 
-
+	CollisionChecker cc;
+	
 	/////------------- Add to Animation Holder all the films
 	AnimationFilmHolder holder("./configs_files/bboxes/", filmsInfo, bitmaps);
 
@@ -100,22 +100,48 @@ int main(){
 	/////------------- Create and start Moving animator for board
 	MovingAnimator boardAnimator;
 	MovingAnimator boardAnimator2;
-	boardAnimator.Start(spriteHolder.GetSprite("boardFilm")->second, &boardAnimation, 0);
-	boardAnimator2.Start(spriteHolder.GetSprite("boardFilm2")->second, &boardAnimation2, 0);
+	boardAnimator.Start(spriteHolder.GetSprite("boardFilm"), &boardAnimation, 0);
+	boardAnimator2.Start(spriteHolder.GetSprite("boardFilm2"), &boardAnimation2, 0);
 
 	/////------------- Register the animatorHolder
 	AnimatorHolder::Register(&boardAnimator);
 	AnimatorHolder::Register(&boardAnimator2);
-	/////------------- Initialize State Holder
+
+	/////------------- Loading the terrain
+	TerrainBuilder tb(&cc, &spriteHolder, &holder);
+	/////------------- Set cfg file
+	set_config_file(CONFIG_FILE);
 	
+	string fileName		= get_config_string("GENERAL", "level_file", "");
+	string bricksFilm	= get_config_string("FILMS", "brick", "");
+	
+	if( !fileName.compare("") )		{ assert(!"file name"); }
+	if( !bricksFilm.compare("") )	{ assert(!"bricks film"); }
+
+	tb.Load(fileName.c_str(), bricksFilm.c_str());
+
+	
+	cout<<"size of sprite holder"<<spriteHolder.Size()<<endl;
+	
+	SpriteMap::iterator	start	= spriteHolder.GetFirst();
+	SpriteMap::iterator	end		= spriteHolder.GetEnd();
+	
+	while( start != end ){
+		Sprite * tmp = spriteHolder.GetSprite("");
+		//if( !tmp ) { assert(!"The sprite is empty"); }
+		start++;
+	}
+	
+
+	
+	
+	/////------------- Initialize State Holder
 	StateHolder::Init();
 	bool isRunning		= false;
 	bool isSuspended	= true;		//otan kanoume register mpenei kai sto suspend
 
 	bool isRunning2		= false;
 	bool isSuspended2	= true;		//otan kanoume register mpenei kai sto suspend
-
-	//KEY tmp;
 
 	while( !key[KEY_ESC] ) {
 		SetGameTime();
@@ -142,7 +168,7 @@ int main(){
 			{
 				if( !isRunning2 ){		//Gia prwth fora mpenei sthn lista me ta running
 					AnimatorHolder::MarkAsRunning(&boardAnimator2);
-					isRunning2	= true;
+					isRunning2		= true;
 					isSuspended2	= false;
 				}
 			}//

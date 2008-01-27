@@ -10,6 +10,7 @@
 
 #include "Point.h"
 #include "Oblong.h"
+#include "SpriteType.h"
 #include "AnimationFilm.h"
 
 
@@ -20,11 +21,12 @@ private:
     AnimationFilm*	currFilm;
 
 public:	
+
+	void SetFrame(char i);
+
 	char GetFrame(void) const { return frameNo; }
 
 	bool IsVisible(void) const { return isVisible; }
-
-	void SetFrame(char i);
 
 	AnimationFilm * GetFilm(void) { return currFilm; }
 
@@ -35,8 +37,18 @@ public:
 	 * @return: true an epikaliptontai alios false
 	 */
     bool CollisionCheck(Sprite* s);
+	
+
 	virtual void Collide(Sprite *s) = 0;
 
+
+	/* @return: Epistrefei ton typo tou ka8e sprite
+	 */
+	virtual spritetype_t GetType(void) const = 0;
+
+
+	/* @target: Einai h Move gia to ekatos8e sprite
+	 */
 	virtual void Move(const int dx, const int dy);
 	
 	Sprite(Point point, AnimationFilm* film);

@@ -31,6 +31,8 @@ Board::Board(int start_x,
 }
 /////////////////////////////////////////////////////////////////////
 
+
+
 void Board::Collide(Sprite *s){
 	if(s->GetType() == SPRITE_WALL){
 		SetPointUpLeft(uperOld);
@@ -38,6 +40,9 @@ void Board::Collide(Sprite *s){
 	}
 	return;
 }
+/////////////////////////////////////////////////////////////////////
+
+
 
 void Board::Move(const int dx, const int dy){
 	//Save the old possitions.
@@ -75,22 +80,3 @@ void Board::Move(const int dx, const int dy){
 	else { assert(0); }
 	return;
 }
-
-
-/*
-void Board::Move(const int dx, const int dy){
-	if( StateHolder::GetKey() == Key_Left )
-		SetPointUpLeft(GetPointUpLeft().GetX() - 1, startY);
-
-	else if( StateHolder::GetKey() == Key_Right )
-		SetPointUpLeft(GetPointUpLeft().GetX() + 1, startY);
-
-	else if( StateHolder::GetKey() == Key_Mouse_Left )
-		SetPointUpLeft(dx, startY);
-
-	else if( StateHolder::GetKey() == Key_Mouse_Right )
-		SetPointUpLeft(dx, startY);
-
-	return;
-}
-*/

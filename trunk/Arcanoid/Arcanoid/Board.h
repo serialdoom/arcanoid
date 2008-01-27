@@ -15,12 +15,12 @@
 
 class Board: public Sprite {
 private:
-	spritetype_t spriteType;
-	bool player1, player2;
-	KEY keyPressed;
-	const int startY;
 	Point uperOld;
 	Point downOld;
+	KEY keyPressed;
+	const int startY;
+	spritetype_t spriteType;
+	bool player1, player2;
 
 public:
 

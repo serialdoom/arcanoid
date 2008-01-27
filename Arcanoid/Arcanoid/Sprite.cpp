@@ -92,16 +92,3 @@ bool Sprite::CollisionCheck(Sprite* s){
 
 	return true;
 }
-/////////////////////////////////////////////////////////////////////
-
-
-
-char *Sprite::GetTypeString(){
-	switch(type){
-		case SPRITE_WALL: return "wall";
-		case SPRITE_BRICK: return "brick";
-		case SPRITE_BOARD: return "board";
-		case SPRITE_BALL: return "ball";
-		default: assert(0);
-	}
-}

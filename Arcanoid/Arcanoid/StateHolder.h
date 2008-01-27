@@ -4,18 +4,18 @@
 #define __STATE_HOLDER_H__
 
 typedef struct KEY {	
-						bool Key_None; 
-						bool Key_Left;
-						bool Key_Right;
-						bool Key_Up;
-						bool Key_Down;
-						bool Key_P;
-						bool Key_Pause;
-						bool Key_Mouse_Left;
-						bool Key_Mouse_Right;
-						bool Key_A;
-						bool Key_D;
-				 }KEY;
+	bool Key_None; 
+	bool Key_Left;
+	bool Key_Right;
+	bool Key_Up;
+	bool Key_Down;
+	bool Key_P;
+	bool Key_Pause;
+	bool Key_Mouse_Left;
+	bool Key_Mouse_Right;
+	bool Key_A;
+	bool Key_D;
+}KEY;
 
 class StateHolder {
 	enum state  {

@@ -2,7 +2,10 @@
  * author: koutsop
  */
 
+#include <cassert>
 #include "Sprite.h"
+
+
 
 
 Sprite::Sprite(int upper_x, int upper_y, int down_x, int down_y){
@@ -18,8 +21,8 @@ Sprite::Sprite(int x, int y, AnimationFilm* film) : currFilm(film){
 	isVisible	= true;
 	frameNo		= currFilm->GetTotalFrames();
 	SetFrame(0);
-	SetPointUpLeft(x, y);
-	SetPointDownRight( x+GetWidth(), y + GetHeight());
+	position.SetX(x);
+	position.SetY(y);
 }
 /////////////////////////////////////////////////////////////////////
 
@@ -30,8 +33,8 @@ Sprite::Sprite(Point point, AnimationFilm* film) : currFilm(film){
 	isVisible	= true;
 	frameNo		= currFilm->GetTotalFrames();
 	SetFrame(0);
-	SetPointUpLeft(point);
-	SetPointDownRight( point.GetX() + GetWidth(), point.GetY() + GetHeight());
+	position.SetX(point.GetX());
+	position.SetY(point.GetY());
 }
 /////////////////////////////////////////////////////////////////////
 
@@ -42,20 +45,22 @@ Sprite::Sprite(const Point * const point, AnimationFilm* film) : currFilm(film){
 	isVisible	= true;
 	frameNo		= currFilm->GetTotalFrames();
 	SetFrame(0);
-	SetPointUpLeft(point);
-	SetPointDownRight( point->GetX() + GetWidth(), point->GetY() + GetHeight());
+	position.SetX(point->GetX());
+	position.SetY(point->GetY());
 }
 /////////////////////////////////////////////////////////////////////
 
 
 
 void Sprite::SetFrame (char i) {	
+	
 	if (i != frameNo) {
 		assert(i < currFilm->GetTotalFrames());
 		const Oblong *tmp  = currFilm->GetFrameBox(frameNo = i);
-		this->SetWidth( tmp->GetWidth() );
-		this->SetHeight( tmp->GetHeight() );
-		this->SetPointUpLeft( tmp->GetPointUpLeft() );
+		SetWidth( tmp->GetWidth() );
+		SetHeight( tmp->GetHeight() );
+		SetPointUpLeft( tmp->GetPointUpLeft() );
+		SetPointDownRight( tmp->GetPointDownRight() );
 	}
 	return;
 }
@@ -91,4 +96,22 @@ bool Sprite::CollisionCheck(Sprite* s){
 	Collide(s);
 
 	return true;
+}
+/////////////////////////////////////////////////////////////////////
+
+
+
+void Sprite::Display(BITMAP *bitmap){
+	assert(bitmap);
+	currFilm->DisplayFrame(bitmap,  position, frameNo);
+	return;
+}
+/////////////////////////////////////////////////////////////////////
+
+
+
+void Sprite::SetPosition(int x, int y){
+	position.SetX(x);
+	position.SetY(y);
+	return;
 }

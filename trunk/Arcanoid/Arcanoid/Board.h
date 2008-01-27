@@ -15,10 +15,9 @@
 
 class Board: public Sprite {
 private:
-	Point uperOld;
-	Point downOld;
 	KEY keyPressed;
 	const int startY;
+	Point oldPosition;
 	bool player1, player2;
 	spritetype_t spriteType;
 	

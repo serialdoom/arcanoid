@@ -28,11 +28,16 @@ public:
 	SpriteType GetType(void) { return type;}
 	char *GetTypeString(void);
 	void SetType(SpriteType _type) { type = _type;}
+
+	AnimationFilm * GetFilm(void) const { return currFilm; }
+
 	char GetFrame(void) const { return frameNo; }
 
 	bool IsVisible(void) const { return isVisible; }
 
 	void SetFrame(char i);
+
+	AnimationFilm * GetFilm(void) { return currFilm; }
 
     void SetVisibility(bool v) { isVisible = v; }
     

@@ -92,6 +92,9 @@ bool Sprite::CollisionCheck(Sprite* s){
 
 	return true;
 }
+/////////////////////////////////////////////////////////////////////
+
+
 
 char *Sprite::GetTypeString(){
 	switch(type){

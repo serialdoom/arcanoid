@@ -74,6 +74,7 @@ public:
 	 */
 	void Copy(Brick* brick);
 
+	virtual void Collide(Sprite *s);
 };
 
 #endif

@@ -89,3 +89,7 @@ void Brick::Copy(Brick* brick){
 	return;
 }
 
+void Brick::Collide(Sprite *s){
+	//TODO: wtite code.
+	return;
+}

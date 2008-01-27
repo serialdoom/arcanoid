@@ -42,7 +42,7 @@ using std::endl;
 static unsigned long currTime = 0;
 void SetGameTime(){ currTime = time((time_t *)0); }
 unsigned long GetGameTime(void){ return currTime; }
-
+void Walls(CollisionChecker *cc);
 
 
 
@@ -50,8 +50,11 @@ int main(){
 	/////------------- Initialize all the necessary parts of alllegro
 	allegro_init();			
 	install_timer();
-	install_keyboard();		
+	install_keyboard();
 	install_mouse();
+
+	KeyLogger::Init("arcanoid.log");
+	KeyLogger::Write("KeyLogger is up and running.\n");
 
 	set_color_depth(16);	
 	//set_gfx_mode(GFX_AUTODETECT, 640,480,0,0); 
@@ -83,11 +86,18 @@ int main(){
 	/////------------- Create spriteHolder and sprites
 	SpriteHolder spriteHolder;
 	
+	// Collision checker
+	CollisionChecker cc;
+
 	Board space( 244, 460, const_cast<AnimationFilm*>(board), 1);
 	Board space2( 444, 460, const_cast<AnimationFilm*>(board2), 2);
 	spriteHolder.Insert("boardFilm", &space );
+	cc.AddMovable(&space);
 	spriteHolder.Insert("boardFilm2", &space2 );
+	cc.AddMovable(&space);
 
+	//Adding walls
+	Walls(&cc);
 
 	/////------------- Create InputManager
 	InputManager input;
@@ -143,7 +153,9 @@ int main(){
 	bool isRunning2		= false;
 	bool isSuspended2	= true;		//otan kanoume register mpenei kai sto suspend
 
+	int i=0;
 	while( !key[KEY_ESC] ) {
+		KeyLogger::Write("Game loop begin:\n");
 		SetGameTime();
 
 		if( input.CheckInput() ){
@@ -189,7 +201,8 @@ int main(){
 		}
 ///////////////////////////////////////////////////////////////////////////////////////////
 	
-
+		//Collisioncheck !
+		cc.CollisionCheck();
 
 		/////------------- Progress all animator in animator holder
 		AnimatorHolder::Progress(GetGameTime());
@@ -214,4 +227,59 @@ int main(){
 	}
 	return 0;
 }
+
+void Walls(CollisionChecker *cc){
+	const char *tmp1, *tmp2;
+	int temp1, temp2, temp3, temp4;
+
+	push_config_state();
+	set_config_file("./game.cfg");
+
+	KeyLogger::Write("Creating the Walls...\n");
+	//Twelve oclock wall
+	temp1 = get_config_int("WALLS", "twelve_up_x", -1);
+	temp2 = get_config_int("WALLS", "twelve_up_y", -1);
+	temp3 = get_config_int("WALLS", "twelve_down_x", -1);
+	temp4 = get_config_int("WALLS", "twelve_down_y", -1);
+	if(temp1 == -1 || temp2 == -1 || temp3 == -1 || temp4 == -1) assert(0);
+	Wall *twelve = 0;
+	twelve = new Wall(temp1, temp2, temp3, temp4);
+	assert(twelve);
+	cc->AddUnmovable(dynamic_cast<Sprite *>(twelve));
+
+	//three oclock wall
+	temp1 = get_config_int("WALLS", "three_up_x", -1);
+	temp2 = get_config_int("WALLS", "three_up_y", -1);
+	temp3 = get_config_int("WALLS", "three_down_x", -1);
+	temp4 = get_config_int("WALLS", "three_down_y", -1);
+	if(temp1 == -1 || temp2 == -1 || temp3 == -1 || temp4 == -1) assert(0);
+	Wall *three = 0;
+	three = new Wall(temp1, temp2, temp3, temp4);
+	assert(three);
+	cc->AddUnmovable(dynamic_cast<Sprite *>(three));
+
+	//six oclock wall
+	temp1 = get_config_int("WALLS", "six_up_x", -1);
+	temp2 = get_config_int("WALLS", "six_up_y", -1);
+	temp3 = get_config_int("WALLS", "six_down_x", -1);
+	temp4 = get_config_int("WALLS", "six_down_y", -1);
+	if(temp1 == -1 || temp2 == -1 || temp3 == -1 || temp4 == -1) assert(0);
+	Wall *six = 0;
+	six = new Wall(temp1, temp2, temp3, temp4);
+	assert(six);
+	cc->AddUnmovable(dynamic_cast<Sprite *>(six));
+
+	//Nine oclock wall 
+	temp1 = get_config_int("WALLS", "nine_up_x", -1);
+	temp2 = get_config_int("WALLS", "nine_up_y", -1);
+	temp3 = get_config_int("WALLS", "nine_down_x", -1);
+	temp4 = get_config_int("WALLS", "nine_down_y", -1);
+	if(temp1 == -1 || temp2 == -1 || temp3 == -1 || temp4 == -1) assert(0);
+	Wall *nine = 0;
+	nine = new Wall(temp1, temp2, temp3, temp4);
+	assert(nine);
+	cc->AddUnmovable(dynamic_cast<Sprite *>(nine));
+	pop_config_state();
+}
+
 END_OF_MAIN()

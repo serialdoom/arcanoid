@@ -15,8 +15,8 @@ private:
 	bool player1, player2;
 	KEY keyPressed;
 	const int startY;
-	Point uper_old;
-	Point down_old;
+	Point uperOld;
+	Point downOld;
 
 public:
 

@@ -44,11 +44,11 @@ void Board::Collide(Sprite *s){
 }
 
 void Board::Move(const int dx, const int dy){
+	//Save the old possitions.
+	uperOld = GetPointUpLeft();
+	downOld = GetPointDownRight();
 
 	if( player1 ){
-		//Save the old possitions.
-		uper_old = GetPointUpLeft();
-		down_old = GetPointDownRight();
 		if( StateHolder::stateKey.Key_Left ){
 			SetPointUpLeft(GetPointUpLeft().GetX() - BOARD_SPEED, startY);
 			SetPointDownRight(GetPointDownRight().GetX() - BOARD_SPEED, GetPointDownRight().GetY());

@@ -32,7 +32,7 @@ public:
 	 * apix nomizw oti einai perito to id edw. Esti kai alios 8a ta filaei ola 
 	 * o spriteHolder pou 8a ta filaei se ena map me id, sprite
 	 */
-	Board(int start_x, int start_y, AnimationFilm *af, int numPlayer);
+	Board(int start_x, int start_y, AnimationFilm *af, char _frameNo, int numPlayer);
 	virtual void Collide(Sprite *s);
 	~Board(){} 
 };

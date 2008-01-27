@@ -49,12 +49,12 @@ public:
 	/* @target: Na epistrefei to panw aristera point enos object Oblong.
 	 * @return: thn thmh pou exei to panw aristera point.
 	 */		
-	Point GetPointUpLeft() const { return pointUpLeft; }
+	Point GetPointUpLeft(void) const { return pointUpLeft; }
 	
 	/* @target: Na epistrefei to katw de3ia point enos object Oblong.
 	 * @return: thn thmh pou exei to katw de3ia  point.
 	 */	
-	Point GetPointDownRight() const { return pointDownRight; }
+	Point GetPointDownRight(void) const { return pointDownRight; }
 
 	/* @target: Na 8etei thn thmh tou width apo ena object Oblong.
 	 * @param : Thn thmh pou 8a parei to width.
@@ -69,22 +69,22 @@ public:
 	/* @target: Na 8etei thn thmh tou panw aristero point
 	 * @param : Ena point me thn thmh pou 8a parei to panw aristero point
 	 */
-	void SetPointUpLeft(Point );
+	void SetPointUpLeft(Point point);
 
 	/* @target: Na 8etei thn thmh tou katw de3ia point
 	 * @param : Ena point me thn thmh pou 8a parei to katw de3ia point
 	 */	
-	void SetPointDownRight(Point );
+	void SetPointDownRight(Point point);
 	
 	/* @target: Na 8etei thn thmh tou panw aristera point
 	 * @param : Duo sentetagmenes x,y me ths times pou 8a parei to panw aristera point
 	 */
-	void SetPointUpLeft(int , int);
+	void SetPointUpLeft(int x, int y);
 
 	/* @target: Na 8etei thn thmh tou katw de3ia point
 	 * @param : Duo sentetagmenes x,y me ths times pou 8a parei to katw de3ia point
 	 */	
-	void SetPointDownRight(int , int );
+	void SetPointDownRight(int x, int y);
 };
 
 #endif //define OBLONG_H

@@ -59,9 +59,9 @@ public:
 	
 	/* @target: Na briskei ena sprite mesa sto holder me ena sigkekrimeno name.
 	 * @parma : name to onoma tou sprite pros anazitish.
-	 * @return: Enan iterator sto sugkekrimeno sprite.
+	 * @return: Enan ptr sto sugkekrimeno sprite.
 	 */
-	SpriteMap::iterator GetSprite(string name);
+	Sprite * GetSprite(string name);
 	
 	/* @target: Na isagh ena kenourio sprite ston holder me ena kainourio onoma.
 	 * @parma : name to onoma tou sprite pros isagwgh, sprite to sprite pou 8a 

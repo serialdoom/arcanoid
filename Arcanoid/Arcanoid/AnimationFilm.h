@@ -27,7 +27,7 @@ public:
 	 */
 	BITMAP*	GetBitmap (void)	const { return bitmap; }
 	
-	/* @return: To id tou string.
+	/* @return: To id tou Animation Film.
 	 */
 	const string  GetId (void)	const { return id; }
     

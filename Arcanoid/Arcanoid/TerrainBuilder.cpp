@@ -4,17 +4,17 @@
 
 #define BUFF_SZ 9999
 
-#define PREFIX_FRAME_NUMBER "farme Number = "
-#define PREFIX_UP_POINT_X "up.x="
-#define PREFIX_UP_POINT_Y "up.y="
-#define PREFIX_DOWN_POINT_X "down.x="
-#define PREFIX_DOWN_POINT_Y "down.y="
-#define PREFIX_WIDTH "Width = "
-#define PREFIX_HEIGHT "Height = "
-#define PREFIX_CAN_BREAK "canBreak = "
-#define PREFIX_TIMES_TO_BREAK "time to break = "
-#define PREFIX_SCORE "score = "
-#define BRICK_NAME_PREFIX "Brick_"
+#define PREFIX_FRAME_NUMBER		"farme Number = "
+#define PREFIX_UP_POINT_X		"up.x="
+#define PREFIX_UP_POINT_Y		"up.y="
+#define PREFIX_DOWN_POINT_X		"down.x="
+#define PREFIX_DOWN_POINT_Y		"down.y="
+#define PREFIX_WIDTH			"Width = "
+#define PREFIX_HEIGHT			"Height = "
+#define PREFIX_CAN_BREAK		"canBreak = "
+#define PREFIX_TIMES_TO_BREAK	"time to break = "
+#define PREFIX_SCORE			"score = "
+#define BRICK_NAME_PREFIX		"Brick_"
 
 TerrainBuilder::TerrainBuilder(CollisionChecker *_cc, SpriteHolder *_sp, AnimationFilmHolder *_afm){
 	cc = _cc;

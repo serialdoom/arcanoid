@@ -41,8 +41,9 @@ bool SpriteHolder::IsEmpty(void){
 
 
 //return specific sprite or null
-SpriteMap::iterator SpriteHolder::GetSprite(string name){	
-	return sprites.find(name);
+Sprite * SpriteHolder::GetSprite(string name){
+	SpriteMap::iterator sprite = sprites.find(name);
+	return (sprite != sprites.end())? sprite->second:(Sprite*)0;
 }
 /////////////////////////////////////////////////////////////////////
 
@@ -65,12 +66,13 @@ SpriteMap::iterator	SpriteHolder::GetEnd(void){
 //update sprite
 //an olla kala true alios false
 bool SpriteHolder::SetSprite(string name, Sprite * sprite){
-	SpriteMap::iterator iter = GetSprite(name);
+	assert(sprite);
+	Sprite * tmp = GetSprite(name);
 
-	if(iter == sprites.end())
+	if( !tmp )
 		return false;
 
-	iter->second = sprite;
+	tmp = sprite;
 	return true;
 }
 /////////////////////////////////////////////////////////////////////

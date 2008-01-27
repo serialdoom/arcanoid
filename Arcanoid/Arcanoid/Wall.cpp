@@ -6,7 +6,7 @@ Wall::Wall(int upper_left_x, int upper_left_y, int down_right_x, int down_right_
 			: Sprite(upper_left_x, upper_left_y, down_right_x, down_right_y)
 {
 	SetVisibility(false);
-	SetType(SPRITE_WALL);
+	spriteType = SPRITE_WALL;
 }
 
 void Wall::Collide(Sprite *s){

@@ -5,7 +5,7 @@
 Ball::Ball(int start_x, int start_y, 
 		   AnimationFilm *af, 
 		   const char *ball_string) : Sprite(start_x, start_y, af){
-	SetType(SPRITE_BALL);
+	spriteType = SPRITE_BALL;
 	speed = 0;
 }
 

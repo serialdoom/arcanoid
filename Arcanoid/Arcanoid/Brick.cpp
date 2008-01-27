@@ -25,6 +25,7 @@ Brick::Brick(	int x, int y,
 	SetWidth(w);
 	SetHeight(h);
 	SetFrame(frameNo);
+	spriteType = SPRITE_BRICK;
 }
 
 
@@ -46,6 +47,7 @@ Brick::Brick(	const Point  point,
 	SetWidth(w);
 	SetHeight(h);
 	SetFrame(frameNo);
+	spriteType = SPRITE_BRICK;
 }
 
 //overload constructor 2
@@ -65,6 +67,7 @@ Brick::Brick(	const Point * const point,
 	SetWidth(w);
 	SetHeight(h);
 	SetFrame(frameNo);
+	spriteType = SPRITE_BRICK;
 }
 
 void Brick::Copy(Brick* brick){

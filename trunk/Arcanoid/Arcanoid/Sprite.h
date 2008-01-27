@@ -29,7 +29,6 @@ public:
 	char *GetTypeString(void);
 	void SetType(SpriteType _type) { type = _type;}
 
-	AnimationFilm * GetFilm(void) const { return currFilm; }
 
 	char GetFrame(void) const { return frameNo; }
 

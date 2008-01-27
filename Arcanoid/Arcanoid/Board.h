@@ -19,9 +19,9 @@ private:
 	Point downOld;
 	KEY keyPressed;
 	const int startY;
-	spritetype_t spriteType;
 	bool player1, player2;
-
+	spritetype_t spriteType;
+	
 public:
 
 	spritetype_t GetType(void) const { return spriteType; } 

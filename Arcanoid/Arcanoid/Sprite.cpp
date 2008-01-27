@@ -88,6 +88,17 @@ bool Sprite::CollisionCheck(Sprite* s){
 	
 	if( (x4 < x1) || (x2 < x3) || (y4 < y1) || (y2 < y3) )
 		return false;
+	Collide(s);
+
 	return true;
 }
 
+char *Sprite::GetTypeString(){
+	switch(type){
+		case SPRITE_WALL: return "wall";
+		case SPRITE_BRICK: return "brick";
+		case SPRITE_BOARD: return "board";
+		case SPRITE_BALL: return "ball";
+		default: assert(0);
+	}
+}

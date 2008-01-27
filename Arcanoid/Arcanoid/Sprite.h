@@ -12,15 +12,22 @@
 #include "Oblong.h"
 #include "AnimationFilm.h"
 
+enum SpriteType { SPRITE_BRICK, SPRITE_WALL, SPRITE_BALL, SPRITE_BOARD };
+
+
+
 class Sprite : public Oblong {
 private:
 	char			frameNo;
     bool			isVisible;
     AnimationFilm*	currFilm;
+	SpriteType type;
 
 public:	
 	
-	
+	SpriteType GetType(void) { return type;}
+	char *GetTypeString(void);
+	void SetType(SpriteType _type) { type = _type;}
 	char GetFrame(void) const { return frameNo; }
 
 	bool IsVisible(void) const { return isVisible; }
@@ -34,6 +41,7 @@ public:
 	 * @return: true an epikaliptontai alios false
 	 */
     bool CollisionCheck(Sprite* s);
+	virtual void Collide(Sprite *s) = 0;
 
 	virtual void Move(const int dx, const int dy);
 	

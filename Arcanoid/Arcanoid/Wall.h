@@ -13,6 +13,7 @@ private:
 	//ok
 public:
 	Wall(int upper_left_x, int upper_left_y, int down_right_x, int down_right_y);
+	virtual void Collide(Sprite *s);
 	~Wall();
 };
 

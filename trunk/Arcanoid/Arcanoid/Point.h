@@ -43,12 +43,12 @@ public:
 	/* @target: Na 8etei thn thmh suntetagmenh x apo ena object point
 	 * @input : Thn thmh pou 8a parei h suntetagmenh x
 	 */
-	 void SetX(const int x) { this->x = x; }
+	 void SetX(const int _x) { x = _x; }
 	 
 	/* @target: Na 8etei thn thmh suntetagmenh y apo ena object point
 	 * @input : Thn thmh pou 8a parei h suntetagmenh y
 	 */
-	 void SetY(const int y) { this->y = y; }
+	 void SetY(const int _y) { y = _y; }
 
 	 /* @target: Kanei seighrisei an duo points einai idia.
 	  * @return: true an ta duo point exoun to idio x,y ena pors ena

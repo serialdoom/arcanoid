@@ -5,6 +5,8 @@
 #ifndef __BOARD_H__
 #define __BOARD_H__
 
+#include <string>
+
 #include "KeyLogger.h"
 #include "Sprite.h"
 #include "StateHolder.h"
@@ -12,6 +14,8 @@
 
 class Board: public Sprite {
 private:
+	const string type = "Board";
+
 	bool player1, player2;
 	KEY keyPressed;
 	const int startY;
@@ -19,6 +23,8 @@ private:
 	Point downOld;
 
 public:
+
+	const string GetType(void) const { return type; } 
 
 	void SetKey(KEY &_key) { keyPressed = _key; }
 	void Move(const int dx, const int dy);

@@ -7,15 +7,15 @@
 
 #include <string>
 
-#include "KeyLogger.h"
+
 #include "Sprite.h"
+#include "SpriteType.h"
 #include "StateHolder.h"
 #include "AnimationFilm.h"
 
 class Board: public Sprite {
 private:
-	const string type = "Board";
-
+	spritetype_t spriteType;
 	bool player1, player2;
 	KEY keyPressed;
 	const int startY;
@@ -24,7 +24,7 @@ private:
 
 public:
 
-	const string GetType(void) const { return type; } 
+	spritetype_t GetType(void) const { return spriteType; } 
 
 	void SetKey(KEY &_key) { keyPressed = _key; }
 	void Move(const int dx, const int dy);

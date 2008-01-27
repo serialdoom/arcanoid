@@ -11,7 +11,6 @@ SpriteHolder::SpriteHolder(void){}
 SpriteHolder::~SpriteHolder(void){
 	sprites.clear();
 }
-
 /////////////////////////////////////////////////////////////////////
 
 

@@ -30,7 +30,7 @@ using std::endl;
 
 
 
-
+#define BUFF_SZ 9999
 
 #define CONFIG_FILE "./game.cfg"
 
@@ -44,6 +44,12 @@ void SetGameTime(){ currTime = time((time_t *)0); }
 unsigned long GetGameTime(void){ return currTime; }
 void Walls(CollisionChecker *cc);
 
+const char * AppendIntegerToString( string str, int i){
+	char tmpString[BUFF_SZ];
+	assert( (str.size()+ i) < BUFF_SZ);
+	sprintf_s(tmpString, BUFF_SZ, "%s%d", str.c_str(), i);
+	return _strdup(tmpString);
+}
 
 
 int main(){
@@ -136,9 +142,16 @@ int main(){
 	SpriteMap::iterator	start	= spriteHolder.GetFirst();
 	SpriteMap::iterator	end		= spriteHolder.GetEnd();
 	
+
+//Brick_1
+	int cnt = 0;
 	while( start != end ){
-		Sprite * tmp = spriteHolder.GetSprite("");
-		//if( !tmp ) { assert(!"The sprite is empty"); }
+		cout<<start->second->GetFilm()->GetId()<<endl;
+		cout<<start->second->GetPointUpLeft().GetX()<<endl;
+		//Sprite * tmp = spriteHolder.GetSprite( AppendIntegerToString("Brick_", cnt ));
+		//if( (tmp != (Sprite*)0) && tmp->IsVisible() )
+		//	tmp->GetFilm()->DisplayFrame(baground, tmp->GetPointUpLeft(), tmp->GetFrame());
+		//cnt++;
 		start++;
 	}
 	
@@ -209,6 +222,8 @@ int main(){
 
 		/////------------- All ten blits
 		blit(baground, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+
+
 		if( space.IsVisible() )
 			board->DisplayFrame(buffer, space.GetPointUpLeft(), 0);
 

@@ -23,8 +23,6 @@ public:
 	SpriteHolder(void);
 	~SpriteHolder(void);
 
-	void Move();			//kanei tis kuniseis
-
 	/* @target: Na epustrefei to sunolo ton sprites pou uparxoun ston holder.
 	 * @return: To sunolo ton sprites.
 	 */

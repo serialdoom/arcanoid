@@ -62,25 +62,10 @@ bool TerrainBuilder::Load(const char *filename, const char *brick_id){
 								);
 		delete(brick_id_str);
 		KeyLogger::Write("DONE !!!\n");
-//std::cout << "I have a new brick with " << newBrick->frameNo << " times to break: " << newBrick->timesToBreak << " and score : " << newBrick->score << std::endl;
-		/*
-		newBrick = new Brick(	getNumber(buffy, PREFIX_FRAME_NUMBER),
-								new Point(getNumber(buffy, PREFIX_UP_POINT_X), getNumber(buffy, PREFIX_UP_POINT_Y)),
-								new Point(getNumber(buffy, PREFIX_DOWN_POINT_X), getNumber(buffy, PREFIX_DOWN_POINT_Y)),
-								getNumber(buffy, PREFIX_WIDTH),
-								getNumber(buffy, PREFIX_HEIGHT),
-								(getNumber(buffy, PREFIX_CAN_BREAK))?(true):(false),
-								getNumber(buffy, PREFIX_TIMES_TO_BREAK),
-								getNumber(buffy, PREFIX_SCORE),
-								true // _isActive
-								);
-*/
+
 		cc->AddMovable(dynamic_cast<Sprite *>(newBrick));
 		sp->Insert(test = AppendIntegerToString(BRICK_NAME_PREFIX, counter), dynamic_cast<Sprite *>(newBrick));
-		//KeyLogger::Write("The string has the value :%s:\n", test);
-		// DEBUG: std::cout << "I have a new brick with " << newBrick->frameNum << " times to break: " << newBrick->timesToBreak << " and score : " << newBrick->score << std::endl; 
 	}
-	//DEBUG:: std::cout << "You have :" << counter << " bricks." << std::endl;
 	return true;
 }
 

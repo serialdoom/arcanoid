@@ -5,48 +5,6 @@ InputManager::InputManager(void){
 	oldMouseX = mouse_x;
 	oldMouseY = mouse_y;
 }
-
-
-static void presedLeftKey(void){
-	if(StateHolder::stateKey.Key_Right)
-		StateHolder::stateKey.Key_Right = false;
-	 
-	StateHolder::stateKey.Key_Left = true;
-	return;
-}
-/////////////////////////////////////////////////////////////////////
-
-
-
-static void presedRightKey(void){
-	if(StateHolder::stateKey.Key_Left)
-		StateHolder::stateKey.Key_Left = false;
-	 
-	StateHolder::stateKey.Key_Right = true;
-	return;
-}
-/////////////////////////////////////////////////////////////////////
-
-
-
-static void presedAKey(void){
-	if(StateHolder::stateKey.Key_D)
-		StateHolder::stateKey.Key_D = false;
-	 
-	StateHolder::stateKey.Key_A = true;
-	return;
-}
-/////////////////////////////////////////////////////////////////////
-
-
-
-static void presedDKey(void){
-	if(StateHolder::stateKey.Key_A)
-		StateHolder::stateKey.Key_A = false;
-	
-	StateHolder::stateKey.Key_D = true;
-	return;
-}
 /////////////////////////////////////////////////////////////////////
 
 
@@ -122,10 +80,18 @@ bool InputManager::CheckInput(void){
 
 	bool hasInput = false;
 
-	if (key[KEY_A])		{ presedAKey(); hasInput = true; }
-	if (key[KEY_D])		{ presedDKey(); hasInput = true; }
-	if (key[KEY_LEFT])  { presedLeftKey(); hasInput = true;}
-	if (key[KEY_RIGHT])	{ presedRightKey(); hasInput = true; }
+	if (key[KEY_A])		{ StateHolder::stateKey.Key_A = true; hasInput = true; }
+	else				{ StateHolder::stateKey.Key_A = false; }
+
+	if (key[KEY_D])		{ StateHolder::stateKey.Key_D = true; hasInput = true; }
+	else				{ StateHolder::stateKey.Key_D = false; }
+
+	if (key[KEY_LEFT])  { StateHolder::stateKey.Key_Left = true; hasInput = true;}
+	else				{ StateHolder::stateKey.Key_Left = false; }
+
+	if (key[KEY_RIGHT])	{ StateHolder::stateKey.Key_Right = true; hasInput = true; }
+	else				{ StateHolder::stateKey.Key_Right = false; }
+
 	if (key[KEY_P])		{ presedPKey(); hasInput = true; }
 	if (key[KEY_PAUSE])	{ presedPauseKey(); hasInput = true; }
 	if (oldMouseX != mouse_x){ oldMouseX = mouseMovedX(oldMouseX); hasInput = true;}

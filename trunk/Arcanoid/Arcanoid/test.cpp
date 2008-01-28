@@ -239,7 +239,7 @@ void Walls(CollisionChecker *cc){
 	int temp1, temp2, temp3, temp4;
 
 	push_config_state();
-	set_config_file("./game.cfg");
+	set_config_file(CONFIG_FILE);
 
 	KeyLogger::Write("Creating the Walls...\n");
 	//Twelve oclock wall

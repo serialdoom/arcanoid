@@ -83,6 +83,7 @@ static Board * CreatingBoard( AnimationFilmHolder * animationFH,
 
 
 static Ball * CreatingBall( AnimationFilmHolder * animationFH, 
+						    AnimationHolder * animationH,
 						    CollisionChecker *cc, 
 						    SpriteHolder *sh )
 {
@@ -367,10 +368,10 @@ void Game::PlayGame(void){
 	BITMAP * buffer		= bitmaps->Load(BUFFER_IMAGE);
 	BITMAP * baground	= bitmaps->Load(BAGROUND_IMAGE);
 	//sprites
-	Ball* theBall		= CreatingBall(animationFH, collisionC, spriteH);
+//	Ball* theBall		= CreatingBall(animationFH, collisionC, spriteH);
 	Board* theBoard		= CreatingBoard(animationFH, collisionC, spriteH, 1);
 
-	assert(buffer || baground || theBall || theBoard);
+//	assert(buffer || baground || theBall || theBoard);
 	
 
 	GameLoop(baground, buffer);

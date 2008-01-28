@@ -30,16 +30,12 @@ using std::endl;
 
 
 
-//#define BUFF_SZ 9999
-
-//#define CONFIG_FILE "./game.cfg"
-
-
-
-//#define _APIX_
-//#define _KOUTSOP_
-
 /*
+#define BUFF_SZ 9999
+
+#define CONFIG_FILE "./game.cfg"
+
+
 static unsigned long currTime = 0;
 void SetGameTime(){ currTime = time((time_t *)0); }
 unsigned long GetGameTime(void){ return currTime; }

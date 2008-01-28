@@ -18,7 +18,7 @@ private:
 	SpriteMap sprites;
 
 public:
-	SpriteHolder(void);
+	SpriteHolder(void){}
 	~SpriteHolder(void);
 
 	/* @target: Na epustrefei to sunolo ton sprites pou uparxoun ston holder.

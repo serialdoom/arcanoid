@@ -27,6 +27,7 @@
 #include "AnimatorHolder.h"
 #include "MovingAnimator.h"
 #include "MovingAnimation.h"
+#include "AnimationHolder.h"
 #include "CollisionChecker.h"
 #include "AnimationFilmHolder.h"
 
@@ -46,6 +47,7 @@ private:
 	InputManager *		inputManager;
 	LoadFilmsInfo *		filmsInfo;
 	TerrainBuilder *	terrainB;
+	AnimationHolder *	animationH;
 	CollisionChecker *	collisionC;
 	AnimationFilmHolder*animationFH;
 

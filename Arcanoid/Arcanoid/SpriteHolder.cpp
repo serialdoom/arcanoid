@@ -5,10 +5,6 @@
 #include "SpriteHolder.h"
 
 
-//SpriteMap SpriteHolder::sprites;
-
-SpriteHolder::SpriteHolder(void){}
-
 SpriteHolder::~SpriteHolder(void){
 	sprites.clear();
 }
@@ -32,10 +28,7 @@ void SpriteHolder::Clear(void){
 
 //an exei stixoia
 bool SpriteHolder::IsEmpty(void){
-	if( sprites.size() == 0 )
-		return true;
-	else
-		return false;
+	return sprites.empty();
 }
 /////////////////////////////////////////////////////////////////////
 

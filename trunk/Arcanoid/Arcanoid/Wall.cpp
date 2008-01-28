@@ -8,8 +8,10 @@ Wall::Wall(int upper_left_x, int upper_left_y, int down_right_x, int down_right_
 	SetVisibility(false);
 	spriteType = SPRITE_WALL;
 	this->SetPosition(new Point(upper_left_x, upper_left_y));
-	this->SetHeight(upper_left_x - down_right_x>0?upper_left_x - down_right_x:down_right_x - upper_left_x);
-	this->SetWidth(upper_left_y - down_right_y>0?upper_left_y - down_right_y:down_right_y - upper_left_y);
+	this->SetHeight(down_right_y - upper_left_y);
+	assert(down_right_y - upper_left_y >0);
+	this->SetWidth(down_right_x - upper_left_x);
+	assert(down_right_x - upper_left_x >0);
 }
 
 void Wall::Collide(Sprite *s){

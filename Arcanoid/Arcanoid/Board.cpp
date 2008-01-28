@@ -47,18 +47,18 @@ void Board::Move(const int dx, const int dy){
 
 	if( player1 ){
 		if( StateHolder::stateKey.Key_Left )
-			SetPosition(GetPointUpLeft().GetX() - BOARD_SPEED, startY);
+			SetPosition(GetPosition().GetX() - BOARD_SPEED, startY);
 		else if( StateHolder::stateKey.Key_Right )
-			SetPosition(GetPointUpLeft().GetX() + BOARD_SPEED, startY);
+			SetPosition(GetPosition().GetX() + BOARD_SPEED, startY);
 		else if( (keyPressed.Key_Mouse_Left || keyPressed.Key_Mouse_Right)) 
 			SetPosition(dx, startY);
 	}//if
 	
 	else if( player2 ){
 		if( StateHolder::stateKey.Key_A)
-			SetPosition(GetPointUpLeft().GetX() - BOARD_SPEED, startY);
+			SetPosition(GetPosition().GetX() - BOARD_SPEED, startY);
 		else if( StateHolder::stateKey.Key_D)
-			SetPosition(GetPointUpLeft().GetX() + BOARD_SPEED, startY);
+			SetPosition(GetPosition().GetX() + BOARD_SPEED, startY);
 	}//else if
 	else { assert(0); }
 	return;

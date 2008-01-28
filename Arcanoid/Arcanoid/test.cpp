@@ -28,14 +28,33 @@ using std::endl;
 #include "AnimationFilmHolder.h"
 
 
-//static unsigned long currTime = 0;
-//void SetGameTime(){ currTime = time((time_t *)0); }
-//unsigned long GetGameTime(void){ return currTime; }
+
+
+//#define BUFF_SZ 9999
+
+//#define CONFIG_FILE "./game.cfg"
+
+
+
+//#define _APIX_
+//#define _KOUTSOP_
+
+/*
+static unsigned long currTime = 0;
+void SetGameTime(){ currTime = time((time_t *)0); }
+unsigned long GetGameTime(void){ return currTime; }
+
+const char * AppendIntegerToString( string str, int i){
+	char tmpString[BUFF_SZ];
+	assert( (str.size()+ i) < BUFF_SZ);
+	sprintf_s(tmpString, BUFF_SZ, "%s%d", str.c_str(), i);
+	return _strdup(tmpString);
+}
+*/
 
 int main(){
 	Game theGame;
 	theGame.PlayGame();
-
 #if 0
 	/////------------- Initialize all the necessary parts of alllegro ok
 	allegro_init();			
@@ -205,7 +224,7 @@ int main(){
 		
 		blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 	}
-#endif
 	return 0;
+#endif
 }
 END_OF_MAIN()

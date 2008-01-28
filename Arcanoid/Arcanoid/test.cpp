@@ -30,15 +30,20 @@ using std::endl;
 
 
 
-/*
 #define BUFF_SZ 9999
 
-#define CONFIG_FILE "./game.cfg"
+#define CONFIG_FILE "./configs_files/game.cfg"
+
+
+
+//#define _APIX_
+//#define _KOUTSOP_
 
 
 static unsigned long currTime = 0;
 void SetGameTime(){ currTime = time((time_t *)0); }
 unsigned long GetGameTime(void){ return currTime; }
+void Walls(CollisionChecker *cc);
 
 const char * AppendIntegerToString( string str, int i){
 	char tmpString[BUFF_SZ];
@@ -46,12 +51,12 @@ const char * AppendIntegerToString( string str, int i){
 	sprintf_s(tmpString, BUFF_SZ, "%s%d", str.c_str(), i);
 	return _strdup(tmpString);
 }
-*/
+
 
 int main(){
-	Game theGame;
-	theGame.PlayGame();
-#if 0
+//	Game theGame;
+//	theGame.PlayGame();
+//#if 0
 	/////------------- Initialize all the necessary parts of alllegro ok
 	allegro_init();			
 	install_timer();
@@ -62,6 +67,8 @@ int main(){
 	//set_gfx_mode(GFX_AUTODETECT, 640,480,0,0); ok
 	set_gfx_mode(GFX_AUTODETECT_WINDOWED, 640,480,0,0); 
 	
+	KeyLogger::Init("arcanoid.log");
+	KeyLogger::Write("KeyLogger is up and running.\n");
 
 	/////_------------ Load films data ok
 	LoadFilmsInfo filmsInfo("./configs_files/films.cfg");
@@ -89,8 +96,12 @@ int main(){
 	Board space( 244, 460, const_cast<AnimationFilm*>(board), 1);
 	Board space2( 444, 460, const_cast<AnimationFilm*>(board2), 2);
 	spriteHolder.Insert("boardFilm", &space );
+	cc.AddMovable(&space);
 	spriteHolder.Insert("boardFilm2", &space2 );
+	cc.AddMovable(&space);
 
+	//Adding walls
+	Walls(&cc);
 
 	/////------------- Create InputManager OK
 	InputManager input;
@@ -150,6 +161,7 @@ int main(){
 	bool isSuspended2	= true;		//otan kanoume register mpenei kai sto suspend
 
 	while( !key[KEY_ESC] ) {
+		KeyLogger::Write("Begin of the game loop:\n");
 		SetGameTime();
 
 		if( input.CheckInput() ){
@@ -195,7 +207,8 @@ int main(){
 		}
 ///////////////////////////////////////////////////////////////////////////////////////////
 	
-
+		//Collisioncheck !
+		cc.CollisionCheck();
 
 		/////------------- Progress all animator in animator holder
 		AnimatorHolder::Progress(GetGameTime());
@@ -221,6 +234,63 @@ int main(){
 		blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 	}
 	return 0;
-#endif
+//#endif
 }
+
+void Walls(CollisionChecker *cc){
+	const char *tmp1, *tmp2;
+	int temp1, temp2, temp3, temp4;
+
+	push_config_state();
+	set_config_file("./game.cfg");
+
+	KeyLogger::Write("Creating the Walls...\n");
+	//Twelve oclock wall
+	temp1 = get_config_int("WALLS", "twelve_up_x", -1);
+	temp2 = get_config_int("WALLS", "twelve_up_y", -1);
+	temp3 = get_config_int("WALLS", "twelve_down_x", -1);
+	temp4 = get_config_int("WALLS", "twelve_down_y", -1);
+	if(temp1 == -1 || temp2 == -1 || temp3 == -1 || temp4 == -1) assert(0);
+	Wall *twelve = 0;
+	twelve = new Wall(temp1, temp2, temp3, temp4);
+	assert(twelve);
+	cc->AddUnmovable(dynamic_cast<Sprite *>(twelve));
+
+	//three oclock wall
+	temp1 = get_config_int("WALLS", "three_up_x", -1);
+	temp2 = get_config_int("WALLS", "three_up_y", -1);
+	temp3 = get_config_int("WALLS", "three_down_x", -1);
+	temp4 = get_config_int("WALLS", "three_down_y", -1);
+	if(temp1 == -1 || temp2 == -1 || temp3 == -1 || temp4 == -1) assert(0);
+	Wall *three = 0;
+	three = new Wall(temp1, temp2, temp3, temp4);
+	assert(three);
+	cc->AddUnmovable(dynamic_cast<Sprite *>(three));
+
+	//six oclock wall
+	temp1 = get_config_int("WALLS", "six_up_x", -1);
+	temp2 = get_config_int("WALLS", "six_up_y", -1);
+	temp3 = get_config_int("WALLS", "six_down_x", -1);
+	temp4 = get_config_int("WALLS", "six_down_y", -1);
+	if(temp1 == -1 || temp2 == -1 || temp3 == -1 || temp4 == -1) assert(0);
+	Wall *six = 0;
+	six = new Wall(temp1, temp2, temp3, temp4);
+	assert(six);
+	cc->AddUnmovable(dynamic_cast<Sprite *>(six));
+
+	//Nine oclock wall 
+	temp1 = get_config_int("WALLS", "nine_up_x", -1);
+	temp2 = get_config_int("WALLS", "nine_up_y", -1);
+	temp3 = get_config_int("WALLS", "nine_down_x", -1);
+	temp4 = get_config_int("WALLS", "nine_down_y", -1);
+	if(temp1 == -1 || temp2 == -1 || temp3 == -1 || temp4 == -1) assert(0);
+	Wall *nine = 0;
+	nine = new Wall(temp1, temp2, temp3, temp4);
+	assert(nine);
+	cc->AddUnmovable(dynamic_cast<Sprite *>(nine));
+	pop_config_state();
+}
+
+
+
 END_OF_MAIN()

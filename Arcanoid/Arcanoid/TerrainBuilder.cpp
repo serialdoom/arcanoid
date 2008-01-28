@@ -48,7 +48,7 @@ bool TerrainBuilder::Load(const char *filename, const char *brick_id){
 
 		++counter;
 		// Get the frame number
-		KeyLogger::Write("Writing the bricks....\n");
+		//KeyLogger::Write("Writing the bricks....\n");
 		std::string *brick_id_str = new std::string(brick_id);
 
 		newBrick = new Brick(	getNumber(buffy, PREFIX_UP_POINT_X), getNumber(buffy, PREFIX_UP_POINT_Y), //point
@@ -63,9 +63,9 @@ bool TerrainBuilder::Load(const char *filename, const char *brick_id){
 							);
 				
 		delete(brick_id_str);
-		KeyLogger::Write("DONE !!!\n");
+		//KeyLogger::Write("DONE !!!\n");
 
-		cc->AddMovable(dynamic_cast<Sprite *>(newBrick));
+		cc->AddUnmovable(dynamic_cast<Sprite *>(newBrick));
 		sp->Insert(test = AppendIntegerToString(BRICK_NAME_PREFIX, counter), dynamic_cast<Sprite *>(newBrick));
 	}
 	return true;

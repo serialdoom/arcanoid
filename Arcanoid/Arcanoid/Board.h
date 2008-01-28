@@ -12,6 +12,7 @@
 #include "SpriteType.h"
 #include "StateHolder.h"
 #include "AnimationFilm.h"
+#include "KeyLogger.h"
 
 class Board: public Sprite {
 private:
@@ -23,7 +24,7 @@ private:
 	
 public:
 
-	spritetype_t GetType(void) const { return spriteType; } 
+	spritetype_t GetType(void) const { return spriteType; }
 
 	void SetKey(KEY &_key) { keyPressed = _key; }
 	void Move(const int dx, const int dy);

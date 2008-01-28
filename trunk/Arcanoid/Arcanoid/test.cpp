@@ -6,6 +6,8 @@
 #include <allegro.h>
 #include <string>
 
+
+
 using std::cout;
 using std::endl;
 
@@ -26,17 +28,14 @@ using std::endl;
 #include "AnimationFilmHolder.h"
 
 
-/*
+
 
 #define BUFF_SZ 9999
-
 #define CONFIG_FILE "./configs_files/game.cfg"
-
 
 
 //#define _APIX_
 //#define _KOUTSOP_
-
 
 static unsigned long currTime = 0;
 void SetGameTime(){ currTime = time((time_t *)0); }
@@ -50,11 +49,11 @@ const char * AppendIntegerToString( string str, int i){
 	return _strdup(tmpString);
 }
 
-*/
+
 int main(){
-	Game theGame;
-	theGame.PlayGame();
-#if 0
+//	Game theGame;
+//	theGame.PlayGame();
+//#if 0
 	/////------------- Initialize all the necessary parts of alllegro ok
 	allegro_init();			
 	install_timer();
@@ -84,7 +83,7 @@ int main(){
 	/////------------- Add to Animation Holder all the films ok
 	AnimationFilmHolder holder("./configs_files/bboxes/", filmsInfo, bitmaps);
 
-	/////------------- Take specific AnimationFilm OK
+	/////------------- Take specific AnimationFilm NO
 	const AnimationFilm * board  = holder.GetFilm("boardFilm");
 	const AnimationFilm * board2 = holder.GetFilm("boardFilm");
 	
@@ -104,18 +103,18 @@ int main(){
 	/////------------- Create InputManager OK
 	InputManager input;
 
-	/////------------- Create MovingAnimation for board NO
+	/////------------- Create MovingAnimation for board
 	MovingAnimation boardAnimation(244,460,1,true,1);
 	MovingAnimation boardAnimation2(444,460,1,true,1);
 
 
-	/////------------- Create and start Moving animator for board NO
+	/////------------- Create and start Moving animator for board
 	MovingAnimator boardAnimator;
 	MovingAnimator boardAnimator2;
 	boardAnimator.Start(spriteHolder.GetSprite("boardFilm"), &boardAnimation, 0);
 	boardAnimator2.Start(spriteHolder.GetSprite("boardFilm2"), &boardAnimation2, 0);
 
-	/////------------- Register the animatorHolder NO
+	/////------------- Register the animatorHolder
 	AnimatorHolder::Register(&boardAnimator);
 	AnimatorHolder::Register(&boardAnimator2);
 
@@ -232,12 +231,9 @@ int main(){
 		blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 	}
 	return 0;
-#endif
+//#endif
 }
-END_OF_MAIN()
 
-
-#if 0
 void Walls(CollisionChecker *cc){
 	const char *tmp1, *tmp2;
 	int temp1, temp2, temp3, temp4;
@@ -291,6 +287,7 @@ void Walls(CollisionChecker *cc){
 	cc->AddUnmovable(dynamic_cast<Sprite *>(nine));
 	pop_config_state();
 }
-#endif
 
 
+
+END_OF_MAIN()

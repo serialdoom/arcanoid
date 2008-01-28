@@ -53,11 +53,7 @@ static void InitiallizingAllegro(void){
 
 
 
-static Board * CreatingBoard( AnimationFilmHolder * animationFH, 
-							  CollisionChecker *cc, 
-							  SpriteHolder *sh,
-							  char playerNo )
-{
+Board * Game::CreatingBoard(int playerNo){
 	int x, y;
 	string filmID;
 
@@ -72,10 +68,19 @@ static Board * CreatingBoard( AnimationFilmHolder * animationFH,
 							  const_cast<AnimationFilm *>(animationFH->GetFilm(filmID)), 
 							  playerNo);
 	assert(theBoard);
+	collisionC->AddMovable(dynamic_cast<Sprite *>(theBoard));
+	spriteH->Insert(BOARD, dynamic_cast<Sprite *>(theBoard));
 
-	cc->AddMovable(dynamic_cast<Sprite *>(theBoard));
-	sh->Insert(BALL, dynamic_cast<Sprite *>(theBoard));
+	//Add to animation Holder
+	MovingAnimation * mov = new MovingAnimation(x, y, 1, true, countAnimationID);
+	countAnimationID++;
+	animationH->Insert(BOARD, mov );
 	
+	//Add to animator Holder
+	board = new MovingAnimator();
+	board->Start(spriteH->GetSprite(BOARD), mov, 0);
+	AnimatorHolder::Register(board);
+
 	return theBoard;
 }
 /////////////////////////////////////////////////////////////////////
@@ -148,21 +153,8 @@ Game::~Game(){
 //constructor
 Game::Game(void){
 	levelsNo		= currLevel = currTime = 0;
-	bitmaps			= (BitmapLoader *)0;
-	spriteH			= (SpriteHolder *)0;
-	terrainB		= (TerrainBuilder *)0;
-	filmsInfo		= (LoadFilmsInfo *)0;
-	animationH		= (AnimationHolder *)0;
-	collisionC		= (CollisionChecker *)0;
-	animationFH		= (AnimationFilmHolder *)0;
-	Wall *twelve	= (Wall *)0;
-	Wall *three		= (Wall *)0;
-	Wall *six		= (Wall *)0;
-	Wall *nine		= (Wall *)0;
-
-
-	InitiallizingAllegro();
 	
+	InitiallizingAllegro();
 	spriteH		= new SpriteHolder();
 	animationH	= new AnimationHolder();
 	collisionC	= new CollisionChecker();
@@ -340,10 +332,47 @@ Wall * Game::CreatingNineWall(void){
 
 
 void Game::DisplayALL(BITMAP *baground, BITMAP *buffer){
-		blit(baground, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-		DisplayTerrain(buffer, spriteH);
-		blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-		return;
+	Sprite *board;
+	blit(baground, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+	
+	if(  (board = spriteH->GetSprite(BOARD))->IsVisible() )
+		board->Display(buffer);
+
+	DisplayTerrain(buffer, spriteH);
+	blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+	return;
+}
+/////////////////////////////////////////////////////////////////////
+
+
+
+void Game::CheckBoardInput( bool input ){
+	static bool isRunning	= false;
+	static bool isSuspended	= true;		//otan kanoume register mpenei kai sto suspend
+	
+	if(input){
+		dynamic_cast<Board*>(spriteH->GetSprite(BOARD))->SetKey(StateHolder::stateKey);
+		if( StateHolder::stateKey.Key_Mouse_Left	|| 
+			StateHolder::stateKey.Key_Mouse_Right	||
+			StateHolder::stateKey.Key_Left			||
+			StateHolder::stateKey.Key_Right) 
+		{
+			dynamic_cast<MovingAnimation*>(animationH->GetAnimation(BOARD))->SetDx(inputManager->GetOldMouseX());		//alazoume to dx tou board
+			if( !isRunning ){		//Gia prwth fora mpenei sthn lista me ta running
+				AnimatorHolder::MarkAsRunning(board);
+				isRunning	= true;
+				isSuspended	= false;
+			}
+		}//end second if
+	}//end first if
+	else{
+		if( !isSuspended ){	//Gia prwth fora sthn lista me ta suspended
+			AnimatorHolder::MarkAsSuspended(board);
+			isRunning	= false;
+			isSuspended	= true;
+		}
+	}//end else
+	return;
 }
 /////////////////////////////////////////////////////////////////////
 
@@ -351,12 +380,14 @@ void Game::DisplayALL(BITMAP *baground, BITMAP *buffer){
 
 void Game::GameLoop(BITMAP *baground, BITMAP *buffer){
 	bool input = false;
+
 	while( !key[KEY_ESC] && (currLevel < levelsNo) ) {
 		SetGameTime();
 
-		if( inputManager->CheckInput() ){
-			
-		}
+		input = inputManager->CheckInput();
+		CheckBoardInput(input);
+		collisionC->CollisionCheck();
+		AnimatorHolder::Progress(GetGameTime());
 		DisplayALL(baground, buffer);
 	}
 	return;
@@ -369,7 +400,7 @@ void Game::PlayGame(void){
 	BITMAP * baground	= bitmaps->Load(BAGROUND_IMAGE);
 	//sprites
 //	Ball* theBall		= CreatingBall(animationFH, collisionC, spriteH);
-	Board* theBoard		= CreatingBoard(animationFH, collisionC, spriteH, 1);
+	Board* theBoard		= CreatingBoard(1);
 
 //	assert(buffer || baground || theBall || theBoard);
 	

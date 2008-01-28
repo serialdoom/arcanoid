@@ -151,6 +151,7 @@ Game::Game(void){
 	spriteH			= (SpriteHolder *)0;
 	terrainB		= (TerrainBuilder *)0;
 	filmsInfo		= (LoadFilmsInfo *)0;
+	animationH		= (AnimationHolder *)0;
 	collisionC		= (CollisionChecker *)0;
 	animationFH		= (AnimationFilmHolder *)0;
 	Wall *twelve	= (Wall *)0;
@@ -162,6 +163,7 @@ Game::Game(void){
 	InitiallizingAllegro();
 	
 	spriteH		= new SpriteHolder();
+	animationH	= new AnimationHolder();
 	collisionC	= new CollisionChecker();
 	assert(spriteH || collisionC);
 
@@ -371,9 +373,6 @@ void Game::PlayGame(void){
 	assert(buffer || baground || theBall || theBoard);
 	
 
-
-	//DisplayTerrain(buffer, spriteH);
-	//blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 	GameLoop(baground, buffer);
 
 	//readkey();

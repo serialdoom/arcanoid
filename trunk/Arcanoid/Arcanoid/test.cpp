@@ -26,7 +26,7 @@ using std::endl;
 #include "AnimationFilmHolder.h"
 
 
-
+/*
 
 #define BUFF_SZ 9999
 
@@ -50,11 +50,11 @@ const char * AppendIntegerToString( string str, int i){
 	return _strdup(tmpString);
 }
 
-
+*/
 int main(){
-//	Game theGame;
-//	theGame.PlayGame();
-//#if 0
+	Game theGame;
+	theGame.PlayGame();
+#if 0
 	/////------------- Initialize all the necessary parts of alllegro ok
 	allegro_init();			
 	install_timer();
@@ -84,7 +84,7 @@ int main(){
 	/////------------- Add to Animation Holder all the films ok
 	AnimationFilmHolder holder("./configs_files/bboxes/", filmsInfo, bitmaps);
 
-	/////------------- Take specific AnimationFilm NO
+	/////------------- Take specific AnimationFilm OK
 	const AnimationFilm * board  = holder.GetFilm("boardFilm");
 	const AnimationFilm * board2 = holder.GetFilm("boardFilm");
 	
@@ -104,18 +104,18 @@ int main(){
 	/////------------- Create InputManager OK
 	InputManager input;
 
-	/////------------- Create MovingAnimation for board
+	/////------------- Create MovingAnimation for board NO
 	MovingAnimation boardAnimation(244,460,1,true,1);
 	MovingAnimation boardAnimation2(444,460,1,true,1);
 
 
-	/////------------- Create and start Moving animator for board
+	/////------------- Create and start Moving animator for board NO
 	MovingAnimator boardAnimator;
 	MovingAnimator boardAnimator2;
 	boardAnimator.Start(spriteHolder.GetSprite("boardFilm"), &boardAnimation, 0);
 	boardAnimator2.Start(spriteHolder.GetSprite("boardFilm2"), &boardAnimation2, 0);
 
-	/////------------- Register the animatorHolder
+	/////------------- Register the animatorHolder NO
 	AnimatorHolder::Register(&boardAnimator);
 	AnimatorHolder::Register(&boardAnimator2);
 
@@ -232,9 +232,12 @@ int main(){
 		blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 	}
 	return 0;
-//#endif
+#endif
 }
+END_OF_MAIN()
 
+
+#if 0
 void Walls(CollisionChecker *cc){
 	const char *tmp1, *tmp2;
 	int temp1, temp2, temp3, temp4;
@@ -288,7 +291,6 @@ void Walls(CollisionChecker *cc){
 	cc->AddUnmovable(dynamic_cast<Sprite *>(nine));
 	pop_config_state();
 }
+#endif
 
 
-
-END_OF_MAIN()

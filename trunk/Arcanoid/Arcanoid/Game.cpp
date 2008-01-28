@@ -87,11 +87,7 @@ Board * Game::CreatingBoard(int playerNo){
 
 
 
-static Ball * CreatingBall( AnimationFilmHolder * animationFH, 
-						    AnimationHolder * animationH,
-						    CollisionChecker *cc, 
-						    SpriteHolder *sh )
-{
+Ball * Game::CreatingBall(void){
 	int x, y;
 	string filmID;
 
@@ -106,9 +102,18 @@ static Ball * CreatingBall( AnimationFilmHolder * animationFH,
 							  const_cast<AnimationFilm *>(animationFH->GetFilm(filmID)), 
 							  filmID.c_str());
 	assert(theBall);
+	collisionC->AddMovable(dynamic_cast<Sprite *>(theBall));
+	spriteH->Insert(BALL, dynamic_cast<Sprite *>(theBall));
 
-	cc->AddMovable(dynamic_cast<Sprite *>(theBall));
-	sh->Insert(BALL, dynamic_cast<Sprite *>(theBall));
+	//Add to animation Holder
+	MovingAnimation * mov = new MovingAnimation(x, y, 1, true, countAnimationID);
+	countAnimationID++;
+	animationH->Insert(BALL, mov );
+	
+	//Add to animator Holder
+	ball = new MovingAnimator();
+	ball->Start(spriteH->GetSprite(BALL), mov, 0);
+	AnimatorHolder::Register(ball);
 
 	return theBall;
 }
@@ -165,7 +170,7 @@ Game::Game(void){
 	InitiallizingBitmapLoader();
 	InitiallizingAnimationFilmHolder();
 
-	terrainB = new TerrainBuilder(collisionC, spriteH, animationFH);
+	terrainB = new TerrainBuilder(collisionC, spriteH, animationFH, animationH);
 	assert(terrainB);
 
 	LoadLevelsInfo();
@@ -241,7 +246,7 @@ void Game::LoadingTerrain(int levelNo){
 	if( !fileName.compare("") )		{ assert(!"file name"); }
 	if( !bricksFilm.compare("") )	{ assert(!"bricks film"); }
 	string lala = levelPath+fileName;
-	terrainB->Load( (levelPath+fileName).c_str(), bricksFilm.c_str());
+	countAnimationID = terrainB->Load( (levelPath+fileName).c_str(), bricksFilm.c_str(), countAnimationID);
 	return;
 }
 /////////////////////////////////////////////////////////////////////

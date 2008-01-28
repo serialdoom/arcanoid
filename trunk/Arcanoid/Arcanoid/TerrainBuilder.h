@@ -2,31 +2,42 @@
 #ifndef __TERRAINBUILDER_H__
 #define __TERRAINBUILDER_H__
 
+#include <allegro.h>
 #include <fstream>
 #include <cstring>
 #include <cstdlib>
 
-
-#include "CollisionChecker.h"
-#include "SpriteHolder.h"
 #include "Point.h"
 #include "Brick.h"
+#include "Animation.h"
 #include "KeyLogger.h"
+#include "SpriteHolder.h"
+#include "MovingAnimation.h"
+#include "AnimationHolder.h"
+#include "CollisionChecker.h"
 #include "AnimationFilmHolder.h"
+
+
 
 class TerrainBuilder {
 private:
-	CollisionChecker *cc; // Holds the Collision checker in order to be able to register items in him.
-	SpriteHolder *sp;
+	SpriteHolder		*sp;
+	AnimationHolder		*ah;
+	CollisionChecker	*cc; // Holds the Collision checker in order to be able to register items in him.
 	AnimationFilmHolder *afm;
+
+	
 
 	void Register(Sprite *toreg);
 	int getNumber(char *buffer, const char *pattern);
 	const char *AppendIntegerToString( std::string str, int i);
 
 public:
-	TerrainBuilder(CollisionChecker *_cc, SpriteHolder *_sp, AnimationFilmHolder *_afm);
-	bool Load(const char *config_filename, const char *brick_id);
+	TerrainBuilder( CollisionChecker *_cc, 
+					SpriteHolder *_sp, 
+					AnimationFilmHolder *_afm, 
+					AnimationHolder * _ah);
+	animid_t Load(const char *config_filename, const char *brick_id, animid_t countAnimationID);
 };
 
 

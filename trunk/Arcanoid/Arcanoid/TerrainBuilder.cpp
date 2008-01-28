@@ -27,7 +27,11 @@ TerrainBuilder::TerrainBuilder(CollisionChecker *_cc,
 	return;
 }
 
-animid_t TerrainBuilder::Load(const char *filename, const char *brick_id, animid_t countAnimationID){
+animid_t TerrainBuilder::Load(const char *filename, 
+							  const char *brick_id, 
+							  animid_t countAnimationID, 
+							  AnimatorMap &bricksAnimator)
+{
 	std::ifstream input; // input stream
 	char buffy[BUFF_SZ];
 	const char *test;
@@ -65,9 +69,16 @@ animid_t TerrainBuilder::Load(const char *filename, const char *brick_id, animid
 		cc->AddUnmovable(dynamic_cast<Sprite *>(newBrick));
 		sp->Insert(test = AppendIntegerToString(BRICK_NAME_PREFIX, counter), dynamic_cast<Sprite *>(newBrick));
 		
-		//MovingAnimation * mov = new MovingAnimation(x, y, 1, true, countAnimationID);
-		//countAnimationID++;
-		//ah->Insert(test, mov );
+		//add to animationHolder
+		MovingAnimation * mov = new MovingAnimation(x, y, 1, true, countAnimationID);
+		countAnimationID++;
+		ah->Insert(test, mov );
+
+		//add to animator Holder
+		MovingAnimator * brick = new MovingAnimator();
+		brick->Start(sp->GetSprite(test), mov, 0);
+		bricksAnimator.insert( make_pair(test, brick) );
+		AnimatorHolder::Register(brick);
 	}
 	return countAnimationID;
 }

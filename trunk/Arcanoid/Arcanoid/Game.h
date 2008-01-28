@@ -35,6 +35,7 @@
 
 class Game {
 private:
+	AnimatorMap			bricksAnimator;
 	animid_t			countAnimationID;
 	unsigned long		currTime;
 	int					levelsNo;

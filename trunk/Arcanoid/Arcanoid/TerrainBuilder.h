@@ -9,9 +9,12 @@
 
 #include "Point.h"
 #include "Brick.h"
+#include "Animator.h"
 #include "Animation.h"
 #include "KeyLogger.h"
 #include "SpriteHolder.h"
+#include "AnimatorHolder.h"
+#include "MovingAnimator.h"
 #include "MovingAnimation.h"
 #include "AnimationHolder.h"
 #include "CollisionChecker.h"
@@ -37,7 +40,10 @@ public:
 					SpriteHolder *_sp, 
 					AnimationFilmHolder *_afm, 
 					AnimationHolder * _ah);
-	animid_t Load(const char *config_filename, const char *brick_id, animid_t countAnimationID);
+	animid_t Load(const char *filename, 
+				  const char *brick_id, 
+				  animid_t countAnimationID, 
+				  AnimatorMap &bricksAnimator);
 };
 
 

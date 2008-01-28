@@ -1,6 +1,7 @@
 /*
  * author: koutsop
  */
+#include <cassert>
 #include "SpriteHolder.h"
 
 
@@ -81,5 +82,16 @@ bool SpriteHolder::SetSprite(string name, Sprite * sprite){
 //add sprite
 void SpriteHolder::Insert(string name, Sprite * sprite){
 	sprites.insert(make_pair(name, sprite));
+	return;
+}
+/////////////////////////////////////////////////////////////////////
+
+
+void SpriteHolder::EraseSprite(string name){
+	SpriteMap::iterator sprite = sprites.find(name);
+
+	if( sprite == sprites.end() ) { assert(0); }
+
+	sprites.erase(sprite);
 	return;
 }

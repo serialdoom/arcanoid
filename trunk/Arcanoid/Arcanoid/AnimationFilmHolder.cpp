@@ -16,7 +16,14 @@ static char * Append( string str, int i){
 
 
 
-AnimationFilmHolder::~AnimationFilmHolder(void){ 
+AnimationFilmHolder::~AnimationFilmHolder(void){
+	/*FilmMap::iterator start = filmMap.begin();
+	FilmMap::iterator end	= filmMap.end();
+
+	while( start != end ){
+		destroy_bitmap( start->second->GetBitmap() );
+		start++;
+	}*/
 	filmMap.clear();
 }
 /////////////////////////////////////////////////////////////////////////////

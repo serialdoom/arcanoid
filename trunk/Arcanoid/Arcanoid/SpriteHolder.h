@@ -6,8 +6,6 @@
 
 #include <map>
 #include <string>
-#include <cassert>
-#include <iostream>
 
 #include "Sprite.h"
 
@@ -66,6 +64,12 @@ public:
 	 *		  :eisagoume ston holder.
 	 */
 	void Insert(string name, Sprite * sprite);
+
+
+	/* @target: Na diagrafei mesa apo to map ena sugkekrimeno sprite.
+	 * @param : To onoma tou sprite pou prikite na diagrafei.
+	 */
+	void EraseSprite(string name);
 };
 
 #endif

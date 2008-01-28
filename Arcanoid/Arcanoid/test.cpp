@@ -28,46 +28,31 @@ using std::endl;
 #include "AnimationFilmHolder.h"
 
 
-
-
-#define BUFF_SZ 9999
-
-#define CONFIG_FILE "./game.cfg"
-
-
-
-//#define _APIX_
-//#define _KOUTSOP_
-
-static unsigned long currTime = 0;
-void SetGameTime(){ currTime = time((time_t *)0); }
-unsigned long GetGameTime(void){ return currTime; }
-
-const char * AppendIntegerToString( string str, int i){
-	char tmpString[BUFF_SZ];
-	assert( (str.size()+ i) < BUFF_SZ);
-	sprintf_s(tmpString, BUFF_SZ, "%s%d", str.c_str(), i);
-	return _strdup(tmpString);
-}
-
+//static unsigned long currTime = 0;
+//void SetGameTime(){ currTime = time((time_t *)0); }
+//unsigned long GetGameTime(void){ return currTime; }
 
 int main(){
-	/////------------- Initialize all the necessary parts of alllegro
+	Game theGame;
+	theGame.PlayGame();
+
+#if 0
+	/////------------- Initialize all the necessary parts of alllegro ok
 	allegro_init();			
 	install_timer();
 	install_keyboard();		
 	install_mouse();
 
 	set_color_depth(16);	
-	//set_gfx_mode(GFX_AUTODETECT, 640,480,0,0); 
+	//set_gfx_mode(GFX_AUTODETECT, 640,480,0,0); ok
 	set_gfx_mode(GFX_AUTODETECT_WINDOWED, 640,480,0,0); 
 	
 
-	/////_------------ Load films data
+	/////_------------ Load films data ok
 	LoadFilmsInfo filmsInfo("./configs_files/films.cfg");
 	FilmsInfoMap test = filmsInfo.GetFilmsInfo();
 
-	/////------------- Load all den bitmaps
+	/////------------- Load all den bitmaps OK
 	BitmapLoader bitmaps;
 	bitmaps.LoadFilms(filmsInfo);
 
@@ -76,23 +61,23 @@ int main(){
 
 	CollisionChecker cc;
 	
-	/////------------- Add to Animation Holder all the films
+	/////------------- Add to Animation Holder all the films ok
 	AnimationFilmHolder holder("./configs_files/bboxes/", filmsInfo, bitmaps);
 
-	/////------------- Take specific AnimationFilm
+	/////------------- Take specific AnimationFilm NO
 	const AnimationFilm * board  = holder.GetFilm("boardFilm");
 	const AnimationFilm * board2 = holder.GetFilm("boardFilm");
 	
-	/////------------- Create spriteHolder and sprites
+	/////------------- Create spriteHolder and sprites OK
 	SpriteHolder spriteHolder;
 	
-	Board space( 244, 460, const_cast<AnimationFilm*>(board), 0, 1);
-	Board space2( 444, 460, const_cast<AnimationFilm*>(board2), 0, 2);
+	Board space( 244, 460, const_cast<AnimationFilm*>(board), 1);
+	Board space2( 444, 460, const_cast<AnimationFilm*>(board2), 2);
 	spriteHolder.Insert("boardFilm", &space );
 	spriteHolder.Insert("boardFilm2", &space2 );
 
 
-	/////------------- Create InputManager
+	/////------------- Create InputManager OK
 	InputManager input;
 
 	/////------------- Create MovingAnimation for board
@@ -110,7 +95,7 @@ int main(){
 	AnimatorHolder::Register(&boardAnimator);
 	AnimatorHolder::Register(&boardAnimator2);
 
-	/////------------- Loading the terrain
+	/////------------- Loading the terrain OK
 	TerrainBuilder tb(&cc, &spriteHolder, &holder);
 	/////------------- Set cfg file
 	set_config_file(CONFIG_FILE);
@@ -118,17 +103,16 @@ int main(){
 	string fileName		= get_config_string("GENERAL", "level_file", "");
 	string bricksFilm	= get_config_string("FILMS", "brick", "");
 	
+
 	if( !fileName.compare("") )		{ assert(!"file name"); }
 	if( !bricksFilm.compare("") )	{ assert(!"bricks film"); }
 
 	tb.Load(fileName.c_str(), bricksFilm.c_str());
 
-		
+	/////------------- display terrain	OK
 	SpriteMap::iterator	start	= spriteHolder.GetFirst();
 	SpriteMap::iterator	end		= spriteHolder.GetEnd();
-	
 
-//Brick_1
 	//print to screen all den bricks
 	int cnt = 0;
 	while( start != end ){
@@ -142,7 +126,7 @@ int main(){
 
 	
 	
-	/////------------- Initialize State Holder
+	/////------------- Initialize State Holder OK
 	StateHolder::Init();
 	bool isRunning		= false;
 	bool isSuspended	= true;		//otan kanoume register mpenei kai sto suspend
@@ -221,6 +205,7 @@ int main(){
 		
 		blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 	}
+#endif
 	return 0;
 }
 END_OF_MAIN()

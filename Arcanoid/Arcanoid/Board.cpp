@@ -12,16 +12,14 @@
 Board::Board(int start_x, 
 			 int start_y, 
 			 AnimationFilm *af,
-			 char _frameNo,
-			 int numPlayer) : 	startY(start_y),
+			 char playerNo) : 	startY(start_y),
 								Sprite(start_x, start_y, af)
 {	
-	assert( numPlayer == 1 || numPlayer == 2);
+	assert( playerNo == 1 || playerNo == 2);
 	spriteType = SPRITE_BOARD;
-	SetFrame(_frameNo);
 	SetVisibility(true);
 	
-	if( numPlayer == 1){
+	if( playerNo == 1){
 		player1 = true;
 		player2 = false;
 	}

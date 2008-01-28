@@ -66,6 +66,7 @@ private:
 	Wall * CreatingSixWall(void);
 	Wall * CreatingNineWall(void);
 	Board * CreatingBoard(int playerNo);
+	Ball * Game::CreatingBall(void);
 
 	void CheckBoardInput( bool input );
 	void GameLoop(BITMAP *baground, BITMAP *buffer);

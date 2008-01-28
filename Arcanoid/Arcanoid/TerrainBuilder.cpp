@@ -16,14 +16,18 @@
 #define PREFIX_SCORE			"score = "
 #define BRICK_NAME_PREFIX		"Brick_"
 
-TerrainBuilder::TerrainBuilder(CollisionChecker *_cc, SpriteHolder *_sp, AnimationFilmHolder *_afm){
-	cc = _cc;
-	sp = _sp;
+TerrainBuilder::TerrainBuilder(CollisionChecker *_cc, 
+							   SpriteHolder *_sp, 
+							   AnimationFilmHolder *_afm, 
+							   AnimationHolder * _ah){
+	cc	= _cc;
+	sp	= _sp;
 	afm = _afm;
+	ah	= _ah;
 	return;
 }
 
-bool TerrainBuilder::Load(const char *filename, const char *brick_id){
+animid_t TerrainBuilder::Load(const char *filename, const char *brick_id, animid_t countAnimationID){
 	std::ifstream input; // input stream
 	char buffy[BUFF_SZ];
 	const char *test;
@@ -31,9 +35,6 @@ bool TerrainBuilder::Load(const char *filename, const char *brick_id){
 	// variable to hold brick data.
 	Brick *newBrick = 0;
 
-
-	// DEBUG:
-	KeyLogger::Write("Opening file \"%s\" ...", filename);
 	input.open(filename);
 	if(!input.good()) {
 		KeyLogger::Write("FAIL.\n");
@@ -44,11 +45,8 @@ bool TerrainBuilder::Load(const char *filename, const char *brick_id){
 		memset(buffy, 0, BUFF_SZ);
 		input.getline(buffy, BUFF_SZ, '\n');
 		if(!strlen(buffy)) continue; // In case there is a line in the file with just an enter...
-		// DEBUG: std::cout << "got line: " << buffy << std::endl;
 
 		++counter;
-		// Get the frame number
-		//KeyLogger::Write("Writing the bricks....\n");
 		std::string *brick_id_str = new std::string(brick_id);
 
 		newBrick = new Brick(	getNumber(buffy, PREFIX_UP_POINT_X), getNumber(buffy, PREFIX_UP_POINT_Y), //point
@@ -63,12 +61,15 @@ bool TerrainBuilder::Load(const char *filename, const char *brick_id){
 							);
 				
 		delete(brick_id_str);
-		//KeyLogger::Write("DONE !!!\n");
 
 		cc->AddUnmovable(dynamic_cast<Sprite *>(newBrick));
 		sp->Insert(test = AppendIntegerToString(BRICK_NAME_PREFIX, counter), dynamic_cast<Sprite *>(newBrick));
+		
+		//MovingAnimation * mov = new MovingAnimation(x, y, 1, true, countAnimationID);
+		//countAnimationID++;
+		//ah->Insert(BALL, mov );
 	}
-	return true;
+	return countAnimationID;
 }
 
 int TerrainBuilder::getNumber(char *buffer, const char *pattern){
@@ -83,12 +84,6 @@ int TerrainBuilder::getNumber(char *buffer, const char *pattern){
 	//DEBUG:: KeyLogger::Write("The string im trying to print is \"%s\" and  pattern \"%s\".\n", buffer, pattern);
 	while(tmp && isdigit(*tmp)) temp[counter++] = *(tmp++);
 	return atoi(temp);
-}
-
-void TerrainBuilder::Register(Sprite *toreg){
-	cc->AddUnmovable(toreg);
-	// Debuging purpose :  cc->AddMovable(toreg);
-	return;
 }
 
 

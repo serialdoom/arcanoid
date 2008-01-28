@@ -31,7 +31,7 @@ animid_t TerrainBuilder::Load(const char *filename, const char *brick_id, animid
 	std::ifstream input; // input stream
 	char buffy[BUFF_SZ];
 	const char *test;
-	int counter = 0;
+	int counter = 0, x, y;
 	// variable to hold brick data.
 	Brick *newBrick = 0;
 
@@ -49,7 +49,7 @@ animid_t TerrainBuilder::Load(const char *filename, const char *brick_id, animid
 		++counter;
 		std::string *brick_id_str = new std::string(brick_id);
 
-		newBrick = new Brick(	getNumber(buffy, PREFIX_UP_POINT_X), getNumber(buffy, PREFIX_UP_POINT_Y), //point
+		newBrick = new Brick(	(x = getNumber(buffy, PREFIX_UP_POINT_X)), (y = getNumber(buffy, PREFIX_UP_POINT_Y)), //point
 								const_cast<AnimationFilm*>(afm->GetFilm( (*brick_id_str) )), //AnimationFilm
 								getNumber(buffy, PREFIX_WIDTH), // w
 								getNumber(buffy, PREFIX_HEIGHT), //h
@@ -67,7 +67,7 @@ animid_t TerrainBuilder::Load(const char *filename, const char *brick_id, animid
 		
 		//MovingAnimation * mov = new MovingAnimation(x, y, 1, true, countAnimationID);
 		//countAnimationID++;
-		//ah->Insert(BALL, mov );
+		//ah->Insert(test, mov );
 	}
 	return countAnimationID;
 }

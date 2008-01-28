@@ -69,7 +69,7 @@ void Sprite::SetFrame (char i) {
 
 
 void Sprite::Move(const int dx, const int dy){
-	SetPointUpLeft( GetPointUpLeft().GetX() + dx, GetPointUpLeft().GetY() + dy);
+	SetPosition( GetPosition().GetX() + dx, GetPosition().GetY() + dy);
 	return;
 }
 /////////////////////////////////////////////////////////////////////
@@ -79,17 +79,17 @@ void Sprite::Move(const int dx, const int dy){
 bool Sprite::CollisionCheck(Sprite* s){
 	int x1, y1, x2, y2, x3, y3, x4, y4;
 
-	x1 = this->GetPointUpLeft().GetX();
-	y1 = this->GetPointUpLeft().GetY();
+	x1 = this->GetPosition().GetX();
+	y1 = this->GetPosition().GetY();
 
-	x2 = this->GetPointDownRight().GetX();
-	y2 = this->GetPointDownRight().GetY();
+	x2 = x1 + this->GetWidth();
+	y2 = y1 + this->GetHeight();
 
-	x3 = s->GetPointUpLeft().GetX();
-	y3 = s->GetPointUpLeft().GetY();
+	x3 = s->GetPosition().GetX();
+	y3 = s->GetPosition().GetY();
 
-	x4 = s->GetPointDownRight().GetX();
-	y4 = s->GetPointDownRight().GetY();
+	x4 = x3 + s->GetWidth();
+	y4 = y3 + s->GetHeight();
 	
 	if( (x4 < x1) || (x2 < x3) || (y4 < y1) || (y2 < y3) )
 		return false;

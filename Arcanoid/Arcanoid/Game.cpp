@@ -246,7 +246,10 @@ void Game::LoadingTerrain(int levelNo){
 	if( !fileName.compare("") )		{ assert(!"file name"); }
 	if( !bricksFilm.compare("") )	{ assert(!"bricks film"); }
 	string lala = levelPath+fileName;
-	countAnimationID = terrainB->Load( (levelPath+fileName).c_str(), bricksFilm.c_str(), countAnimationID);
+	countAnimationID = terrainB->Load( (levelPath+fileName).c_str(), 
+										bricksFilm.c_str(), 
+										countAnimationID,
+										bricksAnimator);
 	return;
 }
 /////////////////////////////////////////////////////////////////////

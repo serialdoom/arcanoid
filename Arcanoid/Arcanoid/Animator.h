@@ -5,6 +5,13 @@
 #define ANIMATOR_H
 
 
+#include <map>
+#include <string>
+
+class Animator;
+
+typedef std::map<std::string, Animator *> AnimatorMap;
+
 typedef unsigned long timestamp_t;
 
 enum animatorstate_t {

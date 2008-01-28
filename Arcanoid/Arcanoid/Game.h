@@ -16,6 +16,7 @@
 #include "Point.h"
 #include "Board.h"
 #include "Animator.h"
+#include "Animation.h"
 #include "KeyLogger.h"
 #include "StateHolder.h"
 #include "SpriteHolder.h"
@@ -34,6 +35,7 @@
 
 class Game {
 private:
+	animid_t			countAnimationID;
 	unsigned long		currTime;
 	int					levelsNo;
 	int					currLevel;
@@ -46,6 +48,8 @@ private:
 	SpriteHolder *		spriteH;
 	InputManager *		inputManager;
 	LoadFilmsInfo *		filmsInfo;
+	MovingAnimator *	board;
+	MovingAnimator *	ball;
 	TerrainBuilder *	terrainB;
 	AnimationHolder *	animationH;
 	CollisionChecker *	collisionC;
@@ -61,7 +65,9 @@ private:
 	Wall * CreatingThreeWall(void);
 	Wall * CreatingSixWall(void);
 	Wall * CreatingNineWall(void);
+	Board * CreatingBoard(int playerNo);
 
+	void CheckBoardInput( bool input );
 	void GameLoop(BITMAP *baground, BITMAP *buffer);
 	void DisplayALL(BITMAP *baground, BITMAP *buffer);
 

@@ -29,7 +29,7 @@ using std::endl;
 
 
 
-
+/*
 #define BUFF_SZ 9999
 #define CONFIG_FILE "./configs_files/game.cfg"
 
@@ -49,11 +49,11 @@ const char * AppendIntegerToString( string str, int i){
 	return _strdup(tmpString);
 }
 
-
+*/
 int main(){
-//	Game theGame;
-//	theGame.PlayGame();
-//#if 0
+	Game theGame;
+	theGame.PlayGame();
+#if 0
 	/////------------- Initialize all the necessary parts of alllegro ok
 	allegro_init();			
 	install_timer();
@@ -231,9 +231,9 @@ int main(){
 		blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 	}
 	return 0;
-//#endif
+#endif
 }
-
+#if 0
 void Walls(CollisionChecker *cc){
 	const char *tmp1, *tmp2;
 	int temp1, temp2, temp3, temp4;
@@ -287,7 +287,7 @@ void Walls(CollisionChecker *cc){
 	cc->AddUnmovable(dynamic_cast<Sprite *>(nine));
 	pop_config_state();
 }
-
+#endif
 
 
 END_OF_MAIN()

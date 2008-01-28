@@ -398,6 +398,7 @@ void Game::GameLoop(BITMAP *baground, BITMAP *buffer){
 	while( !key[KEY_ESC] && (currLevel < levelsNo) ) {
 		SetGameTime();
 
+		spriteH->GetEnd();
 		input = inputManager->CheckInput();
 		CheckBoardInput(input);
 		collisionC->CollisionCheck();
@@ -413,7 +414,7 @@ void Game::PlayGame(void){
 	BITMAP * buffer		= bitmaps->Load(BUFFER_IMAGE);
 	BITMAP * baground	= bitmaps->Load(BAGROUND_IMAGE);
 	//sprites
-//	Ball* theBall		= CreatingBall(animationFH, collisionC, spriteH);
+	Ball* theBall		= CreatingBall(/*animationFH, collisionC, spriteH*/);
 	Board* theBoard		= CreatingBoard(1);
 
 //	assert(buffer || baground || theBall || theBoard);

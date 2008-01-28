@@ -6,7 +6,7 @@ Ball::Ball(int start_x, int start_y,
 		   AnimationFilm *af, 
 		   const char *ball_string) : Sprite(start_x, start_y, af){
 	spriteType = SPRITE_BALL;
-	speed = 0;
+	speed = 4;
 }
 
 void Ball::SetSpeed(int _newspeed){

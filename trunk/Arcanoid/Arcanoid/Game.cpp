@@ -109,6 +109,7 @@ Ball * Game::CreatingBall(void){
 	MovingAnimation * mov = new MovingAnimation(x, y, 1, true, countAnimationID);
 	countAnimationID++;
 	animationH->Insert(BALL, mov );
+
 	
 	//Add to animator Holder
 	ball = new MovingAnimator();
@@ -340,11 +341,16 @@ Wall * Game::CreatingNineWall(void){
 
 
 void Game::DisplayALL(BITMAP *baground, BITMAP *buffer){
-	Sprite *board;
+	Sprite *board, *ball;
 	blit(baground, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 	
 	if(  (board = spriteH->GetSprite(BOARD))->IsVisible() )
 		board->Display(buffer);
+
+	ball = spriteH->GetSprite(BALL);
+	assert(ball);
+	if(  (ball = spriteH->GetSprite(BALL))->IsVisible() )
+		ball->Display(buffer);
 
 	DisplayTerrain(buffer, spriteH);
 	blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);

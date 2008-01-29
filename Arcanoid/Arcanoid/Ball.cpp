@@ -2,7 +2,9 @@
 
 #include "Ball.h"
 
-#define BALL_SPEED	1
+#include <iostream>
+
+#define BALL_SPEED	2
 
 Ball::Ball(int start_x, int start_y, 
 		   AnimationFilm *af, 
@@ -57,11 +59,25 @@ void Ball::Collide(Sprite *s){
 		goingLeft	= false;
 	}
 	else if( s->GetType() == SPRITE_BOARD ){			//ok
-		if(goingLeft)	{ goingLeft = false; }
-		else			{ goingLeft = true; }
+		/*if(goingLeft){ 
+			if		( StateHolder::IsGoLeft() )	{ goingLeft = true;  }
+			else if ( StateHolder::IsGoRight())	{ goingLeft = false; }
+			else								{ goingLeft = goingLeft; }
+		}
+		else{ 
+			if		( StateHolder::IsGoLeft() )	{ goingLeft = true;  }
+			else if ( StateHolder::IsGoRight())	{ goingLeft = false; }
+			else								{ goingLeft = goingLeft; }
+		}*/
+		
+		if		( StateHolder::IsGoLeft() )	{ goingLeft = true;  }
+		else if ( StateHolder::IsGoRight())	{ goingLeft = false; }
+		else								{ goingLeft = goingLeft; }		
 		goingUp = true;
 	}
 	else if( s->GetType() == SPRITE_BRICK ) {}
+
+
 
 	return;
 }

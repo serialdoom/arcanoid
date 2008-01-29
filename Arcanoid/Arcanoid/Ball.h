@@ -7,6 +7,7 @@
 
 #include "Sprite.h"
 #include "SpriteType.h"
+#include "StateHolder.h"
 #include "AnimationFilm.h"
 
 

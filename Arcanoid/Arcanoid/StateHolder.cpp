@@ -1,5 +1,5 @@
 /* StateHolder implementation file*/
-
+#include <iostream>
 #include "StateHolder.h"
 
 KEY StateHolder::stateKey;
@@ -24,21 +24,21 @@ void StateHolder::Init(void){
 
 
 
-bool StateHolder::isRunning(void){
+bool StateHolder::IsRunning(void){
 	return theState == STATE_RUNNING;
 }
 /////////////////////////////////////////////////////////////////////
 
 
 
-bool StateHolder::isPaused(void){
+bool StateHolder::IsPaused(void){
 	return theState == STATE_PAUSED;
 }
 /////////////////////////////////////////////////////////////////////
 
 
 
-bool StateHolder::isFinished(void){
+bool StateHolder::IsFinished(void){
 	return theState == STATE_FINISHED;
 }
 /////////////////////////////////////////////////////////////////////
@@ -65,3 +65,50 @@ void StateHolder::Finish(void){
 	theState = STATE_FINISHED;
 	return;
 }
+/////////////////////////////////////////////////////////////////////
+
+
+
+void StateHolder::GoLeft(void){
+	std::cout<<"go left"<<std::endl;
+	theState = STATE_GO_LEFT;
+	return;
+}
+/////////////////////////////////////////////////////////////////////
+
+
+
+void StateHolder::GoRight(void){
+	std::cout<<"go right"<<std::endl;
+	theState = STATE_GO_RIGHT;
+	return;
+}
+/////////////////////////////////////////////////////////////////////
+
+
+
+bool StateHolder::IsGoLeft(void){
+	return theState == STATE_GO_LEFT;
+}
+/////////////////////////////////////////////////////////////////////
+
+
+
+bool StateHolder::IsGoRight(void){
+	return theState == STATE_GO_RIGHT;
+}
+/////////////////////////////////////////////////////////////////////
+
+
+void StateHolder::Stop(void){
+	std::cout<<"stop"<<std::endl;
+	theState = STATE_STOP;
+}
+/////////////////////////////////////////////////////////////////////
+
+
+
+bool StateHolder::IsStop(void){
+	return theState == STATE_STOP;
+}
+/////////////////////////////////////////////////////////////////////

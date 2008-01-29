@@ -10,16 +10,18 @@
 
 class Ball : public Sprite {
 private:
-	int speed;
+	int speedX, speedY;
 	spritetype_t spriteType;
 	
 public:
 	
 	spritetype_t GetType(void) const { return spriteType; }
 
-
-	void SetSpeed(int _newspeed);
-	int GetSpeed(void);
+	void SetSpeedX(int _newspeed);
+	void SetSpeedY(int _newspeed);
+	int GetSpeedX(void);
+	int GetSpeedY(void);
+	void Move(const int dx, const int dy);
 	virtual void Collide(Sprite *s);
 	
 	Ball(int start_x, int start_y, AnimationFilm *af, const char *ball_string);

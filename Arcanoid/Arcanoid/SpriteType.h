@@ -1,3 +1,6 @@
+/*
+ * author: koutsop
+ */
 #ifndef SPRITETYPE_H
 #define SPRITETYPE_H
 

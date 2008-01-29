@@ -1,8 +1,12 @@
+/*
+ * author: koutsop
+ */
+
 /* StateHolder implementation file*/
 #include "StateHolder.h"
 
 KEY StateHolder::stateKey;
-StateHolder::state StateHolder::theState;
+StateHolder::state_t StateHolder::theState;
 
 void StateHolder::Init(void){
 	stateKey.Key_None			= true; 

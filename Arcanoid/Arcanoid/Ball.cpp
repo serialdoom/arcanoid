@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-#define BALL_SPEED	2
+#define BALL_SPEED	1
 
 Ball::Ball(int start_x, int start_y, 
 		   AnimationFilm *af, 
@@ -59,17 +59,6 @@ void Ball::Collide(Sprite *s){
 		goingLeft	= false;
 	}
 	else if( s->GetType() == SPRITE_BOARD ){			//ok
-		/*if(goingLeft){ 
-			if		( StateHolder::IsGoLeft() )	{ goingLeft = true;  }
-			else if ( StateHolder::IsGoRight())	{ goingLeft = false; }
-			else								{ goingLeft = goingLeft; }
-		}
-		else{ 
-			if		( StateHolder::IsGoLeft() )	{ goingLeft = true;  }
-			else if ( StateHolder::IsGoRight())	{ goingLeft = false; }
-			else								{ goingLeft = goingLeft; }
-		}*/
-		
 		if		( StateHolder::IsGoLeft() )	{ goingLeft = true;  }
 		else if ( StateHolder::IsGoRight())	{ goingLeft = false; }
 		else								{ goingLeft = goingLeft; }		

@@ -6,19 +6,15 @@ Ball::Ball(int start_x, int start_y,
 		   AnimationFilm *af, 
 		   const char *ball_string) : Sprite(start_x, start_y, af){
 	spriteType = SPRITE_BALL;
-	speed = 4;
-}
-
-void Ball::SetSpeed(int _newspeed){
-	speed = _newspeed;
-	return;
-}
-
-int Ball::GetSpeed(void){
-	return speed;
+	SetSpeedX(4);
+	SetSpeedY(4);
 }
 
 Ball::~Ball(){
+	return;
+}
+void Ball::Move(const int dx, const int dy){
+	SetPosition(new Point((GetPosition().GetX() + GetSpeedX()), (GetPosition().GetY() + GetSpeedY())));
 	return;
 }
 
@@ -27,21 +23,20 @@ void Ball::Collide(Sprite *s){
 	return;
 }
 
-/*
-void Ball::Activate(){
-	isActive = true;
+void Ball::SetSpeedX(int _newspeed){
+	this->speedX = _newspeed;
 	return;
 }
 
-void Ball::Deativate(){
-	isActive = false;
+void Ball::SetSpeedY(int _newspeed){
+	this->speedY = _newspeed;
 	return;
 }
 
-bool Ball::isActive(){
-	return isActive;
-	return;
+int Ball::GetSpeedX(void){
+	return this->speedX;
 }
 
-
-*/
+int Ball::GetSpeedY(void){
+	return this->speedY;
+}

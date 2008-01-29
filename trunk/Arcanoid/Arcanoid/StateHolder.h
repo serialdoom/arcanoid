@@ -1,3 +1,7 @@
+/*
+ * author: koutsop
+ */
+
 /* StateHolder header file */
 
 #ifndef __STATE_HOLDER_H__
@@ -18,15 +22,16 @@ typedef struct KEY {
 }KEY;
 
 class StateHolder {
-	enum state  {
-					STATE_RUNNING	= 0, 
-					STATE_PAUSED	= 1,	
-					STATE_FINISHED	= 2,
-					STATE_GO_LEFT	= 3,
-					STATE_GO_RIGHT	= 4,
-					STATE_STOP		= 5
-				};
-	static state	theState;
+	typedef enum state  {
+		STATE_RUNNING	= 0, 
+		STATE_PAUSED	= 1,	
+		STATE_FINISHED	= 2,
+		STATE_GO_LEFT	= 3,
+		STATE_GO_RIGHT	= 4,
+		STATE_STOP		= 5
+	}state_t;
+	
+	static state_t	theState;
 
 public:
 	static KEY	stateKey;

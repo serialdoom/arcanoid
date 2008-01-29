@@ -15,6 +15,9 @@ public:
 	int GetOldMouseX(void) const { return oldMouseX; }
 	int GetOldMouseY(void) const { return oldMouseY; }
 
+	void SetOldMouseX(int dx) { oldMouseX = dx; }
+	void SetOldMouseY(int dy) { oldMouseY = dy; }
+
 
 	/* @target: Elegxei an uparxei kapoia eisodos apo tos keyboard h' to muse. An uparxei
 	 *		  :tote 8etei thn katastasei tou StateHolder gia to key.

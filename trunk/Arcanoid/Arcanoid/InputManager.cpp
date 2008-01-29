@@ -9,8 +9,44 @@ InputManager::InputManager(void){
 
 
 
+static void pressedAButton(void){
+	StateHolder::stateKey.Key_A = true; 
+	StateHolder::GoLeft();
+	return;
+}
+/////////////////////////////////////////////////////////////////////
+
+
+
+static void pressedDButton(void){
+	StateHolder::stateKey.Key_D = true; 
+	StateHolder::GoRight();
+	return;
+}
+/////////////////////////////////////////////////////////////////////
+
+
+
+static void pressedLeftButton(void){
+	StateHolder::stateKey.Key_Left = true; 
+	StateHolder::GoLeft();
+	return;
+}
+/////////////////////////////////////////////////////////////////////
+
+
+
+static void pressedRightButton(void){
+	StateHolder::stateKey.Key_Right = true; 
+	StateHolder::GoRight();
+	return;
+}
+/////////////////////////////////////////////////////////////////////
+
+
+
 static void presedPKey(){
-	if( StateHolder::isRunning() ){
+	if( StateHolder::IsRunning() ){
 		StateHolder::Pause();
 		StateHolder::stateKey.Key_P = true;
 	}
@@ -19,7 +55,7 @@ static void presedPKey(){
 		StateHolder::Run();
 		StateHolder::stateKey.Key_P = false;
 	}
-	
+	StateHolder::Stop();
 	return;
 }
 /////////////////////////////////////////////////////////////////////
@@ -27,7 +63,7 @@ static void presedPKey(){
 
 
 static void presedPauseKey(){
-	if( StateHolder::isRunning() ){
+	if( StateHolder::IsRunning() ){
 		StateHolder::Pause();
 		StateHolder::stateKey.Key_Pause = true;
 	}
@@ -36,8 +72,7 @@ static void presedPauseKey(){
 		StateHolder::Run();
 		StateHolder::stateKey.Key_Pause = false;
 	}
-	
-	
+	StateHolder::Stop();	
 	return;
 }
 /////////////////////////////////////////////////////////////////////
@@ -45,10 +80,14 @@ static void presedPauseKey(){
 
 
 static int mouseMovedX(int oldMouseX){
-	if( oldMouseX - mouse_x <= 0)			//mouse moved right
+	if( oldMouseX - mouse_x <= 0){			//mouse moved right
+		StateHolder::GoRight();
 		StateHolder::stateKey.Key_Mouse_Right = true;
-	else									//mouse moved left
+	}
+	else{									//mouse moved left
+		StateHolder::GoLeft();
 		StateHolder::stateKey.Key_Mouse_Left = true;
+	}
 	return mouse_x;
 }
 
@@ -70,6 +109,7 @@ void noneInput(void){
 	StateHolder::stateKey.Key_A				= false;
 	StateHolder::stateKey.Key_D				= false;
 	
+	StateHolder::Stop();
 	return;
 }
 /////////////////////////////////////////////////////////////////////
@@ -80,17 +120,17 @@ bool InputManager::CheckInput(void){
 
 	bool hasInput = false;
 
-	if (key[KEY_A])		{ StateHolder::stateKey.Key_A = true; hasInput = true; }
-	else				{ StateHolder::stateKey.Key_A = false; }
+	if (key[KEY_A])		{ pressedAButton(); hasInput = true; }
+	else				{ StateHolder::stateKey.Key_A = false;}
 
-	if (key[KEY_D])		{ StateHolder::stateKey.Key_D = true; hasInput = true; }
-	else				{ StateHolder::stateKey.Key_D = false; }
+	if (key[KEY_D])		{ pressedDButton(); hasInput = true; }
+	else				{ StateHolder::stateKey.Key_D = false;}
 
-	if (key[KEY_LEFT])  { StateHolder::stateKey.Key_Left = true; hasInput = true;}
+	if (key[KEY_LEFT])	{ pressedLeftButton(); hasInput = true; }
 	else				{ StateHolder::stateKey.Key_Left = false; }
 
-	if (key[KEY_RIGHT])	{ StateHolder::stateKey.Key_Right = true; hasInput = true; }
-	else				{ StateHolder::stateKey.Key_Right = false; }
+	if (key[KEY_RIGHT])	{ pressedRightButton(); hasInput = true; }
+	else				{ StateHolder::stateKey.Key_Right = false;}
 
 	if (key[KEY_P])		{ presedPKey(); hasInput = true; }
 	if (key[KEY_PAUSE])	{ presedPauseKey(); hasInput = true; }

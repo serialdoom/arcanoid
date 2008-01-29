@@ -3,7 +3,7 @@
  */
 
 #include <cassert>
-
+#include <iostream>
 #include "Board.h"
 
 #define BOARD_SPEED	2
@@ -50,7 +50,7 @@ void Board::Move(const int dx, const int dy){
 			SetPosition(GetPosition().GetX() - BOARD_SPEED, startY);
 		else if( StateHolder::stateKey.Key_Right )
 			SetPosition(GetPosition().GetX() + BOARD_SPEED, startY);
-		else if( (keyPressed.Key_Mouse_Left || keyPressed.Key_Mouse_Right)) 
+		else if( (keyPressed.Key_Mouse_Left || keyPressed.Key_Mouse_Right))
 			SetPosition(dx, startY);
 	}//if
 	

@@ -369,6 +369,7 @@ void Game::DisplayALL(BITMAP *baground, BITMAP *buffer){
 void Game::CheckBoardInput( bool input ){
 	static bool isRunning	= false;
 	static bool isSuspended	= true;		//otan kanoume register mpenei kai sto suspend
+	MovingAnimation * mov = dynamic_cast<MovingAnimation*>(animationH->GetAnimation(BOARD));
 	
 	if(input){
 		dynamic_cast<Board*>(spriteH->GetSprite(BOARD))->SetKey(StateHolder::stateKey);
@@ -377,7 +378,15 @@ void Game::CheckBoardInput( bool input ){
 			StateHolder::stateKey.Key_Left			||
 			StateHolder::stateKey.Key_Right) 
 		{
-			dynamic_cast<MovingAnimation*>(animationH->GetAnimation(BOARD))->SetDx(inputManager->GetOldMouseX());		//alazoume to dx tou board
+			//elegxoume an pame na bgoume apo ta oria tou terrain
+			//dx = 4; (dx + terrainW) - boardW = 484 - 72
+			if( inputManager->GetOldMouseX() < 4 )
+				inputManager->SetOldMouseX(4);
+			else if ( inputManager->GetOldMouseX() > 484 - 72 )
+				inputManager->SetOldMouseX(484 - 72);
+					
+			mov->SetDx( inputManager->GetOldMouseX() );		//alazoume to dx tou board
+							
 			if( !isRunning ){		//Gia prwth fora mpenei sthn lista me ta running
 				AnimatorHolder::MarkAsRunning(board);
 				isRunning	= true;

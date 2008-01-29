@@ -19,22 +19,32 @@ typedef struct KEY {
 
 class StateHolder {
 	enum state  {
-					STATE_RUNNING, 
-					STATE_PAUSED, 
-					STATE_FINISHED
+					STATE_RUNNING	= 0, 
+					STATE_PAUSED	= 1,	
+					STATE_FINISHED	= 2,
+					STATE_GO_LEFT	= 3,
+					STATE_GO_RIGHT	= 4,
+					STATE_STOP		= 5
 				};
 	static state	theState;
 
 public:
 	static KEY	stateKey;
-
+	
+	static void Run(void);
+	static void Stop(void);
 	static void Init(void);
 	static void Pause(void);
-	static void Run(void);
+	static bool IsStop(void);
+	static void GoLeft(void);
 	static void Finish(void);
-	static bool isRunning(void);
-	static bool isPaused(void);
-	static bool isFinished(void);
+	static void GoRight(void);
+	static bool IsPaused(void);
+	static bool IsGoLeft(void);
+	static bool IsRunning(void);
+	static bool IsGoRight(void);
+	static bool IsFinished(void);
+
 };
 
 #endif

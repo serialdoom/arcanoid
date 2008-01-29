@@ -53,7 +53,7 @@ public:
 	/* @return: Epistrefei ton typo tou ka8e sprite
 	 */
 	virtual spritetype_t GetType(void) const = 0;
-
+	virtual void SetType(spritetype_t type) = 0;
 
 	/* @target: Einai h Move gia to ekatos8e sprite
 	 */

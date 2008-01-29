@@ -1,5 +1,4 @@
 /* StateHolder implementation file*/
-#include <iostream>
 #include "StateHolder.h"
 
 KEY StateHolder::stateKey;
@@ -70,7 +69,6 @@ void StateHolder::Finish(void){
 
 
 void StateHolder::GoLeft(void){
-	std::cout<<"go left"<<std::endl;
 	theState = STATE_GO_LEFT;
 	return;
 }
@@ -79,7 +77,6 @@ void StateHolder::GoLeft(void){
 
 
 void StateHolder::GoRight(void){
-	std::cout<<"go right"<<std::endl;
 	theState = STATE_GO_RIGHT;
 	return;
 }
@@ -101,7 +98,6 @@ bool StateHolder::IsGoRight(void){
 
 
 void StateHolder::Stop(void){
-	std::cout<<"stop"<<std::endl;
 	theState = STATE_STOP;
 }
 /////////////////////////////////////////////////////////////////////

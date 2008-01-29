@@ -59,7 +59,8 @@ public:
 
 	//destructor
 	~Brick(void){}
-
+	
+	void SetType(spritetype_t type) { spriteType = type; }
 	spritetype_t GetType(void)  const { return spriteType; }
 	int GetScore(void)			const { return score; }
 	bool GetCanBreak(void)		const { return canBreak; }

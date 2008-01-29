@@ -23,7 +23,7 @@ private:
 	spritetype_t spriteType;
 	
 public:
-
+	void SetType(spritetype_t type) { spriteType = type; }
 	spritetype_t GetType(void) const { return spriteType; }
 
 	void SetKey(KEY &_key) { keyPressed = _key; }

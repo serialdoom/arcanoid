@@ -33,8 +33,7 @@ Board::Board(int start_x,
 
 
 void Board::Collide(Sprite *s){
-	KeyLogger::Write("COLLISION !!! \n");
-	if(s->GetType() == SPRITE_WALL)
+	if((s->GetType() == SPRITE_WALL_LEFT) || (s->GetType() == SPRITE_WALL_RIGHT) )
 		SetPosition(oldPosition);
 	return;
 }

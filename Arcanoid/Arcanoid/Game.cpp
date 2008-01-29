@@ -52,6 +52,72 @@ static void InitiallizingAllegro(void){
 /////////////////////////////////////////////////////////////////////
 
 
+//print to screen all den visible bricks
+static void DisplayTerrain(BITMAP *bitmap, SpriteHolder* sh){
+	int cnt = 0;
+	SpriteMap::iterator	start	= sh->GetFirst();
+	SpriteMap::iterator	end		= sh->GetEnd();
+
+	while( start != end ){
+		Sprite * tmp = sh->GetSprite( Append("Brick_", cnt ) );
+		if( (tmp != (Sprite*)0) && tmp->IsVisible() )
+			tmp->Display(bitmap);
+		cnt++;
+		start++;
+	}
+	return;
+}
+/////////////////////////////////////////////////////////////////////
+
+
+//******************  End of static private functions  ***************
+
+
+//Destructor
+Game::~Game(){
+	delete bitmaps;
+	delete spriteH;
+	delete terrainB;
+	delete filmsInfo;
+	delete collisionC;
+	delete animationFH;
+	delete inputManager;
+}
+/////////////////////////////////////////////////////////////////////
+
+
+
+//constructor
+Game::Game(void){
+	levelsNo		= currLevel = currTime = 0;
+	
+	InitiallizingAllegro();
+	spriteH		= new SpriteHolder();
+	animationH	= new AnimationHolder();
+	collisionC	= new CollisionChecker();
+	assert(spriteH || collisionC);
+
+	StateHolder::Init();
+	InitiallizingFilmsInfo();
+	InitiallizingBitmapLoader();
+	InitiallizingAnimationFilmHolder();
+
+	terrainB = new TerrainBuilder(collisionC, spriteH, animationFH, animationH);
+	assert(terrainB);
+
+	LoadLevelsInfo();
+	LoadingTerrain(currLevel);
+
+	twelve			= CreatingTwelveWall();
+	three			= CreatingThreeWall();
+	six				= CreatingSixWall();
+	nine			= CreatingNineWall();
+	inputManager	= new InputManager();
+	assert(inputManager);
+}
+/////////////////////////////////////////////////////////////////////
+
+
 
 Board * Game::CreatingBoard(int playerNo){
 	int x, y;
@@ -117,72 +183,6 @@ Ball * Game::CreatingBall(void){
 	AnimatorHolder::Register(ball);
 
 	return theBall;
-}
-/////////////////////////////////////////////////////////////////////
-
-
-//print to screen all den visible bricks
-static void DisplayTerrain(BITMAP *bitmap, SpriteHolder* sh){
-	int cnt = 0;
-	SpriteMap::iterator	start	= sh->GetFirst();
-	SpriteMap::iterator	end		= sh->GetEnd();
-
-	while( start != end ){
-		Sprite * tmp = sh->GetSprite( Append("Brick_", cnt ) );
-		if( (tmp != (Sprite*)0) && tmp->IsVisible() )
-			tmp->Display(bitmap);
-		cnt++;
-		start++;
-	}
-	return;
-}
-/////////////////////////////////////////////////////////////////////
-
-
-//******************  End of static private functions  ***************
-
-
-//Destructor
-Game::~Game(){
-	delete bitmaps;
-	delete spriteH;
-	delete terrainB;
-	delete filmsInfo;
-	delete collisionC;
-	delete animationFH;
-	delete inputManager;
-}
-/////////////////////////////////////////////////////////////////////
-
-
-
-//constructor
-Game::Game(void){
-	levelsNo		= currLevel = currTime = 0;
-	
-	InitiallizingAllegro();
-	spriteH		= new SpriteHolder();
-	animationH	= new AnimationHolder();
-	collisionC	= new CollisionChecker();
-	assert(spriteH || collisionC);
-
-	StateHolder::Init();
-	InitiallizingFilmsInfo();
-	InitiallizingBitmapLoader();
-	InitiallizingAnimationFilmHolder();
-
-	terrainB = new TerrainBuilder(collisionC, spriteH, animationFH, animationH);
-	assert(terrainB);
-
-	LoadLevelsInfo();
-	LoadingTerrain(currLevel);
-
-	twelve			= CreatingTwelveWall();
-	three			= CreatingThreeWall();
-	six				= CreatingSixWall();
-	nine			= CreatingNineWall();
-	inputManager	= new InputManager();
-	assert(inputManager);
 }
 /////////////////////////////////////////////////////////////////////
 
@@ -270,6 +270,7 @@ Wall * Game::CreatingTwelveWall(void){
 	twelve = new Wall(upX, upY, downX, downY);
 	assert(twelve);
 
+	twelve->SetType(SPRITE_WALL_UP);
 	collisionC->AddUnmovable(dynamic_cast<Sprite *>(twelve));
 	spriteH->Insert(WALL_12, dynamic_cast<Sprite *>(twelve));
 	return twelve;
@@ -291,6 +292,7 @@ Wall * Game::CreatingThreeWall(void){
 	three = new Wall(upX, upY, downX, downY);
 	assert(three);
 
+	three->SetType(SPRITE_WALL_RIGHT);
 	collisionC->AddUnmovable(dynamic_cast<Sprite *>(three));
 	spriteH->Insert(WALL_3, dynamic_cast<Sprite *>(three));
 	return three;
@@ -312,6 +314,7 @@ Wall * Game::CreatingSixWall(void){
 	six = new Wall(upX, upY, downX, downY);
 	assert(six);
 
+	six->SetType(SPRITE_WALL_BOTTOM);
 	collisionC->AddUnmovable(dynamic_cast<Sprite *>(six));
 	spriteH->Insert(WALL_6, dynamic_cast<Sprite *>(six));
 	return six;
@@ -333,6 +336,7 @@ Wall * Game::CreatingNineWall(void){
 	nine = new Wall(upX, upY, downX, downY);
 	assert(nine);
 
+	nine->SetType(SPRITE_WALL_LEFT);
 	collisionC->AddUnmovable(dynamic_cast<Sprite *>(nine));
 	spriteH->Insert(WALL_9, dynamic_cast<Sprite *>(nine));
 	return nine;
@@ -341,15 +345,17 @@ Wall * Game::CreatingNineWall(void){
 
 
 void Game::DisplayALL(BITMAP *baground, BITMAP *buffer){
-	Sprite *board, *ball;
+	Sprite *board = board = spriteH->GetSprite(BOARD); 
+	Sprite *ball = spriteH->GetSprite(BALL);
+	
+	assert(baground || buffer || board || ball);
+	
 	blit(baground, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 	
-	if(  (board = spriteH->GetSprite(BOARD))->IsVisible() )
+	if( board->IsVisible() )
 		board->Display(buffer);
 
-	ball = spriteH->GetSprite(BALL);
-	assert(ball);
-	if(  (ball = spriteH->GetSprite(BALL))->IsVisible() )
+	if( ball->IsVisible() )
 		ball->Display(buffer);
 
 	DisplayTerrain(buffer, spriteH);
@@ -401,6 +407,7 @@ void Game::GameLoop(BITMAP *baground, BITMAP *buffer){
 		spriteH->GetEnd();
 		input = inputManager->CheckInput();
 		CheckBoardInput(input);
+
 		collisionC->CollisionCheck();
 		AnimatorHolder::Progress(GetGameTime());
 		DisplayALL(baground, buffer);
@@ -414,14 +421,14 @@ void Game::PlayGame(void){
 	BITMAP * buffer		= bitmaps->Load(BUFFER_IMAGE);
 	BITMAP * baground	= bitmaps->Load(BAGROUND_IMAGE);
 	//sprites
-	Ball* theBall		= CreatingBall(/*animationFH, collisionC, spriteH*/);
+	Ball* theBall		= CreatingBall();
 	Board* theBoard		= CreatingBoard(1);
 
-//	assert(buffer || baground || theBall || theBoard);
+	AnimatorHolder::MarkAsRunning(ball);
+	assert(buffer || baground || theBall || theBoard);
 	
-
+	
 	GameLoop(baground, buffer);
 
-	//readkey();
 	return;
 }

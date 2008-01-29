@@ -2,24 +2,67 @@
 
 #include "Ball.h"
 
+#define BALL_SPEED	1
+
 Ball::Ball(int start_x, int start_y, 
 		   AnimationFilm *af, 
-		   const char *ball_string) : Sprite(start_x, start_y, af){
+		   const char *ball_string) : Sprite(start_x, start_y, af)
+{
+	old.SetX(start_x);
+	old.SetY(start_y);
 	spriteType = SPRITE_BALL;
-	SetSpeedX(4);
-	SetSpeedY(4);
+	speedX = BALL_SPEED;
+	speedY = BALL_SPEED;
+	goingLeft	= false;
+	goingUp		= true;
 }
 
-Ball::~Ball(){
-	return;
-}
 void Ball::Move(const int dx, const int dy){
-	SetPosition(new Point((GetPosition().GetX() + GetSpeedX()), (GetPosition().GetY() + GetSpeedY())));
+
+	if(goingLeft)	{ SetPosition(GetPosition().GetX() - speedX, GetPosition().GetY()); }
+	else			{ SetPosition(GetPosition().GetX() + speedX, GetPosition().GetY()); }
+
+	if(goingUp)		{ SetPosition(GetPosition().GetX(), GetPosition().GetY() - speedY); }
+	else			{ SetPosition(GetPosition().GetX(), GetPosition().GetY() + speedY); }
+
 	return;
 }
 
+//TODO na kanw kai alla edw aplos blepw an einai tixos h' bricks kkai to paw sthn arxikh tou 8esh
 void Ball::Collide(Sprite *s){
-	//TODO: write something here
+	spritetype_t type = s->GetType();
+	
+	if( (type == SPRITE_WALL_RIGHT) && goingUp && !goingLeft ){
+		goingUp		= true;
+		goingLeft	= true;
+	}
+	else if( (type == SPRITE_WALL_RIGHT) && !goingUp && !goingLeft ){
+		goingUp		= false;
+		goingLeft	= true;
+	}
+	else if( (type == SPRITE_WALL_UP) && goingUp && goingLeft ){
+		goingUp		= false;
+		goingLeft	= true;
+	}
+	else if( (type == SPRITE_WALL_UP) && goingUp && !goingLeft ){
+		goingUp		= false;
+		goingLeft	= false;
+	}
+	else if( (type == SPRITE_WALL_LEFT) && !goingUp && goingLeft ){
+		goingUp		= false;
+		goingLeft	= false;
+	}
+	else if( (type == SPRITE_WALL_LEFT) && goingUp && goingLeft ){
+		goingUp		= true;
+		goingLeft	= false;
+	}
+	else if( s->GetType() == SPRITE_BOARD ){			//ok
+		if(goingLeft)	{ goingLeft = false; }
+		else			{ goingLeft = true; }
+		goingUp = true;
+	}
+	else if( s->GetType() == SPRITE_BRICK ) {}
+
 	return;
 }
 

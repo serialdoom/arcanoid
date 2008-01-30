@@ -126,7 +126,9 @@ void Terrain::BricksCleanUp(SpriteHolder* sh){
 		Sprite * tmp		= sh->GetSprite( test );
 		if( (dynamic_cast<Brick *>(tmp) != (Sprite*)0) && (dynamic_cast<Brick *>(tmp)->IsActive()) ){
 			cout<<test<<"    "<<start->second->GetPosition().ToString()<<endl;
+			start++;
 			sh->EraseSprite(test);
+			continue;
 		}
 		start++;
 	}

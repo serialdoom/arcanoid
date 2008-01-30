@@ -53,7 +53,6 @@ private:
 	void InitiallizingBitmapLoader(void);
 	void InitiallizingAnimationFilmHolder(void);
 
-	void SetMouseCoordinates(MovingAnimation * mov);
 	Board * CreatingBoard(int playerNo);
 	Ball * Game::CreatingBall(void);
 

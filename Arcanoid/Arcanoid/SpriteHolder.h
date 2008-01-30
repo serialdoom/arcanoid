@@ -7,6 +7,7 @@
 #include <map>
 #include <string>
 
+#include "KeyLogger.h"
 #include "Sprite.h"
 
 using namespace std;
@@ -70,6 +71,9 @@ public:
 	 * @param : To onoma tou sprite pou prokite na diagrafei.
 	 */
 	void EraseSprite(string name);
+
+	//gia debug skopous xrisimeuei mono
+	void PrintSpriteHolder();
 };
 
 #endif

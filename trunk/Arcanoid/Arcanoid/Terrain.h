@@ -18,6 +18,8 @@
 
 
 
+
+
 class Terrain{
 private:
 	int			levelsNo;
@@ -29,10 +31,10 @@ private:
 	void LoadingTerrainInfo(void);
 
 public:
-	Point	coordinates;
-	int width;
-	int height;
-	
+	static int		width;
+	static int		height;	
+	static Point	coordinates;
+
 	int LoadingTerrain(int countAnimationID, int levelNo);
 	void DisplayTerrain(BITMAP *bitmap, SpriteHolder* sh);
 

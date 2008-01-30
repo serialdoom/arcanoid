@@ -21,6 +21,7 @@
 #define WALL_9			"left wall"
 
 
+
 static void InitiallizingAllegro(void){
 	//Innits
 	allegro_init();
@@ -203,12 +204,13 @@ void Game::DisplayALL(BITMAP *baground, BITMAP *buffer){
 void Game::SetMouseCoordinates(MovingAnimation * mov){
 	//elegxoume an pame na bgoume apo ta oria tou terrain
 	int x		= terrain->coordinates.GetX();
+	int w		= terrain->width;
 	int boardW	= dynamic_cast<Board*>(spriteH->GetSprite(BOARD))->GetWidth();
 
 	if( inputManager->GetOldMouseX() < x )
 		inputManager->SetOldMouseX(x);
-	else if ( inputManager->GetOldMouseX() > (x + terrain->width) - boardW )
-		inputManager->SetOldMouseX((x + terrain->width) - boardW);
+	else if ( inputManager->GetOldMouseX() > (x + w) - boardW )
+		inputManager->SetOldMouseX((x + w) - boardW);
 				
 	mov->SetDx( inputManager->GetOldMouseX() );		//alazoume to dx tou board
 	return;

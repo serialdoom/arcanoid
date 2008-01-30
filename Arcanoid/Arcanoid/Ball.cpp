@@ -4,6 +4,7 @@
 #include "Brick.h"
 
 #include <iostream>
+#include "Terrain.h"
 
 #define BALL_SPEED	1
 
@@ -35,6 +36,8 @@ void Ball::Move(const int dx, const int dy){
 void Ball::Collide(Sprite *s){
 	spritetype_t type = s->GetType();
 	
+	
+
 	if( (type == SPRITE_WALL_RIGHT) && goingUp && !goingLeft ){
 		goingUp		= true;
 		goingLeft	= true;

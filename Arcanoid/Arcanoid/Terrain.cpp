@@ -4,6 +4,13 @@
 
 #include "Terrain.h"
 
+int		Terrain::width;
+int		Terrain::height;	
+Point	Terrain::coordinates;
+
+
+
+
 #define MAX_TMP_SIZE	100
 
 static char tmpString[MAX_TMP_SIZE]; //tmp table gia to append string me ari8mou

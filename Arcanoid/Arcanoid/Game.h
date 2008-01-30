@@ -35,16 +35,19 @@
 
 class Game {
 private:
+	Point				terrainCoordinates;
+	int					terrainWidth;
+	int					terrainHeight;
 	AnimatorMap			bricksAnimator;
 	animid_t			countAnimationID;
 	unsigned long		currTime;
 	int					levelsNo;
 	int					currLevel;
 	string				levelPath;
-	Wall *				twelve;
-	Wall *				three;
-	Wall *				six;
-	Wall *				nine;
+	//Wall *				twelve;
+	//Wall *				three;
+	//Wall *				six;
+	//Wall *				nine;
 	BitmapLoader *		bitmaps;
 	SpriteHolder *		spriteH;
 	InputManager *		inputManager;
@@ -62,10 +65,13 @@ private:
 	void InitiallizingBitmapLoader(void);
 	void InitiallizingAnimationFilmHolder(void);
 
-	Wall * CreatingTwelveWall(void);
-	Wall * CreatingThreeWall(void);
-	Wall * CreatingSixWall(void);
-	Wall * CreatingNineWall(void);
+	void LoadingTerrainInfo(void);
+
+	void SetMouseCoordinates(MovingAnimation * mov);
+	//Wall * CreatingTwelveWall(void);
+	//Wall * CreatingThreeWall(void);
+	//Wall * CreatingSixWall(void);
+	//Wall * CreatingNineWall(void);
 	Board * CreatingBoard(int playerNo);
 	Ball * Game::CreatingBall(void);
 

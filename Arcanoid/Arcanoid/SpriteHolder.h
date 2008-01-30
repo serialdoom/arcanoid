@@ -67,7 +67,7 @@ public:
 
 
 	/* @target: Na diagrafei mesa apo to map ena sugkekrimeno sprite.
-	 * @param : To onoma tou sprite pou prikite na diagrafei.
+	 * @param : To onoma tou sprite pou prokite na diagrafei.
 	 */
 	void EraseSprite(string name);
 };

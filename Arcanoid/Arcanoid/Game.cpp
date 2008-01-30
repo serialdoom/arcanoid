@@ -36,7 +36,6 @@ static void InitiallizingAllegro(void){
 }
 /////////////////////////////////////////////////////////////////////
 
-
 //Destructor
 Game::~Game(){
 	delete bitmaps;
@@ -263,6 +262,7 @@ void Game::GameLoop(BITMAP *baground, BITMAP *buffer){
 		AnimatorHolder::Progress(GetGameTime());
 		DisplayALL(baground, buffer);
 		collisionC->CleanUp();
+		terrain->BricksCleanUp(spriteH);
 		for(int i = 0;i < 1000000;++i);
 	}
 	return;
@@ -282,7 +282,7 @@ void Game::PlayGame(void){
 	AnimatorHolder::MarkAsRunning(ball);
 	assert(buffer || baground || theBall || theBoard);
 	
-	countAnimationID = terrain->LoadingTerrain(countAnimationID, currLevel);
+	countAnimationID = terrain->LoadingTerrain(countAnimationID, 1);
 	GameLoop(baground, buffer);
 	KeyLogger::Terminate();
 	return;

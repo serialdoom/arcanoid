@@ -4,6 +4,11 @@
 
 #include "Terrain.h"
 
+#include <iostream>
+
+using std::cout;
+using std::endl;
+
 int		Terrain::width;
 int		Terrain::height;	
 Point	Terrain::coordinates;
@@ -81,6 +86,8 @@ int Terrain::LoadingTerrain(int countAnimationID, int levelNo){
 	
 	if( !fileName.compare("") )		{ assert(!"file name"); }
 	if( !bricksFilm.compare("") )	{ assert(!"bricks film"); }
+
+	bricksAnimator.clear();
 	string lala = levelPath+fileName;
 	countAnimationID = terrainB->Load( (levelPath+fileName).c_str(), 
 										bricksFilm.c_str(), 
@@ -111,16 +118,22 @@ void Terrain::DisplayTerrain(BITMAP *bitmap, SpriteHolder* sh){
 
 
 void Terrain::BricksCleanUp(SpriteHolder* sh){
-	int cnt = 0;
 	SpriteMap::iterator	start	= sh->GetFirst();
 	SpriteMap::iterator	end		= sh->GetEnd();
 
 	while( start != end ){			//blepw pio sprite einai brick kai to diagrafw
-		string spriteName	= Append("Brick_", cnt );
-		Sprite * tmp		= sh->GetSprite( spriteName );
-		if( (tmp != (Sprite*)0) && dynamic_cast<Brick *>(tmp)->IsActive() )
-			sh->EraseSprite(spriteName);
-		cnt++;
+		string test			= start->first;
+
+		cout<<"["<<test<<"]"<<endl;
+
+		Sprite * tmp		= sh->GetSprite( test );
+		assert(tmp);
+
+		if( (tmp != (Sprite*)0) && (dynamic_cast<Brick *>(tmp)->IsActive()) ){
+			cout<<"name"<<test<<endl;
+			cout<<test<<"    "<<start->second->GetPosition().ToString()<<endl;
+			sh->EraseSprite(test);
+		}
 		start++;
 	}
 	return;

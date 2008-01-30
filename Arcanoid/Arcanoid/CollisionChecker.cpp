@@ -42,22 +42,19 @@ void CollisionChecker::ToDelete(Sprite *sprite){
 }
 
 void CollisionChecker::CleanUp(){
-	bool toDell = false;
 	std::list<Sprite *>::iterator iteUnmovable = unmovable.begin();
+	std::list<Sprite *>::iterator ite;
 	while(iteUnmovable != unmovable.end()){
 		if(dynamic_cast<Brick *>(*iteUnmovable)->IsActive()){
 			todelete.push_front(*iteUnmovable);
-			std::cout<<unmovable.size()<<std::endl;
-			toDell = true;
-			break;
-			//unmovable.clear();
-			//unmovable.erase(iteUnmovable);
+			
+			ite = iteUnmovable;
+			iteUnmovable++;
+			unmovable.erase(ite);
+			continue;
 		}
 		++iteUnmovable;
 	}
-	if(toDell)
-		unmovable.erase(iteUnmovable);
-	//movable.erase(iteUnmovable);
 	todelete.clear();
 }
 

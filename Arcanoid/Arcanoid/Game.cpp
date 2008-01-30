@@ -276,7 +276,7 @@ void Game::PlayGame(void){
 	AnimatorHolder::MarkAsRunning(ball);
 	assert(buffer || baground || theBall || theBoard);
 	
-	terrain->LoadingTerrain(countAnimationID, currLevel);
+	countAnimationID = terrain->LoadingTerrain(countAnimationID, currLevel);
 	GameLoop(baground, buffer);
 
 	return;

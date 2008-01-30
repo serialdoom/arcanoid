@@ -27,54 +27,46 @@ Ball::Ball(int start_x, int start_y,
 }
 
 
-
-
-void Ball::Move(const int dx, const int dy){
-	int startX = Terrain::coordinates.GetX();
-	int startY = Terrain::coordinates.GetY();
-	int terrainW = Terrain::width;
-	int terrainH = Terrain::height;
-	int x = GetPosition().GetX();
-	int y = GetPosition().GetY();
-
-	KeyLogger::Write("x: %d  wall: %d\n", x, terrainW+startX);
-	//cout<<"x: "<<x<<"  "<<"wall: "<<terrainW+startX<<endl;
+void Ball::CheckCoordinates(void){
+	int x			= GetPosition().GetX();
+	int y			= GetPosition().GetY();
+	int startX		= Terrain::coordinates.GetX();
+	int startY		= Terrain::coordinates.GetY();
+	int terrainW	= Terrain::width;
+	int terrainH	= Terrain::height;
 
 	if( ((x+GetWidth()) >= (terrainW+startX)) && goingUp && !goingLeft ){
-		KeyLogger::Write("1\n");
-		goingUp		= true;
+		goingUp		= true;						//right wall
 		goingLeft	= true;
 	}
 	else if( ((x+GetWidth()) >= (terrainW+startX)) && !goingUp && !goingLeft ){
-		KeyLogger::Write("2\n");
-		goingUp		= false;
+		goingUp		= false;					//right wall
 		goingLeft	= true;
 	}
 	else if( (y == startY) && goingUp && goingLeft ){
-				KeyLogger::Write("3\n");
-
-		goingUp		= false;
+		goingUp		= false;					//up wall
 		goingLeft	= true;
 	}
 	else if( (y == startY) && goingUp && !goingLeft ){
-				KeyLogger::Write("4\n");
-
-		goingUp		= false;
+		goingUp		= false;					//up wall
 		goingLeft	= false;
 	}
 	else if( (x <= startX) && !goingUp && goingLeft ){
-				KeyLogger::Write("5\n");
-
-		goingUp		= false;
+		goingUp		= false;					//left wall
 		goingLeft	= false;
 	}
 	else if( (x <= startX) && goingUp && goingLeft ){
-				KeyLogger::Write("6\n");
-
-		goingUp		= true;
+		goingUp		= true;						//left wall
 		goingLeft	= false;
 	}
-	
+	else if( (y+GetHeight()) >= (terrainH+startY) ){
+		goingUp		= true;
+	}
+	return;
+}
+
+void Ball::Move(const int dx, const int dy){
+	CheckCoordinates();
 	if(goingLeft)	{ SetPosition(GetPosition().GetX() - speedX, GetPosition().GetY()); }
 	else			{ SetPosition(GetPosition().GetX() + speedX, GetPosition().GetY()); }
 

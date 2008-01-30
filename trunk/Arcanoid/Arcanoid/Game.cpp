@@ -8,7 +8,7 @@
 #include "Game.h"
 
 #define BUFF_SZ			20321
-#define MAX_TMP_SIZE	100
+
 #define CONFIG_FILE		"./configs_files/game.cfg"
 #define BUFFER_IMAGE	"./images/bufferEditorsScreen.bmp"
 #define BAGROUND_IMAGE	"./images/editorsScreen.bmp"
@@ -19,22 +19,6 @@
 #define WALL_3			"right_wall"
 #define WALL_6			"down_wall"
 #define WALL_9			"left wall"
-
-
-static char tmpString[MAX_TMP_SIZE]; //tmp table gia to append string me ari8mou
-/////////////////////////////////////////////////////////////////////
-
-
-
-//******************  Start of static private functions  ************
-
-
-static char * Append( string str, int i){
-	sprintf_s(tmpString, MAX_TMP_SIZE, "%s%d", str.c_str(), i);
-	return tmpString;
-}
-/////////////////////////////////////////////////////////////////////
-
 
 
 static void InitiallizingAllegro(void){
@@ -52,32 +36,11 @@ static void InitiallizingAllegro(void){
 /////////////////////////////////////////////////////////////////////
 
 
-//print to screen all den visible bricks
-static void DisplayTerrain(BITMAP *bitmap, SpriteHolder* sh){
-	int cnt = 0;
-	SpriteMap::iterator	start	= sh->GetFirst();
-	SpriteMap::iterator	end		= sh->GetEnd();
-
-	while( start != end ){
-		Sprite * tmp = sh->GetSprite( Append("Brick_", cnt ) );
-		if( (tmp != (Sprite*)0) && tmp->IsVisible() )
-			tmp->Display(bitmap);
-		cnt++;
-		start++;
-	}
-	return;
-}
-/////////////////////////////////////////////////////////////////////
-
-
-//******************  End of static private functions  ***************
-
-
 //Destructor
 Game::~Game(){
 	delete bitmaps;
 	delete spriteH;
-	delete terrainB;
+	delete terrain;
 	delete filmsInfo;
 	delete collisionC;
 	delete animationFH;
@@ -89,8 +52,8 @@ Game::~Game(){
 
 //constructor
 Game::Game(void){
-	levelsNo = currLevel = terrainWidth = terrainHeight = 0;
-	currTime = 0;
+	currTime	= 0;
+	currLevel	= 0;
 	
 	InitiallizingAllegro();
 
@@ -105,18 +68,8 @@ Game::Game(void){
 	InitiallizingBitmapLoader();
 	InitiallizingAnimationFilmHolder();
 
-	terrainB = new TerrainBuilder(collisionC, spriteH, animationFH, animationH);
-	assert(terrainB);
-
-	LoadingLevelsInfo();
-	LoadingTerrainInfo();
-	LoadingTerrain(1);
-
-	//twelve			= CreatingTwelveWall();
-	//three			= CreatingThreeWall();
-	//six				= CreatingSixWall();
-	//nine			= CreatingNineWall();
-	
+	terrain = new Terrain(CONFIG_FILE, animationFH, collisionC, animationH, spriteH);
+	assert(terrain);
 }
 /////////////////////////////////////////////////////////////////////
 
@@ -157,61 +110,6 @@ void Game::InitiallizingAnimationFilmHolder(void) {
 }
 /////////////////////////////////////////////////////////////////////
 
-
-
-void Game::LoadingLevelsInfo(void){
-	set_config_file(CONFIG_FILE);
-	levelsNo	= get_config_int("GENERAL", "levels_files_No", -1);
-	levelPath	= get_config_string("GENERAL", "levels_path", "");
-	
-	assert( levelsNo >= 1 );
-	if( !levelPath.compare("") ) { assert(0); }
-	currLevel = 0;
-	return;
-}
-/////////////////////////////////////////////////////////////////////
-
-
-void Game::LoadingTerrainInfo(void){
-	set_config_file(CONFIG_FILE);
-
-	int w = get_config_int("GENERAL", "terrain_w", -1);
-	int h = get_config_int("GENERAL", "terrain_h", -1);
-	int x = get_config_int("GENERAL", "terrain_start_x", -1);
-	int y = get_config_int("GENERAL", "terrain_start_y", -1);
-
-	assert( (x != -1) && (y != -1) && (w != -1) && (h != -1) );
-
-	terrainWidth	= w;
-	terrainHeight	= h;
-	terrainCoordinates.SetX(x);
-	terrainCoordinates.SetY(y);
-	return;
-}
-/////////////////////////////////////////////////////////////////////
-
-
-
-void Game::LoadingTerrain(int levelNo){
-	set_config_file(CONFIG_FILE);
-	string fileName		= get_config_string("GENERAL", Append("level_file_", levelNo), "");
-	string bricksFilm	= get_config_string("FILMS", "brick", "");
-	
-	if( !fileName.compare("") )		{ assert(!"file name"); }
-	if( !bricksFilm.compare("") )	{ assert(!"bricks film"); }
-	string lala = levelPath+fileName;
-/*	countAnimationID = terrainB->Load( (levelPath+fileName).c_str(), 
-										bricksFilm.c_str(), 
-										countAnimationID,
-										bricksAnimator);
-*/
-	countAnimationID = terrainB->Load( "apixlvl.lvl", 
-										bricksFilm.c_str(), 
-										countAnimationID,
-										bricksAnimator);
-	return;
-}
-/////////////////////////////////////////////////////////////////////
 
 
 
@@ -271,7 +169,6 @@ Ball * Game::CreatingBall(void){
 	MovingAnimation * mov = new MovingAnimation(x, y, 1, true, countAnimationID);
 	countAnimationID++;
 	animationH->Insert(BALL, mov );
-
 	
 	//Add to animator Holder
 	ball = new MovingAnimator();
@@ -281,94 +178,7 @@ Ball * Game::CreatingBall(void){
 	return theBall;
 }
 /////////////////////////////////////////////////////////////////////
-#if 0
 
-Wall * Game::CreatingTwelveWall(void){
-	int upX, upY, downX, downY;
-	
-	set_config_file(CONFIG_FILE);
-	upX		= get_config_int("WALLS", "twelve_up_x", -1);
-	upY		= get_config_int("WALLS", "twelve_up_y", -1);
-	downX	= get_config_int("WALLS", "twelve_down_x", -1);
-	downY	= get_config_int("WALLS", "twelve_down_y", -1);
-	if(upX == -1 || upY == -1 || downX == -1 || downY == -1) assert(0);
-	
-	twelve = new Wall(upX, upY, downX, downY);
-	assert(twelve);
-
-	twelve->SetType(SPRITE_WALL_UP);
-	collisionC->AddUnmovable(dynamic_cast<Sprite *>(twelve));
-	spriteH->Insert(WALL_12, dynamic_cast<Sprite *>(twelve));
-	return twelve;
-}
-/////////////////////////////////////////////////////////////////////
-
-
-
-Wall * Game::CreatingThreeWall(void){
-	int upX, upY, downX, downY;
-	
-	set_config_file(CONFIG_FILE);
-	upX		= get_config_int("WALLS", "three_up_x", -1);
-	upY		= get_config_int("WALLS", "three_up_y", -1);
-	downX	= get_config_int("WALLS", "three_down_x", -1);
-	downY	= get_config_int("WALLS", "three_down_y", -1);
-	if(upX == -1 || upY == -1 || downX == -1 || downY == -1) assert(0);
-		
-	three = new Wall(upX, upY, downX, downY);
-	assert(three);
-
-	three->SetType(SPRITE_WALL_RIGHT);
-	collisionC->AddUnmovable(dynamic_cast<Sprite *>(three));
-	spriteH->Insert(WALL_3, dynamic_cast<Sprite *>(three));
-	return three;
-}
-/////////////////////////////////////////////////////////////////////
-
-
-
-Wall * Game::CreatingSixWall(void){
-	int upX, upY, downX, downY;
-
-	set_config_file(CONFIG_FILE);
-	upX		= get_config_int("WALLS", "six_up_x", -1);
-	upY		= get_config_int("WALLS", "six_up_y", -1);
-	downX	= get_config_int("WALLS", "six_down_x", -1);
-	downY	= get_config_int("WALLS", "six_down_y", -1);
-	if(upX == -1 || upY == -1 || downX == -1 || downY == -1) assert(0);
-	
-	six = new Wall(upX, upY, downX, downY);
-	assert(six);
-
-	six->SetType(SPRITE_WALL_BOTTOM);
-	collisionC->AddUnmovable(dynamic_cast<Sprite *>(six));
-	spriteH->Insert(WALL_6, dynamic_cast<Sprite *>(six));
-	return six;
-}
-/////////////////////////////////////////////////////////////////////
-
-
-
-Wall * Game::CreatingNineWall(void){
-	int upX, upY, downX, downY;
-
-	set_config_file(CONFIG_FILE);
-	upX		= get_config_int("WALLS", "nine_up_x", -1);
-	upY		= get_config_int("WALLS", "nine_up_y", -1);
-	downX	= get_config_int("WALLS", "nine_down_x", -1);
-	downY	= get_config_int("WALLS", "nine_down_y", -1);
-	if(upX == -1 || upY == -1 || downX == -1 || downY == -1) assert(0);
-	
-	nine = new Wall(upX, upY, downX, downY);
-	assert(nine);
-
-	nine->SetType(SPRITE_WALL_LEFT);
-	collisionC->AddUnmovable(dynamic_cast<Sprite *>(nine));
-	spriteH->Insert(WALL_9, dynamic_cast<Sprite *>(nine));
-	return nine;
-}
-/////////////////////////////////////////////////////////////////////
-#endif
 
 void Game::DisplayALL(BITMAP *baground, BITMAP *buffer){
 	Sprite *board = board = spriteH->GetSprite(BOARD); 
@@ -384,7 +194,7 @@ void Game::DisplayALL(BITMAP *baground, BITMAP *buffer){
 	if( ball->IsVisible() )
 		ball->Display(buffer);
 
-	DisplayTerrain(buffer, spriteH);
+	terrain->DisplayTerrain(buffer, spriteH);
 	blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 	return;
 }
@@ -392,13 +202,13 @@ void Game::DisplayALL(BITMAP *baground, BITMAP *buffer){
 
 void Game::SetMouseCoordinates(MovingAnimation * mov){
 	//elegxoume an pame na bgoume apo ta oria tou terrain
-	int x		= terrainCoordinates.GetX();
+	int x		= terrain->coordinates.GetX();
 	int boardW	= dynamic_cast<Board*>(spriteH->GetSprite(BOARD))->GetWidth();
 
 	if( inputManager->GetOldMouseX() < x )
 		inputManager->SetOldMouseX(x);
-	else if ( inputManager->GetOldMouseX() > (x + terrainWidth) - boardW )
-		inputManager->SetOldMouseX((x + terrainWidth) - boardW);
+	else if ( inputManager->GetOldMouseX() > (x + terrain->width) - boardW )
+		inputManager->SetOldMouseX((x + terrain->width) - boardW);
 				
 	mov->SetDx( inputManager->GetOldMouseX() );		//alazoume to dx tou board
 	return;
@@ -440,7 +250,7 @@ void Game::CheckBoardInput( bool input ){
 void Game::GameLoop(BITMAP *baground, BITMAP *buffer){
 	bool input = false;
 
-	while( !key[KEY_ESC] && (currLevel < levelsNo) ) {
+	while( !key[KEY_ESC] && (currLevel < terrain->GetLevelsNo()) ) {
 		SetGameTime();
 
 		spriteH->GetEnd();
@@ -466,7 +276,7 @@ void Game::PlayGame(void){
 	AnimatorHolder::MarkAsRunning(ball);
 	assert(buffer || baground || theBall || theBoard);
 	
-	
+	terrain->LoadingTerrain(countAnimationID, currLevel);
 	GameLoop(baground, buffer);
 
 	return;

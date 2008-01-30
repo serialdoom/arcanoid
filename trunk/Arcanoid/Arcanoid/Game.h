@@ -7,14 +7,15 @@
 #define GAME_H
 
 
-#include <allegro.h>
-#include <string>
 
+#include <string>
+#include <allegro.h>
 
 #include "Wall.h"
 #include "Ball.h"
 #include "Point.h"
 #include "Board.h"
+#include "Terrain.h"
 #include "Animator.h"
 #include "Animation.h"
 #include "KeyLogger.h"
@@ -24,7 +25,6 @@
 #include "InputManager.h"
 #include "LoadFilmsInfo.h"
 #include "LoadFilmsInfo.h"
-#include "TerrainBuilder.h"
 #include "AnimatorHolder.h"
 #include "MovingAnimator.h"
 #include "MovingAnimation.h"
@@ -35,43 +35,26 @@
 
 class Game {
 private:
-	Point				terrainCoordinates;
-	int					terrainWidth;
-	int					terrainHeight;
-	AnimatorMap			bricksAnimator;
+	int					currLevel;
 	animid_t			countAnimationID;
 	unsigned long		currTime;
-	int					levelsNo;
-	int					currLevel;
-	string				levelPath;
-	//Wall *				twelve;
-	//Wall *				three;
-	//Wall *				six;
-	//Wall *				nine;
+	Terrain	*			terrain;
 	BitmapLoader *		bitmaps;
 	SpriteHolder *		spriteH;
 	InputManager *		inputManager;
 	LoadFilmsInfo *		filmsInfo;
 	MovingAnimator *	board;
 	MovingAnimator *	ball;
-	TerrainBuilder *	terrainB;
 	AnimationHolder *	animationH;
 	CollisionChecker *	collisionC;
 	AnimationFilmHolder*animationFH;
 
-	void LoadingLevelsInfo(void);
-	void LoadingTerrain(int levelNo);
 	void InitiallizingFilmsInfo(void);
 	void InitiallizingBitmapLoader(void);
 	void InitiallizingAnimationFilmHolder(void);
 
-	void LoadingTerrainInfo(void);
 
 	void SetMouseCoordinates(MovingAnimation * mov);
-	//Wall * CreatingTwelveWall(void);
-	//Wall * CreatingThreeWall(void);
-	//Wall * CreatingSixWall(void);
-	//Wall * CreatingNineWall(void);
 	Board * CreatingBoard(int playerNo);
 	Ball * Game::CreatingBall(void);
 

@@ -1,6 +1,7 @@
 /* Implementation of the Ball */
 
 #include "Ball.h"
+#include "Brick.h"
 
 #include <iostream>
 
@@ -65,7 +66,7 @@ void Ball::Collide(Sprite *s){
 		goingUp = true;
 	}
 	else if( type == SPRITE_BRICK ) {
-		((dynamic_cast<Brick *>)s)->SetActive();
+		dynamic_cast<Brick *>(s)->SetIsActive(true);
 	}
 	return;
 }

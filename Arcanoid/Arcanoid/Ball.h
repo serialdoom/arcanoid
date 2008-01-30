@@ -9,6 +9,7 @@
 #include "SpriteType.h"
 #include "StateHolder.h"
 #include "AnimationFilm.h"
+#include "Brick.h"
 
 
 class Ball : public Sprite {

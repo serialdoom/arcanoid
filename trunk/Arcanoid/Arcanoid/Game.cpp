@@ -30,8 +30,8 @@ static void InitiallizingAllegro(void){
 	install_mouse();
 
 	set_color_depth(16);	// Set the color depth
-	//set_gfx_mode(GFX_AUTODETECT, 640,480,0,0); 
-	set_gfx_mode(GFX_AUTODETECT_WINDOWED, 640,480,0,0); // Change our graphics mode to 640x480
+	set_gfx_mode(GFX_AUTODETECT, 640,480,0,0); 
+	//set_gfx_mode(GFX_AUTODETECT_WINDOWED, 640,480,0,0); // Change our graphics mode to 640x480
 	return;
 }
 /////////////////////////////////////////////////////////////////////
@@ -271,6 +271,8 @@ void Game::GameLoop(BITMAP *baground, BITMAP *buffer){
 
 void Game::PlayGame(void){
 	//bitmaps
+	KeyLogger::Init("ball.txt");
+	KeyLogger::Enable();
 	BITMAP * buffer		= bitmaps->Load(BUFFER_IMAGE);
 	BITMAP * baground	= bitmaps->Load(BAGROUND_IMAGE);
 	//sprites
@@ -282,6 +284,6 @@ void Game::PlayGame(void){
 	
 	countAnimationID = terrain->LoadingTerrain(countAnimationID, currLevel);
 	GameLoop(baground, buffer);
-
+	KeyLogger::Terminate();
 	return;
 }

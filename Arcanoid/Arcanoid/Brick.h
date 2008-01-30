@@ -66,6 +66,7 @@ public:
 	bool GetCanBreak(void)		const { return canBreak; }
 	bool IsActive(void)			const { return isActive; }
 	int GetTimesToBreak(void)	const { return timesToBreak; }
+	void SetActive(void);
 
 	void SetScore(const int score)	{ this->score = score; }
 	void SetCanBreak(const bool cn) { canBreak = cn; }

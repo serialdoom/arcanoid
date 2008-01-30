@@ -36,6 +36,23 @@ void CollisionChecker::CollisionCheck(void){
 	return;
 }
 
+
+void CollisionChecker::ToDelete(Sprite *sprite){
+	for( std::list<Sprite *>::iterator iteMovable = movable.begin(); iteMovable != movable.end() ; ++iteMovable){
+		if(*iteMovable == *sprite){
+			movable.erase(iteMovable);
+			todelete.push_front(sprite);
+		}
+	}
+	for(std::list<Sprite *>::iterator iteUnmovable = unmovable.begin(); iteUnmovable != unmovable.end(); ++iteUnmovable){
+		if(*iteMovable == *sprite){
+			movable.erase(iteUnmovable);
+			todelete.push_front(sprite);
+		}
+	}
+}
+
+
 bool CollisionChecker::CheckSprites(Sprite *first, Sprite *sec){
 	//TODO: write some code biatch
 	first->CollisionCheck(sec);

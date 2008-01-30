@@ -64,7 +64,8 @@ void Ball::Collide(Sprite *s){
 		else								{ goingLeft = goingLeft; }		
 		goingUp = true;
 	}
-	else if( type == SPRITE_BRICK ) {}
+	else if( type == SPRITE_BRICK ) {
+		s->Set}
 
 
 

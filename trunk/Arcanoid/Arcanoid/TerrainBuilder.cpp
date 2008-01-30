@@ -59,7 +59,7 @@ animid_t TerrainBuilder::Load(const char *filename,
 								getNumber(buffy, PREFIX_HEIGHT), //h
 								getNumber(buffy, PREFIX_SCORE), //score
 								getNumber(buffy, PREFIX_FRAME_NUMBER), //frameNo
-								true, // isActive
+								false, // isActive
 								(getNumber(buffy, PREFIX_CAN_BREAK))?(true):(false), //CanBreak
 								getNumber(buffy, PREFIX_TIMES_TO_BREAK) //Times to break
 							);

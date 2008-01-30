@@ -51,9 +51,10 @@ void CollisionChecker::CleanUp(){
 	unmovable.empty();
 	todelete.empty();
 	for(std::list<Sprite *>::iterator iteUnmovable = unmovable.begin(); iteUnmovable != unmovable.end(); ++iteUnmovable){
-		if(dynamic_cast<Brick *>(iteUnmovable)->IsActive()){
+		
+		if(dynamic_cast<Brick *>(*iteUnmovable)->IsActive()){
 			movable.erase(iteUnmovable);
-			todelete.push_front(iteUnmovable);
+			todelete.push_front(*iteUnmovable);
 		}
 	}
 	todelete.clear();

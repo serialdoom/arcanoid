@@ -4,9 +4,14 @@
 #include "Brick.h"
 
 #include <iostream>
+
+#include "KeyLogger.h"
 #include "Terrain.h"
 
 #define BALL_SPEED	1
+
+using std::cout;
+using std::endl;
 
 Ball::Ball(int start_x, int start_y, 
 		   AnimationFilm *af, 
@@ -21,8 +26,55 @@ Ball::Ball(int start_x, int start_y,
 	goingUp		= true;
 }
 
-void Ball::Move(const int dx, const int dy){
 
+
+
+void Ball::Move(const int dx, const int dy){
+	int startX = Terrain::coordinates.GetX();
+	int startY = Terrain::coordinates.GetY();
+	int terrainW = Terrain::width;
+	int terrainH = Terrain::height;
+	int x = GetPosition().GetX();
+	int y = GetPosition().GetY();
+
+	KeyLogger::Write("x: %d  wall: %d\n", x, terrainW+startX);
+	//cout<<"x: "<<x<<"  "<<"wall: "<<terrainW+startX<<endl;
+
+	if( ((x+GetWidth()) >= (terrainW+startX)) && goingUp && !goingLeft ){
+		KeyLogger::Write("1\n");
+		goingUp		= true;
+		goingLeft	= true;
+	}
+	else if( ((x+GetWidth()) >= (terrainW+startX)) && !goingUp && !goingLeft ){
+		KeyLogger::Write("2\n");
+		goingUp		= false;
+		goingLeft	= true;
+	}
+	else if( (y == startY) && goingUp && goingLeft ){
+				KeyLogger::Write("3\n");
+
+		goingUp		= false;
+		goingLeft	= true;
+	}
+	else if( (y == startY) && goingUp && !goingLeft ){
+				KeyLogger::Write("4\n");
+
+		goingUp		= false;
+		goingLeft	= false;
+	}
+	else if( (x <= startX) && !goingUp && goingLeft ){
+				KeyLogger::Write("5\n");
+
+		goingUp		= false;
+		goingLeft	= false;
+	}
+	else if( (x <= startX) && goingUp && goingLeft ){
+				KeyLogger::Write("6\n");
+
+		goingUp		= true;
+		goingLeft	= false;
+	}
+	
 	if(goingLeft)	{ SetPosition(GetPosition().GetX() - speedX, GetPosition().GetY()); }
 	else			{ SetPosition(GetPosition().GetX() + speedX, GetPosition().GetY()); }
 
@@ -36,33 +88,7 @@ void Ball::Move(const int dx, const int dy){
 void Ball::Collide(Sprite *s){
 	spritetype_t type = s->GetType();
 	
-	
-
-	if( (type == SPRITE_WALL_RIGHT) && goingUp && !goingLeft ){
-		goingUp		= true;
-		goingLeft	= true;
-	}
-	else if( (type == SPRITE_WALL_RIGHT) && !goingUp && !goingLeft ){
-		goingUp		= false;
-		goingLeft	= true;
-	}
-	else if( (type == SPRITE_WALL_UP) && goingUp && goingLeft ){
-		goingUp		= false;
-		goingLeft	= true;
-	}
-	else if( (type == SPRITE_WALL_UP) && goingUp && !goingLeft ){
-		goingUp		= false;
-		goingLeft	= false;
-	}
-	else if( (type == SPRITE_WALL_LEFT) && !goingUp && goingLeft ){
-		goingUp		= false;
-		goingLeft	= false;
-	}
-	else if( (type == SPRITE_WALL_LEFT) && goingUp && goingLeft ){
-		goingUp		= true;
-		goingLeft	= false;
-	}
-	else if( type == SPRITE_BOARD ){			//ok
+	if( type == SPRITE_BOARD ){			//ok
 		if		( StateHolder::IsGoLeft() )	{ goingLeft = true;  }
 		else if ( StateHolder::IsGoRight())	{ goingLeft = false; }
 		else								{ goingLeft = goingLeft; }		
@@ -71,6 +97,8 @@ void Ball::Collide(Sprite *s){
 	else if( type == SPRITE_BRICK ) {
 		dynamic_cast<Brick *>(s)->SetIsActive(true);
 	}
+	else
+		assert(!"kapia malakia ekanes sthn ball malaka\n");
 	return;
 }
 

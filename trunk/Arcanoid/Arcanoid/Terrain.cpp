@@ -123,14 +123,8 @@ void Terrain::BricksCleanUp(SpriteHolder* sh){
 
 	while( start != end ){			//blepw pio sprite einai brick kai to diagrafw
 		string test			= start->first;
-
-		cout<<"["<<test<<"]"<<endl;
-
 		Sprite * tmp		= sh->GetSprite( test );
-		assert(tmp);
-
-		if( (tmp != (Sprite*)0) && (dynamic_cast<Brick *>(tmp)->IsActive()) ){
-			cout<<"name"<<test<<endl;
+		if( (dynamic_cast<Brick *>(tmp) != (Sprite*)0) && (dynamic_cast<Brick *>(tmp)->IsActive()) ){
 			cout<<test<<"    "<<start->second->GetPosition().ToString()<<endl;
 			sh->EraseSprite(test);
 		}

@@ -38,23 +38,13 @@ void CollisionChecker::CollisionCheck(void){
 
 
 void CollisionChecker::ToDelete(Sprite *sprite){
-	for(std::list<Sprite *>::iterator iteUnmovable = unmovable.begin(); iteUnmovable != unmovable.end(); ++iteUnmovable){
-		if(dynamic_cast<Brick *>(sprite)->IsActive()){
-			movable.erase(iteUnmovable);
-			todelete.push_front(sprite);
-		}
-	}
 }
 
-void CollisionChecker::CleanUp(){
-	movable.empty();
-	unmovable.empty();
-	todelete.empty();
+void CollisionChecker::CleanUp(){ ///// EDWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 	for(std::list<Sprite *>::iterator iteUnmovable = unmovable.begin(); iteUnmovable != unmovable.end(); ++iteUnmovable){
-		
-		if(dynamic_cast<Brick *>(*iteUnmovable)->IsActive()){
+		if(dynamic_cast<Brick *>(iteUnmovable)->IsActive()){
 			movable.erase(iteUnmovable);
-			todelete.push_front(*iteUnmovable);
+			todelete.push_front(iteUnmovable);
 		}
 	}
 	todelete.clear();

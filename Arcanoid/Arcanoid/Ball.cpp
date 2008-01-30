@@ -88,12 +88,47 @@ void Ball::Collide(Sprite *s){
 	}
 	else if( type == SPRITE_BRICK ) {
 		dynamic_cast<Brick *>(s)->SetIsActive(true);
+		int ballX1 = this->GetPosition().GetX(), ballY1 = this->GetPosition().GetY();
+		int ballX2 = ballX1 + this->GetWidth(), ballY2 = ballY1 + this->GetHeight();
+		int brickX1 = s->GetPosition().GetX(), brickY1 = s->GetPosition().GetY();
+		int brickX2 = brickX1 + s->GetWidth(), brickY2 = brickY1 + s->GetHeight();
+
+		//Ball is down, brick is up
+		if( (ballX1 >= brickX1-this->GetWidth() || ballX1 <=brickX2) && ballY1 >= brickY2 ){
+			ReverseVertical();
+			std::cout << "Ball is going UP !!!" << std::endl;
+		}else //Ball is right, brick is left
+			if ( (ballY1 >= brickY1 - this->GetHeight() || ballY1 <= brickY2) && ballX1 >= brickX2 ){
+				//todo
+			ReverseVertical();
+			std::cout << "Ball is going left  <<<<<<----!!!!" << std::endl;
+		}else //Ball is up, brick is down
+			if((ballX1 >= brickX1-this->GetWidth() || ballX1 <=brickX2) && ballY2 <= brickY1 ){ 
+				//todo
+			ReverseVertical();
+			std::cout << "Ball is going DOWN !!!!" << std::endl;
+		} else //Ball is left, brick is right
+			if( (ballY1 >= brickY1 - this->GetHeight() || ballY1 <= brickY2) && ballX2 <= brickX1 ){
+				//todo
+			ReverseHorizon();
+			std::cout << "Ball is going right ------->>>>" << std::endl;
+		} else //lol, assert
+			assert(0);
+
 	}
 	else
 		assert(!"kapia malakia ekanes sthn ball malaka\n");
 	return;
 }
 
+void Ball::ReverseHorizon(void){
+	goingLeft = !goingLeft;
+	return;
+}
+void Ball::ReverseVertical(void){
+	goingUp = !goingUp;
+	return;
+}
 void Ball::SetSpeedX(int _newspeed){
 	this->speedX = _newspeed;
 	return;

@@ -29,6 +29,8 @@ public:
 	int GetSpeedY(void);
 	void Move(const int dx, const int dy);
 	void Collide(Sprite *s);
+	void ReverseHorizon(void);
+	void ReverseVertical(void);
 	
 	Ball(int start_x, int start_y, AnimationFilm *af, const char *ball_string);
 	~Ball(){}

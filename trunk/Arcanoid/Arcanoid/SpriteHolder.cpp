@@ -1,8 +1,13 @@
 /*
  * author: koutsop
  */
+
+#include <iostream>
 #include <cassert>
 #include "SpriteHolder.h"
+
+using std::cout;
+using std::endl;
 
 
 SpriteHolder::~SpriteHolder(void){
@@ -87,4 +92,16 @@ void SpriteHolder::EraseSprite(string name){
 
 	sprites.erase(sprite);
 	return;
+}
+
+
+void SpriteHolder::PrintSpriteHolder(){
+	SpriteMap::iterator start = sprites.begin();
+	SpriteMap::iterator end = sprites.end();
+	int cnt = 0;
+	while( start != end){
+		if( start->second->GetType() == SPRITE_BRICK )
+			cout<<start->first<<"    "<<start->second->GetPosition().ToString()<<endl;
+		start++;
+	}
 }

@@ -14,7 +14,6 @@
 #define BAGROUND_IMAGE	"./images/editorsScreen.bmp"
 
 #define BALL			"ball"
-#define BOARD			"board"
 #define WALL_12			"upper_wall"
 #define WALL_3			"right_wall"
 #define WALL_6			"down_wall"
@@ -200,20 +199,6 @@ void Game::DisplayALL(BITMAP *baground, BITMAP *buffer){
 }
 /////////////////////////////////////////////////////////////////////
 
-void Game::SetMouseCoordinates(MovingAnimation * mov){
-	//elegxoume an pame na bgoume apo ta oria tou terrain
-	int x		= terrain->coordinates.GetX();
-	int w		= terrain->width;
-	int boardW	= dynamic_cast<Board*>(spriteH->GetSprite(BOARD))->GetWidth();
-
-	if( inputManager->GetOldMouseX() < x )
-		inputManager->SetOldMouseX(x);
-	else if ( inputManager->GetOldMouseX() > (x + w) - boardW )
-		inputManager->SetOldMouseX((x + w) - boardW);
-				
-	mov->SetDx( inputManager->GetOldMouseX() );		//alazoume to dx tou board
-	return;
-}
 
 void Game::CheckBoardInput( bool input ){
 	static bool isRunning	= false;
@@ -227,7 +212,8 @@ void Game::CheckBoardInput( bool input ){
 			StateHolder::stateKey.Key_Left			||
 			StateHolder::stateKey.Key_Right) 
 		{
-			SetMouseCoordinates(mov);
+			//SetMouseCoordinates(mov);
+			mov->SetDx( inputManager->GetOldMouseX() );
 			if( !isRunning ){		//Gia prwth fora mpenei sthn lista me ta running
 				AnimatorHolder::MarkAsRunning(board);
 				isRunning	= true;
@@ -251,10 +237,12 @@ void Game::CheckBoardInput( bool input ){
 void Game::GameLoop(BITMAP *baground, BITMAP *buffer){
 	bool input = false;
 
+	//spriteH->PrintSpriteHolder();
+
 	while( !key[KEY_ESC] && (currLevel < terrain->GetLevelsNo()) ) {
 		SetGameTime();
 
-		spriteH->GetEnd();
+		//spriteH->GetEnd();
 		input = inputManager->CheckInput();
 		CheckBoardInput(input);
 
@@ -271,7 +259,7 @@ void Game::GameLoop(BITMAP *baground, BITMAP *buffer){
 
 void Game::PlayGame(void){
 	//bitmaps
-	KeyLogger::Init("ball.txt");
+	KeyLogger::Init("test.txt");
 	KeyLogger::Enable();
 	BITMAP * buffer		= bitmaps->Load(BUFFER_IMAGE);
 	BITMAP * baground	= bitmaps->Load(BAGROUND_IMAGE);
@@ -282,7 +270,7 @@ void Game::PlayGame(void){
 	AnimatorHolder::MarkAsRunning(ball);
 	assert(buffer || baground || theBall || theBoard);
 	
-	countAnimationID = terrain->LoadingTerrain(countAnimationID, 1);
+	countAnimationID = terrain->LoadingTerrain(countAnimationID, currLevel);
 	GameLoop(baground, buffer);
 	KeyLogger::Terminate();
 	return;

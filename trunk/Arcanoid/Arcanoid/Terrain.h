@@ -10,15 +10,17 @@
 
 #include "Point.h"
 #include "Animator.h"
+#include "Animation.h"
 #include "SpriteHolder.h"
 #include "TerrainBuilder.h"
+#include "AnimatorHolder.h"
 #include "AnimationHolder.h"
 #include "CollisionChecker.h"
 #include "AnimationFilmHolder.h"
 
 
 
-
+#define BOARD			"board"
 
 class Terrain{
 private:

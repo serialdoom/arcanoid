@@ -22,7 +22,8 @@ private:
 	bool player1, player2;
 	spritetype_t spriteType;
 
-	void CheckCoordinates(void);
+	int GetKeyboardCoordinates(void);
+	int GetMouseCoordinates(int dx);
 
 public:
 	void SetType(spritetype_t type) { spriteType = type; }

@@ -4,6 +4,7 @@
 
 #include "Terrain.h"
 
+
 #include <iostream>
 
 using std::cout;
@@ -100,7 +101,6 @@ int Terrain::LoadingTerrain(int countAnimationID, int levelNo){
 
 //print to screen all den visible bricks
 void Terrain::DisplayTerrain(BITMAP *bitmap, SpriteHolder* sh){
-	int cnt = 0;
 	SpriteMap::iterator	start	= sh->GetFirst();
 	SpriteMap::iterator	end		= sh->GetEnd();
 
@@ -108,7 +108,6 @@ void Terrain::DisplayTerrain(BITMAP *bitmap, SpriteHolder* sh){
 		Sprite * tmp = sh->GetSprite( start->first );
 		if( (dynamic_cast<Brick *>(tmp) != (Sprite*)0) && dynamic_cast<Brick *>(tmp)->IsVisible() )
 			tmp->Display(bitmap);
-		cnt++;
 		start++;
 	}
 	return;
@@ -122,12 +121,12 @@ void Terrain::BricksCleanUp(SpriteHolder* sh){
 	SpriteMap::iterator	end		= sh->GetEnd();
 
 	while( start != end ){			//blepw pio sprite einai brick kai to diagrafw
-		string test			= start->first;
-		Sprite * tmp		= sh->GetSprite( test );
-		if( (dynamic_cast<Brick *>(tmp) != (Sprite*)0) && dynamic_cast<Brick *>(tmp)->IsActive() ){
-			cout<<test<<"    "<<start->second->GetPosition().ToString()<<endl;
+		string name			= start->first;
+		Sprite * tmp		= sh->GetSprite( name );
+		if( (dynamic_cast<Brick *>(tmp) != (Sprite*)0) && dynamic_cast<Brick *>(tmp)->IsActive() ){		
+			AnimatorHolder::MarkAsSuspended( bricksAnimator.find(name)->second );
 			start++;
-			sh->EraseSprite(test);
+			sh->EraseSprite(name);
 			continue;
 		}
 		start++;

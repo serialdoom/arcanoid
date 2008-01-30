@@ -3,8 +3,10 @@
  */
 
 #include <cassert>
-#include <iostream>
+
+
 #include "Board.h"
+#include "Terrain.h"
 
 #define BOARD_SPEED	2
 
@@ -38,8 +40,37 @@ void Board::Collide(Sprite *s){
 /////////////////////////////////////////////////////////////////////
 
 
-void Board::CheckCoordinates(void){
+
+int Board::GetKeyboardCoordinates(void){
+	int x		= Terrain::coordinates.GetX();
+	int w		= Terrain::width;
+	int dx		= GetPosition().GetX();
+
+	if( StateHolder::stateKey.Key_Left ){		//aristero collision
+		if( (dx - BOARD_SPEED) < x )	{ return x; }
+		else							{ return dx - BOARD_SPEED; }
+	}
+	else if(StateHolder::stateKey.Key_Right){	//de3i collision
+		if ( (dx + BOARD_SPEED) > (x + w) - GetWidth()) { return (x + w) - GetWidth(); }
+		else											{ return dx + + BOARD_SPEED; }
+	}
+	else
+		assert(0);
 }
+/////////////////////////////////////////////////////////////////////
+
+
+
+int Board::GetMouseCoordinates(int dx){
+	int x		= Terrain::coordinates.GetX();
+	int w		= Terrain::width;
+
+	if( dx < x ) { return x; }									//aristero collision
+	else if ( dx > (x + w) - GetWidth()) { return (x + w) - GetWidth(); } //de3i collision
+	else { return dx; }
+}
+/////////////////////////////////////////////////////////////////////
+
 
 
 void Board::Move(const int dx, const int dy){
@@ -48,11 +79,11 @@ void Board::Move(const int dx, const int dy){
 
 	if( player1 ){
 		if( StateHolder::stateKey.Key_Left )
-			SetPosition(GetPosition().GetX() - BOARD_SPEED, startY);
+			SetPosition(GetKeyboardCoordinates(), startY);
 		else if( StateHolder::stateKey.Key_Right )
-			SetPosition(GetPosition().GetX() + BOARD_SPEED, startY);
+			SetPosition(GetKeyboardCoordinates(), startY);
 		else if( (keyPressed.Key_Mouse_Left || keyPressed.Key_Mouse_Right))
-			SetPosition(dx, startY);
+			SetPosition(GetMouseCoordinates(dx), startY);
 	}//if
 /*
 //ton player 2 mporw na ton balw mesa ston stateHolder na mou leei

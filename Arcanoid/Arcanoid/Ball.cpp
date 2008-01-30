@@ -58,13 +58,13 @@ void Ball::Collide(Sprite *s){
 		goingUp		= true;
 		goingLeft	= false;
 	}
-	else if( s->GetType() == SPRITE_BOARD ){			//ok
+	else if( type == SPRITE_BOARD ){			//ok
 		if		( StateHolder::IsGoLeft() )	{ goingLeft = true;  }
 		else if ( StateHolder::IsGoRight())	{ goingLeft = false; }
 		else								{ goingLeft = goingLeft; }		
 		goingUp = true;
 	}
-	else if( s->GetType() == SPRITE_BRICK ) {}
+	else if( type == SPRITE_BRICK ) {}
 
 
 

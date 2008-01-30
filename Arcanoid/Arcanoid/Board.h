@@ -22,6 +22,8 @@ private:
 	bool player1, player2;
 	spritetype_t spriteType;
 
+	void CheckCoordinates(void);
+
 public:
 	void SetType(spritetype_t type) { spriteType = type; }
 	spritetype_t GetType(void) const { return spriteType; }

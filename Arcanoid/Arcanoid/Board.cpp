@@ -33,12 +33,13 @@ Board::Board(int start_x,
 
 
 void Board::Collide(Sprite *s){
-	if((s->GetType() == SPRITE_WALL_LEFT) || (s->GetType() == SPRITE_WALL_RIGHT) )
-		SetPosition(oldPosition);
 	return;
 }
 /////////////////////////////////////////////////////////////////////
 
+
+void Board::CheckCoordinates(void){
+}
 
 
 void Board::Move(const int dx, const int dy){

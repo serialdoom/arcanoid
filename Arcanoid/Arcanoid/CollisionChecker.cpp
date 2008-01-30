@@ -1,6 +1,7 @@
 #include "CollisionChecker.h"
 //#include <list>
 
+#include <iostream>
 
 CollisionChecker::~CollisionChecker(void){
 	movable.clear();
@@ -41,14 +42,21 @@ void CollisionChecker::ToDelete(Sprite *sprite){
 }
 
 void CollisionChecker::CleanUp(){
+	bool toDell = false;
 	std::list<Sprite *>::iterator iteUnmovable = unmovable.begin();
 	while(iteUnmovable != unmovable.end()){
 		if(dynamic_cast<Brick *>(*iteUnmovable)->IsActive()){
 			todelete.push_front(*iteUnmovable);
-			movable.erase(iteUnmovable);
+			std::cout<<unmovable.size()<<std::endl;
+			toDell = true;
+			break;
+			//unmovable.clear();
+			//unmovable.erase(iteUnmovable);
 		}
 		++iteUnmovable;
 	}
+	if(toDell)
+		unmovable.erase(iteUnmovable);
 	//movable.erase(iteUnmovable);
 	todelete.clear();
 }

@@ -30,8 +30,8 @@ static void InitiallizingAllegro(void){
 	install_mouse();
 
 	set_color_depth(16);	// Set the color depth
-	set_gfx_mode(GFX_AUTODETECT, 640,480,0,0); 
-	//set_gfx_mode(GFX_AUTODETECT_WINDOWED, 640,480,0,0); // Change our graphics mode to 640x480
+	//set_gfx_mode(GFX_AUTODETECT, 640,480,0,0); 
+	set_gfx_mode(GFX_AUTODETECT_WINDOWED, 640,480,0,0); // Change our graphics mode to 640x480
 	return;
 }
 /////////////////////////////////////////////////////////////////////
@@ -263,7 +263,7 @@ void Game::GameLoop(BITMAP *baground, BITMAP *buffer){
 		AnimatorHolder::Progress(GetGameTime());
 		DisplayALL(baground, buffer);
 		collisionC->CleanUp();
-		for(int i = 0;i < 10000000;++i);
+		for(int i = 0;i < 1000000;++i);
 	}
 	return;
 }

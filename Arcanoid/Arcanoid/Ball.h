@@ -18,6 +18,7 @@ private:
 	bool goingLeft, goingUp;
 	spritetype_t spriteType;
 
+	void Ball::CheckCoordinates(void);
 public:
 	void SetType(spritetype_t type) { spriteType = type; }
 	spritetype_t GetType(void) const { return spriteType; }

@@ -107,3 +107,23 @@ void Terrain::DisplayTerrain(BITMAP *bitmap, SpriteHolder* sh){
 	return;
 }
 /////////////////////////////////////////////////////////////////////
+
+
+
+void Terrain::BricksCleanUp(SpriteHolder* sh){
+	int cnt = 0;
+	SpriteMap::iterator	start	= sh->GetFirst();
+	SpriteMap::iterator	end		= sh->GetEnd();
+
+	while( start != end ){			//blepw pio sprite einai brick kai to diagrafw
+		string spriteName	= Append("Brick_", cnt );
+		Sprite * tmp		= sh->GetSprite( spriteName );
+		if( (tmp != (Sprite*)0) && dynamic_cast<Brick *>(tmp)->IsActive() )
+			sh->EraseSprite(spriteName);
+		cnt++;
+		start++;
+	}
+	return;
+}
+/////////////////////////////////////////////////////////////////////
+

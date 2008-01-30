@@ -31,6 +31,8 @@ public:
 	void Collide(Sprite *s);
 	void ReverseHorizon(void);
 	void ReverseVertical(void);
+	bool GoingUp(void);
+	bool GoingLeft(void);
 	
 	Ball(int start_x, int start_y, AnimationFilm *af, const char *ball_string);
 	~Ball(){}

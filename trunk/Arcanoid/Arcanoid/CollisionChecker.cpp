@@ -47,7 +47,6 @@ void CollisionChecker::CleanUp(){
 	while(iteUnmovable != unmovable.end()){
 		if(dynamic_cast<Brick *>(*iteUnmovable)->IsActive()){
 			todelete.push_front(*iteUnmovable);
-			
 			ite = iteUnmovable;
 			iteUnmovable++;
 			unmovable.erase(ite);
@@ -56,6 +55,7 @@ void CollisionChecker::CleanUp(){
 		++iteUnmovable;
 	}
 	todelete.clear();
+	//std::cout << "\n";
 }
 
 bool CollisionChecker::CheckSprites(Sprite *first, Sprite *sec){

@@ -65,10 +65,8 @@ void Ball::Collide(Sprite *s){
 		goingUp = true;
 	}
 	else if( type == SPRITE_BRICK ) {
-		s->Set}
-
-
-
+		((dynamic_cast<Brick *>)s)->SetActive();
+	}
 	return;
 }
 

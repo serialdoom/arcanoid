@@ -105,8 +105,9 @@ Game::Game(void){
 	terrainB = new TerrainBuilder(collisionC, spriteH, animationFH, animationH);
 	assert(terrainB);
 
-	LoadLevelsInfo();
-	LoadingTerrain(currLevel);
+	LoadingLevelsInfo();
+	//LoadingTerrainInfo();
+	LoadingTerrain(1);
 
 	twelve			= CreatingTwelveWall();
 	three			= CreatingThreeWall();
@@ -225,7 +226,7 @@ void Game::InitiallizingAnimationFilmHolder(void) {
 
 
 
-void Game::LoadLevelsInfo(void){
+void Game::LoadingLevelsInfo(void){
 	set_config_file(CONFIG_FILE);
 	levelsNo	= get_config_int("GENERAL", "levels_files_No", -1);
 	levelPath	= get_config_string("GENERAL", "levels_path", "");

@@ -56,7 +56,7 @@ private:
 	CollisionChecker *	collisionC;
 	AnimationFilmHolder*animationFH;
 
-	void LoadLevelsInfo(void);
+	void LoadingLevelsInfo(void);
 	void LoadingTerrain(int levelNo);
 	void InitiallizingFilmsInfo(void);
 	void InitiallizingBitmapLoader(void);

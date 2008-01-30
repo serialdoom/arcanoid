@@ -38,20 +38,17 @@ void CollisionChecker::CollisionCheck(void){
 
 
 void CollisionChecker::ToDelete(Sprite *sprite){
-/*	for( std::list<Sprite *>::iterator iteMovable = movable.begin(); iteMovable != movable.end() ; ++iteMovable){
-		if(*iteMovable == *sprite){
-			movable.erase(iteMovable);
-			todelete.push_front(sprite);
-		}
-	}
 	for(std::list<Sprite *>::iterator iteUnmovable = unmovable.begin(); iteUnmovable != unmovable.end(); ++iteUnmovable){
-		if(*iteUnmovable == *sprite){
+		if(dynamic_cast<Brick *>(sprite)->IsActive()){
 			movable.erase(iteUnmovable);
 			todelete.push_front(sprite);
 		}
 	}
-*/}
+}
 
+void CollisionChecker::CleanUp(){
+	todelete.clear();
+}
 
 bool CollisionChecker::CheckSprites(Sprite *first, Sprite *sec){
 	//TODO: write some code biatch

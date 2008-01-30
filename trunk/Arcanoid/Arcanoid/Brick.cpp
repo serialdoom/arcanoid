@@ -92,9 +92,6 @@ void Brick::Copy(Brick* brick){
 	return;
 }
 
-void SetActive(void){
-	isActive = true;
-	}
 
 void Brick::Collide(Sprite *s){
 	//TODO: wtite code.

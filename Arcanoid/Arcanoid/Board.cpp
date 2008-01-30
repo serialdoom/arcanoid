@@ -53,13 +53,16 @@ void Board::Move(const int dx, const int dy){
 		else if( (keyPressed.Key_Mouse_Left || keyPressed.Key_Mouse_Right))
 			SetPosition(dx, startY);
 	}//if
-	
-	else if( player2 ){
+/*
+//ton player 2 mporw na ton balw mesa ston stateHolder na mou leei
+//auto poios paixths einai ka8e fora :D
+	else if( player2 ){ 
 		if( StateHolder::stateKey.Key_A)
 			SetPosition(GetPosition().GetX() - BOARD_SPEED, startY);
 		else if( StateHolder::stateKey.Key_D)
 			SetPosition(GetPosition().GetX() + BOARD_SPEED, startY);
 	}//else if
+*/
 	else { assert(0); }
 	return;
 }

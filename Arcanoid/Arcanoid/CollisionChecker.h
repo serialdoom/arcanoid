@@ -9,6 +9,7 @@
 #include <iostream>
 
 #include "Sprite.h"
+#include "Brick.h"
 
 
 

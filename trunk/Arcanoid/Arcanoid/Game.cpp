@@ -89,13 +89,16 @@ Game::~Game(){
 
 //constructor
 Game::Game(void){
-	levelsNo		= currLevel = currTime = 0;
+	levelsNo = currLevel = terrainWidth = terrainHeight = 0;
+	currTime = 0;
 	
 	InitiallizingAllegro();
-	spriteH		= new SpriteHolder();
-	animationH	= new AnimationHolder();
-	collisionC	= new CollisionChecker();
-	assert(spriteH || collisionC);
+
+	spriteH			= new SpriteHolder();
+	animationH		= new AnimationHolder();
+	collisionC		= new CollisionChecker();
+	inputManager	= new InputManager();
+	assert(spriteH || collisionC || inputManager);
 
 	StateHolder::Init();
 	InitiallizingFilmsInfo();
@@ -106,15 +109,107 @@ Game::Game(void){
 	assert(terrainB);
 
 	LoadingLevelsInfo();
-	//LoadingTerrainInfo();
+	LoadingTerrainInfo();
 	LoadingTerrain(1);
 
-	twelve			= CreatingTwelveWall();
-	three			= CreatingThreeWall();
-	six				= CreatingSixWall();
-	nine			= CreatingNineWall();
-	inputManager	= new InputManager();
-	assert(inputManager);
+	//twelve			= CreatingTwelveWall();
+	//three			= CreatingThreeWall();
+	//six				= CreatingSixWall();
+	//nine			= CreatingNineWall();
+	
+}
+/////////////////////////////////////////////////////////////////////
+
+
+
+void Game::InitiallizingFilmsInfo(){
+	set_config_file(CONFIG_FILE);
+	string filmsPath = get_config_string("GENERAL", "films", "");
+	if( !filmsPath.compare("") ) { assert(0); }
+
+	filmsInfo = new LoadFilmsInfo(filmsPath.c_str());
+	assert(filmsInfo);
+	return;
+}
+/////////////////////////////////////////////////////////////////////
+
+
+
+void Game::InitiallizingBitmapLoader(void){
+	assert(filmsInfo);
+	bitmaps = new BitmapLoader();
+	assert(bitmaps);
+	bitmaps->LoadFilms(*(filmsInfo));
+	return;
+}
+/////////////////////////////////////////////////////////////////////
+
+
+
+void Game::InitiallizingAnimationFilmHolder(void) {
+	set_config_file(CONFIG_FILE);
+	string bboxesPath = get_config_string("GENERAL", "animationHolder", "");
+	if( !bboxesPath.compare("") ) { assert(0); }
+
+	animationFH = new AnimationFilmHolder(bboxesPath, (*filmsInfo), (*bitmaps));
+	assert(animationFH);
+	return;
+}
+/////////////////////////////////////////////////////////////////////
+
+
+
+void Game::LoadingLevelsInfo(void){
+	set_config_file(CONFIG_FILE);
+	levelsNo	= get_config_int("GENERAL", "levels_files_No", -1);
+	levelPath	= get_config_string("GENERAL", "levels_path", "");
+	
+	assert( levelsNo >= 1 );
+	if( !levelPath.compare("") ) { assert(0); }
+	currLevel = 0;
+	return;
+}
+/////////////////////////////////////////////////////////////////////
+
+
+void Game::LoadingTerrainInfo(void){
+	set_config_file(CONFIG_FILE);
+
+	int w = get_config_int("GENERAL", "terrain_w", -1);
+	int h = get_config_int("GENERAL", "terrain_h", -1);
+	int x = get_config_int("GENERAL", "terrain_start_x", -1);
+	int y = get_config_int("GENERAL", "terrain_start_y", -1);
+
+	assert( (x != -1) && (y != -1) && (w != -1) && (h != -1) );
+
+	terrainWidth	= w;
+	terrainHeight	= h;
+	terrainCoordinates.SetX(x);
+	terrainCoordinates.SetY(y);
+	return;
+}
+/////////////////////////////////////////////////////////////////////
+
+
+
+void Game::LoadingTerrain(int levelNo){
+	set_config_file(CONFIG_FILE);
+	string fileName		= get_config_string("GENERAL", Append("level_file_", levelNo), "");
+	string bricksFilm	= get_config_string("FILMS", "brick", "");
+	
+	if( !fileName.compare("") )		{ assert(!"file name"); }
+	if( !bricksFilm.compare("") )	{ assert(!"bricks film"); }
+	string lala = levelPath+fileName;
+/*	countAnimationID = terrainB->Load( (levelPath+fileName).c_str(), 
+										bricksFilm.c_str(), 
+										countAnimationID,
+										bricksAnimator);
+*/
+	countAnimationID = terrainB->Load( "apixlvl.lvl", 
+										bricksFilm.c_str(), 
+										countAnimationID,
+										bricksAnimator);
+	return;
 }
 /////////////////////////////////////////////////////////////////////
 
@@ -186,82 +281,7 @@ Ball * Game::CreatingBall(void){
 	return theBall;
 }
 /////////////////////////////////////////////////////////////////////
-
-
-
-void Game::InitiallizingFilmsInfo(){
-	set_config_file(CONFIG_FILE);
-	string filmsPath = get_config_string("GENERAL", "films", "");
-	if( !filmsPath.compare("") ) { assert(0); }
-
-	filmsInfo = new LoadFilmsInfo(filmsPath.c_str());
-	assert(filmsInfo);
-	return;
-}
-/////////////////////////////////////////////////////////////////////
-
-
-
-void Game::InitiallizingBitmapLoader(void){
-	assert(filmsInfo);
-	bitmaps = new BitmapLoader();
-	assert(bitmaps);
-	bitmaps->LoadFilms(*(filmsInfo));
-	return;
-}
-/////////////////////////////////////////////////////////////////////
-
-
-
-void Game::InitiallizingAnimationFilmHolder(void) {
-	set_config_file(CONFIG_FILE);
-	string bboxesPath = get_config_string("GENERAL", "animationHolder", "");
-	if( !bboxesPath.compare("") ) { assert(0); }
-
-	animationFH = new AnimationFilmHolder(bboxesPath, (*filmsInfo), (*bitmaps));
-	assert(animationFH);
-	return;
-}
-/////////////////////////////////////////////////////////////////////
-
-
-
-void Game::LoadingLevelsInfo(void){
-	set_config_file(CONFIG_FILE);
-	levelsNo	= get_config_int("GENERAL", "levels_files_No", -1);
-	levelPath	= get_config_string("GENERAL", "levels_path", "");
-	
-	assert( levelsNo >= 1 );
-	if( !levelPath.compare("") ) { assert(0); }
-	currLevel = 0;
-	return;
-}
-/////////////////////////////////////////////////////////////////////
-
-
-
-void Game::LoadingTerrain(int levelNo){
-	set_config_file(CONFIG_FILE);
-	string fileName		= get_config_string("GENERAL", Append("level_file_", levelNo), "");
-	string bricksFilm	= get_config_string("FILMS", "brick", "");
-	
-	if( !fileName.compare("") )		{ assert(!"file name"); }
-	if( !bricksFilm.compare("") )	{ assert(!"bricks film"); }
-	string lala = levelPath+fileName;
-/*	countAnimationID = terrainB->Load( (levelPath+fileName).c_str(), 
-										bricksFilm.c_str(), 
-										countAnimationID,
-										bricksAnimator);
-*/
-	countAnimationID = terrainB->Load( "apixlvl.lvl", 
-										bricksFilm.c_str(), 
-										countAnimationID,
-										bricksAnimator);
-	return;
-}
-/////////////////////////////////////////////////////////////////////
-
-
+#if 0
 
 Wall * Game::CreatingTwelveWall(void){
 	int upX, upY, downX, downY;
@@ -348,7 +368,7 @@ Wall * Game::CreatingNineWall(void){
 	return nine;
 }
 /////////////////////////////////////////////////////////////////////
-
+#endif
 
 void Game::DisplayALL(BITMAP *baground, BITMAP *buffer){
 	Sprite *board = board = spriteH->GetSprite(BOARD); 
@@ -370,7 +390,19 @@ void Game::DisplayALL(BITMAP *baground, BITMAP *buffer){
 }
 /////////////////////////////////////////////////////////////////////
 
+void Game::SetMouseCoordinates(MovingAnimation * mov){
+	//elegxoume an pame na bgoume apo ta oria tou terrain
+	int x		= terrainCoordinates.GetX();
+	int boardW	= dynamic_cast<Board*>(spriteH->GetSprite(BOARD))->GetWidth();
 
+	if( inputManager->GetOldMouseX() < x )
+		inputManager->SetOldMouseX(x);
+	else if ( inputManager->GetOldMouseX() > (x + terrainWidth) - boardW )
+		inputManager->SetOldMouseX((x + terrainWidth) - boardW);
+				
+	mov->SetDx( inputManager->GetOldMouseX() );		//alazoume to dx tou board
+	return;
+}
 
 void Game::CheckBoardInput( bool input ){
 	static bool isRunning	= false;
@@ -384,15 +416,7 @@ void Game::CheckBoardInput( bool input ){
 			StateHolder::stateKey.Key_Left			||
 			StateHolder::stateKey.Key_Right) 
 		{
-			//elegxoume an pame na bgoume apo ta oria tou terrain
-			//dx = 4; (dx + terrainW) - boardW = 484 - 72
-			if( inputManager->GetOldMouseX() < 4 )
-				inputManager->SetOldMouseX(4);
-			else if ( inputManager->GetOldMouseX() > 484 - 72 )
-				inputManager->SetOldMouseX(484 - 72);
-					
-			mov->SetDx( inputManager->GetOldMouseX() );		//alazoume to dx tou board
-							
+			SetMouseCoordinates(mov);
 			if( !isRunning ){		//Gia prwth fora mpenei sthn lista me ta running
 				AnimatorHolder::MarkAsRunning(board);
 				isRunning	= true;

@@ -40,13 +40,16 @@ void CollisionChecker::CollisionCheck(void){
 void CollisionChecker::ToDelete(Sprite *sprite){
 }
 
-void CollisionChecker::CleanUp(){ ///// EDWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
-	for(std::list<Sprite *>::iterator iteUnmovable = unmovable.begin(); iteUnmovable != unmovable.end(); ++iteUnmovable){
+void CollisionChecker::CleanUp(){
+	std::list<Sprite *>::iterator iteUnmovable = unmovable.begin();
+	while(iteUnmovable != unmovable.end()){
 		if(dynamic_cast<Brick *>(*iteUnmovable)->IsActive()){
-			movable.erase(iteUnmovable);
 			todelete.push_front(*iteUnmovable);
+			movable.erase(iteUnmovable);
 		}
+		++iteUnmovable;
 	}
+	//movable.erase(iteUnmovable);
 	todelete.clear();
 }
 

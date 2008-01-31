@@ -52,9 +52,11 @@ animid_t TerrainBuilder::Load(const char *filename,
 
 		++counter;
 		std::string *brick_id_str = new std::string(brick_id);
-
+		
+		AnimationFilm* tmp = const_cast<AnimationFilm*>(afm->GetFilm( (*brick_id_str) ));
+		assert(tmp);
 		newBrick = new Brick(	(x = getNumber(buffy, PREFIX_UP_POINT_X)), (y = getNumber(buffy, PREFIX_UP_POINT_Y)), //point
-								const_cast<AnimationFilm*>(afm->GetFilm( (*brick_id_str) )), //AnimationFilm
+								tmp, //AnimationFilm
 								getNumber(buffy, PREFIX_WIDTH), // w
 								getNumber(buffy, PREFIX_HEIGHT), //h
 								getNumber(buffy, PREFIX_SCORE), //score

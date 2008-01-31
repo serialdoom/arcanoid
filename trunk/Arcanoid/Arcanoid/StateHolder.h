@@ -19,6 +19,7 @@ typedef struct KEY {
 	bool Key_Mouse_Right;
 	bool Key_A;
 	bool Key_D;
+	bool Key_F1;
 }KEY;
 
 class StateHolder {

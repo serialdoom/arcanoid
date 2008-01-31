@@ -25,7 +25,10 @@ private:
 	 */
 	void LoadBBoxes(string id, BITMAP* bitmap);	
 public:
-	
+	/* @target: diagafei olla ta periexomena tou AnimationFilmHolder
+	 */
+	void Clear(void);
+
 	/* @target: Ka8ara gia debug skopous
 	 * @return: To pli8os ton AnimationFilms pou exei.
 	 */
@@ -47,6 +50,9 @@ public:
 						const LoadFilmsInfo &filmsInfo, 
 						const BitmapLoader &bitmaps);
     ~AnimationFilmHolder();
+
+	//gia debug skopous
+	void PrintAnimationFilmHolder(void);
 };
 
 #endif

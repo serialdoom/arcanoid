@@ -11,7 +11,7 @@ BitmapLoader::~BitmapLoader(void){
 	BitmapMap::iterator end		= bitmaps.end();
 
 	while(start != end){
-		destroy_bitmap( (*start).second );
+		destroy_bitmap( start->second );
 		start++;
 	}
 	bitmaps.clear();

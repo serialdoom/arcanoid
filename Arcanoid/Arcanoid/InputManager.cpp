@@ -132,6 +132,9 @@ bool InputManager::CheckInput(void){
 	if (key[KEY_RIGHT])	{ pressedRightButton(); hasInput = true; }
 	else				{ StateHolder::stateKey.Key_Right = false;}
 
+	if (key[KEY_F1])	{ StateHolder::stateKey.Key_F1 = true; }
+	else				{ StateHolder::stateKey.Key_F1 = false; }
+
 	if (key[KEY_P])		{ presedPKey(); hasInput = true; }
 	if (key[KEY_PAUSE])	{ presedPauseKey(); hasInput = true; }
 	if (oldMouseX != mouse_x){ oldMouseX = mouseMovedX(oldMouseX); hasInput = true;}

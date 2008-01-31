@@ -35,6 +35,10 @@
 
 class Game {
 private:
+	BITMAP * buffer;
+	BITMAP * baground;
+	Ball *				theBall;
+	Board *				theBoard;
 	int					currLevel;
 	animid_t			countAnimationID;
 	unsigned long		currTime;
@@ -54,11 +58,15 @@ private:
 	void InitiallizingAnimationFilmHolder(void);
 
 	Board * CreatingBoard(int playerNo);
-	Ball * Game::CreatingBall(void);
+	Ball * CreatingBall(void);
 
-	void CheckBoardInput( bool input );
-	void GameLoop(BITMAP *baground, BITMAP *buffer);
-	void DisplayALL(BITMAP *baground, BITMAP *buffer);
+	void CreateAll(void);
+	void DeleteAll(void);
+	void SystemLoopDispatching(bool input);
+	void CheckF1(bool input);
+	void CheckBoardInput(bool input);
+	void GameLoop();
+	void DisplayALL();
 
 public:
 	

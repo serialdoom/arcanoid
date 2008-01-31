@@ -3,7 +3,7 @@
  */
 
 #include "AnimationFilmHolder.h"
-
+#include <iostream>
 #define MAX_TMP_SIZE 100
 static char tmpString[MAX_TMP_SIZE]; //tmp table gia to append string me ari8mou
 
@@ -81,12 +81,27 @@ void AnimationFilmHolder::LoadBBoxes(string id,BITMAP * bitmap){
 
 
 
-const AnimationFilm *AnimationFilmHolder::GetFilm (const string id) const {
-	static int cnt = 0;
-
-	cout<<id<<""<< cnt++ <<""<<endl;
+const AnimationFilm *AnimationFilmHolder::GetFilm (const string id)const {
+	
+	//std::cout<<"Animation Film Holder: "<<id<<std::endl;
 	FilmMap::const_iterator i = filmMap.find(id);
 	assert(i != filmMap.end());
 	return i->second;
 }
 
+void AnimationFilmHolder::Clear(void){
+	filmMap.clear();
+	return;
+}
+
+
+void AnimationFilmHolder::PrintAnimationFilmHolder(void){
+	FilmMap::iterator start = filmMap.begin();
+	FilmMap::iterator end	= filmMap.end();
+
+	while(start != end){
+		std::cout<<start->first<<endl;
+		start++;
+	}
+	return;
+}

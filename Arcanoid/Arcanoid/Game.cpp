@@ -268,10 +268,10 @@ void Game::CheckF1(bool input){
 /////////////////////////////////////////////////////////////////////
 
 
-
-static void FPSCalculation(void){
+//precodition: prepei thn prwth fora pou kaloume thn methon na einai
+//to fps 0 
+static void FPSCalculation(int &fps){
 	static unsigned long sec = 0;
-	static unsigned long fps = 0;
 	
 	if( !sec )  { sec = time((time_t *)0); }		
 	else{
@@ -300,6 +300,7 @@ void Game::SystemLoopDispatching( bool input ){
 
 void Game::GameLoop(){
 	bool input = false;
+	int fps = 0;
 
 	//spriteH->PrintSpriteHolder();
 
@@ -317,7 +318,7 @@ void Game::GameLoop(){
 		collisionC->CleanUp();
 		terrain->BricksCleanUp(spriteH);
 	
-		FPSCalculation();
+		FPSCalculation(fps);
 		SystemLoopDispatching(input);
 		//for(int i = 0;i < 1000000;++i);
 	}

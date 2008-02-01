@@ -314,10 +314,10 @@ void Game::GameLoop(){
 		AnimatorHolder::Progress(GetGameTime());
 
 		DisplayALL();
-		
+
 		collisionC->CleanUp();
 		terrain->BricksCleanUp(spriteH);
-	
+
 		FPSCalculation(fps);
 		SystemLoopDispatching(input);
 		//for(int i = 0;i < 1000000;++i);

@@ -7,7 +7,7 @@
 #define GAME_H
 
 
-
+#include <ctime>
 #include <string>
 #include <allegro.h>
 

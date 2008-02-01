@@ -8,6 +8,7 @@
 #include "Game.h"
 
 #define BUFF_SZ			20321
+#define PARSE_ONE_SEC	1
 
 #define CONFIG_FILE		"./configs_files/game.cfg"
 #define BUFFER_IMAGE	"./images/bufferEditorsScreen.bmp"
@@ -268,6 +269,26 @@ void Game::CheckF1(bool input){
 
 
 
+static void FPSCalculation(void){
+	static unsigned long sec = 0;
+	static unsigned long fps = 0;
+	
+	if( !sec )  { sec = time((time_t *)0); }		
+	else{
+		//std::cout<<time((time_t *)0)<<std::endl;
+		if( (time((time_t *)0)- sec) >= PARSE_ONE_SEC ) {//upologizoume an perase ena sec
+			std::cout<<"fps:"<<fps<<std::endl;
+			fps = 0;
+			sec = 0;
+		}
+		else	{fps++;} 
+	}//else
+	return;
+}
+/////////////////////////////////////////////////////////////////////
+
+
+
 void Game::SystemLoopDispatching( bool input ){
 	
 	CheckBoardInput(input);
@@ -296,6 +317,7 @@ void Game::GameLoop(){
 		collisionC->CleanUp();
 		terrain->BricksCleanUp(spriteH);
 	
+		FPSCalculation();
 		SystemLoopDispatching(input);
 		//for(int i = 0;i < 1000000;++i);
 	}
@@ -336,11 +358,6 @@ void Game::PlayGame(void){
 
 	CreateAll();
 
-	//BITMAP * buffer		= bitmaps->Load(BUFFER_IMAGE);
-	//BITMAP * baground	= bitmaps->Load(BAGROUND_IMAGE);
-	//sprites
-	
-	
 	GameLoop();
 	KeyLogger::Terminate();
 	return;

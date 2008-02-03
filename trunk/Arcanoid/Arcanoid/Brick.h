@@ -77,18 +77,7 @@ public:
 	 */
 	void Copy(Brick* brick);
 
-	void Move(const int dx, const int dy) {
-		
-		if( !up ){
-			SetPosition(GetPosition().GetX(), GetPosition().GetY()+2);
-			up = true;
-		}
-		else{
-			SetPosition(GetPosition().GetX(), GetPosition().GetY()-2);
-			up = false;
-		}
-		return;
-	}
+	void Move(const int dx, const int dy);
 
 	virtual void Collide(Sprite *s);
 };

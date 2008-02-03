@@ -26,6 +26,7 @@ Brick::Brick(	int x, int y,
 	SetHeight(h);
 	SetFrame(frameNo);
 	spriteType = SPRITE_BRICK;
+	up = false;
 }
 
 
@@ -48,6 +49,7 @@ Brick::Brick(	const Point  point,
 	SetHeight(h);
 	SetFrame(frameNo);
 	spriteType = SPRITE_BRICK;
+	up = false;
 }
 
 //overload constructor 2
@@ -68,6 +70,7 @@ Brick::Brick(	const Point * const point,
 	SetHeight(h);
 	SetFrame(frameNo);
 	spriteType = SPRITE_BRICK;
+	up = false;
 }
 
 void Brick::Copy(Brick* brick){
@@ -96,5 +99,17 @@ void Brick::Copy(Brick* brick){
 void Brick::Collide(Sprite *s){
 	//TODO: wtite code.
 
+	return;
+}
+
+void Brick::Move(const int dx, const int dy) {
+	if( !up ){ 
+		SetPosition(GetPosition().GetX(), GetPosition().GetY()+2);
+		up = true;
+	}
+	else{
+		SetPosition(GetPosition().GetX(), GetPosition().GetY()-2);
+		up = false;
+	}
 	return;
 }

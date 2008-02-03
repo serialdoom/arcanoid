@@ -20,6 +20,8 @@ typedef struct KEY {
 	bool Key_A;
 	bool Key_D;
 	bool Key_F1;
+	bool Key_Space;
+	bool Key_Enter;
 }KEY;
 
 class StateHolder {

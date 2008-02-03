@@ -204,9 +204,9 @@ void Game::DeleteAll(){
 
 
 void Game::CheckF1(void){
-	if(currLevel >= terrain->GetLevelsNo()-1)	//simenh oti eimatse sto teleuteo level kai den kaeni na proxorisoume
-			return;
 	if( StateHolder::stateKey.Key_F1 ){
+		if(currLevel >= terrain->GetLevelsNo()-1)	//eimatse sto teleuteo level
+			currLevel = -1;							//Pame pali apo thn arxh
 		DeleteAll();
 		currLevel++;
 		AnimatorHolder::Clear();
@@ -270,20 +270,25 @@ void Game::SystemLoopDispatching( bool input ){
 		}
 		else{
 			if( StateHolder::stateKey.Key_Left || StateHolder::stateKey.Key_Mouse_Left)
-				StateHolder::GoLeft();
+				StateHolder::GoLeft();	//board paei aristera
 				
 			else if(StateHolder::stateKey.Key_Right || StateHolder::stateKey.Key_Mouse_Right)
-				StateHolder::GoRight();
+				StateHolder::GoRight();	//board paei de3ia
 			else
-				StateHolder::Stop();
+				StateHolder::Stop();	//board einai ekinito
+
+			if(StateHolder::stateKey.Key_Enter && ball->HasFinished()){
+				ball->Start(spriteH->GetSprite(BALL), movBall, 0);
+				AnimatorHolder::MarkAsRunning(ball);
+			}	//moleis 3ekinise to paixnidi kai prepei na patiseis enter gia na arxisei
 
 			CheckBoardInput();
 			CheckF1();
 		}
 	}//first if
 	else{ //paused
-		if(StateHolder::stateKey.Key_P){
-			StateHolder::Run();
+		if(StateHolder::stateKey.Key_P){//Pati8ike to P
+			StateHolder::Run();			//To paixnidi htan paused kai to arxizoume pali
 			AnimatorHolder::Resum();
 		}
 	}
@@ -297,9 +302,6 @@ void Game::SystemLoopDispatching( bool input ){
 void Game::GameLoop(void){
 	bool input = false;
 	int fps = 0;
-
-	ball->Start(spriteH->GetSprite(BALL), movBall, 0);
-	AnimatorHolder::MarkAsRunning(ball);
 
 	while( !key[KEY_ESC] && (currLevel < terrain->GetLevelsNo()) ) {
 		SetGameTime();
@@ -338,6 +340,7 @@ void Game::CreateAll(void){
 	theBoard = CreatingBoard(PAYER_ONE);
 	countAnimationID = terrain->LoadingTerrain(countAnimationID, currLevel);
 	assert(buffer || baground || theBall || theBoard);
+
 	return;
 }
 

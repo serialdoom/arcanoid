@@ -13,7 +13,6 @@
 #include <algorithm> 
 
 
-#include "Wall.h"
 #include "Ball.h"
 #include "Point.h"
 #include "Board.h"

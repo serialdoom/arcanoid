@@ -9,7 +9,6 @@
 
 
 #include "Sprite.h"
-#include "SpriteType.h"
 #include "StateHolder.h"
 #include "AnimationFilm.h"
 #include "KeyLogger.h"
@@ -21,15 +20,11 @@ private:
 	bool		player1, player2;
 	char		boardSpeed;
 	const int	startY;
-	spritetype_t spriteType;
 
 	int GetKeyboardCoordinates(void);
 	int GetMouseCoordinates(int dx);
 
 public:
-	void SetType(spritetype_t type) { spriteType = type; }
-	spritetype_t GetType(void) const { return spriteType; }
-
 	void SetKey(KEY &_key) { keyPressed = _key; }
 	void Move(const int dx, const int dy);
 

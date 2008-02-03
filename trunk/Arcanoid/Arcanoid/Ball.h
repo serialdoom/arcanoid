@@ -6,7 +6,6 @@
 #include <allegro.h>
 
 #include "Sprite.h"
-#include "SpriteType.h"
 #include "StateHolder.h"
 #include "AnimationFilm.h"
 
@@ -16,12 +15,9 @@ private:
 	Point old;			//Auto edw den xriazetai na einai edw.
 	int speedX, speedY;
 	bool goingLeft, goingUp;
-	spritetype_t spriteType;
 
-	void Ball::CheckCoordinates(void);
+	void CheckCoordinates(void);
 public:
-	void SetType(spritetype_t type) { spriteType = type; }
-	spritetype_t GetType(void) const { return spriteType; }
 
 	void SetSpeedX(int _newspeed);
 	void SetSpeedY(int _newspeed);

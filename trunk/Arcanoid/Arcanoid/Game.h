@@ -37,8 +37,8 @@
 
 class Game {
 private:
-	BITMAP * buffer;
-	BITMAP * baground;
+	BITMAP *			buffer;
+	BITMAP *			baground;
 	Ball *				theBall;
 	Board *				theBoard;
 	int					currLevel;
@@ -49,7 +49,6 @@ private:
 	SpriteHolder *		spriteH;
 	InputManager *		inputManager;
 	LoadFilmsInfo *		filmsInfo;
-
 	MovingAnimator *	board;
 	MovingAnimator *	ball;
 	MovingAnimation *	movBall;
@@ -68,10 +67,10 @@ private:
 	void CreateAll(void);
 	void DeleteAll(void);
 	void SystemLoopDispatching(bool input);
-	void CheckF1(bool input);
-	void CheckBoardInput();
-	void GameLoop();
-	void DisplayALL();
+	void CheckF1(void);
+	void CheckBoardInput(void);
+	void GameLoop(void);
+	void DisplayALL(void);
 
 public:
 	

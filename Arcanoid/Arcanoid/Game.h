@@ -10,6 +10,8 @@
 #include <ctime>
 #include <string>
 #include <allegro.h>
+#include <algorithm> 
+
 
 #include "Wall.h"
 #include "Ball.h"
@@ -47,8 +49,11 @@ private:
 	SpriteHolder *		spriteH;
 	InputManager *		inputManager;
 	LoadFilmsInfo *		filmsInfo;
+
 	MovingAnimator *	board;
 	MovingAnimator *	ball;
+	MovingAnimation *	movBall;
+	MovingAnimation *	movBoard;
 	AnimationHolder *	animationH;
 	CollisionChecker *	collisionC;
 	AnimationFilmHolder*animationFH;
@@ -64,7 +69,7 @@ private:
 	void DeleteAll(void);
 	void SystemLoopDispatching(bool input);
 	void CheckF1(bool input);
-	void CheckBoardInput(bool input);
+	void CheckBoardInput();
 	void GameLoop();
 	void DisplayALL();
 
@@ -72,7 +77,7 @@ public:
 	
 	void PlayGame(void);
 	
-	void SetGameTime(void){ currTime = time((time_t *)0); }
+	void SetGameTime(void){ currTime = time( (time_t *)0 ); }
 
 	unsigned long GetGameTime(void) const { return currTime; }
 	

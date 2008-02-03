@@ -127,13 +127,13 @@ Board * Game::CreatingBoard(int playerNo){
 	spriteH->Insert(BOARD, dynamic_cast<Sprite *>(theBoard));
 
 	//Add to animation Holder
-	MovingAnimation * mov = new MovingAnimation(x, y, 1, true, countAnimationID);
+	movBoard = new MovingAnimation(x, y, 1, true, countAnimationID);
 	countAnimationID++;
-	animationH->Insert(BOARD, mov );
+	animationH->Insert(BOARD, movBoard );
 	
 	//Add to animator Holder
 	board = new MovingAnimator();
-	board->Start(spriteH->GetSprite(BOARD), mov, 0);
+	//board->Start(spriteH->GetSprite(BOARD), movBoard, 0);
 	AnimatorHolder::Register(board);
 
 	return theBoard;
@@ -164,13 +164,13 @@ Ball * Game::CreatingBall(void){
 	spriteH->Insert(BALL, dynamic_cast<Sprite *>(theBall));
 
 	//Add to animation Holder
-	MovingAnimation * mov = new MovingAnimation(x, y, 1, true, countAnimationID);
+	movBall = new MovingAnimation(x, y, 1, true, countAnimationID);
 	countAnimationID++;
-	animationH->Insert(BALL, mov );
+	animationH->Insert(BALL, movBall );
 	
 	//Add to animator Holder
 	ball = new MovingAnimator();
-	ball->Start(spriteH->GetSprite(BALL), mov, 0);
+	ball->Start(spriteH->GetSprite(BALL), movBall, 0);
 	AnimatorHolder::Register(ball);
 
 	return theBall;
@@ -199,37 +199,6 @@ void Game::DisplayALL(){
 /////////////////////////////////////////////////////////////////////
 
 
-void Game::CheckBoardInput( bool input ){
-	static bool isRunning	= false;
-	static bool isSuspended	= true;		//otan kanoume register mpenei kai sto suspend
-	MovingAnimation * mov = dynamic_cast<MovingAnimation*>(animationH->GetAnimation(BOARD));
-	
-	if(input){
-		dynamic_cast<Board*>(spriteH->GetSprite(BOARD))->SetKey(StateHolder::stateKey);
-		if( StateHolder::stateKey.Key_Mouse_Left	|| 
-			StateHolder::stateKey.Key_Mouse_Right	||
-			StateHolder::stateKey.Key_Left			||
-			StateHolder::stateKey.Key_Right) 
-		{
-			//SetMouseCoordinates(mov);
-			mov->SetDx( inputManager->GetOldMouseX() );
-			if( !isRunning ){		//Gia prwth fora mpenei sthn lista me ta running
-				AnimatorHolder::MarkAsRunning(board);
-				isRunning	= true;
-				isSuspended	= false;
-			}
-		}//end second if
-	}//end first if
-	else{
-		if( !isSuspended ){	//Gia prwth fora sthn lista me ta suspended
-			AnimatorHolder::MarkAsSuspended(board);
-			isRunning	= false;
-			isSuspended	= true;
-		}
-	}//end else
-	return;
-}
-/////////////////////////////////////////////////////////////////////
 
 /*
 void Game::BuildAll(){
@@ -260,6 +229,7 @@ void Game::CheckF1(bool input){
 	if( StateHolder::stateKey.Key_F1 ){
 		DeleteAll();
 		currLevel++;
+		AnimatorHolder::Clear();
 		countAnimationID = 0;
 		CreateAll();
 	}
@@ -275,7 +245,6 @@ static void FPSCalculation(int &fps){
 	
 	if( !sec )  { sec = time((time_t *)0); }		
 	else{
-		//std::cout<<time((time_t *)0)<<std::endl;
 		if( (time((time_t *)0)- sec) >= PARSE_ONE_SEC ) {//upologizoume an perase ena sec
 			std::cout<<"fps:"<<fps<<std::endl;
 			fps = 0;
@@ -289,10 +258,57 @@ static void FPSCalculation(int &fps){
 
 
 
+void Game::CheckBoardInput(){
+	MovingAnimation * mov = dynamic_cast<MovingAnimation*>(animationH->GetAnimation(BOARD));
+		
+	if( !StateHolder::IsStoped()){
+		if( board->HasFinished() ){//8eloume na ton baloume mia mono fora sthn lista me tous ranning
+			board->Start(spriteH->GetSprite(BOARD), movBoard, 0);
+			AnimatorHolder::MarkAsRunning(board);
+		}
+		dynamic_cast<Board*>(spriteH->GetSprite(BOARD))->SetKey(StateHolder::stateKey);
+		mov->SetDx( inputManager->GetOldMouseX() );
+	}
+	else{
+		if( !board->HasFinished() ){	//8eloume na ton baloume mia mono fora sthn lista me tous suspended
+			board->Stop();
+			AnimatorHolder::MarkAsSuspended(board);
+		}
+	}
+	return;
+}
+/////////////////////////////////////////////////////////////////////
+
+
+
 void Game::SystemLoopDispatching( bool input ){
-	
-	CheckBoardInput(input);
-	return CheckF1(input);
+
+	if(StateHolder::IsRunning()){
+		if(StateHolder::stateKey.Key_P){
+			StateHolder::Pause();
+			AnimatorHolder::Pause();
+		}
+		else{
+			if( StateHolder::stateKey.Key_Left || StateHolder::stateKey.Key_Mouse_Left)
+				StateHolder::GoLeft();
+				
+			else if(StateHolder::stateKey.Key_Right || StateHolder::stateKey.Key_Mouse_Right)
+				StateHolder::GoRight();
+			else
+				StateHolder::Stop();
+
+			CheckBoardInput();
+			CheckF1(input);
+		}
+	}//first if
+	else{ //paused
+		if(StateHolder::stateKey.Key_P){
+			StateHolder::Run();
+			AnimatorHolder::Resum();
+		}
+	}
+
+	return;
 }
 /////////////////////////////////////////////////////////////////////
 
@@ -313,14 +329,14 @@ void Game::GameLoop(){
 		collisionC->CollisionCheck();
 		AnimatorHolder::Progress(GetGameTime());
 
-		DisplayALL();
-
 		collisionC->CleanUp();
 		terrain->BricksCleanUp(spriteH);
 
+		DisplayALL();
 		FPSCalculation(fps);
 		SystemLoopDispatching(input);
-		//for(int i = 0;i < 1000000;++i);
+
+		AnimatorHolder::printSize();
 	}
 	return;
 }
@@ -332,7 +348,6 @@ void Game::CreateAll(void){
 	inputManager	= new InputManager();
 	assert(spriteH || collisionC || inputManager);
 
-	StateHolder::Init();
 	InitiallizingFilmsInfo();
 	InitiallizingBitmapLoader();
 	InitiallizingAnimationFilmHolder();
@@ -347,6 +362,7 @@ void Game::CreateAll(void){
 	theBoard = CreatingBoard(PAYER_ONE);
 	countAnimationID = terrain->LoadingTerrain(countAnimationID, currLevel);
 	AnimatorHolder::MarkAsRunning(ball);
+	//AnimatorHolder::MarkAsRunning(board);
 	
 	assert(buffer || baground || theBall || theBoard);
 
@@ -358,7 +374,7 @@ void Game::PlayGame(void){
 	KeyLogger::Enable();
 
 	CreateAll();
-
+	StateHolder::Init();
 	GameLoop();
 	KeyLogger::Terminate();
 	return;

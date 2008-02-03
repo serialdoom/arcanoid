@@ -7,6 +7,8 @@
 
 KEY StateHolder::stateKey;
 StateHolder::state_t StateHolder::theState;
+StateHolder::boardstate_t StateHolder::boardState;
+
 
 void StateHolder::Init(void){
 	stateKey.Key_None			= true; 
@@ -20,7 +22,7 @@ void StateHolder::Init(void){
 	stateKey.Key_Mouse_Right	= false;
 	stateKey.Key_A				= false;
 	stateKey.Key_D				= false;
-	theState					= STATE_PAUSED;
+	theState					= STATE_RUNNING;
 	return;
 }
 /////////////////////////////////////////////////////////////////////
@@ -48,6 +50,25 @@ bool StateHolder::IsFinished(void){
 
 
 
+bool StateHolder::IsGoLeft(void){
+	return boardState == STATE_GO_LEFT;
+}
+/////////////////////////////////////////////////////////////////////
+
+
+
+bool StateHolder::IsGoRight(void){
+	return boardState == STATE_GO_RIGHT;
+}
+/////////////////////////////////////////////////////////////////////
+
+
+
+bool StateHolder::IsStoped(void){
+	return boardState == STATE_STOP;
+}
+/////////////////////////////////////////////////////////////////////
+
 void StateHolder::Pause(void){
 	theState = STATE_PAUSED;
 	return;
@@ -73,7 +94,7 @@ void StateHolder::Finish(void){
 
 
 void StateHolder::GoLeft(void){
-	theState = STATE_GO_LEFT;
+	boardState = STATE_GO_LEFT;
 	return;
 }
 /////////////////////////////////////////////////////////////////////
@@ -81,34 +102,14 @@ void StateHolder::GoLeft(void){
 
 
 void StateHolder::GoRight(void){
-	theState = STATE_GO_RIGHT;
+	boardState = STATE_GO_RIGHT;
 	return;
 }
 /////////////////////////////////////////////////////////////////////
 
 
 
-bool StateHolder::IsGoLeft(void){
-	return theState == STATE_GO_LEFT;
-}
-/////////////////////////////////////////////////////////////////////
-
-
-
-bool StateHolder::IsGoRight(void){
-	return theState == STATE_GO_RIGHT;
-}
-/////////////////////////////////////////////////////////////////////
-
-
 void StateHolder::Stop(void){
-	theState = STATE_STOP;
-}
-/////////////////////////////////////////////////////////////////////
-
-
-
-bool StateHolder::IsStop(void){
-	return theState == STATE_STOP;
+	boardState = STATE_STOP;
 }
 /////////////////////////////////////////////////////////////////////

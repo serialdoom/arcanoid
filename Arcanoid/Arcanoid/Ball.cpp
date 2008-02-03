@@ -106,7 +106,7 @@ void Ball::Collide(Sprite *s){
 			if( (ballY1 >= brickY1 - this->GetHeight() || ballY1 <= brickY2) && ballX2 <= brickX1 ){
 			if(!GoingLeft())ReverseHorizon();
 		} else //lol, assert
-			assert(0);
+			{}//assert(0);
 
 	}
 	else

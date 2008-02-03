@@ -5,7 +5,6 @@
 
 
 #include "Sprite.h"
-#include "SpriteType.h"
 
 
 class Wall: public Sprite {

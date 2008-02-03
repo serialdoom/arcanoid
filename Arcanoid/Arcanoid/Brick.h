@@ -14,7 +14,6 @@
 #include "Oblong.h"
 #include "Point.h"
 #include "Sprite.h"
-#include "SpriteType.h"
 #include "AnimationFilm.h"
 
 using namespace std;
@@ -23,7 +22,6 @@ class Brick : public Sprite{
 private:
 	int  score;
 	char timesToBreak;
-	spritetype_t spriteType;
 	bool canBreak, isActive;	
 	//To isActive 8a to xriastoume gia na 3eroume an ena brick tou pinaka exei
 	//sxediastei apo ton xristi h' oxi.
@@ -63,8 +61,6 @@ public:
 	//destructor
 	~Brick(void){}
 	
-	void SetType(spritetype_t type) { spriteType = type; }
-	spritetype_t GetType(void)  const { return spriteType; }
 	int GetScore(void)			const { return score; }
 	bool GetCanBreak(void)		const { return canBreak; }
 	bool IsActive(void)			const { return isActive; }
@@ -84,11 +80,11 @@ public:
 	void Move(const int dx, const int dy) {
 		
 		if( !up ){
-			SetPosition(GetPosition().GetX(), GetPosition().GetY()+1);
+			SetPosition(GetPosition().GetX(), GetPosition().GetY()+2);
 			up = true;
 		}
 		else{
-			SetPosition(GetPosition().GetX(), GetPosition().GetY()-1);
+			SetPosition(GetPosition().GetX(), GetPosition().GetY()-2);
 			up = false;
 		}
 		return;

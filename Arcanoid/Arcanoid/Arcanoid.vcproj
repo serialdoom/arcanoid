@@ -396,10 +396,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\SpriteType.h"
-				>
-			</File>
-			<File
 				RelativePath=".\StateHolder.h"
 				>
 			</File>

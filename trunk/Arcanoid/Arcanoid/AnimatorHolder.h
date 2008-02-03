@@ -4,15 +4,20 @@
 #ifndef ANIMATORHOLDER_H
 #define ANIMATORHOLDER_H
 
+//TODO na sbisw thn print size
 
 #include <list>
+#include <ctime>
 #include <algorithm>
 #include "Animator.h"
+
+#include "KeyLogger.h"
 
 class AnimatorHolder {
 
 private:
-	static std::list<Animator*> running, suspended;
+	static unsigned long startPauseTime;
+	static std::list<Animator*> running, suspended, paused;
 
 	class ProgressFunctor : public std::unary_function<Animator*, void> {
 	private:	
@@ -33,6 +38,18 @@ public:
 	static void MarkAsSuspended (Animator* a);
 	
 	static void Progress (timestamp_t currTime);
+
+	static void Pause(void);
+
+	static void Resum(void);
+
+	static void Clear(void);
+	//debug skopous
+	static void printSize(void){
+		KeyLogger::Write("paused size: %d\n", paused.size());
+		KeyLogger::Write("running size: %d\n", running.size());
+		KeyLogger::Write("suspended size: %d\n\n\n", suspended.size());
+	}
 };
 
 #endif

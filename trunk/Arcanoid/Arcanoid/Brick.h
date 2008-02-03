@@ -78,6 +78,19 @@ public:
 	 */
 	void Copy(Brick* brick);
 
+	void Move(const int dx, const int dy) {
+		static int up =0;
+		
+		if( !up ){
+			SetPosition(dx, dy+1);
+			up++;
+		}
+		else{
+			SetPosition(dx, dy-1);
+			up--;
+		}
+	}
+
 	virtual void Collide(Sprite *s);
 };
 

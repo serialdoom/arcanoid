@@ -78,9 +78,10 @@ animid_t TerrainBuilder::Load(const char *filename,
 
 		//add to animator Holder
 		MovingAnimator * brick = new MovingAnimator();
-		brick->Start(sp->GetSprite(test), mov, 0);
+		brick->Start(sp->GetSprite(test), mov, 20);
 		bricksAnimator.insert( make_pair(test, brick) );
 		AnimatorHolder::Register(brick);
+		AnimatorHolder::MarkAsRunning(brick);
 	}
 	return countAnimationID;
 }

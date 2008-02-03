@@ -16,10 +16,11 @@
 
 class Board: public Sprite {
 private:
-	KEY keyPressed;
-	const int startY;
-	Point oldPosition;
-	bool player1, player2;
+	KEY			keyPressed;
+	Point		oldPosition;
+	bool		player1, player2;
+	char		boardSpeed;
+	const int	startY;
 	spritetype_t spriteType;
 
 	int GetKeyboardCoordinates(void);
@@ -31,6 +32,9 @@ public:
 
 	void SetKey(KEY &_key) { keyPressed = _key; }
 	void Move(const int dx, const int dy);
+
+	char GetBoardSpaed(void) const { return boardSpeed; }
+	void SetBoardSpeed(char speed) { boardSpeed = speed; }
 	
 	/*
 	 * apix nomizw oti einai perito to id edw. Esti kai alios 8a ta filaei ola 

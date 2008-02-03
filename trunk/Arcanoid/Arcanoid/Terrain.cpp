@@ -124,7 +124,11 @@ void Terrain::BricksCleanUp(SpriteHolder* sh){
 		string name			= start->first;
 		Sprite * tmp		= sh->GetSprite( name );
 		if( (dynamic_cast<Brick *>(tmp) != (Sprite*)0) && dynamic_cast<Brick *>(tmp)->IsActive() ){		
-			AnimatorHolder::MarkAsSuspended( bricksAnimator.find(name)->second );
+			Animator * anim = bricksAnimator.find(name)->second;
+			if( !anim->HasFinished() ){//einai running animator
+				anim->Stop();
+				AnimatorHolder::MarkAsSuspended(anim);
+			}
 			start++;
 			sh->EraseSprite(name);
 			continue;

@@ -8,8 +8,6 @@
 #include "Board.h"
 #include "Terrain.h"
 
-#define BOARD_SPEED	2
-
 
 Board::Board(int start_x, 
 			 int start_y, 
@@ -29,6 +27,7 @@ Board::Board(int start_x,
 		player1 = false;
 		player2 = true;
 	}
+	boardSpeed = 2;
 }
 /////////////////////////////////////////////////////////////////////
 
@@ -47,15 +46,16 @@ int Board::GetKeyboardCoordinates(void){
 	int dx		= GetPosition().GetX();
 
 	if( StateHolder::stateKey.Key_Left ){		//aristero collision
-		if( (dx - BOARD_SPEED) < x )	{ return x; }
-		else							{ return dx - BOARD_SPEED; }
+		if( (dx - boardSpeed) < x )	{ return x; }
+		else						{ return dx - boardSpeed; }
 	}
 	else if(StateHolder::stateKey.Key_Right){	//de3i collision
-		if ( (dx + BOARD_SPEED) > (x + w) - GetWidth()) { return (x + w) - GetWidth(); }
-		else											{ return dx + + BOARD_SPEED; }
+		if ( (dx + boardSpeed) > (x + w) - GetWidth())	{ return (x + w) - GetWidth(); }
+		else											{ return dx + boardSpeed; }
 	}
 	else
 		assert(0);
+	return 0;
 }
 /////////////////////////////////////////////////////////////////////
 

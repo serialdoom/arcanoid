@@ -43,15 +43,8 @@ static int mouseMovedX(int oldMouseX){
 
 void noneInput(void){
 	StateHolder::stateKey.Key_None			= true; 
-	StateHolder::stateKey.Key_Left			= false;
-	StateHolder::stateKey.Key_Right			= false;
-	StateHolder::stateKey.Key_Up			= false;
-	StateHolder::stateKey.Key_Down			= false;
-	StateHolder::stateKey.Key_P				= false;
 	StateHolder::stateKey.Key_Mouse_Left	= false;
 	StateHolder::stateKey.Key_Mouse_Right	= false;
-	StateHolder::stateKey.Key_A				= false;
-	StateHolder::stateKey.Key_D				= false;
 	return;
 }
 /////////////////////////////////////////////////////////////////////
@@ -69,6 +62,12 @@ bool InputManager::CheckInput(void){
 
 	if (key[KEY_D])		{ StateHolder::stateKey.Key_D = true; hasInput = true; }
 	else				{ StateHolder::stateKey.Key_D = false;}*/
+
+	if (key[KEY_ENTER])	{StateHolder::stateKey.Key_Enter = true;  hasInput = true;}
+	else				{StateHolder::stateKey.Key_Enter = false;}
+
+	if (key[KEY_SPACE])	{StateHolder::stateKey.Key_Space = true;  hasInput = true;}
+	else				{StateHolder::stateKey.Key_Space = false;}
 
 	if (key[KEY_LEFT])	{ StateHolder::stateKey.Key_Left = true;  hasInput = true; }
 	else				{ StateHolder::stateKey.Key_Left = false; }

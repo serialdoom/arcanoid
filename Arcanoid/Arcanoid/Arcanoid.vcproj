@@ -250,6 +250,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\main.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\MovingAnimation.cpp"
 				>
 			</File>
@@ -283,14 +287,6 @@
 			</File>
 			<File
 				RelativePath=".\TerrainBuilder.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\test.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Wall.cpp"
 				>
 			</File>
 		</Filter>
@@ -405,10 +401,6 @@
 			</File>
 			<File
 				RelativePath=".\TerrainBuilder.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Wall.h"
 				>
 			</File>
 		</Filter>

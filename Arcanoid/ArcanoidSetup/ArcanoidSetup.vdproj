@@ -39,12 +39,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_114F4B2AE8CE45FA90C869BB244E5E8C"
-        "OwnerKey" = "8:_096383A5AD3141AFB13144CB1D4B95DB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_1955736F0D4EBF25F0F49B98F0A6FC23"
         "OwnerKey" = "8:_096383A5AD3141AFB13144CB1D4B95DB"
         "MsmSig" = "8:_UNDEFINED"
@@ -69,8 +63,20 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_39C0E21440AA40C595AD9F0577F42355"
+        "OwnerKey" = "8:_096383A5AD3141AFB13144CB1D4B95DB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_5D03FB48073D42BDAD6432C90A13EA90"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_60D787A115924293B80E02FA617E3F0B"
+        "OwnerKey" = "8:_39C0E21440AA40C595AD9F0577F42355"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -129,12 +135,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_D651A8B71FE74BB48C36809DB5D9F10E"
-        "OwnerKey" = "8:_114F4B2AE8CE45FA90C869BB244E5E8C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_D81FEA52BFE44916BC53300660D71DBF"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -169,6 +169,17 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                }
+            }
         }
         "Release"
         {
@@ -185,6 +196,17 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                }
+            }
         }
     }
     "Deployable"
@@ -836,6 +858,20 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_012CEC71C22C416C9820F997895B1352"
+            {
+            "Name" = "8:Shortcut to Arcanoid"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_096383A5AD3141AFB13144CB1D4B95DB"
+            "Folder" = "8:_603585DA02A449B3A5EDDE5633D93E9C"
+            "WorkingFolder" = "8:_AA3E3A0C9F654C8EB9E78A72EB861E0F"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
         }
         "UserInterface"
         {
@@ -1232,7 +1268,7 @@
         }
         "MergeModule"
         {
-            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_114F4B2AE8CE45FA90C869BB244E5E8C"
+            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_39C0E21440AA40C595AD9F0577F42355"
             {
             "UseDynamicProperties" = "11:TRUE"
             "IsDependency" = "11:TRUE"
@@ -1246,7 +1282,7 @@
             "Feature" = "8:"
             "IsolateTo" = "8:"
             }
-            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_D651A8B71FE74BB48C36809DB5D9F10E"
+            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_60D787A115924293B80E02FA617E3F0B"
             {
             "UseDynamicProperties" = "11:TRUE"
             "IsDependency" = "11:TRUE"

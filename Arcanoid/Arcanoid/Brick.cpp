@@ -3,10 +3,7 @@
  */
 #include "Brick.h"
 
-	int  score;
-	char timesToBreak; 
-	bool canBreak, isActive;	
-
+#define BRICK_SPEED 1
 
 //constructor
 Brick::Brick(	int x, int y,
@@ -104,11 +101,11 @@ void Brick::Collide(Sprite *s){
 
 void Brick::Move(const int dx, const int dy) {
 	if( !up ){ 
-		SetPosition(GetPosition().GetX(), GetPosition().GetY()+2);
+		SetPosition(GetPosition().GetX(), GetPosition().GetY()+BRICK_SPEED);
 		up = true;
 	}
 	else{
-		SetPosition(GetPosition().GetX(), GetPosition().GetY()-2);
+		SetPosition(GetPosition().GetX(), GetPosition().GetY()-BRICK_SPEED);
 		up = false;
 	}
 	return;

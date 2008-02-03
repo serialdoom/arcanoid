@@ -37,6 +37,14 @@ static void InitiallizingAllegro(void){
 }
 /////////////////////////////////////////////////////////////////////
 
+
+//constructor
+Game::Game(void){
+	currTime	= 0;
+	currLevel	= 0;
+	InitiallizingAllegro();
+}
+
 //Destructor
 Game::~Game(){
 	delete bitmaps;
@@ -46,20 +54,6 @@ Game::~Game(){
 	delete collisionC;
 	delete animationFH;
 	delete inputManager;
-}
-/////////////////////////////////////////////////////////////////////
-
-
-
-
-//constructor
-Game::Game(void){
-	currTime	= 0;
-	currLevel	= 0;
-	
-	InitiallizingAllegro();
-
-//	CreateAll();
 }
 /////////////////////////////////////////////////////////////////////
 
@@ -102,8 +96,6 @@ void Game::InitiallizingAnimationFilmHolder(void) {
 
 
 
-
-
 /* precodition: Prepei na exei dimiourgi8ei o animation Film Holder
 			  : o collision Checker o sprite Holder kai telos o animation Holder
  */
@@ -133,7 +125,6 @@ Board * Game::CreatingBoard(int playerNo){
 	
 	//Add to animator Holder
 	board = new MovingAnimator();
-	//board->Start(spriteH->GetSprite(BOARD), movBoard, 0);
 	AnimatorHolder::Register(board);
 
 	return theBoard;
@@ -170,7 +161,6 @@ Ball * Game::CreatingBall(void){
 	
 	//Add to animator Holder
 	ball = new MovingAnimator();
-	ball->Start(spriteH->GetSprite(BALL), movBall, 0);
 	AnimatorHolder::Register(ball);
 
 	return theBall;
@@ -200,19 +190,6 @@ void Game::DisplayALL(){
 
 
 
-/*
-void Game::BuildAll(){
-	//CreateAll();
-	theBall	 = CreatingBall();
-	theBoard = CreatingBoard(currLevel);
-	countAnimationID = terrain->LoadingTerrain(countAnimationID, currLevel);
-	AnimatorHolder::MarkAsRunning(ball);
-
-	assert(theBall || theBoard || (countAnimationID > 0));
-	return;
-}
-*/
-
 void Game::DeleteAll(){
 	delete bitmaps;
 	delete spriteH;
@@ -222,8 +199,11 @@ void Game::DeleteAll(){
 	delete animationFH;
 	delete inputManager;
 }
+/////////////////////////////////////////////////////////////////////
 
-void Game::CheckF1(bool input){
+
+
+void Game::CheckF1(void){
 	if(currLevel >= terrain->GetLevelsNo()-1)	//simenh oti eimatse sto teleuteo level kai den kaeni na proxorisoume
 			return;
 	if( StateHolder::stateKey.Key_F1 ){
@@ -298,7 +278,7 @@ void Game::SystemLoopDispatching( bool input ){
 				StateHolder::Stop();
 
 			CheckBoardInput();
-			CheckF1(input);
+			CheckF1();
 		}
 	}//first if
 	else{ //paused
@@ -314,29 +294,25 @@ void Game::SystemLoopDispatching( bool input ){
 
 
 
-void Game::GameLoop(){
+void Game::GameLoop(void){
 	bool input = false;
 	int fps = 0;
 
-	//spriteH->PrintSpriteHolder();
+	ball->Start(spriteH->GetSprite(BALL), movBall, 0);
+	AnimatorHolder::MarkAsRunning(ball);
 
 	while( !key[KEY_ESC] && (currLevel < terrain->GetLevelsNo()) ) {
 		SetGameTime();
 
 		input = inputManager->CheckInput();
-
-
 		collisionC->CollisionCheck();
 		AnimatorHolder::Progress(GetGameTime());
-
 		collisionC->CleanUp();
 		terrain->BricksCleanUp(spriteH);
-
 		DisplayALL();
 		FPSCalculation(fps);
 		SystemLoopDispatching(input);
-
-		AnimatorHolder::printSize();
+		AnimatorHolder::printSize();//Na diagrafei kata thn paradwsh
 	}
 	return;
 }
@@ -361,15 +337,11 @@ void Game::CreateAll(void){
 	theBall	 = CreatingBall();
 	theBoard = CreatingBoard(PAYER_ONE);
 	countAnimationID = terrain->LoadingTerrain(countAnimationID, currLevel);
-	AnimatorHolder::MarkAsRunning(ball);
-	//AnimatorHolder::MarkAsRunning(board);
-	
 	assert(buffer || baground || theBall || theBoard);
-
+	return;
 }
 
 void Game::PlayGame(void){
-	//bitmaps
 	KeyLogger::Init("test.txt");
 	KeyLogger::Enable();
 

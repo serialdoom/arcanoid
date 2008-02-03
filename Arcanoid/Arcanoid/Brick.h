@@ -9,6 +9,8 @@
 #include <cassert>
 #include <allegro.h>	//Eidea den exw giati xriazete ala stamata na peta la8oi h allgero
 
+#include <iostream>
+
 #include "Oblong.h"
 #include "Point.h"
 #include "Sprite.h"
@@ -25,6 +27,7 @@ private:
 	bool canBreak, isActive;	
 	//To isActive 8a to xriastoume gia na 3eroume an ena brick tou pinaka exei
 	//sxediastei apo ton xristi h' oxi.
+bool up;
 
 public:
 	//constructor
@@ -79,16 +82,16 @@ public:
 	void Copy(Brick* brick);
 
 	void Move(const int dx, const int dy) {
-		static int up =0;
 		
 		if( !up ){
-			SetPosition(dx, dy+1);
-			up++;
+			SetPosition(GetPosition().GetX(), GetPosition().GetY()+1);
+			up = true;
 		}
 		else{
-			SetPosition(dx, dy-1);
-			up--;
+			SetPosition(GetPosition().GetX(), GetPosition().GetY()-1);
+			up = false;
 		}
+		return;
 	}
 
 	virtual void Collide(Sprite *s);

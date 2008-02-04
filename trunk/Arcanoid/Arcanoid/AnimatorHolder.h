@@ -7,16 +7,17 @@
 //TODO na sbisw thn print size
 
 #include <list>
-#include <ctime>
 #include <algorithm>
-#include "Animator.h"
 
+
+#include "MyTime.h"
+#include "Animator.h"
 #include "KeyLogger.h"
 
 class AnimatorHolder {
 
 private:
-	static unsigned long startPauseTime;
+	static timestamp_t startPauseTime;
 	static std::list<Animator*> running, suspended, paused;
 
 	class ProgressFunctor : public std::unary_function<Animator*, void> {
@@ -44,6 +45,7 @@ public:
 	static void Resum(void);
 
 	static void Clear(void);
+	
 	//debug skopous
 	static void printSize(void){
 		KeyLogger::Write("paused size: %d\n", paused.size());

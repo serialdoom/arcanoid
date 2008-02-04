@@ -40,7 +40,6 @@ static void InitiallizingAllegro(void){
 
 //constructor
 Game::Game(void){
-	currTime	= 0;
 	currLevel	= 0;
 	InitiallizingAllegro();
 }
@@ -53,10 +52,8 @@ Game::~Game(){
 	delete filmsInfo;
 	delete collisionC;
 	delete animationFH;
-	delete inputManager;
 }
 /////////////////////////////////////////////////////////////////////
-
 
 
 void Game::InitiallizingFilmsInfo(){
@@ -197,14 +194,14 @@ void Game::DeleteAll(){
 	delete filmsInfo;
 	delete collisionC;
 	delete animationFH;
-	delete inputManager;
+	InputManager::Clear();
 }
 /////////////////////////////////////////////////////////////////////
 
 
 
 void Game::CheckF1(void){
-	if( StateHolder::stateKey.Key_F1 ){
+	if( InputManager::inputKey.Key_F1 ){
 		if(currLevel >= terrain->GetLevelsNo()-1)	//eimatse sto teleuteo level
 			currLevel = -1;							//Pame pali apo thn arxh
 		DeleteAll();
@@ -221,17 +218,20 @@ void Game::CheckF1(void){
 //precodition: prepei thn prwth fora pou kaloume thn methon na einai
 //to fps 0 
 static void FPSCalculation(int &fps){
-	static unsigned long sec = 0;
+	timestamp_t theTime	= MyTime::GetSystemTime();
+	static timestamp_t msec	= 0;
 	
-	if( !sec )  { sec = time((time_t *)0); }		
+	if( !msec )  { msec = theTime;}		
 	else{
-		if( (time((time_t *)0)- sec) >= PARSE_ONE_SEC ) {//upologizoume an perase ena sec
+		if( MyTime::GetSystemDiffTimeInSec(theTime, msec) >= 1 ) {//upologizoume an perase ena sec
 			std::cout<<"fps:"<<fps<<std::endl;
 			fps = 0;
-			sec = 0;
+			msec = 0;
 		}
-		else	{fps++;} 
 	}//else
+	fps++;
+
+	//rest( (fps > 55) ? difftime(theTime, sec) : 0);
 	return;
 }
 /////////////////////////////////////////////////////////////////////
@@ -246,8 +246,8 @@ void Game::CheckBoardInput(){
 			board->Start(spriteH->GetSprite(BOARD), movBoard, 0);
 			AnimatorHolder::MarkAsRunning(board);
 		}
-		dynamic_cast<Board*>(spriteH->GetSprite(BOARD))->SetKey(StateHolder::stateKey);
-		mov->SetDx( inputManager->GetOldMouseX() );
+		dynamic_cast<Board*>(spriteH->GetSprite(BOARD))->SetKey(InputManager::inputKey);
+		mov->SetDx( InputManager::GetOldMouseX() );
 	}
 	else{
 		if( !board->HasFinished() ){	//8eloume na ton baloume mia mono fora sthn lista me tous suspended
@@ -264,20 +264,20 @@ void Game::CheckBoardInput(){
 void Game::SystemLoopDispatching( bool input ){
 
 	if(StateHolder::IsRunning()){
-		if(StateHolder::stateKey.Key_P){
+		if(InputManager::inputKey.Key_P){
 			StateHolder::Pause();
 			AnimatorHolder::Pause();
 		}
 		else{
-			if( StateHolder::stateKey.Key_Left || StateHolder::stateKey.Key_Mouse_Left)
+			if( InputManager::inputKey.Key_Left || InputManager::inputKey.Key_Mouse_Left)
 				StateHolder::GoLeft();	//board paei aristera
 				
-			else if(StateHolder::stateKey.Key_Right || StateHolder::stateKey.Key_Mouse_Right)
+			else if(InputManager::inputKey.Key_Right || InputManager::inputKey.Key_Mouse_Right)
 				StateHolder::GoRight();	//board paei de3ia
 			else
 				StateHolder::Stop();	//board einai ekinito
 
-			if(StateHolder::stateKey.Key_Enter && ball->HasFinished()){
+			if(InputManager::inputKey.Key_Enter && ball->HasFinished()){
 				ball->Start(spriteH->GetSprite(BALL), movBall, 0);
 				AnimatorHolder::MarkAsRunning(ball);
 			}	//moleis 3ekinise to paixnidi kai prepei na patiseis enter gia na arxisei
@@ -287,7 +287,7 @@ void Game::SystemLoopDispatching( bool input ){
 		}
 	}//first if
 	else{ //paused
-		if(StateHolder::stateKey.Key_P){//Pati8ike to P
+		if(InputManager::inputKey.Key_P){//Pati8ike to P
 			StateHolder::Run();			//To paixnidi htan paused kai to arxizoume pali
 			AnimatorHolder::Resum();
 		}
@@ -304,11 +304,11 @@ void Game::GameLoop(void){
 	int fps = 0;
 
 	while( !key[KEY_ESC] && (currLevel < terrain->GetLevelsNo()) ) {
-		SetGameTime();
+		MyTime::SetGameTime();
 
-		input = inputManager->CheckInput();
+		input = InputManager::CheckInput();
 		collisionC->CollisionCheck();
-		AnimatorHolder::Progress(GetGameTime());
+		AnimatorHolder::Progress( MyTime::GetGameTime() );
 		collisionC->CleanUp();
 		terrain->BricksCleanUp(spriteH);
 		DisplayALL();
@@ -323,8 +323,7 @@ void Game::CreateAll(void){
 	spriteH			= new SpriteHolder();
 	animationH		= new AnimationHolder();
 	collisionC		= new CollisionChecker();
-	inputManager	= new InputManager();
-	assert(spriteH || collisionC || inputManager);
+	assert(spriteH || collisionC );
 
 	InitiallizingFilmsInfo();
 	InitiallizingBitmapLoader();

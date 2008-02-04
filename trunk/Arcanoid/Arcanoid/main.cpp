@@ -1,32 +1,7 @@
 /* Testing file for Acranoid project */
 
 
-#include <ctime>
-#include <iostream>
-#include <allegro.h>
-#include <string>
-
-
-
-using std::cout;
-using std::endl;
-
 #include "Game.h"
-#include "Point.h"
-#include "Board.h"
-#include "Animator.h"
-#include "StateHolder.h"
-#include "SpriteHolder.h"
-#include "BitmapLoader.h"
-#include "InputManager.h"
-#include "LoadFilmsInfo.h"
-#include "TerrainBuilder.h"
-#include "AnimatorHolder.h"
-#include "MovingAnimator.h"
-#include "MovingAnimation.h"
-#include "CollisionChecker.h"
-#include "AnimationFilmHolder.h"
-
 
 
 /*

@@ -4,7 +4,7 @@
 #include "AnimatorHolder.h"
 #include <iostream>
 
-unsigned long AnimatorHolder::startPauseTime;
+timestamp_t AnimatorHolder::startPauseTime;
 std::list<Animator*> AnimatorHolder::paused;
 std::list<Animator*> AnimatorHolder::running;
 std::list<Animator*> AnimatorHolder::suspended;
@@ -55,9 +55,12 @@ void AnimatorHolder::Clear(void){
 	running.clear();
 	suspended.clear();
 }
+/////////////////////////////////////////////////////////////////////
+
 
 void AnimatorHolder::Pause(void){
-	startPauseTime = time( (time_t *)0 );
+	startPauseTime = MyTime::GetSystemTime();
+
 	std::list<Animator*>::iterator start	= running.begin();
 	std::list<Animator*>::iterator end		= running.end();
 
@@ -69,9 +72,12 @@ void AnimatorHolder::Pause(void){
 	}
 	return;
 }
+/////////////////////////////////////////////////////////////////////
+
+
 
 void AnimatorHolder::Resum(void){
-	unsigned long pauseTime = time( (time_t *)0 ) - startPauseTime;
+	timestamp_t pauseTime = MyTime::GetSystemDiffTime( MyTime::GetSystemTime(), startPauseTime);
 	std::list<Animator*>::iterator start	= paused.begin();
 	std::list<Animator*>::iterator end		= paused.end();
 
@@ -84,4 +90,5 @@ void AnimatorHolder::Resum(void){
 	}
 	return;
 }
+/////////////////////////////////////////////////////////////////////
 

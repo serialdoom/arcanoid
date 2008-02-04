@@ -8,7 +8,7 @@
 #include "KeyLogger.h"
 #include "Terrain.h"
 
-#define BALL_SPEED	1
+#define BALL_SPEED	2
 
 using std::cout;
 using std::endl;

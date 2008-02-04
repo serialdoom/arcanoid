@@ -262,6 +262,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\MyTime.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Oblong.cpp"
 				>
 			</File>
@@ -373,6 +377,10 @@
 			</File>
 			<File
 				RelativePath=".\MovingAnimator.h"
+				>
+			</File>
+			<File
+				RelativePath=".\MyTime.h"
 				>
 			</File>
 			<File

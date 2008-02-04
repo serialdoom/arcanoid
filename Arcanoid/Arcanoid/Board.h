@@ -9,6 +9,7 @@
 
 
 #include "Sprite.h"
+#include "InputManager.h"
 #include "StateHolder.h"
 #include "AnimationFilm.h"
 #include "KeyLogger.h"

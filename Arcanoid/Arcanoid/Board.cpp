@@ -8,6 +8,7 @@
 #include "Board.h"
 #include "Terrain.h"
 
+#define BOARD_SPEED 4
 
 Board::Board(int start_x, 
 			 int start_y, 
@@ -27,7 +28,7 @@ Board::Board(int start_x,
 		player1 = false;
 		player2 = true;
 	}
-	boardSpeed = 2;
+	boardSpeed = BOARD_SPEED;
 }
 /////////////////////////////////////////////////////////////////////
 
@@ -45,11 +46,11 @@ int Board::GetKeyboardCoordinates(void){
 	int w		= Terrain::width;
 	int dx		= GetPosition().GetX();
 
-	if( StateHolder::stateKey.Key_Left ){		//aristero collision
+	if( StateHolder::IsGoLeft() ){		//aristero collision
 		if( (dx - boardSpeed) < x )	{ return x; }
 		else						{ return dx - boardSpeed; }
 	}
-	else if(StateHolder::stateKey.Key_Right){	//de3i collision
+	else if(StateHolder::IsGoRight()){	//de3i collision
 		if ( (dx + boardSpeed) > (x + w) - GetWidth())	{ return (x + w) - GetWidth(); }
 		else											{ return dx + boardSpeed; }
 	}
@@ -76,7 +77,16 @@ int Board::GetMouseCoordinates(int dx){
 void Board::Move(const int dx, const int dy){
 	//Save the old possitions.
 	oldPosition = GetPosition();
-
+	
+	
+	if( player1 ){
+		if( StateHolder::IsGoLeft() || StateHolder::IsGoRight())
+			SetPosition(GetKeyboardCoordinates(), startY);
+		else if( (keyPressed.Key_Mouse_Left || keyPressed.Key_Mouse_Right))
+			SetPosition(GetMouseCoordinates(dx), startY);
+	}//if
+	
+	/*
 	if( player1 ){
 		if( StateHolder::stateKey.Key_Left )
 			SetPosition(GetKeyboardCoordinates(), startY);
@@ -85,6 +95,7 @@ void Board::Move(const int dx, const int dy){
 		else if( (keyPressed.Key_Mouse_Left || keyPressed.Key_Mouse_Right))
 			SetPosition(GetMouseCoordinates(dx), startY);
 	}//if
+	*/
 /*
 //ton player 2 mporw na ton balw mesa ston stateHolder na mou leei
 //auto poios paixths einai ka8e fora :D

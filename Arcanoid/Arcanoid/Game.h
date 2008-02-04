@@ -7,7 +7,6 @@
 #define GAME_H
 
 
-#include <ctime>
 #include <string>
 #include <allegro.h>
 #include <algorithm> 
@@ -16,6 +15,7 @@
 #include "Ball.h"
 #include "Point.h"
 #include "Board.h"
+#include "MyTime.h"
 #include "Terrain.h"
 #include "Animator.h"
 #include "Animation.h"
@@ -42,11 +42,9 @@ private:
 	Board *				theBoard;
 	int					currLevel;
 	animid_t			countAnimationID;
-	unsigned long		currTime;
 	Terrain	*			terrain;
 	BitmapLoader *		bitmaps;
 	SpriteHolder *		spriteH;
-	InputManager *		inputManager;
 	LoadFilmsInfo *		filmsInfo;
 	MovingAnimator *	board;
 	MovingAnimator *	ball;
@@ -74,10 +72,6 @@ private:
 public:
 	
 	void PlayGame(void);
-	
-	void SetGameTime(void){ currTime = time( (time_t *)0 ); }
-
-	unsigned long GetGameTime(void) const { return currTime; }
 	
 	Game();
 	

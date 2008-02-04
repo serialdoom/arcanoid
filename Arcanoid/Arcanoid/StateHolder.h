@@ -4,25 +4,8 @@
 
 /* StateHolder header file */
 
-#ifndef __STATE_HOLDER_H__
-#define __STATE_HOLDER_H__
-
-typedef struct KEY {	
-	bool Key_None; 
-	bool Key_Left;
-	bool Key_Right;
-	bool Key_Up;
-	bool Key_Down;
-	bool Key_P;
-	bool Key_Pause;
-	bool Key_Mouse_Left;
-	bool Key_Mouse_Right;
-	bool Key_A;
-	bool Key_D;
-	bool Key_F1;
-	bool Key_Space;
-	bool Key_Enter;
-}KEY;
+#ifndef STATE_HOLDER_H
+#define STATE_HOLDER_H
 
 class StateHolder {
 	typedef enum state  {
@@ -39,9 +22,7 @@ class StateHolder {
 
 	static state_t		theState;
 	static boardstate_t boardState;
-public:
-	static KEY	stateKey;
-	
+public:	
 	static void Run(void);
 	static void Stop(void);
 	static void Init(void);

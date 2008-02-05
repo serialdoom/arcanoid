@@ -146,7 +146,8 @@ Ball * Game::CreatingBall(void){
 	
 	Ball *theBall = new Ball( x, y, 
 							  const_cast<AnimationFilm *>(animationFH->GetFilm(filmID)), 
-							  filmID.c_str());
+							  filmID.c_str(),
+							  spriteH);
 	assert(theBall);
 	collisionC->AddMovable(dynamic_cast<Sprite *>(theBall));
 	spriteH->Insert(BALL, dynamic_cast<Sprite *>(theBall));
@@ -246,6 +247,7 @@ void Game::CheckBoardInput(){
 			board->Start(spriteH->GetSprite(BOARD), movBoard, 0);
 			AnimatorHolder::MarkAsRunning(board);
 		}
+		//gia na 3erei me ti egine h khnhsh 
 		dynamic_cast<Board*>(spriteH->GetSprite(BOARD))->SetKey(InputManager::inputKey);
 		mov->SetDx( InputManager::GetOldMouseX() );
 	}
@@ -261,7 +263,7 @@ void Game::CheckBoardInput(){
 
 
 
-void Game::SystemLoopDispatching( bool input ){
+void Game::SystemLoopDispatching(void){
 
 	if(StateHolder::IsRunning()){
 		if(InputManager::inputKey.Key_P){
@@ -300,20 +302,23 @@ void Game::SystemLoopDispatching( bool input ){
 
 
 void Game::GameLoop(void){
-	bool input = false;
 	int fps = 0;
 
 	while( !key[KEY_ESC] && (currLevel < terrain->GetLevelsNo()) ) {
 		MyTime::SetGameTime();
 
-		input = InputManager::CheckInput();
+		InputManager::CheckInput();
+
 		collisionC->CollisionCheck();
+		
 		AnimatorHolder::Progress( MyTime::GetGameTime() );
 		collisionC->CleanUp();
 		terrain->BricksCleanUp(spriteH);
+		
 		DisplayALL();
 		FPSCalculation(fps);
-		SystemLoopDispatching(input);
+		
+		SystemLoopDispatching();
 		AnimatorHolder::printSize();//Na diagrafei kata thn paradwsh
 	}
 	return;
@@ -344,11 +349,13 @@ void Game::CreateAll(void){
 }
 
 void Game::PlayGame(void){
-	KeyLogger::Init("test.txt");
+	KeyLogger::Init("ArcanoidBigBrother.txt");
 	KeyLogger::Enable();
 
 	CreateAll();
 	StateHolder::Init();
+	InputManager::Init();
+
 	GameLoop();
 	KeyLogger::Terminate();
 	return;

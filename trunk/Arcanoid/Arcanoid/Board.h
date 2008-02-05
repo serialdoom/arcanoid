@@ -20,7 +20,7 @@ private:
 	Point		oldPosition;
 	bool		player1, player2;
 	char		boardSpeed;
-	const int	startY;
+	const int	startY;					//H Y suntetagmenh paramenei panta sta8erh
 
 	int GetKeyboardCoordinates(void);
 	int GetMouseCoordinates(int dx);

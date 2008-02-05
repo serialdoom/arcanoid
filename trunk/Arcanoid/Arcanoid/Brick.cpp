@@ -13,11 +13,13 @@ Brick::Brick(	int x, int y,
 				const char frameNo,
 				const bool _isActive,
 				const bool _canBreak, 
-				const char _timesToBreak ) :	Sprite(x, y, film),								
-												score(_score),
-												isActive(_isActive),
-												canBreak(_canBreak),
-												timesToBreak(_timesToBreak)
+				const char _timesToBreak,
+				const string _id ) :	Sprite(x, y, film),								
+										score(_score),
+										isActive(_isActive),
+										canBreak(_canBreak),
+										timesToBreak(_timesToBreak),
+										id(_id)
 {
 	SetWidth(w);
 	SetHeight(h);
@@ -36,11 +38,13 @@ Brick::Brick(	const Point  point,
 				const char frameNo,
 				const bool _isActive,
 				const bool _canBreak, 
-				const char _timesToBreak ) :	Sprite(point, film),
-												score(_score),
-												isActive(_isActive),
-												canBreak(_canBreak),
-												timesToBreak(_timesToBreak)
+				const char _timesToBreak,
+				const string _id ) :	Sprite(point, film),
+										score(_score),
+										isActive(_isActive),
+										canBreak(_canBreak),
+										timesToBreak(_timesToBreak),
+										id(_id)
 {
 	SetWidth(w);
 	SetHeight(h);
@@ -57,11 +61,13 @@ Brick::Brick(	const Point * const point,
 				const char frameNo,
 				const bool _isActive,
 				const bool _canBreak, 
-				const char _timesToBreak ) :	Sprite(point, film),
-												score(_score),
-												isActive(_isActive),
-												canBreak(_canBreak),
-												timesToBreak(_timesToBreak)
+				const char _timesToBreak,
+				const string _id ) :	Sprite(point, film),
+										score(_score),
+										isActive(_isActive),
+										canBreak(_canBreak),
+										timesToBreak(_timesToBreak),
+										id(_id)
 {
 	SetWidth(w);
 	SetHeight(h);

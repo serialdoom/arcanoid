@@ -16,7 +16,8 @@ Sprite::Sprite(int upper_x, int upper_y, int down_x, int down_y){
 
 
 
-Sprite::Sprite(int x, int y, AnimationFilm* film) : currFilm(film){
+Sprite::Sprite(int x, int y, AnimationFilm* film) : currFilm(film)
+{
 	assert(film);
 	isVisible	= true;
 	frameNo		= currFilm->GetTotalFrames();
@@ -28,7 +29,8 @@ Sprite::Sprite(int x, int y, AnimationFilm* film) : currFilm(film){
 
 
 
-Sprite::Sprite(Point point, AnimationFilm* film) : currFilm(film){
+Sprite::Sprite(Point point, AnimationFilm* film) : currFilm(film)
+{
 	assert(film);
 	isVisible	= true;
 	frameNo		= currFilm->GetTotalFrames();
@@ -40,7 +42,8 @@ Sprite::Sprite(Point point, AnimationFilm* film) : currFilm(film){
 
 
 
-Sprite::Sprite(const Point * const point, AnimationFilm* film) : currFilm(film){
+Sprite::Sprite(const Point * const point, AnimationFilm* film) : currFilm(film)
+{
 	assert(film);
 	isVisible	= true;
 	frameNo		= currFilm->GetTotalFrames();

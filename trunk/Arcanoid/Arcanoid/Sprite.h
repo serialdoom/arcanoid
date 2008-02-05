@@ -5,6 +5,7 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
+#include <string>
 #include <allegro.h>		//Eidea den exw giati xriazete ala stamata na peta la8oi h allgero
 
 #include "Point.h"
@@ -24,7 +25,7 @@ private:
 	char			frameNo;
     bool			isVisible;
 	Point			position;
-    AnimationFilm*	currFilm;
+	AnimationFilm*	currFilm;
 
 protected:
 	spritetype_t	spriteType;
@@ -67,7 +68,7 @@ public:
 	/* @target: Einai h Move gia to ekatos8e sprite
 	 */
 	virtual void Move(const int dx, const int dy);
-	
+
 	Sprite(Point point, AnimationFilm* film);
 	Sprite(int x, int y, AnimationFilm* film);
 	Sprite(const Point * const point, AnimationFilm* film);

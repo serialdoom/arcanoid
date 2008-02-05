@@ -70,8 +70,11 @@ bool InputManager::CheckInput(void){
 	else				{ inputKey.Key_P = false; lock = false;}
 
 	if (oldMouseX != mouse_x){ oldMouseX = mouseMovedX(oldMouseX); hasInput = true;}
-	if (!hasInput)		{ Clear(); }	//None input
-	
+	else{
+		inputKey.Key_Mouse_Left		= false; 
+		inputKey.Key_Mouse_Right	= false;
+		hasInput					= false;
+	}
 	return hasInput;
 }
 
@@ -91,5 +94,12 @@ void InputManager::Clear(void){
 	inputKey.Key_F1				= false;
 	inputKey.Key_Space			= false;
 	inputKey.Key_Enter			= false;
+	return;
+}
+
+
+void InputManager::Init(void){
+	Clear();
+	oldMouseX = mouse_x;
 	return;
 }

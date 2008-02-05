@@ -15,7 +15,8 @@ using std::endl;
 
 Ball::Ball(int start_x, int start_y, 
 		   AnimationFilm *af, 
-		   const char *ball_string) : Sprite(start_x, start_y, af)
+		   const char *ball_string, 
+		   SpriteHolder * _sh) : Sprite(start_x, start_y, af), sh(_sh)	 
 {
 	old.SetX(start_x);
 	old.SetY(start_y);
@@ -107,7 +108,7 @@ void Ball::Collide(Sprite *s){
 			if(!GoingLeft())ReverseHorizon();
 		} else //lol, assert
 			{}//assert(0);
-
+		sh->MarkAsDeleted( dynamic_cast<Brick *>(s)->GetID() );
 	}
 	else
 		assert(!"kapia malakia ekanes sthn ball malaka\n");

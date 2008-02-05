@@ -63,15 +63,13 @@ SpriteMap::iterator	SpriteHolder::GetEnd(void){
 
 //update sprite
 //an olla kala true alios false
-bool SpriteHolder::SetSprite(string name, Sprite * sprite){
+void SpriteHolder::SetSprite(string name, Sprite * sprite){
 	assert(sprite);
 	Sprite * tmp = GetSprite(name);
-
-	if( !tmp )
-		return false;
-
+	
+	assert(tmp);	//Den bre8ike to sprite
 	tmp = sprite;
-	return true;
+	return;
 }
 /////////////////////////////////////////////////////////////////////
 
@@ -87,11 +85,31 @@ void SpriteHolder::Insert(string name, Sprite * sprite){
 
 void SpriteHolder::EraseSprite(string name){
 	SpriteMap::iterator sprite = sprites.find(name);
-
 	if( sprite == sprites.end() ) { assert(0); }
 
 	sprites.erase(sprite);
 	return;
+}
+/////////////////////////////////////////////////////////////////////
+
+
+void SpriteHolder::MarkAsDeleted(string name){
+	SpriteMap::iterator sprite = sprites.find(name);
+	assert(sprite != sprites.end()); 
+
+	deleted.push_back(sprite->second);
+	sprites.erase(sprite);	
+	return;
+}
+/////////////////////////////////////////////////////////////////////
+
+
+std::list<Sprite *>::iterator SpriteHolder::GetEndDeleded(void){
+	return deleted.end();
+}
+
+std::list<Sprite *>::iterator SpriteHolder::GetFirstDeleded(void){
+	return deleted.begin();
 }
 
 

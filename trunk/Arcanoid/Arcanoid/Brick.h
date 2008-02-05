@@ -22,7 +22,8 @@ class Brick : public Sprite{
 private:
 	int  score;
 	char timesToBreak;
-	bool canBreak, isActive;	
+	bool canBreak, isActive;
+	string id;
 	//To isActive 8a to xriastoume gia na 3eroume an ena brick tou pinaka exei
 	//sxediastei apo ton xristi h' oxi.
 bool up;
@@ -36,7 +37,8 @@ public:
 			const char frameNo,
 			const bool _isActive,
 			const bool _canBreak, 
-			const char _timesToBreak ); 
+			const char _timesToBreak,
+			const string _id); 
 
 	//overload constructor 1
 	Brick(	const Point  point,
@@ -46,7 +48,8 @@ public:
 			const char frameNo,
 			const bool _isActive,
 			const bool _canBreak, 
-			const char _timesToBreak ); 
+			const char _timesToBreak,
+			const string _id ); 
 
 	//overload constructor 2
 	Brick(	const Point * const point,
@@ -56,7 +59,8 @@ public:
 			const char frameNo,
 			const bool _isActive,
 			const bool _canBreak, 
-			const char _timesToBreak ); 
+			const char _timesToBreak,
+			const string _id ); 
 
 	//destructor
 	~Brick(void){}
@@ -66,6 +70,8 @@ public:
 	bool IsActive(void)			const { return isActive; }
 	int GetTimesToBreak(void)	const { return timesToBreak; }
 
+	string GetID(void) const { return id; }
+	void SetID(const string _id) { id = _id; }
 	void SetScore(const int score)	{ this->score = score; }
 	void SetCanBreak(const bool cn) { canBreak = cn; }
 	void SetIsActive(const bool is) { isActive = is; }

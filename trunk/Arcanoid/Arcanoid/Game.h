@@ -63,7 +63,7 @@ private:
 
 	void CreateAll(void);
 	void DeleteAll(void);
-	void SystemLoopDispatching(bool input);
+	void SystemLoopDispatching(void);
 	void CheckF1(void);
 	void CheckBoardInput(void);
 	void GameLoop(void);

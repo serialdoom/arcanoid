@@ -116,3 +116,18 @@ void Brick::Move(const int dx, const int dy) {
 	}
 	return;
 }
+
+
+bool Brick::QuestionDeath(){
+	assert(this->GetTimesToBreak() >= 0);
+	if(this->GetCanBreak() && this->GetTimesToBreak() == 1){
+		this->SetIsActive(true);
+		return true;
+	} else if( this->GetCanBreak() && this->GetTimesToBreak() >1){
+		this->SetTimesToBreak( this->GetTimesToBreak() - 1);
+		this->SetFrame(this->GetFrame() - 1);
+	} else {
+		//brick cant break;
+	}
+	return false;
+}

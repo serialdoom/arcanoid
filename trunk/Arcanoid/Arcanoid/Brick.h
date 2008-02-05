@@ -86,6 +86,7 @@ public:
 	void Move(const int dx, const int dy);
 
 	virtual void Collide(Sprite *s);
+	bool QuestionDeath(void);
 };
 
 #endif

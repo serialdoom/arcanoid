@@ -99,9 +99,10 @@ void Ball::Collide(Sprite *s){
 			if(GoingUp()) ReverseVertical();
 		}else //Ball is right, brick is left
 			if ( (ballY1 >= brickY1 - this->GetHeight() || ballY1 <= brickY2) && ballX1 >= brickX2 ){
-			if(GoingLeft()) ReverseVertical();
+			if(GoingLeft()) ReverseHorizon();
 		}else //Ball is up, brick is down
-			if((ballX1 >= brickX1-this->GetWidth() || ballX1 <=brickX2) && ballY2 <= brickY1 ){ 
+			if((ballX1 >= brickX1-this->GetWidth() || ballX1 <=brickX2) && ballY2 <= brickY1 ){
+				std::cout << "BALL IS ON TOP OF A BRICK!!!!\n";
 			if(!GoingUp())ReverseVertical();
 		} else //Ball is left, brick is right
 			if( (ballY1 >= brickY1 - this->GetHeight() || ballY1 <= brickY2) && ballX2 <= brickX1 ){

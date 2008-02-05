@@ -76,12 +76,20 @@ public:
 	 */
 	void MarkAsDeleted(string name);
 
-	void DeleteFromList(Sprite * sprite) { deleted.remove(sprite); } 
-	std::list<Sprite *>::iterator GetEndDeleded(void);
-	std::list<Sprite *>::iterator GetFirstDeleded(void);
+	std::list<Sprite *> * GetDelededList(void) { return &deleted; }
+	//void DeleteFromList(Sprite * sprite) { deleted.remove(sprite); } 
+	//std::list<Sprite *>::iterator GetEndDeleded(void);
+	//std::list<Sprite *>::iterator GetFirstDeleded(void);
 
 	//gia debug skopous xrisimeuei mono
 	void PrintSpriteHolder();
+	
+	//debug
+	void PrintSizeOfSpriteHolder(){
+		KeyLogger::Write("size of map: %d\n", sprites.size());
+		KeyLogger::Write("size of list: %d\n\n", deleted.size());
+		return;
+	}
 };
 
 #endif

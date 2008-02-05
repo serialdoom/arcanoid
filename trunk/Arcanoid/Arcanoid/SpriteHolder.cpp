@@ -103,7 +103,7 @@ void SpriteHolder::MarkAsDeleted(string name){
 }
 /////////////////////////////////////////////////////////////////////
 
-
+/*
 std::list<Sprite *>::iterator SpriteHolder::GetEndDeleded(void){
 	return deleted.end();
 }
@@ -111,7 +111,7 @@ std::list<Sprite *>::iterator SpriteHolder::GetEndDeleded(void){
 std::list<Sprite *>::iterator SpriteHolder::GetFirstDeleded(void){
 	return deleted.begin();
 }
-
+*/
 
 void SpriteHolder::PrintSpriteHolder(){
 	SpriteMap::iterator start = sprites.begin();

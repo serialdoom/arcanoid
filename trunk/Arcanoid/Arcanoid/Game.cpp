@@ -312,6 +312,7 @@ void Game::GameLoop(void){
 		collisionC->CollisionCheck();
 		
 		AnimatorHolder::Progress( MyTime::GetGameTime() );
+		spriteH->PrintSizeOfSpriteHolder();//Na diagrafei kata thn paradwsh
 		collisionC->CleanUp();
 		terrain->BricksCleanUp(spriteH);
 		
@@ -319,7 +320,8 @@ void Game::GameLoop(void){
 		FPSCalculation(fps);
 		
 		SystemLoopDispatching();
-		AnimatorHolder::printSize();//Na diagrafei kata thn paradwsh
+		spriteH->PrintSizeOfSpriteHolder();//Na diagrafei kata thn paradwsh
+		//AnimatorHolder::printSize();//Na diagrafei kata thn paradwsh
 	}
 	return;
 }

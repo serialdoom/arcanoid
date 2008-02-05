@@ -3,7 +3,7 @@
  */
 #include "Brick.h"
 
-#define BRICK_SPEED 1
+#define BRICK_SPEED 2
 
 //constructor
 Brick::Brick(	int x, int y,

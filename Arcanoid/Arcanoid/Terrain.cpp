@@ -117,9 +117,9 @@ void Terrain::DisplayTerrain(BITMAP *bitmap, SpriteHolder* sh){
 
 
 void Terrain::BricksCleanUp(SpriteHolder* sh){
-	
-	std::list<Sprite *>::iterator start = sh->GetFirstDeleded();
-	std::list<Sprite *>::iterator end	= sh->GetEndDeleded();
+	std::list<Sprite *> * theList		= sh->GetDelededList();
+	std::list<Sprite *>::iterator start = theList->begin();
+	std::list<Sprite *>::iterator end	= theList->end();
 
 	while( start != end ){
 		if( dynamic_cast<Brick *>(*start) ){
@@ -131,7 +131,7 @@ void Terrain::BricksCleanUp(SpriteHolder* sh){
 			}
 			Sprite * tmp = (*start);
 			start++;
-			sh->DeleteFromList(tmp);
+			theList->remove(tmp);
 			continue;
 		}
 		start++;

@@ -43,6 +43,8 @@ public:
 	 */
 	static bool CheckInput(void);
 
+	static void Init(void);
+
 };
 
 #endif

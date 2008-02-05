@@ -63,13 +63,15 @@ animid_t TerrainBuilder::Load(const char *filename,
 								getNumber(buffy, PREFIX_FRAME_NUMBER), //frameNo
 								false, // isActive
 								(getNumber(buffy, PREFIX_CAN_BREAK))?(true):(false), //CanBreak
-								getNumber(buffy, PREFIX_TIMES_TO_BREAK) //Times to break
+								getNumber(buffy, PREFIX_TIMES_TO_BREAK), //Times to break
+								(test = AppendIntegerToString(BRICK_NAME_PREFIX, counter))
 							);
 				
 		delete(brick_id_str);
-
+		
+		//add to collision Checker and to spriteholder
 		cc->AddUnmovable(dynamic_cast<Sprite *>(newBrick));
-		sp->Insert(test = AppendIntegerToString(BRICK_NAME_PREFIX, counter), dynamic_cast<Sprite *>(newBrick));
+		sp->Insert(test, dynamic_cast<Sprite *>(newBrick));
 		
 		//add to animationHolder
 		MovingAnimation * mov = new MovingAnimation(x, y, 1, true, countAnimationID);

@@ -117,24 +117,47 @@ void Terrain::DisplayTerrain(BITMAP *bitmap, SpriteHolder* sh){
 
 
 void Terrain::BricksCleanUp(SpriteHolder* sh){
-	SpriteMap::iterator	start	= sh->GetFirst();
+	
+	std::list<Sprite *>::iterator start = sh->GetFirstDeleded();
+	std::list<Sprite *>::iterator end	= sh->GetEndDeleded();
+
+	while( start != end ){
+		if( dynamic_cast<Brick *>(*start) ){
+			//edw elegxw an to brick einai running wtse na to kanw stop
+			Animator * anim = bricksAnimator.find( dynamic_cast<Brick *>(*start)->GetID() )->second;
+			if( !anim->HasFinished() ){//einai running animator
+				anim->Stop();
+				AnimatorHolder::MarkAsSuspended(anim);
+			}
+			Sprite * tmp = (*start);
+			start++;
+			sh->DeleteFromList(tmp);
+			continue;
+		}
+		start++;
+	}//end while
+	
+/*	SpriteMap::iterator	start	= sh->GetFirst();
 	SpriteMap::iterator	end		= sh->GetEnd();
 
-	while( start != end ){			//blepw pio sprite einai brick kai to diagrafw
+	while( start != end ){			//blepw pio sprite einai brick kai to diagrafw apo ton sh
 		string name			= start->first;
 		Sprite * tmp		= sh->GetSprite( name );
 		if( (dynamic_cast<Brick *>(tmp) != (Sprite*)0) && dynamic_cast<Brick *>(tmp)->IsActive() ){		
+			
+			//edw elegxw an to brick einai running wtse na to kanw stop
 			Animator * anim = bricksAnimator.find(name)->second;
 			if( !anim->HasFinished() ){//einai running animator
 				anim->Stop();
 				AnimatorHolder::MarkAsSuspended(anim);
 			}
 			start++;
-			sh->EraseSprite(name);
+			//sh->EraseSprite(name);
 			continue;
 		}
 		start++;
 	}
+*/
 	return;
 }
 /////////////////////////////////////////////////////////////////////

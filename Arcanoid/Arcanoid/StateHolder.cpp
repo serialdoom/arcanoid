@@ -7,6 +7,7 @@ StateHolder::boardstate_t StateHolder::boardState;
 
 void StateHolder::Init(void){
 	theState					= STATE_RUNNING;
+	boardState					= STATE_STOP;
 	return;
 }
 /////////////////////////////////////////////////////////////////////

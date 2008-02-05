@@ -6,12 +6,14 @@
 #include <allegro.h>
 
 #include "Sprite.h"
+#include "SpriteHolder.h"
 #include "StateHolder.h"
 #include "AnimationFilm.h"
 
 
 class Ball : public Sprite {
 private:
+	SpriteHolder * sh;
 	Point old;			//Auto edw den xriazetai na einai edw.
 	int speedX, speedY;
 	bool goingLeft, goingUp;
@@ -30,7 +32,7 @@ public:
 	bool GoingUp(void);
 	bool GoingLeft(void);
 	
-	Ball(int start_x, int start_y, AnimationFilm *af, const char *ball_string);
+	Ball(int start_x, int start_y, AnimationFilm *af, const char *ball_string, SpriteHolder * _sh);
 	~Ball(){}
 };
 

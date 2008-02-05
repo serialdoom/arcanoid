@@ -1,22 +1,29 @@
 /*
  * author: koutsop
  */
+//Na diagrayw thn PrintSpriteHolder
 #ifndef SPRITEHOLDER_H
 #define SPRITEHOLDER_H
 
 #include <map>
+#include <list>
 #include <string>
 
 #include "KeyLogger.h"
 #include "Sprite.h"
 
-using namespace std;
-typedef map<string, Sprite *> SpriteMap;
+typedef std::map<string, Sprite *> SpriteMap;
 
 
 class SpriteHolder {
 private:
+	std::list<Sprite *> deleted;
 	SpriteMap sprites;
+	
+	/* @target: Na diagrafei mesa apo to map ena sugkekrimeno sprite.
+	 * @param : To onoma tou sprite pou prokite na diagrafei.
+	 */
+	void EraseSprite(string name);
 
 public:
 	SpriteHolder(void){}
@@ -39,9 +46,8 @@ public:
 	/* @target: Na 8etei ena sigkekrimeno sprite pou uparxei ston holder.
 	 * @param : name einai to onoma tou sprite pou 8eloume na kanoume thn alagh
 	 *		  :sptire einai to eno sprite.
-	 * @retrun: True an egine to set alios false.
 	 */
-	bool SetSprite(string name, Sprite * sprite);
+	void SetSprite(string name, Sprite * sprite);
 	
 
 	/* @target: Na epistrefei to prwto stoikxeio tou holder.
@@ -66,11 +72,13 @@ public:
 	 */
 	void Insert(string name, Sprite * sprite);
 
-
-	/* @target: Na diagrafei mesa apo to map ena sugkekrimeno sprite.
-	 * @param : To onoma tou sprite pou prokite na diagrafei.
+	/* @target: Na bazei ena sprite sthn lista pou einai pros diagrafh
 	 */
-	void EraseSprite(string name);
+	void MarkAsDeleted(string name);
+
+	void DeleteFromList(Sprite * sprite) { deleted.remove(sprite); } 
+	std::list<Sprite *>::iterator GetEndDeleded(void);
+	std::list<Sprite *>::iterator GetFirstDeleded(void);
 
 	//gia debug skopous xrisimeuei mono
 	void PrintSpriteHolder();

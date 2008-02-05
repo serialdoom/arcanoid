@@ -80,10 +80,11 @@ void Board::Move(const int dx, const int dy){
 	
 	
 	if( player1 ){
-		if( StateHolder::IsGoLeft() || StateHolder::IsGoRight())
+		if( keyPressed.Key_Left || keyPressed.Key_Right)	//Exoume isodo apo plhktrologio
 			SetPosition(GetKeyboardCoordinates(), startY);
-		else if( (keyPressed.Key_Mouse_Left || keyPressed.Key_Mouse_Right))
+		else if( (keyPressed.Key_Mouse_Left || keyPressed.Key_Mouse_Right))//apo to mause
 			SetPosition(GetMouseCoordinates(dx), startY);
+		else assert(0);				//kapoios ekane pali malakia
 	}//if
 	
 	/*

@@ -238,6 +238,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GameStats.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\InputManager.cpp"
 				>
 			</File>
@@ -357,6 +361,10 @@
 			</File>
 			<File
 				RelativePath=".\Game.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GameStats.h"
 				>
 			</File>
 			<File

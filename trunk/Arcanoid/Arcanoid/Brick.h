@@ -15,6 +15,7 @@
 #include "Point.h"
 #include "Sprite.h"
 #include "AnimationFilm.h"
+#include "GameStats.h"
 
 using namespace std;
 

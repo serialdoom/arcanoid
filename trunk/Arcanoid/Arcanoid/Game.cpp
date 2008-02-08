@@ -41,6 +41,8 @@ static void InitiallizingAllegro(void){
 //constructor
 Game::Game(void){
 	currLevel	= 0;
+	for(int i=SCORE_MAX_DIGIT-1; i>=0;--i)
+		scoreDigit[i] = -1;
 	InitiallizingAllegro();
 }
 
@@ -165,6 +167,15 @@ Ball * Game::CreatingBall(void){
 }
 /////////////////////////////////////////////////////////////////////
 
+void Game::SetUpScore(){
+	scoreDigitPos[0] = get_config_int("SCORE", "start_x", -1);
+	scoreDigitPos[1] = get_config_int("SCORE", "start_y", -1);
+
+	if(scoreDigitPos[0] == -1 || scoreDigitPos[1] == -1) assert(0);
+}
+
+
+/////////////////////////////////////////////////////////////////////
 
 void Game::DisplayALL(){
 	Sprite *board = board = spriteH->GetSprite(BOARD); 
@@ -179,6 +190,7 @@ void Game::DisplayALL(){
 
 	if( ball->IsVisible() )
 		ball->Display(buffer);
+	DisplayScore(buffer);
 
 	terrain->DisplayTerrain(buffer, spriteH);
 	blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
@@ -186,7 +198,29 @@ void Game::DisplayALL(){
 }
 /////////////////////////////////////////////////////////////////////
 
+void Game::DisplayScore(BITMAP *buffy){
+	string filmID = get_config_string("FILMS", "score", 0);
+	AnimationFilm *film = const_cast<AnimationFilm *>(animationFH->GetFilm(filmID));
+	if(filmID.size() == 0) assert(0);
+	assert(film);
+	if(GameStats::ScoreChanged()){
+		int i = GameStats::GetScore();
+		for(int digit = 0;digit < SCORE_MAX_DIGIT; ++digit){
+			scoreDigit[digit] = i%10;
+			i  /= 10;
+		}
+	}
+	int x=	scoreDigitPos[0];
+	for(int i = SCORE_MAX_DIGIT-1;i>=0;--i){
+		if(scoreDigit[i] != -1){
+			film->DisplayFrame(buffy, new Point(x, scoreDigitPos[1]), scoreDigit[i]);
+			x += (film->GetFrameBox(scoreDigit[i]))->GetWidth();
+		}
+	}
+}
 
+
+/////////////////////////////////////////////////////////////////////
 
 void Game::DeleteAll(){
 	delete bitmaps;
@@ -283,7 +317,11 @@ void Game::SystemLoopDispatching(void){
 				ball->Start(spriteH->GetSprite(BALL), movBall, 0);
 				AnimatorHolder::MarkAsRunning(ball);
 			}	//moleis 3ekinise to paixnidi kai prepei na patiseis enter gia na arxisei
-
+			else if( ball->HasFinished() ) {
+				int x = theBoard->GetPosition().GetX() + (theBoard->GetWidth() / 2);
+				int y = theBall->GetPosition().GetY();
+				theBall->SetPosition(x, y);
+			}
 			CheckBoardInput();
 			CheckF1();
 		}
@@ -347,6 +385,10 @@ void Game::CreateAll(void){
 	theBoard = CreatingBoard(PAYER_ONE);
 	countAnimationID = terrain->LoadingTerrain(countAnimationID, currLevel);
 	assert(buffer || baground || theBall || theBoard);
+
+	GameStats::Init(0, 3);
+	SetUpScore();
+
 
 	return;
 }

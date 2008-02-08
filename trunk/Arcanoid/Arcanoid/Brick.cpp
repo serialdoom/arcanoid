@@ -122,6 +122,7 @@ bool Brick::QuestionDeath(){
 	assert(this->GetTimesToBreak() >= 0);
 	if(this->GetCanBreak() && this->GetTimesToBreak() == 1){
 		this->SetIsActive(true);
+		GameStats::IncreaseScore(this->GetScore());
 		return true;
 	} else if( this->GetCanBreak() && this->GetTimesToBreak() >1){
 		this->SetTimesToBreak( this->GetTimesToBreak() - 1);

@@ -31,7 +31,7 @@ void AnimationFilm::DisplayFrame(BITMAP* dest, const Point& at, char frameNo) co
 				tmp->GetPointUpLeft().GetY(),
 				at.GetX(), at.GetY(),
 				tmp->GetWidth(), 
-				tmp->GetWidth()
+				tmp->GetHeight()
 				);
 	return;
 }

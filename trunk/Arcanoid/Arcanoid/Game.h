@@ -61,7 +61,6 @@ private:
 
 	void InitiallizingFilmsInfo(void);
 	void InitiallizingBitmapLoader(void);
-	void InitiallizingAnimationFilmHolder(void);
 
 	Board * CreatingBoard(int playerNo);
 	Ball * CreatingBall(void);

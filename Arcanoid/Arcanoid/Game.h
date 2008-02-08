@@ -32,7 +32,9 @@
 #include "AnimationHolder.h"
 #include "CollisionChecker.h"
 #include "AnimationFilmHolder.h"
+#include "GameStats.h"
 
+#define SCORE_MAX_DIGIT 4
 
 class Game {
 private:
@@ -54,6 +56,9 @@ private:
 	CollisionChecker *	collisionC;
 	AnimationFilmHolder*animationFH;
 
+	int scoreDigit[SCORE_MAX_DIGIT];
+	int scoreDigitPos[2];
+
 	void InitiallizingFilmsInfo(void);
 	void InitiallizingBitmapLoader(void);
 	void InitiallizingAnimationFilmHolder(void);
@@ -68,6 +73,8 @@ private:
 	void CheckBoardInput(void);
 	void GameLoop(void);
 	void DisplayALL(void);
+	void DisplayScore(BITMAP *buffy);
+	void SetUpScore(void);
 
 public:
 	

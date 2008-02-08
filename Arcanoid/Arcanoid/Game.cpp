@@ -186,18 +186,7 @@ void Game::DisplayALL(){
 /////////////////////////////////////////////////////////////////////
 
 void Game::DisplayScore(BITMAP *buffy){
-	
 	AnimationFilm *film = const_cast<AnimationFilm *>(animationFH->GetFilm("numbersFilm"));
-	
-	std::cout<<film->GetFrameBox(0)->GetWidth()<<std::endl;
-	std::cout<<film->GetFrameBox(0)->GetHeight()<<std::endl;
-
-	film->DisplayFrame(buffy, new Point(550, 75), 0);
-	//filmsInfo->GetFilmsInfo().find("numbersFilm");
-	/*
-	string filmID = get_config_string("FILMS", "score", 0);
-	AnimationFilm *film = const_cast<AnimationFilm *>(animationFH->GetFilm(filmID));
-	if(filmID.size() == 0) assert(0);
 	assert(film);
 	if(GameStats::ScoreChanged()){
 		int i = GameStats::GetScore();
@@ -213,7 +202,6 @@ void Game::DisplayScore(BITMAP *buffy){
 			x += (film->GetFrameBox(scoreDigit[i]))->GetWidth();
 		}
 	}
-	*/
 	return;
 }
 

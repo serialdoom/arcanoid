@@ -58,6 +58,7 @@ private:
 
 	int scoreDigit[SCORE_MAX_DIGIT];
 	int scoreDigitPos[2];
+	char *digit_string;
 
 	void InitiallizingFilmsInfo(void);
 	void InitiallizingBitmapLoader(void);

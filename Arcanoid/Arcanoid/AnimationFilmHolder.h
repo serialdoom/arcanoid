@@ -19,11 +19,13 @@ class AnimationFilmHolder {
 private:
 	typedef std::map<string, AnimationFilm*> FilmMap;
     FilmMap		filmMap;
+	
 	/* @target: Na diabazei ola ta bboxes pou uparxoun se ena cfg file
 	 *		  :gia ena sugkekrimeno film. Kai telos na kanei thn eisagwnei tou neou
 	 *		  :animationFilm mesa sto FilmMap
 	 */
-	void LoadBBoxes(string id, BITMAP* bitmap);	
+	void LoadBBoxes(string id, BITMAP* bitmap);
+
 public:
 	/* @target: diagafei olla ta periexomena tou AnimationFilmHolder
 	 */
@@ -46,8 +48,7 @@ public:
 	 * @param : LoadFilmsInfo, 
 	 * @param : BitmapLoader
 	 */
-	AnimationFilmHolder(const string &path, 
-						const LoadFilmsInfo &filmsInfo, 
+	AnimationFilmHolder(const LoadFilmsInfo &filmsInfo, 
 						const BitmapLoader &bitmaps);
     ~AnimationFilmHolder();
 

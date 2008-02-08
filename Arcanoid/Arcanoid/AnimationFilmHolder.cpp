@@ -30,8 +30,7 @@ AnimationFilmHolder::~AnimationFilmHolder(void){
 
 
 
-AnimationFilmHolder::AnimationFilmHolder(const string &path, 
-										 const LoadFilmsInfo &filmsInfo, 
+AnimationFilmHolder::AnimationFilmHolder(const LoadFilmsInfo &filmsInfo, 
 										 const BitmapLoader &bitmaps)
 {
 	FilmsInfoMap films				= filmsInfo.GetFilmsInfo();
@@ -39,7 +38,7 @@ AnimationFilmHolder::AnimationFilmHolder(const string &path,
 	FilmsInfoMap::iterator end		= films.end();
 
 	while( start != end ){	//diabazw olh thn pliroforia gia ta bbox twn films
-		set_config_file( (path + (*start).second.first).c_str() );
+		set_config_file( (*start).second.first.c_str() );
 		BITMAP * tmp = const_cast<BitmapLoader &>(bitmaps).Load( (*start).second.second.c_str() );
 		LoadBBoxes((*start).first, tmp);
 		start++;

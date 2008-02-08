@@ -50,8 +50,8 @@ Terrain::~Terrain(void){
 
 void Terrain::LoadingLevelsInfo(void){
 	set_config_file(cfg.c_str());
-	levelsNo	= get_config_int("GENERAL", "levels_files_No", -1);
-	levelPath	= get_config_string("GENERAL", "levels_path", "");
+	levelsNo	= get_config_int("LEVELS", "levels_files_No", -1);
+	levelPath	= get_config_string("LEVELS", "levels_path", "");
 	
 	assert( levelsNo >= 1 );
 	if( !levelPath.compare("") ) { assert(0); }
@@ -82,7 +82,7 @@ void Terrain::LoadingTerrainInfo(void){
 
 int Terrain::LoadingTerrain(int countAnimationID, int levelNo){
 	set_config_file(cfg.c_str());
-	string fileName		= get_config_string("GENERAL", Append("level_file_", levelNo), "");
+	string fileName		= get_config_string("LEVELS", Append("level_file_", levelNo), "");
 	string bricksFilm	= get_config_string("FILMS", "brick", "");
 	
 	if( !fileName.compare("") )		{ assert(!"file name"); }

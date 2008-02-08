@@ -82,19 +82,6 @@ void Game::InitiallizingBitmapLoader(void){
 
 
 
-void Game::InitiallizingAnimationFilmHolder(void) {
-	set_config_file(CONFIG_FILE);
-	string bboxesPath = get_config_string("GENERAL", "animationHolder", "");
-	if( !bboxesPath.compare("") ) { assert(0); }
-
-	animationFH = new AnimationFilmHolder(bboxesPath, (*filmsInfo), (*bitmaps));
-	assert(animationFH);
-	return;
-}
-/////////////////////////////////////////////////////////////////////
-
-
-
 /* precodition: Prepei na exei dimiourgi8ei o animation Film Holder
 			  : o collision Checker o sprite Holder kai telos o animation Holder
  */
@@ -199,6 +186,15 @@ void Game::DisplayALL(){
 /////////////////////////////////////////////////////////////////////
 
 void Game::DisplayScore(BITMAP *buffy){
+	
+	AnimationFilm *film = const_cast<AnimationFilm *>(animationFH->GetFilm("numbersFilm"));
+	
+	std::cout<<film->GetFrameBox(0)->GetWidth()<<std::endl;
+	std::cout<<film->GetFrameBox(0)->GetHeight()<<std::endl;
+
+	film->DisplayFrame(buffy, new Point(550, 75), 0);
+	//filmsInfo->GetFilmsInfo().find("numbersFilm");
+	/*
 	string filmID = get_config_string("FILMS", "score", 0);
 	AnimationFilm *film = const_cast<AnimationFilm *>(animationFH->GetFilm(filmID));
 	if(filmID.size() == 0) assert(0);
@@ -217,6 +213,8 @@ void Game::DisplayScore(BITMAP *buffy){
 			x += (film->GetFrameBox(scoreDigit[i]))->GetWidth();
 		}
 	}
+	*/
+	return;
 }
 
 
@@ -373,7 +371,9 @@ void Game::CreateAll(void){
 
 	InitiallizingFilmsInfo();
 	InitiallizingBitmapLoader();
-	InitiallizingAnimationFilmHolder();
+
+	animationFH = new AnimationFilmHolder((*filmsInfo), (*bitmaps));
+	assert(animationFH);
 
 	terrain = new Terrain(CONFIG_FILE, animationFH, collisionC, animationH, spriteH);
 	assert(terrain);

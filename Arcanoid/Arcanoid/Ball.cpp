@@ -61,6 +61,7 @@ void Ball::CheckCoordinates(void){
 		goingLeft	= false;
 	}
 	else if( (y+GetHeight()) >= (terrainH+startY) ){
+		GameStats::LifeLost();
 		goingUp		= true;						//bottom wall
 	}
 	return;

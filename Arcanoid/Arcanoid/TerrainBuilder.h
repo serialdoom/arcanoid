@@ -19,7 +19,7 @@
 #include "AnimationHolder.h"
 #include "CollisionChecker.h"
 #include "AnimationFilmHolder.h"
-
+#include "GameStats.h"
 
 
 class TerrainBuilder {

@@ -85,6 +85,7 @@ animid_t TerrainBuilder::Load(const char *filename,
 		AnimatorHolder::Register(brick);
 		AnimatorHolder::MarkAsRunning(brick);
 	}
+	GameStats::IncreaseBrick(counter);
 	return countAnimationID;
 }
 

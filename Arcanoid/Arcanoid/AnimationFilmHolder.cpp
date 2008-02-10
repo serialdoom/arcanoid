@@ -62,7 +62,8 @@ void AnimationFilmHolder::LoadBBoxes(string id,BITMAP * bitmap){
 	assert(bitmap);
 	vector<Oblong> boxes;
 	int framesNo = get_config_int("BBOXES", "frames", -1);		//O ari8mos ton film pou uparxoun
-	assert( framesNo != -1 );
+	if(framesNo == -1)
+		assert(0);
 
 	for( int i = 0; i < framesNo; i++ ){
 		int x		= get_config_int("BBOXES", Append("film_x_", i), -1);

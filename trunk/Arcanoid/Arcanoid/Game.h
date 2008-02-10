@@ -58,6 +58,8 @@ private:
 
 	int scoreDigit[SCORE_MAX_DIGIT];
 	int scoreDigitPos[2];
+	int lifeDigitPos[2];
+	int levelDigitPos[2];
 	char *digit_string;
 
 	void InitiallizingFilmsInfo(void);
@@ -74,7 +76,12 @@ private:
 	void GameLoop(void);
 	void DisplayALL(void);
 	void DisplayScore(BITMAP *buffy);
-	void SetUpScore(void);
+	void DisplayLife(BITMAP *buffy);
+	void DisplayLevel(BITMAP *buffy);
+	void SetUpStats(void);
+	void NextLevel(void);
+	void ResetBall(void);
+	void ResetBoard(void);
 
 public:
 	

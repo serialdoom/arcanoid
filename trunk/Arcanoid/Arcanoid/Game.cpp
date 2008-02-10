@@ -117,6 +117,14 @@ Board * Game::CreatingBoard(int playerNo){
 }
 /////////////////////////////////////////////////////////////////////
 
+void Game::ResetBoard(void){
+	spriteH->GetSprite(BOARD)->SetPosition(
+		get_config_int("BOARD", "start_x", -1), get_config_int("BOARD", "start_y", -1));
+	return;
+}
+
+/////////////////////////////////////////////////////////////////////
+
 
 /* precodition: Prepei na exei dimiourgi8ei o animation Film Holder
 			  : o collision Checker o sprite Holder kai telos o animation Holder
@@ -154,11 +162,27 @@ Ball * Game::CreatingBall(void){
 }
 /////////////////////////////////////////////////////////////////////
 
-void Game::SetUpScore(){
+void Game::ResetBall(){
+	spriteH->GetSprite(BALL)->SetPosition(
+		get_config_int("BALL", "start_x", -1), get_config_int("BALL", "start_y", -1));
+	AnimatorHolder::MarkAsSuspended(ball);
+	ball->Stop();
+	return;
+}
+
+/////////////////////////////////////////////////////////////////////
+
+void Game::SetUpStats(){
 	scoreDigitPos[0] = get_config_int("SCORE", "start_x", -1);
 	scoreDigitPos[1] = get_config_int("SCORE", "start_y", -1);
+	lifeDigitPos[0] =  get_config_int("LIFE", "start_x", -1);
+	lifeDigitPos[1] = get_config_int("LIFE", "start_y", -1);
+	levelDigitPos[0] = get_config_int("LEVEL", "start_x", -1);
+	levelDigitPos[1] = get_config_int("LEVEL", "start_y", -1);
 
-	if(scoreDigitPos[0] == -1 || scoreDigitPos[1] == -1) assert(0);
+	if(scoreDigitPos[0] == -1 || scoreDigitPos[1] == -1 ||
+		lifeDigitPos[0] == -1 || lifeDigitPos[1] == -1	||
+		levelDigitPos[0] == -1 || levelDigitPos[0] == -1 ) assert(0);
 }
 
 
@@ -178,6 +202,8 @@ void Game::DisplayALL(){
 	if( ball->IsVisible() )
 		ball->Display(buffer);
 	DisplayScore(buffer);
+	DisplayLife(buffer);
+	DisplayLevel(buffer);
 
 	terrain->DisplayTerrain(buffer, spriteH);
 	blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
@@ -185,6 +211,22 @@ void Game::DisplayALL(){
 }
 /////////////////////////////////////////////////////////////////////
 
+void Game::DisplayLevel(BITMAP *buffy){
+	AnimationFilm *film = const_cast<AnimationFilm *>(animationFH->GetFilm("numbersFilm"));
+	assert(film);
+	film->DisplayFrame(buffy, new Point(levelDigitPos[0], levelDigitPos[1]), currLevel);
+	return;
+}
+
+/////////////////////////////////////////////////////////////////////
+void Game::DisplayLife(BITMAP *buffy){
+	AnimationFilm *film = const_cast<AnimationFilm *>(animationFH->GetFilm("numbersFilm"));
+	assert(film);
+	film->DisplayFrame(buffy, new Point(lifeDigitPos[0], lifeDigitPos[1]), GameStats::GetLife());
+	return;
+}
+
+/////////////////////////////////////////////////////////////////////
 void Game::DisplayScore(BITMAP *buffy){
 	AnimationFilm *film = const_cast<AnimationFilm *>(animationFH->GetFilm("numbersFilm"));
 	assert(film);
@@ -219,17 +261,21 @@ void Game::DeleteAll(){
 }
 /////////////////////////////////////////////////////////////////////
 
+void Game::NextLevel(void){
+	if(currLevel >= terrain->GetLevelsNo()-1)	//eimatse sto teleuteo level
+		currLevel = -1;							//Pame pali apo thn arxh
+	DeleteAll();
+	currLevel++;
+	AnimatorHolder::Clear();
+	countAnimationID = 0;
+	CreateAll();
+	return;
+}
 
 
 void Game::CheckF1(void){
 	if( InputManager::inputKey.Key_F1 ){
-		if(currLevel >= terrain->GetLevelsNo()-1)	//eimatse sto teleuteo level
-			currLevel = -1;							//Pame pali apo thn arxh
-		DeleteAll();
-		currLevel++;
-		AnimatorHolder::Clear();
-		countAnimationID = 0;
-		CreateAll();
+		NextLevel();
 	}
 	return;
 }
@@ -329,6 +375,12 @@ void Game::GameLoop(void){
 	int fps = 0;
 
 	while( !key[KEY_ESC] && (currLevel < terrain->GetLevelsNo()) ) {
+		if(GameStats::GetBricksToGo() <= 0) NextLevel();
+		if(GameStats::IsLifeLost()) {
+			GameStats::ResetLifeLost();
+			ResetBall();
+			ResetBoard();
+		}
 		MyTime::SetGameTime();
 
 		InputManager::CheckInput();
@@ -375,7 +427,7 @@ void Game::CreateAll(void){
 	assert(buffer || baground || theBall || theBoard);
 
 	GameStats::Init(0, 3);
-	SetUpScore();
+	SetUpStats();
 
 
 	return;

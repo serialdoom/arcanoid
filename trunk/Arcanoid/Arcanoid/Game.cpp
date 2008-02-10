@@ -1,12 +1,3 @@
-/*********************
-
-TEEEEEEEEEEEEEEEST IRENE 
-
-
-*/
-
-
-
 /*
  * author: koutsop
  */

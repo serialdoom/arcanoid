@@ -206,7 +206,12 @@ void Game::DisplayALL(){
 	DisplayLevel(buffer);
 
 	terrain->DisplayTerrain(buffer, spriteH);
-	blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+/*	if(StateHolder::IsPaused()){
+		AnimationFilm *film = const_cast<AnimationFilm *>(animationFH->GetFilm("pauseFilm"));
+		assert(film);
+		film->DisplayFrame(buffer, new Point(SCREEN_W - (film->GetFrameBox(0))->GetWidth()/2, SCREEN_H - (film->GetFrameBox(0))->GetHeight()/2), 0);
+	}
+*/	blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 	return;
 }
 /////////////////////////////////////////////////////////////////////
@@ -376,12 +381,12 @@ void Game::GameLoop(void){
 
 	while( !key[KEY_ESC] && (currLevel < terrain->GetLevelsNo()) ) {
 		if(GameStats::GetBricksToGo() <= 0) NextLevel();
-		if(GameStats::IsLifeLost()) {
+/*		if(GameStats::IsLifeLost()) {
 			GameStats::ResetLifeLost();
 			ResetBall();
 			ResetBoard();
 		}
-		MyTime::SetGameTime();
+*/		MyTime::SetGameTime();
 
 		InputManager::CheckInput();
 
@@ -398,7 +403,7 @@ void Game::GameLoop(void){
 		SystemLoopDispatching();
 		spriteH->PrintSizeOfSpriteHolder();//Na diagrafei kata thn paradwsh
 		//AnimatorHolder::printSize();//Na diagrafei kata thn paradwsh
-		//for(int i=0; i < 1000000;++i);
+		//for(int i=0; i < 5000000;++i);
 	}
 	return;
 }

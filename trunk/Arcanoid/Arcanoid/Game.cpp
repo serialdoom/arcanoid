@@ -1,3 +1,12 @@
+/*********************
+
+TEEEEEEEEEEEEEEEST IRENE 
+
+
+*/
+
+
+
 /*
  * author: koutsop
  */
@@ -15,6 +24,7 @@
 #define BAGROUND_IMAGE	"./images/editorsScreen.bmp"
 
 #define BALL			"ball"
+#define PAUSE			"pause"
 #define WALL_12			"upper_wall"
 #define WALL_3			"right_wall"
 #define WALL_6			"down_wall"
@@ -206,12 +216,7 @@ void Game::DisplayALL(){
 	DisplayLevel(buffer);
 
 	terrain->DisplayTerrain(buffer, spriteH);
-/*	if(StateHolder::IsPaused()){
-		AnimationFilm *film = const_cast<AnimationFilm *>(animationFH->GetFilm("pauseFilm"));
-		assert(film);
-		film->DisplayFrame(buffer, new Point(SCREEN_W - (film->GetFrameBox(0))->GetWidth()/2, SCREEN_H - (film->GetFrameBox(0))->GetHeight()/2), 0);
-	}
-*/	blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+	blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 	return;
 }
 /////////////////////////////////////////////////////////////////////

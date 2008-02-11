@@ -1,6 +1,6 @@
 #include "PowerUpSpr.h"
 
 
-PowerUpSpr::PowerUpSpr(): Sprite(point, film){
+PowerUpSpr::PowerUpSpr(Point point, AnimationFilm* film): Sprite(point, film){
 	return;
 }

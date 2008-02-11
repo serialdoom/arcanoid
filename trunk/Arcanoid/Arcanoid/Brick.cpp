@@ -2,7 +2,7 @@
  *author: koutsop
  */
 #include "Brick.h"
-#include <string>
+
 
 #define BRICK_SPEED 2
 
@@ -136,10 +136,4 @@ bool Brick::QuestionDeath(){
 }
 
 
-//Elegxei gia kathe brick an periexei dwraki h' oxi
-void Brick::ApplyBonus(){
-	
-	if(this->gift.compare("none"))
-		;
-	else{
 

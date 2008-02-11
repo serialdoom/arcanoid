@@ -12,5 +12,23 @@
 
 class PowerUp {
 private:
+	string NamePorewUp[];
+
+public:
+
+	PowerUp(void);
+
+	~PowerUp(void);
+
+	ApplyBonus(string gift);
 	
+
+
+};
+
+
+
+
+
+
 

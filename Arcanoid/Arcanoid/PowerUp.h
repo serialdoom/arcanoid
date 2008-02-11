@@ -10,9 +10,11 @@
 #include "GameStats.h"
 
 
+#define MAX_POWER 17
+
 class PowerUp {
 private:
-	string NamePorewUp[];
+	string NamePorewUp[MAX_POWER];
 
 public:
 

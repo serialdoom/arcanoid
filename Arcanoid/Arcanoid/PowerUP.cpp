@@ -2,7 +2,7 @@
 #include <string>
 #include "PowerUp.h"
 
-#define MAX_POWER 17
+
 
 
 

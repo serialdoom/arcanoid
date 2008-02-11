@@ -97,16 +97,16 @@ void Ball::Collide(Sprite *s){
 		//Rotate the ball
 		if //Ball is down, brick is up
 			( (ballX1 >= brickX1-this->GetWidth() || ballX1 <=brickX2) && ballY1 >= brickY2 ){
-			if(GoingUp()) ReverseVertical();
-		}else //Ball is right, brick is left
-			if ( (ballY1 >= brickY1 - this->GetHeight() || ballY1 <= brickY2) && ballX1 >= brickX2 ){
-			if(GoingLeft()) ReverseHorizon();
+				if(GoingUp()) { std::cout << "reversing vertical(1)" << std::endl; ReverseVertical();}
 		}else //Ball is up, brick is down
 			if((ballX1 >= brickX1-this->GetWidth() || ballX1 <=brickX2) && ballY2 <= brickY1 ){
-			if(!GoingUp())ReverseVertical();
+				if(!GoingUp()){ std::cout << "reversing vertical(2)" << std::endl; ReverseVertical();}
+		}else //Ball is right, brick is left
+			if ( (ballY1 >= brickY1 - this->GetHeight() || ballY1 <= brickY2) && ballX1 >= brickX2 ){
+				if(GoingLeft()) {std::cout << "reversing horizon(1)" << std::endl; ReverseHorizon();}
 		} else //Ball is left, brick is right
 			if( (ballY1 >= brickY1 - this->GetHeight() || ballY1 <= brickY2) && ballX2 <= brickX1 ){
-			if(!GoingLeft())ReverseHorizon();
+				if(!GoingLeft()){ std::cout << "reversing horizon(2)" << std::endl; ReverseHorizon();}
 		} else //lol, assert
 			{}//assert(0);
 

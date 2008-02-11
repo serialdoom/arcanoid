@@ -14,15 +14,16 @@
 
 class PowerUp {
 private:
-	string NamePorewUp[MAX_POWER];
+	string NamePowerUp[MAX_POWER];
+	const char *AppendIntegerToString( string str, int i);
 
 public:
 
-	PowerUp(void);
+	PowerUp(AnimationFilmHolder *ah, SpriteHolder *sp, const char *configFileName);
 
 	~PowerUp(void);
 
-	ApplyBonus(string gift);
+	void ApplyBonus(string gift);
 	
 
 

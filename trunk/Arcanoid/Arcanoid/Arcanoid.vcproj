@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="windows-1253"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8,00"
+	Version="8.00"
 	Name="Arcanoid"
 	ProjectGUID="{5E00742D-DC71-499B-BBD0-55B2D8DD1A85}"
 	RootNamespace="Arcanoid"
@@ -278,6 +278,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\PowerUP.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Sprite.cpp"
 				>
 			</File>
@@ -397,6 +401,10 @@
 			</File>
 			<File
 				RelativePath=".\Point.h"
+				>
+			</File>
+			<File
+				RelativePath=".\PowerUp.h"
 				>
 			</File>
 			<File

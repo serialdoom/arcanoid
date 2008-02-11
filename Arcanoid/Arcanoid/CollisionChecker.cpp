@@ -9,7 +9,6 @@ CollisionChecker::~CollisionChecker(void){
 }
 
 
-
 void CollisionChecker::AddMovable(Sprite *toadd){
 	//Debugging, use only with CollisionCHeckerTest.cpp std::cout << "Adding " << toadd->x << " to movables.\n";
 	movable.push_back(toadd);

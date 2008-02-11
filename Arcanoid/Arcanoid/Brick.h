@@ -25,6 +25,7 @@ private:
 	char timesToBreak;
 	bool canBreak, isActive;
 	string id;
+	string gift; // mas enhmerwnei an exei paowerup to Brick
 	//To isActive 8a to xriastoume gia na 3eroume an ena brick tou pinaka exei
 	//sxediastei apo ton xristi h' oxi.
 bool up;

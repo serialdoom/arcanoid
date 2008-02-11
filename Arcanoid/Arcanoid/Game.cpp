@@ -207,6 +207,7 @@ void Game::DisplayALL(){
 	DisplayLevel(buffer);
 
 	terrain->DisplayTerrain(buffer, spriteH);
+	spriteH->GetSprite("money")->Display(buffer);
 	blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 	return;
 }
@@ -425,7 +426,8 @@ void Game::CreateAll(void){
 	theBall	 = CreatingBall();
 	theBoard = CreatingBoard(PAYER_ONE);
 	countAnimationID = terrain->LoadingTerrain(countAnimationID, currLevel);
-	assert(buffer || baground || theBall || theBoard);
+	powerup = new PowerUp(animationH, animationFH, spriteH, countAnimationID, CONFIG_FILE);
+	assert(buffer || baground || theBall || theBoard || powerup);
 
 	GameStats::Init(0, 3);
 	SetUpStats();

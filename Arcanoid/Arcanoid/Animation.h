@@ -15,7 +15,7 @@ private:
 	animid_t id;
 
 public:
-	
+
 	/* @return: To id tou Animation*/
 	animid_t GetId (void) { return id; }
 	

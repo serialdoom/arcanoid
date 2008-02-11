@@ -14,11 +14,11 @@ void PowerUp::ApplyBonus(string gift){
 		;
 	else{
 		for(int i=0; i<MAX_POWER; i++){
-			if(gift.compare(NamePorewUp[i])){
+			if(this->NamePorewUp[i]).compare(gift){
 
 				;
 			}
 		}
 	}
 
-		
+}	

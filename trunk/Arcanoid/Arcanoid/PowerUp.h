@@ -8,18 +8,19 @@
 #include "CollisionChecker.h"
 #include "AnimationFilmHolder.h"
 #include "GameStats.h"
-
+#include "PowerUpSpr.h"
 
 #define MAX_POWER 17
 
 class PowerUp {
 private:
+	AnimatorMap	powerupAnimator;
 	string NamePowerUp[MAX_POWER];
 	const char *AppendIntegerToString( string str, int i);
 
 public:
 
-	PowerUp(AnimationFilmHolder *ah, SpriteHolder *sp, const char *configFileName);
+	PowerUp(AnimationHolder *ah, AnimationFilmHolder *afh, SpriteHolder *sp, int countAnimationID, const char *configFileName);
 
 	~PowerUp(void);
 

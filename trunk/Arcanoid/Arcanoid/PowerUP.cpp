@@ -12,35 +12,35 @@ const char * PowerUp::AppendIntegerToString( string str, int i){
 }
 
 
-PowerUp::PowerUp(AnimationFilmHolder *ah, SpriteHolder *sp, const char *configFileName){
+PowerUp::PowerUp(AnimationHolder *ah, AnimationFilmHolder *afh, SpriteHolder *sp, int countAnimationID, const char *configFileName){
+	const char *name = get_config_string("POWERUP", "location", 0);
 	push_config_state();
-	set_config_file(configFileName);
+	set_config_file(name);
 	int max = get_config_int("POWERUP", "totalNumber", -1);
 	assert( max != -1);
 
 	for(int i = 0;i< max;++i){
-/*		const char *name = AppendIntegerToString("position_", i);
+		const char *name = AppendIntegerToString("position_", i);
 		int pos = get_config_int("POWERUP", name, -1);
 		assert(pos != -1);
 		name = AppendIntegerToString("name_", i);
 		NamePowerUp[pos] = get_config_string("POWERUP", name, 0);
-		assert(!NamePowerUp[pos].length());
-		Sprite *newSprite = new Sprite(0, ah->GetFilm("powerupsFilm"));
-		newSprite->SetVisibility(false);
+		assert(NamePowerUp[pos].length());
+		PowerUpSpr *newSprite = new PowerUpSpr(new Point(0, 0), const_cast<AnimationFilm*>(afh->GetFilm("powerupsFilm")));
 		newSprite->SetFrame(pos);
-		sp->Insert(NamePowerUp[pos]);
-*/
-/*		MovingAnimation * mov = new MovingAnimation(x, y, 1, true, countAnimationID);
+		sp->Insert(NamePowerUp[pos], newSprite);
+
+		MovingAnimation * mov = new MovingAnimation(0, 0, 1, true, countAnimationID);
 		countAnimationID++;
-		ah->Insert(test, mov );
+		ah->Insert(NamePowerUp[pos], mov );
 
 		//add to animator Holder
 		MovingAnimator * brick = new MovingAnimator();
 		brick->Start(sp->GetSprite(NamePowerUp[pos]), mov, 2000);
-		bricksAnimator.insert( make_pair(NamePowerUp[pos], brick) );
+		powerupAnimator.insert( make_pair(NamePowerUp[pos], brick) );
 		AnimatorHolder::Register(brick);
 		AnimatorHolder::MarkAsSuspended(brick);
-*/	}
+	}
 
 
 	pop_config_state();

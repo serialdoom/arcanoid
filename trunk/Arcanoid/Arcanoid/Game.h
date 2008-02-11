@@ -33,6 +33,7 @@
 #include "CollisionChecker.h"
 #include "AnimationFilmHolder.h"
 #include "GameStats.h"
+#include "PowerUp.h"
 
 #define SCORE_MAX_DIGIT 4
 
@@ -55,6 +56,7 @@ private:
 	AnimationHolder *	animationH;
 	CollisionChecker *	collisionC;
 	AnimationFilmHolder*animationFH;
+	PowerUp	*			powerup;
 
 	int scoreDigit[SCORE_MAX_DIGIT];
 	int scoreDigitPos[2];

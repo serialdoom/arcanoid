@@ -10,6 +10,7 @@ private:
 	int i;
 public:
 	PowerUpSpr(Point point, AnimationFilm* film);
+	virtual void Collide(Sprite *s);
 	~PowerUpSpr();
 };
 

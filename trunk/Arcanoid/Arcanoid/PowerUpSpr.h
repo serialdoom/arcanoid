@@ -11,6 +11,8 @@ private:
 public:
 	PowerUpSpr(Point point, AnimationFilm* film);
 	virtual void Collide(Sprite *s);
+
+	void Move(const int x, const int y);
 	~PowerUpSpr();
 };
 

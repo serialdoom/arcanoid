@@ -1,5 +1,6 @@
 /* TerrainBuilder.cpp */
 
+#include "PowerUp.h"
 #include "TerrainBuilder.h"
 
 #define BUFF_SZ 9999
@@ -69,6 +70,8 @@ animid_t TerrainBuilder::Load(const char *filename,
 				
 		delete(brick_id_str);
 		
+		newBrick->SetGift(SPEED_DOWN);
+
 		//add to collision Checker and to spriteholder
 		cc->AddUnmovable(dynamic_cast<Sprite *>(newBrick));
 		sp->Insert(test, dynamic_cast<Sprite *>(newBrick));

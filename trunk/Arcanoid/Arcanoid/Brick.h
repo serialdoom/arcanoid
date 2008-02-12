@@ -11,11 +11,13 @@
 
 #include <iostream>
 
-#include "Oblong.h"
+#include "PowerUp.h"
 #include "Point.h"
+#include "Oblong.h"
 #include "Sprite.h"
-#include "AnimationFilm.h"
 #include "GameStats.h"
+#include "AnimationFilm.h"
+
 
 using namespace std;
 
@@ -25,11 +27,10 @@ private:
 	char timesToBreak;
 	bool canBreak, isActive;
 	string id;
-	string gift; // mas enhmerwnei an exei paowerup to Brick
-	//To isActive 8a to xriastoume gia na 3eroume an ena brick tou pinaka exei
-	//sxediastei apo ton xristi h' oxi.
-bool up;
-
+	bool up;		//mas leei an to brick paei panw h' katw
+	//powerups_t gift;
+	powerups_t gift; // mas enhmerwnei an exei paowerup to Brick
+	
 public:
 	//constructor
 	Brick(	int x, int y,
@@ -84,6 +85,9 @@ public:
 	 * @param : To brick pou exei thn pliroforia pou 8eloume.
 	 */
 	void Copy(Brick* brick);
+
+	void SetGift(powerups_t _gift) { gift = _gift; }
+	powerups_t GetGift(void) const { return gift; }
 
 	void Move(const int dx, const int dy);
 

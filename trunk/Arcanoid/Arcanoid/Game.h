@@ -85,6 +85,8 @@ private:
 	void ResetBall(void);
 	void ResetBoard(void);
 
+	void ExecuteBonus();
+
 public:
 	
 	void PlayGame(void);

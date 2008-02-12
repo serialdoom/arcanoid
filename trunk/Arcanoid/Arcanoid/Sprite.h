@@ -13,11 +13,6 @@
 #include "AnimationFilm.h"
 
 
-typedef enum spritetype_t{ 
-	SPRITE_BALL			= 0,
-	SPRITE_BOARD		= 1,
-	SPRITE_BRICK		= 2,
-}spritetype_t;
 
 
 class Sprite : public Oblong {
@@ -27,8 +22,6 @@ private:
 	Point			position;
 	AnimationFilm*	currFilm;
 
-protected:
-	spritetype_t	spriteType;
 
 public:	
 
@@ -59,11 +52,6 @@ public:
 
 	virtual void Collide(Sprite *s) = 0;
 
-
-	/* @return: Epistrefei ton typo tou ka8e sprite
-	 */
-	void		 SetType(spritetype_t type) { spriteType = type; }
-	spritetype_t GetType(void)  const { return spriteType; }
 
 	/* @target: Einai h Move gia to ekatos8e sprite
 	 */

@@ -14,5 +14,4 @@ void PowerUpSpr::Collide(Sprite *s){
 }
 
 PowerUpSpr::~PowerUpSpr(){
-	return;
 }

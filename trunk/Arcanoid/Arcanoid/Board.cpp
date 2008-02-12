@@ -17,7 +17,6 @@ Board::Board(int start_x,
 								Sprite(start_x, start_y, af)
 {	
 	assert( playerNo == 1 || playerNo == 2);
-	spriteType = SPRITE_BOARD;
 	SetVisibility(true);
 	
 	if( playerNo == 1){

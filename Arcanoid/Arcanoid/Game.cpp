@@ -207,7 +207,7 @@ void Game::DisplayALL(){
 	DisplayLevel(buffer);
 
 	terrain->DisplayTerrain(buffer, spriteH);
-	spriteH->GetSprite("buckler")->Display(buffer);
+	powerup->DesplayAll(buffer, spriteH);
 	blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 	return;
 }
@@ -393,7 +393,7 @@ void Game::GameLoop(void){
 		spriteH->PrintSizeOfSpriteHolder();//Na diagrafei kata thn paradwsh
 		collisionC->CleanUp();
 		terrain->BricksCleanUp(spriteH, powerup);
-		ExecuteBonus();
+		powerup->ApplyBonus(spriteH, animationH);		
 		
 		DisplayALL();
 		FPSCalculation(fps);
@@ -457,13 +457,13 @@ void Game::PlayGame(void){
 //Geia test skopou htan auth na doume an kalounte oi dunamoi
 //Ekei pou kaloume emeis tis dunamhs 8a prepei na kanoume oti leei to xartaki :)
 void Game::ExecuteBonus(){
-	powerUpVector *allThePowers		= powerup->GetPowersToExecute();
+	/*powerUpVector *allThePowers		= powerup->GetPowersToExecute();
 	powerUpVector::iterator start	= allThePowers->begin();
 	powerUpVector::iterator end		= allThePowers->end();
 
 	while( start != end ){	
 		switch( start->first){
-			case MAX:			powerup->ApplyBonus( MAX, spriteH);//powerup->Max(theBoard); break;
+			case MAX:			powerup->ApplyBonus( MAX, spriteH); break;//powerup->Max(theBoard); break;
 			case MIN:			powerup->Max(theBoard); break;
 			case STIC:			std::cout<<"STIC"<<std::endl; break;
 			case LIFE_UP:		//powerup->LifeUp(); break;
@@ -484,6 +484,6 @@ void Game::ExecuteBonus(){
 		}//end of chitc
 		start++;
 	}
-	powerup->ClearPowersToExecute();
+	powerup->ClearPowersToExecute();*/
 	return;
 }

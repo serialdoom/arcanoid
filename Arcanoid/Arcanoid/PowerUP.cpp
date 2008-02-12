@@ -54,21 +54,50 @@ PowerUp::PowerUp(AnimationHolder *ah,
 		brick->Start(sp->GetSprite(NamePowerUp[i]), mov, 2000);
 		powerupAnimator.insert( make_pair(NamePowerUp[i], brick) );
 		
-		brick->Stop();
+		//brick->Stop();
 		AnimatorHolder::Register(brick);
+		
+		//Edw einai na diagraftoun auta
+		AnimatorHolder::MarkAsRunning(brick);
 	}//end of for
 }
 
 
 
 //Elegxei gia kathe brick an periexei dwraki h' oxi
-void PowerUp::ApplyBonus(powerups_t gift, SpriteHolder *sp){
-	string name = NamePowerUp[gift];
+void PowerUp::ApplyBonus(SpriteHolder *sp, AnimationHolder *ah){
+	std::vector< std::pair<powerups_t, Point> >::iterator start	= powersToExecute.begin();
+	std::vector< std::pair<powerups_t, Point> >::iterator end	= powersToExecute.end();
 
-	Sprite* sprite = sp->GetSprite(name);
-	sprite->SetVisibility(true);
+	while( start != end ){
+		Sprite* sprite = sp->GetSprite(NamePowerUp[start->first]);	//pernoume to spite
+		sprite->SetVisibility(true);								//makeAsVisibi
+		sprite->SetPosition(start->second);							//set potition
+		
+		//MovingAnimation * manimation	= dynamic_cast<MovingAnimation *>(ah->GetAnimation(NamePowerUp[start->first]));
+		//MovingAnimator * manimator		= dynamic_cast<MovingAnimator *>(powerupAnimator.find(NamePowerUp[start->first])->second);
+		
+		//assert(manimation || manimator);
 
+		//manimator->Start(sprite, manimation, 0);					//kanoume start ton animator
+		//AnimatorHolder::MarkAsRunning(manimator);
+		start++;
+	}
+	powersToExecute.clear();
+	return;
 }	
+
+
+void PowerUp::DesplayAll(BITMAP * bitmap, SpriteHolder *sp){
+	for( int i = MAX; i < NONE; i++) { 
+		Sprite * sprite = sp->GetSprite(NamePowerUp[i]);
+		if( sprite->IsVisible() )
+			sprite->Display(bitmap);
+	}
+	return;
+}
+
+
 
 
 //Edw prepei na kanoume elegxo poso polu grigora mporei na paei h mpala

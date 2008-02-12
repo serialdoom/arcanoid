@@ -39,12 +39,12 @@ typedef enum powerups_t {
 	NONE		= 16
 }powerups_t;
 
-typedef std::vector< std::pair<powerups_t, Point> > powerUpVector;
+
 
 class PowerUp {
 
 private:
-	powerUpVector	powersToExecute;
+	std::vector< std::pair<powerups_t, Point> > powersToExecute;
 	AnimatorMap		powerupAnimator;
 	string			NamePowerUp[MAX_POWER];
 	const char *AppendIntegerToString( string str, int i);
@@ -59,7 +59,7 @@ public:
 
 	~PowerUp(void);
 
-	void ApplyBonus(powerups_t gift, SpriteHolder *sp);
+	void ApplyBonus(SpriteHolder *sp, AnimationHolder *ah);
 	
 	
 	void SpeedUp(Ball *ball);
@@ -68,11 +68,13 @@ public:
 	void LifeUp(int &lifes);
 	void Max(Board* board);
 	void Min(Board* board);
+	
+	void DesplayAll(BITMAP * bitmap,SpriteHolder *sp);
 
 
 	void AddPowerToExecute( std::pair<powerups_t, Point> item) { powersToExecute.push_back(item); };
-	void ClearPowersToExecute(void) { powersToExecute.clear(); }
-	powerUpVector *GetPowersToExecute(void) { return &powersToExecute; }
+	//void ClearPowersToExecute(void) { powersToExecute.clear(); }
+	//powerUpVector *GetPowersToExecute(void) { return &powersToExecute; }
 
 };
 

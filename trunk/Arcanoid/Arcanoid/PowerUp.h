@@ -59,7 +59,7 @@ public:
 
 	~PowerUp(void);
 
-	void ApplyBonus(powerups_t gift);
+	void ApplyBonus(powerups_t gift, SpriteHolder *sp);
 	
 	
 	void SpeedUp(Ball *ball);

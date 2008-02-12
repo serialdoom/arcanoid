@@ -62,7 +62,11 @@ PowerUp::PowerUp(AnimationHolder *ah,
 
 
 //Elegxei gia kathe brick an periexei dwraki h' oxi
-void PowerUp::ApplyBonus(powerups_t gift){
+void PowerUp::ApplyBonus(powerups_t gift, SpriteHolder *sp){
+	string name = NamePowerUp[gift];
+
+	Sprite* sprite = sp->GetSprite(name);
+	sprite->SetVisibility(true);
 
 }	
 

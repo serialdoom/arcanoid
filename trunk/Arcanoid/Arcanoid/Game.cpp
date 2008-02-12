@@ -463,7 +463,7 @@ void Game::ExecuteBonus(){
 
 	while( start != end ){	
 		switch( start->first){
-			case MAX:			powerup->Max(theBoard); break;
+			case MAX:			powerup->ApplyBonus( MAX, spriteH);//powerup->Max(theBoard); break;
 			case MIN:			powerup->Max(theBoard); break;
 			case STIC:			std::cout<<"STIC"<<std::endl; break;
 			case LIFE_UP:		//powerup->LifeUp(); break;

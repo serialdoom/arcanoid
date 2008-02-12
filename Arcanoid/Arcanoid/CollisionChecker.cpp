@@ -59,7 +59,8 @@ void CollisionChecker::CleanUp(){
 
 bool CollisionChecker::CheckSprites(Sprite *first, Sprite *sec){
 	//TODO: write some code biatch
-	if(first->GetType() == SPRITE_BOARD) return true; //cheat :p
+
+	if( dynamic_cast<Brick *>(first)) return true; //cheat :p
 	first->CollisionCheck(sec);
 	sec->CollisionCheck(first);
 	return true;

@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <cassert>
+#include "Brick.h"
 #include "SpriteHolder.h"
 
 using std::cout;
@@ -118,7 +119,7 @@ void SpriteHolder::PrintSpriteHolder(){
 	SpriteMap::iterator end = sprites.end();
 	int cnt = 0;
 	while( start != end){
-		if( start->second->GetType() == SPRITE_BRICK )
+		if( dynamic_cast<Brick *>(start->second))
 			cout<<start->first<<"    "<<start->second->GetPosition().ToString()<<endl;
 		start++;
 	}

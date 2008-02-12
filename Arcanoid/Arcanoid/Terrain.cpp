@@ -116,20 +116,24 @@ void Terrain::DisplayTerrain(BITMAP *bitmap, SpriteHolder* sh){
 
 
 
-void Terrain::BricksCleanUp(SpriteHolder* sh){
+void Terrain::BricksCleanUp(SpriteHolder* sh , PowerUp	* powerup){
 	std::list<Sprite *> * theList		= sh->GetDelededList();
 	std::list<Sprite *>::iterator start = theList->begin();
 	std::list<Sprite *>::iterator end	= theList->end();
 
 	while( start != end ){
-		if( dynamic_cast<Brick *>(*start) ){
+		Sprite * tmp = (*start);
+		if( dynamic_cast<Brick *>(tmp) ){
 			//edw elegxw an to brick einai running wtse na to kanw stop
-			Animator * anim = bricksAnimator.find( dynamic_cast<Brick *>(*start)->GetID() )->second;
+			Animator * anim = bricksAnimator.find( dynamic_cast<Brick *>(tmp)->GetID() )->second;
 			if( !anim->HasFinished() ){//einai running animator
 				anim->Stop();
 				AnimatorHolder::MarkAsSuspended(anim);
 			}
-			Sprite * tmp = (*start);
+			powerups_t gift = dynamic_cast<Brick *>(tmp)->GetGift();
+			int x = tmp->GetPosition().GetX();
+			int y = tmp->GetPosition().GetY();
+			powerup->AddPowerToExecute( std::pair<powerups_t, Point>(gift, new Point(x, y)));
 			start++;
 			theList->remove(tmp);
 			continue;

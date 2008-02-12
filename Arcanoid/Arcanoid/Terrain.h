@@ -9,6 +9,7 @@
 #include <string>
 
 #include "Point.h"
+#include "PowerUp.h"
 #include "Animator.h"
 #include "Animation.h"
 #include "SpriteHolder.h"
@@ -41,7 +42,7 @@ public:
 	void DisplayTerrain(BITMAP *bitmap, SpriteHolder* sh);
 
 	int GetLevelsNo(void) const { return levelsNo; }
-	void BricksCleanUp(SpriteHolder* sh);
+	void BricksCleanUp(SpriteHolder* sh , PowerUp	* powerup);
 
 	Terrain(string _cfg, 
 			AnimationFilmHolder * afh, 

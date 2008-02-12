@@ -1,6 +1,7 @@
 /* Implementation of the Ball */
 
 #include "Ball.h"
+#include "Board.h"
 #include "Brick.h"
 
 #include <iostream>
@@ -20,7 +21,6 @@ Ball::Ball(int start_x, int start_y,
 {
 	old.SetX(start_x);
 	old.SetY(start_y);
-	spriteType = SPRITE_BALL;
 	speedX = BALL_SPEED;
 	speedY = BALL_SPEED;
 	goingLeft	= false;
@@ -79,16 +79,14 @@ void Ball::Move(const int dx, const int dy){
 }
 
 //TODO na kanw kai alla edw aplos blepw an einai tixos h' bricks kkai to paw sthn arxikh tou 8esh
-void Ball::Collide(Sprite *s){
-	spritetype_t type = s->GetType();
-	
-	if( type == SPRITE_BOARD ){			//ok
+void Ball::Collide(Sprite *s){	
+	if( dynamic_cast<Board *>(s) ){			//ok
 		if		( StateHolder::IsGoLeft() )	{ goingLeft = true;  }
 		else if ( StateHolder::IsGoRight())	{ goingLeft = false; }
 		else								{ goingLeft = goingLeft; }		
 		goingUp = true;
 	}
-	else if( type == SPRITE_BRICK ) {
+	else if( dynamic_cast<Brick *>(s) ) {
 		int ballX1 = this->GetPosition().GetX(), ballY1 = this->GetPosition().GetY();
 		int ballX2 = ballX1 + this->GetWidth(), ballY2 = ballY1 + this->GetHeight();
 		int brickX1 = s->GetPosition().GetX(), brickY1 = s->GetPosition().GetY();

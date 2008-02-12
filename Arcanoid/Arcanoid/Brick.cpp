@@ -25,7 +25,6 @@ Brick::Brick(	int x, int y,
 	SetWidth(w);
 	SetHeight(h);
 	SetFrame(frameNo);
-	spriteType = SPRITE_BRICK;
 	up = false;
 }
 
@@ -50,7 +49,6 @@ Brick::Brick(	const Point  point,
 	SetWidth(w);
 	SetHeight(h);
 	SetFrame(frameNo);
-	spriteType = SPRITE_BRICK;
 	up = false;
 }
 
@@ -73,7 +71,6 @@ Brick::Brick(	const Point * const point,
 	SetWidth(w);
 	SetHeight(h);
 	SetFrame(frameNo);
-	spriteType = SPRITE_BRICK;
 	up = false;
 }
 

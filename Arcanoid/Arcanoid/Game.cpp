@@ -207,7 +207,7 @@ void Game::DisplayALL(){
 	DisplayLevel(buffer);
 
 	terrain->DisplayTerrain(buffer, spriteH);
-	spriteH->GetSprite("money")->Display(buffer);
+	spriteH->GetSprite("buckler")->Display(buffer);
 	blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 	return;
 }
@@ -392,13 +392,14 @@ void Game::GameLoop(void){
 		AnimatorHolder::Progress( MyTime::GetGameTime() );
 		spriteH->PrintSizeOfSpriteHolder();//Na diagrafei kata thn paradwsh
 		collisionC->CleanUp();
-		terrain->BricksCleanUp(spriteH);
+		terrain->BricksCleanUp(spriteH, powerup);
+		ExecuteBonus();
 		
 		DisplayALL();
 		FPSCalculation(fps);
 		
 		SystemLoopDispatching();
-		spriteH->PrintSizeOfSpriteHolder();//Na diagrafei kata thn paradwsh
+		//spriteH->PrintSizeOfSpriteHolder();//Na diagrafei kata thn paradwsh
 		//AnimatorHolder::printSize();//Na diagrafei kata thn paradwsh
 		//for(int i=0; i < 5000000;++i);
 	}
@@ -426,7 +427,8 @@ void Game::CreateAll(void){
 	theBall	 = CreatingBall();
 	theBoard = CreatingBoard(PAYER_ONE);
 	countAnimationID = terrain->LoadingTerrain(countAnimationID, currLevel);
-	powerup = new PowerUp(animationH, animationFH, spriteH, countAnimationID, CONFIG_FILE);
+	
+	powerup = new PowerUp(animationH, animationFH, spriteH, countAnimationID);
 	assert(buffer || baground || theBall || theBoard || powerup);
 
 	GameStats::Init(0, 3);
@@ -446,5 +448,42 @@ void Game::PlayGame(void){
 
 	GameLoop();
 	KeyLogger::Terminate();
+	return;
+}
+
+/* @precodition: Prepei panta na ektelite meta thn BricksCleanUp()
+ */
+
+//Geia test skopou htan auth na doume an kalounte oi dunamoi
+//Ekei pou kaloume emeis tis dunamhs 8a prepei na kanoume oti leei to xartaki :)
+void Game::ExecuteBonus(){
+	powerUpVector *allThePowers		= powerup->GetPowersToExecute();
+	powerUpVector::iterator start	= allThePowers->begin();
+	powerUpVector::iterator end		= allThePowers->end();
+
+	while( start != end ){	
+		switch( start->first){
+			case MAX:			powerup->Max(theBoard); break;
+			case MIN:			powerup->Max(theBoard); break;
+			case STIC:			std::cout<<"STIC"<<std::endl; break;
+			case LIFE_UP:		//powerup->LifeUp(); break;
+			case CLONE_BALL:	std::cout<<"clone"<<std::endl;break;
+			case SPEED_UP:		powerup->SpeedUp(theBall); break;
+			case SPEED_DOWN:	powerup->SpeedDown(theBall); break;
+			case DESTRUCTION:	std::cout<<"DESTRUCTION"<<std::endl; break;
+			case EXPLOSION:		std::cout<<"EXPLOSION"<<std::endl; break;
+			case BUCKLER:		std::cout<<"BUCKLER"<<std::endl; break;
+			case BAD:			std::cout<<"BAD"<<std::endl; break;
+			case MONEY:			//powerup->Money(); break;
+			case BOMB:			std::cout<<"bomb"<<std::endl; break;
+			case BANANA:		std::cout<<"banana"<<std::endl; break;
+			case FIRE:			std::cout<<"fire"<<std::endl; break;
+			case MONEY_X2:		std::cout<<"MONEY_X2"<<std::endl; break;
+			case NONE:			std::cout<<"none"<<std::endl; break;
+			default: assert(0);
+		}//end of chitc
+		start++;
+	}
+	powerup->ClearPowersToExecute();
 	return;
 }

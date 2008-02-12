@@ -23,6 +23,7 @@ using namespace std;
 
 class Brick : public Sprite{
 private:
+	int speed;
 	int  score;
 	char timesToBreak;
 	bool canBreak, isActive;
@@ -68,6 +69,9 @@ public:
 	//destructor
 	~Brick(void){}
 	
+
+	int GetSpeed(void) const { return speed; }
+	void SetSpeed(int newSpeed) { speed = newSpeed; }
 	int GetScore(void)			const { return score; }
 	bool GetCanBreak(void)		const { return canBreak; }
 	bool IsActive(void)			const { return isActive; }

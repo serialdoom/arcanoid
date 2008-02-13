@@ -133,7 +133,8 @@ void Terrain::BricksCleanUp(SpriteHolder* sh){
 			powerups_t gift = dynamic_cast<Brick *>(tmp)->GetGift();
 			int x = tmp->GetPosition().GetX();
 			int y = tmp->GetPosition().GetY();
-			PowerUp::AddPowerToExecute( std::pair<powerups_t, Point>(gift, new Point(x, y)));
+			if( gift != NONE )
+				PowerUp::AddPowerToExecute( std::pair<powerups_t, Point>(gift, new Point(x, y)));
 			//powerup->AddPowerToExecute( std::pair<powerups_t, Point>(gift, new Point(x, y)));
 			start++;
 			theList->remove(tmp);

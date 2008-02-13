@@ -25,7 +25,7 @@ Brick::Brick(	int x, int y,
 	SetWidth(w);
 	SetHeight(h);
 	SetFrame(frameNo);
-	up		= false;
+	up		= true;
 	speed	= BRICK_SPEED;
 }
 
@@ -50,7 +50,7 @@ Brick::Brick(	const Point  point,
 	SetWidth(w);
 	SetHeight(h);
 	SetFrame(frameNo);
-	up		= false;
+	up		= true;
 	speed	= BRICK_SPEED;
 }
 
@@ -73,7 +73,7 @@ Brick::Brick(	const Point * const point,
 	SetWidth(w);
 	SetHeight(h);
 	SetFrame(frameNo);
-	up		= false;
+	up		= true;
 	speed	= BRICK_SPEED;
 }
 

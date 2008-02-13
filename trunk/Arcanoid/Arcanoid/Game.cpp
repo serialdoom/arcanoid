@@ -32,8 +32,8 @@ static void InitiallizingAllegro(void){
 	install_mouse();
 
 	set_color_depth(16);	// Set the color depth
-	//set_gfx_mode(GFX_AUTODETECT, 640,480,0,0); 
-	set_gfx_mode(GFX_AUTODETECT_WINDOWED, 640,480,0,0); // Change our graphics mode to 640x480
+	set_gfx_mode(GFX_AUTODETECT, 640,480,0,0); 
+	//set_gfx_mode(GFX_AUTODETECT_WINDOWED, 640,480,0,0); // Change our graphics mode to 640x480
 	return;
 }
 /////////////////////////////////////////////////////////////////////
@@ -163,6 +163,33 @@ Ball * Game::CreatingBall(void){
 }
 /////////////////////////////////////////////////////////////////////
 
+//precodition na exei dimiourgi8ei poio prhn to terrain
+NainSpin * Game::CreateNain(void){
+		int x = theBoard->GetPosition().GetX() + (theBoard->GetWidth() / 2);
+		int y = theBall->GetPosition().GetY();
+	nainID	= get_config_string("FILMS", "nainSpin", "");
+	if( !nainID.compare("") ) { assert(0); }
+
+	nain = new NainSpin(x,y,const_cast<AnimationFilm *>(animationFH->GetFilm(nainID))); 
+	assert(nain);
+
+	nain->SetVisibility(true);
+
+	spriteH->Insert(nainID, dynamic_cast<Sprite *>(nain));
+	nainAn = new FrameRangeAnimation(0, 39, x,y,20, true, countAnimationID);
+	countAnimationID++;
+	animationH->Insert(nainID, nainAn);
+	
+	//Add to animator Holder
+	nainAr = new FrameRangeAnimator();
+	nainAr->Start(nain, nainAn, 100);
+	AnimatorHolder::Register(ball);
+	AnimatorHolder::MarkAsRunning(dynamic_cast<Animator*>(nainAr));
+	
+	return nain;
+}
+/////////////////////////////////////////////////////////////////////
+
 void Game::ResetBall(){
 	spriteH->GetSprite(BALL)->SetPosition(
 		get_config_int("BALL", "start_x", -1), get_config_int("BALL", "start_y", -1));
@@ -190,23 +217,25 @@ void Game::SetUpStats(){
 /////////////////////////////////////////////////////////////////////
 
 void Game::DisplayALL(){
-	Sprite *board = board = spriteH->GetSprite(BOARD); 
-	Sprite *ball = spriteH->GetSprite(BALL);
-	
-	assert(baground || buffer || board || ball);
+	assert(baground || buffer || theBoard || theBall || nain);
 	
 	blit(baground, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 	
-	if( board->IsVisible() )
-		board->Display(buffer);
+	if( theBoard->IsVisible() )
+		theBoard->Display(buffer);
 
-	if( ball->IsVisible() )
-		ball->Display(buffer);
+	if( theBall->IsVisible() )
+		theBall->Display(buffer);
+
 	DisplayScore(buffer);
 	DisplayLife(buffer);
 	DisplayLevel(buffer);
 
 	terrain->DisplayTerrain(buffer, spriteH);
+
+	if( nain->IsVisible() )
+		nain->Display(buffer);
+
 	powerup->DesplayAll(buffer, spriteH);
 	blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 	return;
@@ -348,7 +377,7 @@ void Game::SystemLoopDispatching(void){
 				StateHolder::Stop();	//board einai ekinito
 
 			if(InputManager::inputKey.Key_Enter && ball->HasFinished()){
-				ball->Start(spriteH->GetSprite(BALL), movBall, 0);
+				ball->Start(theBall, movBall, 0);
 				AnimatorHolder::MarkAsRunning(ball);
 			}	//moleis 3ekinise to paixnidi kai prepei na patiseis enter gia na arxisei
 			else if( ball->HasFinished() ) {
@@ -365,6 +394,16 @@ void Game::SystemLoopDispatching(void){
 			StateHolder::Run();			//To paixnidi htan paused kai to arxizoume pali
 			AnimatorHolder::Resum();
 		}
+	}
+
+	//Na diagrafei otan apofasiso pou 8a to balw
+	if( !nain->IsVisible() ){
+		int x = theBoard->GetPosition().GetX() + (theBoard->GetWidth() / 2);
+		int y = theBall->GetPosition().GetY();
+
+		nain->SetVisibility(true);
+		nain->SetPosition(x, 0);
+		
 	}
 
 	return;
@@ -386,11 +425,14 @@ void Game::GameLoop(void){
 */		MyTime::SetGameTime();
 
 		InputManager::CheckInput();
+			
+		ai->AIBricks(spriteH);
+	
 
 		collisionC->CollisionCheck();
 		
 		AnimatorHolder::Progress( MyTime::GetGameTime() );
-		spriteH->PrintSizeOfSpriteHolder();//Na diagrafei kata thn paradwsh
+		//spriteH->PrintSizeOfSpriteHolder();//Na diagrafei kata thn paradwsh
 		collisionC->CleanUp();
 		terrain->BricksCleanUp(spriteH, powerup);
 		powerup->ApplyBonus(spriteH, animationH);		
@@ -426,10 +468,12 @@ void Game::CreateAll(void){
 
 	theBall	 = CreatingBall();
 	theBoard = CreatingBoard(PAYER_ONE);
+	nain	 = CreateNain();
 	countAnimationID = terrain->LoadingTerrain(countAnimationID, currLevel);
 	
+	ai = new AI();
 	powerup = new PowerUp(animationH, animationFH, spriteH, countAnimationID);
-	assert(buffer || baground || theBall || theBoard || powerup);
+	assert(buffer || baground || theBall || theBoard || powerup || ai);
 
 	GameStats::Init(0, 3);
 	SetUpStats();
@@ -446,6 +490,7 @@ void Game::PlayGame(void){
 	StateHolder::Init();
 	InputManager::Init();
 
+	
 	GameLoop();
 	KeyLogger::Terminate();
 	return;

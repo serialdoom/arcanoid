@@ -7,14 +7,13 @@
 
 void FrameRangeAnimator::Progress (timestamp_t currTime) {
 
-	while (currTime - lastTime >= anim->GetDelay()) {
-
+	//while (currTime - lastTime >= anim->GetDelay()) {
+	if(currTime - lastTime >= anim->GetDelay()){
 	    if (currFrame == anim->GetEndFrame())
 			currFrame = anim->GetStartFrame();
 	    else
 			++currFrame;
-//TODO
-//	    sprite->Move( anim->GetDx(), anim->GetDy() );
+	    sprite->Move( anim->GetDx(), anim->GetDy() );
 	    sprite->SetFrame(currFrame);
 	    lastTime += anim->GetDelay();
 
@@ -23,7 +22,7 @@ void FrameRangeAnimator::Progress (timestamp_t currTime) {
 			NotifyStopped();
 			return;
 	    }
-	}//end of while
+	}//end of first if
 	return;
 }
 /////////////////////////////////////////////////////////////////////

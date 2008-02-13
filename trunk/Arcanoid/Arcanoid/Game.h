@@ -11,13 +11,16 @@
 #include <allegro.h>
 #include <algorithm> 
 
-
+#include "AI.h"
 #include "Ball.h"
 #include "Point.h"
 #include "Board.h"
 #include "MyTime.h"
+#include "PowerUp.h"
 #include "Terrain.h"
 #include "Animator.h"
+#include "NainSpin.h"
+#include "GameStats.h"
 #include "Animation.h"
 #include "KeyLogger.h"
 #include "StateHolder.h"
@@ -31,14 +34,16 @@
 #include "MovingAnimation.h"
 #include "AnimationHolder.h"
 #include "CollisionChecker.h"
+#include "FrameRangeAnimator.h"
+#include "FrameRangeAnimation.h"
 #include "AnimationFilmHolder.h"
-#include "GameStats.h"
-#include "PowerUp.h"
 
 #define SCORE_MAX_DIGIT 4
 
 class Game {
 private:
+	AI*					ai;
+	NainSpin *			nain;
 	BITMAP *			buffer;
 	BITMAP *			baground;
 	Ball *				theBall;
@@ -56,6 +61,10 @@ private:
 	AnimationHolder *	animationH;
 	CollisionChecker *	collisionC;
 	AnimationFilmHolder*animationFH;
+
+	string				nainID;
+	FrameRangeAnimator*	nainAr;
+	FrameRangeAnimation*nainAn;
 	PowerUp	*			powerup;
 
 	int scoreDigit[SCORE_MAX_DIGIT];
@@ -67,6 +76,7 @@ private:
 	void InitiallizingFilmsInfo(void);
 	void InitiallizingBitmapLoader(void);
 
+	NainSpin * CreateNain(void);
 	Board * CreatingBoard(int playerNo);
 	Ball * CreatingBall(void);
 

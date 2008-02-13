@@ -17,7 +17,7 @@
 #include "AnimatorHolder.h"
 #include "MovingAnimator.h"
 #include "MovingAnimation.h"
-//#include "CollisionChecker.h"
+#include "CollisionChecker.h"
 
 #define MAX_POWER 16
 

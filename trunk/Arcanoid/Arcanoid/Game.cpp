@@ -30,6 +30,8 @@ static void InitiallizingAllegro(void){
 	install_timer();
 	install_keyboard();		// Initialize keyboard routines
 	install_mouse();
+//	if(install_sound(DIGI_AUTODETECT,MIDI_AUTODETECT,NULL) == -1)
+//		std::cout << "Error while loading sound in allegro." << std::endl;
 
 	set_color_depth(16);	// Set the color depth
 	//set_gfx_mode(GFX_AUTODETECT, 640,480,0,0); 
@@ -473,7 +475,8 @@ void Game::CreateAll(void){
 
 	GameStats::Init(0, 3);
 	SetUpStats();
-
+//	theme = load_mp
+//	play_sample(theme, 255, 255, 1000, 1);
 
 	return;
 }

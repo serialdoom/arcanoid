@@ -66,6 +66,7 @@ private:
 	FrameRangeAnimator*	nainAr;
 	FrameRangeAnimation*nainAn;
 	//PowerUp	*			powerup;
+	MIDI *theme, *ping, *pong;
 
 	int scoreDigit[SCORE_MAX_DIGIT];
 	int scoreDigitPos[2];

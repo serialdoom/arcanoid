@@ -4,7 +4,7 @@
 #include "AnimatorHolder.h"
 #include "MovingAnimator.h"
 #include "MovingAnimation.h"
-
+#include "CollisionChecker.h"
 
 
 #define MONEY_BONUS 1000
@@ -50,6 +50,7 @@ void PowerUp::Init( AnimationHolder *ah,
 		PowerUpSpr *newSprite = new PowerUpSpr(new Point(0, 0), const_cast<AnimationFilm*>(afh->GetFilm("powerupsFilm")));
 		newSprite->SetFrame(i);
 		sp->Insert(NamePowerUp[i], newSprite);
+
 
 		//add new animation to animation holder
 		MovingAnimation * mov = new MovingAnimation(0, 0, 1, true, countAnimationID);

@@ -14,6 +14,10 @@ void CollisionChecker::AddMovable(Sprite *toadd){
 	movable.push_back(toadd);
 }
 
+void CollisionChecker::AddPowerUp(Sprite *toadd){
+	powerup.push_back(toadd);
+}
+
 void CollisionChecker::AddUnmovable(Sprite *toadd){
 	//Debugging, use only with CollisionCHeckerTest.cpp std::cout << "Adding " << toadd->x << " to UNmovables.\n";
 	unmovable.push_back(toadd);
@@ -22,6 +26,11 @@ void CollisionChecker::AddUnmovable(Sprite *toadd){
 void CollisionChecker::CollisionCheck(void){
 	//Compare all the movable objects with all the movable objects.
 	for( std::list<Sprite *>::iterator iteMovable = movable.begin(); iteMovable != movable.end() ; ++iteMovable){
+		if(dynamic_cast<Board*>(*iteMovable)){
+			for(std::list<Sprite *>::iterator bonus = powerup.begin(); bonus != powerup.end(); ++bonus){
+				CheckSprites(*iteMovable, *bonus);
+			}
+		}
 		for(std::list<Sprite *>::iterator iteMovable2 = movable.begin(); iteMovable2 != movable.end(); ++iteMovable2){
 			// TODO: do some serious collision checking here.
 			// Debugging checking, use only with CollisionCHeckerTest.cpp if((*iteMovable)->x == (*iteMovable2)->x) std::cout << "Mov with Mov: Collision detected for : " << (*iteMovable)->x << " and " << (*iteMovable2)->x  << std::endl ; //debugging

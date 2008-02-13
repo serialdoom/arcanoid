@@ -1,14 +1,11 @@
 /*Collision checker class */
 
-#ifndef __COLLISIONCHECKER_H_
-#define __COLLISIONCHECKER_H_
-
-
+#ifndef COLLISIONCHECKER_H
+#define COLLISIONCHECKER_H
 
 #include <list>
 
 #include "Sprite.h"
-#include "Brick.h"
 #include "KeyLogger.h"
 
 

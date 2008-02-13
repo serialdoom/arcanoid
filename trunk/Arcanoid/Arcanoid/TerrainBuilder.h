@@ -1,6 +1,6 @@
 /* TerrainBuilder.h */
-#ifndef __TERRAINBUILDER_H__
-#define __TERRAINBUILDER_H__
+#ifndef TERRAINBUILDER_H
+#define TERRAINBUILDER_H
 
 #include <allegro.h>
 #include <fstream>
@@ -10,6 +10,7 @@
 #include "Point.h"
 #include "Brick.h"
 #include "Animator.h"
+#include "GameStats.h"
 #include "Animation.h"
 #include "KeyLogger.h"
 #include "SpriteHolder.h"
@@ -19,7 +20,7 @@
 #include "AnimationHolder.h"
 #include "CollisionChecker.h"
 #include "AnimationFilmHolder.h"
-#include "GameStats.h"
+
 
 
 class TerrainBuilder {

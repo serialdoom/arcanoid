@@ -9,6 +9,7 @@
 #include "KeyLogger.h"
 #include "Terrain.h"
 
+#define MAX_SPEED	5
 #define BALL_SPEED	2
 
 using std::cout;
@@ -23,6 +24,7 @@ Ball::Ball(int start_x, int start_y,
 	old.SetY(start_y);
 	speedX = BALL_SPEED;
 	speedY = BALL_SPEED;
+	maxSpeed	= 
 	goingLeft	= false;
 	goingUp		= true;
 }

@@ -1,5 +1,6 @@
 #include "PowerUp.h"
 #include "PowerUpSpr.h"
+#include "GameStats.h"
 #include "AnimatorHolder.h"
 #include "MovingAnimator.h"
 #include "MovingAnimation.h"
@@ -9,18 +10,24 @@
 #define MONEY_BONUS 1000
 #define BUFF_SZ 12341
 
-const char * PowerUp::AppendIntegerToString( string str, int i){
-	char tmpString[BUFF_SZ];
-	assert( (str.size()+ i) < BUFF_SZ);
-	sprintf_s(tmpString, BUFF_SZ, "%s%d", str.c_str(), i);
-	return _strdup(tmpString);
-}
+Ball*	PowerUp::ball;
+Board*	PowerUp::board;
 
-PowerUp::PowerUp(AnimationHolder *ah, 
-				 AnimationFilmHolder *afh, 
-				 SpriteHolder *sp,
-				 animid_t &countAnimationID)
+std::vector< std::pair<powerups_t, Point> > PowerUp::powersToExecute;
+AnimatorMap		PowerUp::powerupAnimator;
+string			PowerUp::NamePowerUp[MAX_POWER];
+
+
+
+void PowerUp::Init( AnimationHolder *ah, 
+					AnimationFilmHolder *afh, 
+					SpriteHolder *sp,
+					animid_t &countAnimationID,
+					Ball* _ball,
+					Board* _board)
 {
+	ball = _ball;
+	board = _board;
 	NamePowerUp[MAX]			= "max";	
 	NamePowerUp[MIN]			= "min";
 	NamePowerUp[STIC]			= "stic";
@@ -62,7 +69,7 @@ PowerUp::PowerUp(AnimationHolder *ah,
 	}//end of for
 }
 
-
+void PowerUp::clear(void){ powersToExecute.clear(); return; }
 
 //Elegxei gia kathe brick an periexei dwraki h' oxi
 void PowerUp::ApplyBonus(SpriteHolder *sp, AnimationHolder *ah){
@@ -73,19 +80,14 @@ void PowerUp::ApplyBonus(SpriteHolder *sp, AnimationHolder *ah){
 		Sprite* sprite = sp->GetSprite(NamePowerUp[start->first]);	//pernoume to spite
 		sprite->SetVisibility(true);								//makeAsVisibi
 		sprite->SetPosition(start->second);							//set potition
-		
-		//MovingAnimation * manimation	= dynamic_cast<MovingAnimation *>(ah->GetAnimation(NamePowerUp[start->first]));
-		//MovingAnimator * manimator		= dynamic_cast<MovingAnimator *>(powerupAnimator.find(NamePowerUp[start->first])->second);
-		
-		//assert(manimation || manimator);
-
-		//manimator->Start(sprite, manimation, 0);					//kanoume start ton animator
-		//AnimatorHolder::MarkAsRunning(manimator);
 		start++;
 	}
 	powersToExecute.clear();
 	return;
 }	
+
+
+
 
 
 void PowerUp::DesplayAll(BITMAP * bitmap, SpriteHolder *sp){
@@ -100,6 +102,53 @@ void PowerUp::DesplayAll(BITMAP * bitmap, SpriteHolder *sp){
 
 
 
+void PowerUp::SpeedUp(void){
+	if( ball->GetSpeedX() < ball->GetMaxSpeed() && ball->GetSpeedY() < ball->GetMaxSpeed()){
+		ball->SetSpeedX( ball->GetSpeedX() + 1);
+		ball->SetSpeedY( ball->GetSpeedY() + 1);
+	}
+	return;
+}
+
+void PowerUp::SpeedDown(void){
+	int x = ball->GetSpeedX();
+	int y = ball->GetSpeedX();
+	if( x > 1 && y > 1){
+		ball->SetSpeedX( x - 1);
+		ball->SetSpeedY( y - 1);
+	}
+	return;
+}
+
+void PowerUp::Money(){
+	GameStats::IncreaseScore(GameStats::GetScore() + 1000);
+	//score = score + (level * MONEY_BONUS);
+	return;
+}
+
+void PowerUp::LifeUp(){
+	GameStats::IncreaseLife(1);
+	return;
+}
+
+void PowerUp::Max(){
+	int frame = board->GetFrame();
+
+	if(frame < 4)
+		board->SetFrame(frame+1);
+	return;
+}
+
+void PowerUp::Min(){
+	int frame = board->GetFrame();
+	
+	if(frame > 1)
+		board->SetFrame(frame-1);
+	return;
+}
+
+
+/*
 //Edw prepei na kanoume elegxo poso polu grigora mporei na paei h mpala
 void PowerUp::SpeedUp(Ball *ball){
 	ball->SetSpeedX( ball->GetSpeedX() + 1);
@@ -142,3 +191,4 @@ void PowerUp::Min(Board* board){
 		board->SetFrame(frame-1);
 	return;
 }
+*/

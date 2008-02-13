@@ -115,8 +115,8 @@ void Terrain::DisplayTerrain(BITMAP *bitmap, SpriteHolder* sh){
 /////////////////////////////////////////////////////////////////////
 
 
-
-void Terrain::BricksCleanUp(SpriteHolder* sh , PowerUp	* powerup){
+void Terrain::BricksCleanUp(SpriteHolder* sh){
+//void Terrain::BricksCleanUp(SpriteHolder* sh , PowerUp	* powerup){
 	std::list<Sprite *> * theList		= sh->GetDelededList();
 	std::list<Sprite *>::iterator start = theList->begin();
 	std::list<Sprite *>::iterator end	= theList->end();
@@ -133,7 +133,8 @@ void Terrain::BricksCleanUp(SpriteHolder* sh , PowerUp	* powerup){
 			powerups_t gift = dynamic_cast<Brick *>(tmp)->GetGift();
 			int x = tmp->GetPosition().GetX();
 			int y = tmp->GetPosition().GetY();
-			powerup->AddPowerToExecute( std::pair<powerups_t, Point>(gift, new Point(x, y)));
+			PowerUp::AddPowerToExecute( std::pair<powerups_t, Point>(gift, new Point(x, y)));
+			//powerup->AddPowerToExecute( std::pair<powerups_t, Point>(gift, new Point(x, y)));
 			start++;
 			theList->remove(tmp);
 			continue;

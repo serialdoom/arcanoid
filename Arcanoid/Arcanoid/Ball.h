@@ -13,6 +13,7 @@
 
 class Ball : public Sprite {
 private:
+	int maxSpeed;
 	SpriteHolder * sh;
 	Point old;			//Auto edw den xriazetai na einai edw.
 	int speedX, speedY;
@@ -21,6 +22,7 @@ private:
 	void CheckCoordinates(void);
 public:
 
+	int GetMaxSpeed(void) const { return maxSpeed; }
 	void SetSpeedX(int _newspeed);
 	void SetSpeedY(int _newspeed);
 	int GetSpeedX(void);

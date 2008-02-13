@@ -44,37 +44,31 @@ typedef enum powerups_t {
 class PowerUp {
 
 private:
-	std::vector< std::pair<powerups_t, Point> > powersToExecute;
-	AnimatorMap		powerupAnimator;
-	string			NamePowerUp[MAX_POWER];
-	const char *AppendIntegerToString( string str, int i);
-
+	static Ball*	ball;
+	static Board*	board;
+	static std::vector< std::pair<powerups_t, Point> > powersToExecute;
+	static AnimatorMap		powerupAnimator;
+	static string			NamePowerUp[MAX_POWER];
 
 public:
 
-	PowerUp(AnimationHolder *ah, 
-		    AnimationFilmHolder *afh, 
-			SpriteHolder *sp,
-			animid_t &countAnimationID);
+	static void Init(AnimationHolder *ah, 
+			  AnimationFilmHolder *afh, 
+			  SpriteHolder *sp,
+			  animid_t &countAnimationID,
+			  Ball* _ball,
+			  Board* _baord);
 
-	~PowerUp(void);
-
-	void ApplyBonus(SpriteHolder *sp, AnimationHolder *ah);
-	
-	
-	void SpeedUp(Ball *ball);
-	void SpeedDown( Ball *ball);
-	void Money(int &score, int level);
-	void LifeUp(int &lifes);
-	void Max(Board* board);
-	void Min(Board* board);
-	
-	void DesplayAll(BITMAP * bitmap,SpriteHolder *sp);
-
-
-	void AddPowerToExecute( std::pair<powerups_t, Point> item) { powersToExecute.push_back(item); };
-	//void ClearPowersToExecute(void) { powersToExecute.clear(); }
-	//powerUpVector *GetPowersToExecute(void) { return &powersToExecute; }
+	static void clear(void);
+	static void ApplyBonus(SpriteHolder *sp, AnimationHolder *ah);	
+	static void SpeedUp(void);
+	static void SpeedDown(void);
+	static void Money();
+	static void LifeUp();
+	static void Max(void);
+	static void Min(void);
+	static void DesplayAll(BITMAP * bitmap,SpriteHolder *sp);
+	static void AddPowerToExecute( std::pair<powerups_t, Point> item) { powersToExecute.push_back(item); };
 
 };
 

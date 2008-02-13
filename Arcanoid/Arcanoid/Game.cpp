@@ -32,8 +32,8 @@ static void InitiallizingAllegro(void){
 	install_mouse();
 
 	set_color_depth(16);	// Set the color depth
-	set_gfx_mode(GFX_AUTODETECT, 640,480,0,0); 
-	//set_gfx_mode(GFX_AUTODETECT_WINDOWED, 640,480,0,0); // Change our graphics mode to 640x480
+	//set_gfx_mode(GFX_AUTODETECT, 640,480,0,0); 
+	set_gfx_mode(GFX_AUTODETECT_WINDOWED, 640,480,0,0); // Change our graphics mode to 640x480
 	return;
 }
 /////////////////////////////////////////////////////////////////////
@@ -151,7 +151,7 @@ Ball * Game::CreatingBall(void){
 	spriteH->Insert(BALL, dynamic_cast<Sprite *>(theBall));
 
 	//Add to animation Holder
-	movBall = new MovingAnimation(x, y, 1, true, countAnimationID);
+	movBall = new MovingAnimation(x, y, 20, true, countAnimationID);
 	countAnimationID++;
 	animationH->Insert(BALL, movBall );
 	
@@ -236,7 +236,7 @@ void Game::DisplayALL(){
 	if( nain->IsVisible() )
 		nain->Display(buffer);
 
-	powerup->DesplayAll(buffer, spriteH);
+	PowerUp::DesplayAll(buffer, spriteH);
 	blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 	return;
 }
@@ -289,6 +289,7 @@ void Game::DeleteAll(){
 	delete collisionC;
 	delete animationFH;
 	InputManager::Clear();
+	PowerUp::clear();
 }
 /////////////////////////////////////////////////////////////////////
 
@@ -329,7 +330,7 @@ static void FPSCalculation(int &fps){
 	}//else
 	fps++;
 
-	//rest( (fps > 55) ? difftime(theTime, sec) : 0);
+	//rest( (fps > 60) ? difftime(theTime, msec) : 0);
 	return;
 }
 /////////////////////////////////////////////////////////////////////
@@ -424,8 +425,10 @@ void Game::GameLoop(void){
 		AnimatorHolder::Progress( MyTime::GetGameTime() );
 		//spriteH->PrintSizeOfSpriteHolder();//Na diagrafei kata thn paradwsh
 		collisionC->CleanUp();
-		terrain->BricksCleanUp(spriteH, powerup);
-		powerup->ApplyBonus(spriteH, animationH);		
+		terrain->BricksCleanUp(spriteH);
+		PowerUp::ApplyBonus(spriteH, animationH);
+		//terrain->BricksCleanUp(spriteH, powerup);
+		//powerup->ApplyBonus(spriteH, animationH);		
 		
 		DisplayALL();
 		FPSCalculation(fps);
@@ -462,8 +465,10 @@ void Game::CreateAll(void){
 	countAnimationID = terrain->LoadingTerrain(countAnimationID, currLevel);
 	
 	ai = new AI();
-	powerup = new PowerUp(animationH, animationFH, spriteH, countAnimationID);
-	assert(buffer || baground || theBall || theBoard || powerup || ai);
+	PowerUp::Init(animationH, animationFH, spriteH, countAnimationID, theBall,theBoard );
+	assert(buffer || baground || theBall || theBoard || ai);
+	//powerup = new PowerUp(animationH, animationFH, spriteH, countAnimationID, theBall,theBoard );
+	//assert(buffer || baground || theBall || theBoard || powerup || ai);
 
 	GameStats::Init(0, 3);
 	SetUpStats();
@@ -491,6 +496,7 @@ void Game::PlayGame(void){
 
 //Geia test skopou htan auth na doume an kalounte oi dunamoi
 //Ekei pou kaloume emeis tis dunamhs 8a prepei na kanoume oti leei to xartaki :)
+/*
 void Game::ExecuteBonus(){
 	/*powerUpVector *allThePowers		= powerup->GetPowersToExecute();
 	powerUpVector::iterator start	= allThePowers->begin();
@@ -519,6 +525,7 @@ void Game::ExecuteBonus(){
 		}//end of chitc
 		start++;
 	}
-	powerup->ClearPowersToExecute();*/
+	powerup->ClearPowersToExecute();
 	return;
 }
+*/

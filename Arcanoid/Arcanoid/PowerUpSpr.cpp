@@ -1,5 +1,7 @@
 #include "PowerUpSpr.h"
 
+#include "PowerUp.h"
+
 
 #include <iostream>
 
@@ -25,9 +27,10 @@ void PowerUpSpr::Move(const int x, const int y){
 	int tmpY = GetPosition().GetY();
 
 	//Den exei ginei collide me ton katw wall
-	if( (tmpY + GetHeight()) < (Terrain::height+Terrain::coordinates.GetY())  )		
+	if( (tmpY + GetHeight()) < (Terrain::height+Terrain::coordinates.GetY())  ){	
 		SetPosition(GetPosition().GetX(), tmpY + SPEED_POWER);
-	else{											//Kanei collide me ton katw wall
+	}
+	else{											//Kanei collide me ton katw 
 		SetVisibility(false);
 	}
 	return;

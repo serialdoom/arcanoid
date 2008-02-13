@@ -6,7 +6,6 @@
 #include <string>
 #include <allegro.h>
 
-
 #include "Ball.h"
 #include "Point.h"
 #include "Board.h"

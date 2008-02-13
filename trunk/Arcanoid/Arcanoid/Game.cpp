@@ -406,13 +406,14 @@ void Game::GameLoop(void){
 	int fps = 0;
 
 	while( !key[KEY_ESC] && (currLevel < terrain->GetLevelsNo()) ) {
+		if(!GameStats::GetLife()) return;
 		if(GameStats::GetBricksToGo() <= 0) NextLevel();
-/*		if(GameStats::IsLifeLost()) {
+		if(GameStats::IsLifeLost()) {
 			GameStats::ResetLifeLost();
 			ResetBall();
 			ResetBoard();
 		}
-*/		MyTime::SetGameTime();
+		MyTime::SetGameTime();
 
 		InputManager::CheckInput();
 			

@@ -42,7 +42,8 @@ public:
 	void DisplayTerrain(BITMAP *bitmap, SpriteHolder* sh);
 
 	int GetLevelsNo(void) const { return levelsNo; }
-	void BricksCleanUp(SpriteHolder* sh , PowerUp	* powerup);
+	void BricksCleanUp(SpriteHolder* sh);
+	//void BricksCleanUp(SpriteHolder* sh , PowerUp	* powerup);
 
 	Terrain(string _cfg, 
 			AnimationFilmHolder * afh, 

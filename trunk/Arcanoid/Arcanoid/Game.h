@@ -65,7 +65,7 @@ private:
 	string				nainID;
 	FrameRangeAnimator*	nainAr;
 	FrameRangeAnimation*nainAn;
-	PowerUp	*			powerup;
+	//PowerUp	*			powerup;
 
 	int scoreDigit[SCORE_MAX_DIGIT];
 	int scoreDigitPos[2];
@@ -95,7 +95,7 @@ private:
 	void ResetBall(void);
 	void ResetBoard(void);
 
-	void ExecuteBonus();
+	//void ExecuteBonus();
 
 public:
 	

@@ -1,11 +1,4 @@
 #include "PowerUp.h"
-#include "PowerUpSpr.h"
-#include "GameStats.h"
-#include "AnimatorHolder.h"
-#include "MovingAnimator.h"
-#include "MovingAnimation.h"
-#include "CollisionChecker.h"
-
 
 #define MONEY_BONUS 1000
 #define BUFF_SZ 12341

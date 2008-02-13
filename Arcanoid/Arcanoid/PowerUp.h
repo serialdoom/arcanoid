@@ -1,7 +1,6 @@
 #ifndef POWERUP_H
 #define POWERUP_H
 
-
 #include <vector>
 #include <string>
 #include <allegro.h>
@@ -13,8 +12,12 @@
 #include "SpriteHolder.h"
 #include "AnimationHolder.h"
 #include "AnimationFilmHolder.h"
-
-
+#include "PowerUpSpr.h"
+#include "GameStats.h"
+#include "AnimatorHolder.h"
+#include "MovingAnimator.h"
+#include "MovingAnimation.h"
+//#include "CollisionChecker.h"
 
 #define MAX_POWER 16
 

@@ -10,14 +10,13 @@
 #include "Board.h"
 #include "Animator.h"
 #include "SpriteHolder.h"
-#include "AnimationHolder.h"
-#include "AnimationFilmHolder.h"
-#include "PowerUpSpr.h"
-#include "GameStats.h"
 #include "AnimatorHolder.h"
-#include "MovingAnimator.h"
-#include "MovingAnimation.h"
+#include "AnimationHolder.h"
 #include "CollisionChecker.h"
+#include "AnimationFilmHolder.h"
+
+
+
 
 #define MAX_POWER 16
 
@@ -42,7 +41,6 @@ typedef enum powerups_t {
 }powerups_t;
 
 
-
 class PowerUp {
 
 private:
@@ -58,6 +56,7 @@ public:
 			  AnimationFilmHolder *afh, 
 			  SpriteHolder *sp,
 			  animid_t &countAnimationID,
+			  CollisionChecker *ch,
 			  Ball* _ball,
 			  Board* _baord);
 

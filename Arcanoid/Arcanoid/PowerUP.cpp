@@ -1,5 +1,11 @@
 #include "PowerUp.h"
 
+#include "GameStats.h"
+#include "PowerUpSpr.h"
+#include "MovingAnimator.h"
+#include "MovingAnimation.h"
+
+
 #define MONEY_BONUS 1000
 #define BUFF_SZ 12341
 
@@ -16,6 +22,7 @@ void PowerUp::Init( AnimationHolder *ah,
 					AnimationFilmHolder *afh, 
 					SpriteHolder *sp,
 					animid_t &countAnimationID,
+					CollisionChecker *ch,
 					Ball* _ball,
 					Board* _board)
 {

@@ -1,7 +1,7 @@
 #include "CollisionChecker.h"
 //#include <list>
 
-
+#include "Brick.h"
 CollisionChecker::~CollisionChecker(void){
 	movable.clear();
 	unmovable.clear();

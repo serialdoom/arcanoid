@@ -178,6 +178,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\AI.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Animation.cpp"
 				>
 			</File>
@@ -219,6 +223,10 @@
 			</File>
 			<File
 				RelativePath=".\CollisionChecker.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Explosion.cpp"
 				>
 			</File>
 			<File
@@ -270,6 +278,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\NainSpin.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Oblong.cpp"
 				>
 			</File>
@@ -311,6 +323,10 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\AI.h"
+				>
+			</File>
 			<File
 				RelativePath=".\Animation.h"
 				>
@@ -356,6 +372,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Explosion.h"
+				>
+			</File>
+			<File
 				RelativePath=".\FrameListAnimation.h"
 				>
 			</File>
@@ -397,6 +417,10 @@
 			</File>
 			<File
 				RelativePath=".\MyTime.h"
+				>
+			</File>
+			<File
+				RelativePath=".\NainSpin.h"
 				>
 			</File>
 			<File

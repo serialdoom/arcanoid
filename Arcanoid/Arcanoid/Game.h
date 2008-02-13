@@ -68,6 +68,8 @@ private:
 	//PowerUp	*			powerup;
 	MIDI *theme, *ping, *pong;
 
+	//SAMPLE *theme;
+
 	int scoreDigit[SCORE_MAX_DIGIT];
 	int scoreDigitPos[2];
 	int lifeDigitPos[2];

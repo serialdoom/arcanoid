@@ -8,7 +8,6 @@
 #include <string>
 #include <cassert>
 #include <allegro.h>	//Eidea den exw giati xriazete ala stamata na peta la8oi h allgero
-
 #include <iostream>
 
 #include "PowerUp.h"

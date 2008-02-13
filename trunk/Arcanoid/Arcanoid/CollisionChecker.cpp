@@ -1,7 +1,6 @@
 #include "CollisionChecker.h"
 //#include <list>
 
-#include <iostream>
 
 CollisionChecker::~CollisionChecker(void){
 	movable.clear();
@@ -63,7 +62,6 @@ void CollisionChecker::CleanUp(){
 		++iteUnmovable;
 	}
 	todelete.clear();
-	//std::cout << "\n";
 }
 
 bool CollisionChecker::CheckSprites(Sprite *first, Sprite *sec){

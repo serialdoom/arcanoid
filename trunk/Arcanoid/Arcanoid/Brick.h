@@ -29,7 +29,7 @@ private:
 	bool canBreak, isActive;
 	string id;
 	bool up;		//mas leei an to brick paei panw h' katw
-	//powerups_t gift;
+	bool isRunning;
 	powerups_t gift; // mas enhmerwnei an exei paowerup to Brick
 	
 public:
@@ -74,14 +74,18 @@ public:
 	void SetSpeed(int newSpeed) { speed = newSpeed; }
 	int GetScore(void)			const { return score; }
 	bool GetCanBreak(void)		const { return canBreak; }
+	
+	bool IsRunning(void)	const { return isRunning; }
+	void SetIsRunning(bool b)	{ isRunning = b; }
+	
 	bool IsActive(void)			const { return isActive; }
+	void SetIsActive(bool b){ isActive = b;}
 	int GetTimesToBreak(void)	const { return timesToBreak; }
 
 	string GetID(void) const { return id; }
 	void SetID(const string _id) { id = _id; }
 	void SetScore(const int score)	{ this->score = score; }
 	void SetCanBreak(const bool cn) { canBreak = cn; }
-	void SetIsActive(const bool is) { isActive = is; }
 	void SetTimesToBreak(const int times) {timesToBreak = times; }
 	
 

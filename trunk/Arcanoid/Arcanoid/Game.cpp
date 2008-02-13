@@ -11,8 +11,8 @@
 #define PARSE_ONE_SEC	1
 
 #define CONFIG_FILE		"./configs_files/game.cfg"
-#define BUFFER_IMAGE	"./images/bufferEditorsScreen.bmp"
-#define BAGROUND_IMAGE	"./images/editorsScreen.bmp"
+#define BUFFER_IMAGE	"./images/BufferGameScreen.bmp"
+#define BAGROUND_IMAGE	"./images/GameScreen.bmp"
 
 #define BALL			"ball"
 #define PAUSE			"pause"

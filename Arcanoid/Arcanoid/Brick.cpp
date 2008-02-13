@@ -4,7 +4,7 @@
 #include "Brick.h"
 
 
-#define BRICK_SPEED 0
+#define BRICK_SPEED 2
 
 //constructor
 Brick::Brick(	int x, int y,
@@ -25,8 +25,9 @@ Brick::Brick(	int x, int y,
 	SetWidth(w);
 	SetHeight(h);
 	SetFrame(frameNo);
-	up		= true;
-	speed	= BRICK_SPEED;
+	up			= false;
+	speed		= BRICK_SPEED;
+	isRunning	= false;
 }
 
 
@@ -50,8 +51,9 @@ Brick::Brick(	const Point  point,
 	SetWidth(w);
 	SetHeight(h);
 	SetFrame(frameNo);
-	up		= true;
-	speed	= BRICK_SPEED;
+	up			= false;
+	speed		= BRICK_SPEED;
+	isRunning	= false;
 }
 
 //overload constructor 2
@@ -73,8 +75,9 @@ Brick::Brick(	const Point * const point,
 	SetWidth(w);
 	SetHeight(h);
 	SetFrame(frameNo);
-	up		= true;
-	speed	= BRICK_SPEED;
+	up			= false;
+	speed		= BRICK_SPEED;
+	isRunning	= false;
 }
 
 void Brick::Copy(Brick* brick){
@@ -107,13 +110,15 @@ void Brick::Collide(Sprite *s){
 }
 
 void Brick::Move(const int dx, const int dy) {
-	if( !up ){ 
-		SetPosition(GetPosition().GetX(), GetPosition().GetY()+speed);
-		up = true;
-	}
-	else{
-		SetPosition(GetPosition().GetX(), GetPosition().GetY()-speed);
-		up = false;
+	if( isRunning ){
+		if( !up ){ 
+			SetPosition(GetPosition().GetX(), GetPosition().GetY()+speed);
+			up = true;
+		}
+		else{
+			SetPosition(GetPosition().GetX(), GetPosition().GetY()-speed);
+			up = false;
+		}
 	}
 	return;
 }

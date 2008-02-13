@@ -395,17 +395,6 @@ void Game::SystemLoopDispatching(void){
 			AnimatorHolder::Resum();
 		}
 	}
-
-	//Na diagrafei otan apofasiso pou 8a to balw
-	if( !nain->IsVisible() ){
-		int x = theBoard->GetPosition().GetX() + (theBoard->GetWidth() / 2);
-		int y = theBall->GetPosition().GetY();
-
-		nain->SetVisibility(true);
-		nain->SetPosition(x, 0);
-		
-	}
-
 	return;
 }
 /////////////////////////////////////////////////////////////////////
@@ -427,6 +416,7 @@ void Game::GameLoop(void){
 		InputManager::CheckInput();
 			
 		ai->AIBricks(spriteH);
+		ai->AINain(nain, theBoard->GetPosition().GetX() + (theBoard->GetWidth() / 2), 0);
 	
 
 		collisionC->CollisionCheck();

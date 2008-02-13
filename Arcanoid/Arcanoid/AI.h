@@ -1,6 +1,11 @@
+/*
+ *author: koutsop
+ */
+
 #ifndef AI_H
 #define AI_H
 
+#include "NainSpin.h"
 #include "Brick.h"
 #include "Sprite.h"
 #include "SpriteHolder.h"
@@ -12,26 +17,25 @@ private:
 	public: 
 		void operator()(std::pair<string, Sprite*> p) const {
 			if( dynamic_cast<Brick*>(p.second) )
-				dynamic_cast<Brick*>(p.second)->SetSpeed(0);
+				dynamic_cast<Brick*>(p.second)->SetIsRunning(false);
 		}
 	    StopBricksFunctor (void){}
 	};
 	
 	class SetSpeedFunctor : public std::unary_function<Animator*, void> {
-	private:
-		int speed;
 	public: 
 		void operator()(std::pair<string, Sprite*> p) const {
-			if( dynamic_cast<Brick*>(p.second) ){
-				dynamic_cast<Brick*>(p.second)->SetSpeed(speed);
-			}
+			if( dynamic_cast<Brick*>(p.second) )
+				dynamic_cast<Brick*>(p.second)->SetIsRunning(true);
 		}
-		SetSpeedFunctor (int _speed) : speed(_speed){}
+		SetSpeedFunctor (void) {}
 	};
 
 public:
 	void AIBricks(SpriteHolder* sp);
-	void AINain();
+
+	//precodition na exei dimiourgi8ei to terrain prwta
+	void AINain(NainSpin *nain, int dx, int dy);
 	AI(void){}
 	~AI(void){}
 };

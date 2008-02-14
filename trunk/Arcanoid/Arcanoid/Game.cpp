@@ -468,7 +468,7 @@ void Game::CreateAll(void){
 	countAnimationID = terrain->LoadingTerrain(countAnimationID, currLevel);
 	
 	ai = new AI();
-	PowerUp::Init(animationH, animationFH, spriteH, countAnimationID, theBall,theBoard );
+	PowerUp::Init(animationH, animationFH, spriteH, collisionC, countAnimationID, theBall,theBoard );
 	assert(buffer || baground || theBall || theBoard || ai);
 	//powerup = new PowerUp(animationH, animationFH, spriteH, countAnimationID, theBall,theBoard );
 	//assert(buffer || baground || theBall || theBoard || powerup || ai);

@@ -55,8 +55,8 @@ public:
 	static void Init(AnimationHolder *ah, 
 			  AnimationFilmHolder *afh, 
 			  SpriteHolder *sp,
+  			  CollisionChecker *cc,
 			  animid_t &countAnimationID,
-			  CollisionChecker *ch,
 			  Ball* _ball,
 			  Board* _baord);
 

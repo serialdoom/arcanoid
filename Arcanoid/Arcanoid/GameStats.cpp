@@ -2,17 +2,23 @@
 
 #include "GameStats.h"
 
-int GameStats::score;
-char GameStats::life;
-bool GameStats::scoreHasChanged;
-bool GameStats::lifeHasChanged;
-int GameStats::bricksToGo;
-bool GameStats::lifeLost;
-bool GameStats::doubleblicks;
+int		GameStats::score;
+char	GameStats::life;
+bool	GameStats::scoreHasChanged;
+bool	GameStats::lifeHasChanged;
+int		GameStats::bricksToGo = 0;
+bool	GameStats::lifeLost;
+bool	GameStats::doubleblicks;
+
 
 int GameStats::GetBricksToGo(void){
 	return bricksToGo;
 }
+void GameStats::SetBricksToGo(int ammount){
+	bricksToGo = ammount;
+	return;
+}
+
 
 void GameStats::IncreaseBrick(int ammount){
 	bricksToGo += ammount;

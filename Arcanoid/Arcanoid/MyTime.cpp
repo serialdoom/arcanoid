@@ -27,3 +27,12 @@ timestamp_t MyTime::GetSystemDiffTimeInSec(timestamp_t time1, timestamp_t time2)
 timestamp_t MyTime::GetSystemDiffTime(timestamp_t time1, timestamp_t time2){
 	return (time1-time2);
 }
+
+timestamp_t	MyTime::GetGameDiffTimeInSec(timestamp_t time1, timestamp_t time2){
+		return (time1-time2)/CLOCKS_PER_SEC;
+}
+
+timestamp_t MyTime::GetGameDiffTime(timestamp_t time1, timestamp_t time2){
+	return (time1-time2);
+}
+

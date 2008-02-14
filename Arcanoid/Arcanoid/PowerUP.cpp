@@ -95,6 +95,8 @@ void PowerUp::ApplyBonus(SpriteHolder *sp, AnimationHolder *ah){
 	powersToExecute.clear();
 	return;
 }	
+/////////////////////////////////////////////////////////////////////
+
 
 void PowerUp::Bomb(void){
 	SpriteMap::iterator start	= tsp->GetFirst();
@@ -109,6 +111,7 @@ void PowerUp::Bomb(void){
 	}
 	return;
 }
+/////////////////////////////////////////////////////////////////////
 
 
 
@@ -131,25 +134,35 @@ void PowerUp::SpeedUp(void){
 	}
 	return;
 }
+/////////////////////////////////////////////////////////////////////
+
 
 void PowerUp::Destruction(void){
 	ball->SetFuckLevel(true);
 	return;
 }
+/////////////////////////////////////////////////////////////////////
+
 
 void PowerUp::Explosion(void){
 	ball->SetFuckLevel(true);
 }
+/////////////////////////////////////////////////////////////////////
+
 
 void PowerUp::DoubleMoney(void){
 	GameStats::SetDoubleBricks(true);
 	return;
 }
+/////////////////////////////////////////////////////////////////////
+
 
 void PowerUp::Banana(void){
 	ball->SetFrame((ball->GetFrame() == 3)?0:ball->GetFrame()+1);
 	return;
 }
+/////////////////////////////////////////////////////////////////////
+
 
 void PowerUp::Bad(void){
 	ball->SetSpeedX(ball->GetMaxSpeed());
@@ -157,6 +170,8 @@ void PowerUp::Bad(void){
 	board->SetFrame(0);
 	return;
 }
+/////////////////////////////////////////////////////////////////////
+
 
 void PowerUp::SpeedDown(void){
 	int x = ball->GetSpeedX();
@@ -167,16 +182,22 @@ void PowerUp::SpeedDown(void){
 	}
 	return;
 }
+/////////////////////////////////////////////////////////////////////
+
 
 void PowerUp::Money(){
 	GameStats::IncreaseScore(GameStats::GetScore() + 1000);
 	return;
 }
+/////////////////////////////////////////////////////////////////////
+
 
 void PowerUp::LifeUp(){
 	GameStats::IncreaseLife(1);
 	return;
 }
+/////////////////////////////////////////////////////////////////////
+
 
 void PowerUp::Max(){		//ok
 	int frame = board->GetFrame();
@@ -185,6 +206,8 @@ void PowerUp::Max(){		//ok
 		board->SetFrame(frame+1);
 	return;
 }
+/////////////////////////////////////////////////////////////////////
+
 
 void PowerUp::Min(){		//ok
 	int frame = board->GetFrame();
@@ -193,3 +216,4 @@ void PowerUp::Min(){		//ok
 		board->SetFrame(frame-1);
 	return;
 }
+/////////////////////////////////////////////////////////////////////

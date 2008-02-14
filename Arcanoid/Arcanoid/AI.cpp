@@ -18,14 +18,14 @@
 
 
 void AI::AIBricks(SpriteHolder* sh){
-	timestamp_t theTime	= MyTime::GetSystemTime();
+	timestamp_t theTime	= MyTime::GetGameTime();
 	static timestamp_t msec	= 0;
 	static bool insert1 = false;		//mono mia fora se TIME_BRICK_STOP sec na kanei thn for_each
 	static bool insert2 = false;		//mono mia fora se TIME_BRICK_MOVE sec na kanei thn for_each
 
 	if( !msec )  { msec = theTime;}		
 	else{
-		timestamp_t time = MyTime::GetSystemDiffTimeInSec(theTime, msec);
+		timestamp_t time = MyTime::GetGameDiffTimeInSec(theTime, msec);
 		if( time <= TIME_BRICK_STOP+TIME_BRICK_MOVE ){
 			if( time < TIME_BRICK_STOP && !insert1){
 				std::for_each(sh->GetFirst(), sh->GetEnd(), StopBricksFunctor());
@@ -45,12 +45,12 @@ void AI::AIBricks(SpriteHolder* sh){
 
 
 void AI::AINain(NainSpin *nain, int dx, int dy){
-	timestamp_t theTime	= MyTime::GetSystemTime();
+	timestamp_t theTime	= MyTime::GetGameTime();
 	static timestamp_t msec	= 0;
 
 	if( !msec )  { msec = theTime;}		
 	else{
-		timestamp_t time = MyTime::GetSystemDiffTimeInSec(theTime, msec);
+		timestamp_t time = MyTime::GetGameDiffTimeInSec(theTime, msec);
 		if( time >= NAIN_TIME && !nain->IsVisible() ){
 			nain->SetPosition(dx, dy);
 			nain->SetVisibility(true);

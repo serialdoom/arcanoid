@@ -36,7 +36,7 @@ animid_t TerrainBuilder::Load(const char *filename,
 	std::ifstream input; // input stream
 	char buffy[BUFF_SZ];
 	const char *test;
-	int counter = 0, x, y;
+	int counter = 0, x, y, bricksCnt = 0;
 	// variable to hold brick data.
 	Brick *newBrick = 0;
 
@@ -69,8 +69,9 @@ animid_t TerrainBuilder::Load(const char *filename,
 							);
 				
 		delete(brick_id_str);
-		
-		newBrick->SetGift(BOMB);
+
+		if( newBrick->GetTimesToBreak() > 0)
+			bricksCnt++;
 
 		//add to collision Checker and to spriteholder
 		cc->AddUnmovable(dynamic_cast<Sprite *>(newBrick));
@@ -88,7 +89,7 @@ animid_t TerrainBuilder::Load(const char *filename,
 		AnimatorHolder::Register(brick);
 		AnimatorHolder::MarkAsRunning(brick);
 	}
-	GameStats::IncreaseBrick(counter);
+	GameStats::SetBricksToGo(bricksCnt);
 	return countAnimationID;
 }
 

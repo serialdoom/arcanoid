@@ -76,10 +76,9 @@ void PowerUp::clear(void){ powersToExecute.clear(); return; }
 void PowerUp::ApplyBonus(SpriteHolder *sp, AnimationHolder *ah){
 	std::vector< std::pair<powerups_t, Point> >::iterator start	= powersToExecute.begin();
 	std::vector< std::pair<powerups_t, Point> >::iterator end	= powersToExecute.end();
-	int CheckPower[MAX_POWER] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 	
 	while( start != end ){
-		if(start->first != NONE && CheckPower[start->first] == 0 ){
+		if(start->first != NONE ){
 			Sprite* sprite = sp->GetSprite(NamePowerUp[start->first]);	//pernoume to spite
 			if( !sprite->IsVisible() ){
 				sprite->SetVisibility(true);								//makeAsVisibi

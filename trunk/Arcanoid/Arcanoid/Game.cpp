@@ -106,6 +106,7 @@ Board * Game::CreatingBoard(int playerNo){
 	assert(theBoard);
 	collisionC->AddMovable(dynamic_cast<Sprite *>(theBoard));
 	spriteH->Insert(BOARD, dynamic_cast<Sprite *>(theBoard));
+	theBoard->SetFrame(2);
 
 	//Add to animation Holder
 	movBoard = new MovingAnimation(x, y, 1, true, countAnimationID);

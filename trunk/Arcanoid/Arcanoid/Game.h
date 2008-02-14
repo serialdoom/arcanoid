@@ -47,7 +47,6 @@ private:
 	BITMAP *			buffer;
 	BITMAP *			baground;
 	BITMAP *			game_over;
-	BITMAP *			salami;
 	Ball *				theBall;
 	Board *				theBoard;
 	int					currLevel;

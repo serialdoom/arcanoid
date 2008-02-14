@@ -13,7 +13,6 @@
 #define CONFIG_FILE		"./configs_files/game.cfg"
 #define BUFFER_IMAGE	"./images/BufferGameScreen.bmp"
 #define BAGROUND_IMAGE	"./images/GameScreen.bmp"
-#define PAUSE_IMAGE		"./images/salami.bmp"
 #define GAMEOVER		"./images/gameover.bmp"
 
 #define BALL			"ball"
@@ -243,8 +242,6 @@ void Game::DisplayALL(){
 
 	PowerUp::DesplayAll(buffer, spriteH);
 
-	if(StateHolder::IsPaused() && salami)
-		masked_blit(salami, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 	blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 	return;
 }
@@ -471,7 +468,6 @@ void Game::CreateAll(void){
 	buffer		= bitmaps->Load(BUFFER_IMAGE);
 	baground	= bitmaps->Load(BAGROUND_IMAGE);
 	game_over	= bitmaps->Load(GAMEOVER);
-	salami		= bitmaps->Load(PAUSE_IMAGE);
 
 	theBall	 = CreatingBall();
 	theBoard = CreatingBoard(PAYER_ONE);

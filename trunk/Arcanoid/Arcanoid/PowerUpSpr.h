@@ -12,6 +12,10 @@ public:
 	PowerUpSpr(Point point, AnimationFilm* film);
 	virtual void Collide(Sprite *s);
 
+
+	int GetBonusType(void);
+	void SetBonusType(int i);
+
 	void Move(const int x, const int y);
 	~PowerUpSpr();
 };

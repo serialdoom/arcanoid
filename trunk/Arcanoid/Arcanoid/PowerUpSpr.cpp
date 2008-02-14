@@ -9,6 +9,16 @@
 
 #define SPEED_POWER 1
 
+
+int PowerUpSpr::GetBonusType(void){
+	return i;
+}
+
+void PowerUpSpr::SetBonusType(int _i){
+	_i = i;
+	return;
+}
+
 PowerUpSpr::PowerUpSpr(Point point, AnimationFilm* film): Sprite(point, film){
 	this->SetVisibility(false);
 	return;

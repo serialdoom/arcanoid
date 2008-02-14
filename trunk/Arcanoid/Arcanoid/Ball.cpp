@@ -54,7 +54,7 @@ void Ball::CheckCoordinates(void){
 	else if( (y <= startY) && goingUp && !goingLeft ){
 		goingUp		= false;					//up wall
 		goingLeft	= false;
-	}
+	} /* asdasdsd */
 	else if( (x <= startX) && !goingUp && goingLeft ){
 		goingUp		= false;					//left wall
 		goingLeft	= false;

@@ -124,7 +124,7 @@ Board * Game::CreatingBoard(int playerNo){
 void Game::ResetBoard(void){
 	spriteH->GetSprite(BOARD)->SetPosition(
 		get_config_int("BOARD", "start_x", -1), get_config_int("BOARD", "start_y", -1));
-	theBoard->SetFrame(3);
+	theBoard->SetFrame(2);
 	return;
 }
 

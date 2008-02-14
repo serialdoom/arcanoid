@@ -7,14 +7,14 @@
 
 class PowerUpSpr: public Sprite{
 private:
-	int i;
+	int kind;
 public:
 	PowerUpSpr(Point point, AnimationFilm* film);
 	virtual void Collide(Sprite *s);
 
 
-	int GetBonusType(void);
-	void SetBonusType(int i);
+	int GetBonusType(void) const	{ return kind; };
+	void SetBonusType(int _kind)	{ kind = _kind; }
 
 	void Move(const int x, const int y);
 	~PowerUpSpr();

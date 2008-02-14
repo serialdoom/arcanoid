@@ -21,8 +21,8 @@ string			PowerUp::NamePowerUp[MAX_POWER];
 void PowerUp::Init( AnimationHolder *ah, 
 					AnimationFilmHolder *afh, 
 					SpriteHolder *sp,
+					CollisionChecker *ss,
 					animid_t &countAnimationID,
-					CollisionChecker *ch,
 					Ball* _ball,
 					Board* _board)
 {
@@ -50,7 +50,7 @@ void PowerUp::Init( AnimationHolder *ah,
 		PowerUpSpr *newSprite = new PowerUpSpr(new Point(0, 0), const_cast<AnimationFilm*>(afh->GetFilm("powerupsFilm")));
 		newSprite->SetFrame(i);
 		sp->Insert(NamePowerUp[i], newSprite);
-
+		ss->AddPowerUp(newSprite);
 
 		//add new animation to animation holder
 		MovingAnimation * mov = new MovingAnimation(0, 0, 1, true, countAnimationID);

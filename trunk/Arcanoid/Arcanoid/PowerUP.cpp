@@ -26,6 +26,7 @@ void PowerUp::Init( AnimationHolder *ah,
 					Ball* _ball,
 					Board* _board)
 {
+
 	ball = _ball;
 	board = _board;
 	NamePowerUp[MAX]			= "max";	

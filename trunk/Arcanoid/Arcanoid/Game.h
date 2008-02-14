@@ -46,6 +46,8 @@ private:
 	NainSpin *			nain;
 	BITMAP *			buffer;
 	BITMAP *			baground;
+	BITMAP *			game_over;
+	BITMAP *			pause;
 	Ball *				theBall;
 	Board *				theBoard;
 	int					currLevel;

@@ -105,7 +105,7 @@ void PowerUp::DesplayAll(BITMAP * bitmap, SpriteHolder *sp){
 	}
 	return;
 }
-
+/////////////////////////////////////////////////////////////////////
 
 
 
@@ -155,7 +155,6 @@ void PowerUp::SpeedDown(void){
 
 void PowerUp::Money(){
 	GameStats::IncreaseScore(GameStats::GetScore() + 1000);
-	//score = score + (level * MONEY_BONUS);
 	return;
 }
 
@@ -164,7 +163,7 @@ void PowerUp::LifeUp(){
 	return;
 }
 
-void PowerUp::Max(){
+void PowerUp::Max(){		//ok
 	int frame = board->GetFrame();
 
 	if(frame < 4)
@@ -172,56 +171,10 @@ void PowerUp::Max(){
 	return;
 }
 
-void PowerUp::Min(){
+void PowerUp::Min(){		//ok
 	int frame = board->GetFrame();
 	
 	if(frame > 0)
 		board->SetFrame(frame-1);
 	return;
 }
-
-
-/*
-//Edw prepei na kanoume elegxo poso polu grigora mporei na paei h mpala
-void PowerUp::SpeedUp(Ball *ball){
-	ball->SetSpeedX( ball->GetSpeedX() + 1);
-	ball->SetSpeedY( ball->GetSpeedY() + 1);
-	return;
-}
-
-void PowerUp::SpeedDown(Ball *ball){
-	int x = ball->GetSpeedX();
-	int y = ball->GetSpeedX();
-	if( x > 1 && y > 1){
-		ball->SetSpeedX( x - 1);
-		ball->SetSpeedY( y - 1);
-	}
-	return;
-}
-
-void PowerUp::Money(int &score, int level){
-	score = score + (level * MONEY_BONUS);
-	return;
-}
-
-void PowerUp::LifeUp(int &lifes){
-	lifes++;
-	return;
-}
-
-void PowerUp::Max(Board* board){
-	int frame = board->GetFrame();
-
-	if(frame < 4)
-		board->SetFrame(frame+1);
-	return;
-}
-
-void PowerUp::Min(Board* board){
-	int frame = board->GetFrame();
-	
-	if(frame > 1)
-		board->SetFrame(frame-1);
-	return;
-}
-*/

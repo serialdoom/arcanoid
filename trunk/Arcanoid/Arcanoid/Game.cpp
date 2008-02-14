@@ -477,13 +477,9 @@ void Game::CreateAll(void){
 	ai = new AI();
 	PowerUp::Init(animationH, animationFH, spriteH, collisionC, countAnimationID, theBall,theBoard );
 	assert(buffer || baground || theBall || theBoard || ai);
-	//powerup = new PowerUp(animationH, animationFH, spriteH, countAnimationID, theBall,theBoard );
-	//assert(buffer || baground || theBall || theBoard || powerup || ai);
 
 	GameStats::Init(0, 3);
 	SetUpStats();
-//	theme = load_mp
-//	play_sample(theme, 255, 255, 1000, 1);
 
 	return;
 }
@@ -502,41 +498,3 @@ void Game::PlayGame(void){
 	return;
 }
 
-/* @precodition: Prepei panta na ektelite meta thn BricksCleanUp()
- */
-
-//Geia test skopou htan auth na doume an kalounte oi dunamoi
-//Ekei pou kaloume emeis tis dunamhs 8a prepei na kanoume oti leei to xartaki :)
-/*
-void Game::ExecuteBonus(){
-	/*powerUpVector *allThePowers		= powerup->GetPowersToExecute();
-	powerUpVector::iterator start	= allThePowers->begin();
-	powerUpVector::iterator end		= allThePowers->end();
-
-	while( start != end ){	
-		switch( start->first){
-			case MAX:			powerup->ApplyBonus( MAX, spriteH); break;//powerup->Max(theBoard); break;
-			case MIN:			powerup->Max(theBoard); break;
-			case STIC:			std::cout<<"STIC"<<std::endl; break;
-			case LIFE_UP:		//powerup->LifeUp(); break;
-			case CLONE_BALL:	std::cout<<"clone"<<std::endl;break;
-			case SPEED_UP:		powerup->SpeedUp(theBall); break;
-			case SPEED_DOWN:	powerup->SpeedDown(theBall); break;
-			case DESTRUCTION:	std::cout<<"DESTRUCTION"<<std::endl; break;
-			case EXPLOSION:		std::cout<<"EXPLOSION"<<std::endl; break;
-			case BUCKLER:		std::cout<<"BUCKLER"<<std::endl; break;
-			case BAD:			std::cout<<"BAD"<<std::endl; break;
-			case MONEY:			//powerup->Money(); break;
-			case BOMB:			std::cout<<"bomb"<<std::endl; break;
-			case BANANA:		std::cout<<"banana"<<std::endl; break;
-			case FIRE:			std::cout<<"fire"<<std::endl; break;
-			case MONEY_X2:		std::cout<<"MONEY_X2"<<std::endl; break;
-			case NONE:			std::cout<<"none"<<std::endl; break;
-			default: assert(0);
-		}//end of chitc
-		start++;
-	}
-	powerup->ClearPowersToExecute();
-	return;
-}
-*/

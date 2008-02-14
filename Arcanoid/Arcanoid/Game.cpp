@@ -13,6 +13,8 @@
 #define CONFIG_FILE		"./configs_files/game.cfg"
 #define BUFFER_IMAGE	"./images/BufferGameScreen.bmp"
 #define BAGROUND_IMAGE	"./images/GameScreen.bmp"
+#define PAUSE_IMAGE		"./images/pause.bmp"
+#define GAMEOVER		"./images/gameover.bmp"
 
 #define BALL			"ball"
 #define PAUSE			"pause"
@@ -97,7 +99,6 @@ Board * Game::CreatingBoard(int playerNo){
 	y		= get_config_int("BOARD", "start_y", -1);
 	filmID	= get_config_string("FILMS", "board", "");
 	
-	if( !filmID.compare("") ) { assert(0); }
 	if( (x == -1) || (y == -1)) { assert(0); }
 
 	Board *theBoard = new Board( x, y, 
@@ -241,6 +242,9 @@ void Game::DisplayALL(){
 		nain->Display(buffer);
 
 	PowerUp::DesplayAll(buffer, spriteH);
+
+	if(StateHolder::IsPaused())
+		masked_blit(pause, buffer, 0, 0, SCREEN_W/2 - pause->w, SCREEN_H/2 - pause->h, pause->w, pause->h);
 	blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 	return;
 }
@@ -463,6 +467,8 @@ void Game::CreateAll(void){
 
 	buffer		= bitmaps->Load(BUFFER_IMAGE);
 	baground	= bitmaps->Load(BAGROUND_IMAGE);
+	game_over	= bitmaps->Load(GAMEOVER);
+	//pause		= bitmaps->Load(PAUSE_IMAGE);
 
 	theBall	 = CreatingBall();
 	theBoard = CreatingBoard(PAYER_ONE);

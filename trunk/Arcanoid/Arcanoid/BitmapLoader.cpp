@@ -46,7 +46,7 @@ BITMAP * BitmapLoader::Load (const char* path) {
 	BITMAP * b = GetBitmap(path);
 	if (!b) {
 		bitmaps[path] = ( b = load_bitmap(path, NULL) );
-		assert(b); // error sthn ball.
+		assert(b);
 	}
 	return b;
 }

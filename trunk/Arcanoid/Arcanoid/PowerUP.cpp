@@ -101,16 +101,12 @@ void PowerUp::Bomb(void){
 	SpriteMap::iterator	end		= tsp->GetEnd();
 
 	while( start != end ){
+		if( dynamic_cast<Brick *>(start->second)){
+			dynamic_cast<Brick *>(start->second)->SetFrame(dynamic_cast<Brick *>(start->second)->GetTimesToBreak());
+			dynamic_cast<Brick *>(start->second)->SetTimesToBreak(1);
+		}
 		start++;
 	}
-/*	for(SpriteMap::iterator i = tsp->GetFirst();i != tsp->GetEnd();++i){
-		string name = i->first;
-		if(name.substr(0, 4) == "Brick"){
-//			Brick *thebrick = dynamic_cast<Brick *>(i->second);
-//			thebrick->SetFrame(0);
-		}
-	}
-*/
 	return;
 }
 

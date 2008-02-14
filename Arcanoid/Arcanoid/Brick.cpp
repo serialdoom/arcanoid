@@ -148,17 +148,21 @@ bool Brick::QuestionDeath(){
 
 
 int Brick::CalculateRandomPowerUp(){
-    srand((unsigned)time(0)); 
-    int random_integer; 
-    int lowest=0, highest=16; 
-    int range=(highest-lowest)+1;
-    random_integer = lowest+int(range*rand()/(RAND_MAX + 1.0)); 
-	
-	int giftArray[MAX_POWER+1];
 
-	for( int i = MAX; i < NONE; i++)
-		giftArray[i] = i;
+	int arrayPowerup[50];
+	static int random_integer = 0; 
+	if(random_integer == 50)
+	   random_integer = 0;
 
-	return giftArray[random_integer];
-   
+	int tmp = 0;
+	for(int i=0; i<50; i++){
+	   if(tmp == 16)
+		   tmp = 0;
+
+		if(i%2 == 0 || i%3 == 0)
+			arrayPowerup[i] = 16;
+		else
+			arrayPowerup[i] = tmp++;
+	}
+	return arrayPowerup[random_integer++];   
 }

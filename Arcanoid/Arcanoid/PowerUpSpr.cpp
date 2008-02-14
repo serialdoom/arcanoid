@@ -32,7 +32,7 @@ void PowerUpSpr::Collide(Sprite *s){
 			case BUCKLER:								break;	//NO
 			case BAD:			PowerUp::Bad();			break;	//OK
 			case MONEY:			PowerUp::Money();		break;	//OK
-			case BOMB:									break;	//					
+			case BOMB:			PowerUp::Bomb();		break;	//					
 			case BANANA:		PowerUp::Banana();		break;	//OK
 			case FIRE:									break;	//NO
 			case MONEY_X2:		PowerUp::DoubleMoney(); break;	//OK

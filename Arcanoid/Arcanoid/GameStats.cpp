@@ -8,7 +8,7 @@ bool GameStats::scoreHasChanged;
 bool GameStats::lifeHasChanged;
 int GameStats::bricksToGo;
 bool GameStats::lifeLost;
-bool GameStats::doublebricks;
+bool GameStats::doubleblicks;
 
 int GameStats::GetBricksToGo(void){
 	return bricksToGo;
@@ -34,7 +34,7 @@ bool GameStats::IsLifeLost(void){
 	return lifeLost;
 }
 
-void SetDoubleBricks(bool v){
+void GameStats::SetDoubleBricks(bool v){
 	doubleblicks = v;
 }
 
@@ -70,7 +70,7 @@ void GameStats::SetLife(char _life){
 
 void GameStats::IncreaseScore(int ammount){
 	scoreHasChanged = true;
-	score += (doublebricks)?(ammount*2):ammount;
+	score += (doubleblicks)?(ammount*2):ammount;
 	return;
 }
 

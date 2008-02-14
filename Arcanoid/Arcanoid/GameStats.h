@@ -11,7 +11,7 @@ private:
 	static bool scoreHasChanged;
 	static bool lifeHasChanged;
 	static bool lifeLost;
-	static bool doublebricks;
+	static bool doubleblicks;
 
 public:
 	static int GetScore(void);

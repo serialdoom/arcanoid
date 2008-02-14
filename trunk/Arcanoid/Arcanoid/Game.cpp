@@ -198,6 +198,7 @@ void Game::ResetBall(){
 		get_config_int("BALL", "start_x", -1), get_config_int("BALL", "start_y", -1));
 	AnimatorHolder::MarkAsSuspended(ball);
 	ball->Stop();
+	dynamic_cast<Ball *>(spriteH->GetSprite(BALL))->SetFuckLevel(false);
 	return;
 }
 

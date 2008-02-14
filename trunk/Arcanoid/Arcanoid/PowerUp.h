@@ -87,6 +87,11 @@ public:
 	static void LifeUp();
 	static void Max(void);
 	static void Min(void);
+	static void Bad(void);
+	static void Destruction(void);
+	static void Explosion(void);
+	static void Banana(void);
+	static void DoubleMoney(void);
 	static void DesplayAll(BITMAP * bitmap,SpriteHolder *sp);
 	static void AddPowerToExecute( std::pair<powerups_t, Point> item) { powersToExecute.push_back(item); };
 

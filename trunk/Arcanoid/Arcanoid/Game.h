@@ -38,7 +38,7 @@
 #include "FrameRangeAnimation.h"
 #include "AnimationFilmHolder.h"
 
-#define SCORE_MAX_DIGIT 4
+#define SCORE_MAX_DIGIT 6
 
 class Game {
 private:

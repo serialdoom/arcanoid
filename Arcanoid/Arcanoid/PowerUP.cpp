@@ -17,6 +17,7 @@ std::vector< std::pair<powerups_t, Point> > PowerUp::powersToExecute;
 AnimatorMap		PowerUp::powerupAnimator;
 string			PowerUp::NamePowerUp[MAX_POWER];
 
+SpriteHolder * PowerUp::tsp;
 
 
 void PowerUp::Init( AnimationHolder *ah, 
@@ -96,13 +97,20 @@ void PowerUp::ApplyBonus(SpriteHolder *sp, AnimationHolder *ah){
 }	
 
 void PowerUp::Bomb(void){
-	for(SpriteMap::iterator i = tsp->GetFirst();i != tsp->GetEnd();++i){
+	SpriteMap::iterator start	= tsp->GetFirst();
+	SpriteMap::iterator	end		= tsp->GetEnd();
+
+	while( start != end ){
+		start++;
+	}
+/*	for(SpriteMap::iterator i = tsp->GetFirst();i != tsp->GetEnd();++i){
 		string name = i->first;
 		if(name.substr(0, 4) == "Brick"){
 //			Brick *thebrick = dynamic_cast<Brick *>(i->second);
 //			thebrick->SetFrame(0);
 		}
 	}
+*/
 	return;
 }
 

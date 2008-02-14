@@ -68,6 +68,7 @@ private:
 	static std::vector< std::pair<powerups_t, Point> > powersToExecute;
 	static AnimatorMap		powerupAnimator;
 	static string			NamePowerUp[MAX_POWER];
+	static SpriteHolder *tsp;
 
 public:
 	//static int giftArray[MAX_POWER+1];
@@ -88,6 +89,7 @@ public:
 	static void Max(void);
 	static void Min(void);
 	static void Bad(void);
+	static void Bomb(void);
 	static void Destruction(void);
 	static void Explosion(void);
 	static void Banana(void);

@@ -101,7 +101,7 @@ void PowerUp::Bomb(void){
 	SpriteMap::iterator	end		= tsp->GetEnd();
 
 	while( start != end ){
-		if( dynamic_cast<Brick *>(start->second)){
+		if( dynamic_cast<Brick *>(start->second) &&  dynamic_cast<Brick *>(start->second)->GetTimesToBreak() >1){
 			dynamic_cast<Brick *>(start->second)->SetFrame(dynamic_cast<Brick *>(start->second)->GetFrame() - dynamic_cast<Brick *>(start->second)->GetTimesToBreak());
 			dynamic_cast<Brick *>(start->second)->SetTimesToBreak(1);
 		}

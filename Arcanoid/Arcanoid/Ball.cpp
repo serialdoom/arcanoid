@@ -47,11 +47,11 @@ void Ball::CheckCoordinates(void){
 		goingUp		= false;					//right wall
 		goingLeft	= true;
 	}
-	else if( (y == startY) && goingUp && goingLeft ){
+	else if( (y <= startY) && goingUp && goingLeft ){
 		goingUp		= false;					//up wall
 		goingLeft	= true;
 	}
-	else if( (y == startY) && goingUp && !goingLeft ){
+	else if( (y <= startY) && goingUp && !goingLeft ){
 		goingUp		= false;					//up wall
 		goingLeft	= false;
 	}

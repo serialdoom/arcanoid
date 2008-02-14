@@ -1,10 +1,11 @@
 #include "PowerUp.h"
 
+#include "Brick.h"
 #include "GameStats.h"
 #include "PowerUpSpr.h"
 #include "MovingAnimator.h"
 #include "MovingAnimation.h"
-
+#include <string>
 
 #define MONEY_BONUS 1000
 #define BUFF_SZ 12341
@@ -26,7 +27,7 @@ void PowerUp::Init( AnimationHolder *ah,
 					Ball* _ball,
 					Board* _board)
 {
-
+	tsp = sp;
 	ball = _ball;
 	board = _board;
 	NamePowerUp[MAX]			= "max";	
@@ -72,6 +73,7 @@ void PowerUp::Init( AnimationHolder *ah,
 	}//end of for
 }
 
+
 void PowerUp::clear(void){ powersToExecute.clear(); return; }
 
 //Elegxei gia kathe brick an periexei dwraki h' oxi
@@ -93,7 +95,16 @@ void PowerUp::ApplyBonus(SpriteHolder *sp, AnimationHolder *ah){
 	return;
 }	
 
-
+void PowerUp::Bomb(void){
+	for(SpriteMap::iterator i = tsp->GetFirst();i != tsp->GetEnd();++i){
+		string name = i->first;
+		if(name.substr(0, 4) == "Brick"){
+//			Brick *thebrick = dynamic_cast<Brick *>(i->second);
+//			thebrick->SetFrame(0);
+		}
+	}
+	return;
+}
 
 
 

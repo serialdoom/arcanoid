@@ -11,6 +11,7 @@ private:
 	static bool scoreHasChanged;
 	static bool lifeHasChanged;
 	static bool lifeLost;
+	static bool doublebricks;
 
 public:
 	static int GetScore(void);
@@ -26,6 +27,7 @@ public:
 	static void LifeLost(void);
 	static void ResetLifeLost(void);
 	static bool IsLifeLost(void);
+	static void SetDoubleBricks(bool v);
 
 	static void Init(int score, char life);
 	static void Terminate(void);

@@ -89,27 +89,28 @@ void Ball::Collide(Sprite *s){
 		goingUp = true;
 	}
 	else if( dynamic_cast<Brick *>(s) ) {
-		int ballX1 = this->GetPosition().GetX(), ballY1 = this->GetPosition().GetY();
-		int ballX2 = ballX1 + this->GetWidth(), ballY2 = ballY1 + this->GetHeight();
-		int brickX1 = s->GetPosition().GetX(), brickY1 = s->GetPosition().GetY();
-		int brickX2 = brickX1 + s->GetWidth(), brickY2 = brickY1 + s->GetHeight();
+		if(!fuckEverything){
+			int ballX1 = this->GetPosition().GetX(), ballY1 = this->GetPosition().GetY();
+			int ballX2 = ballX1 + this->GetWidth(), ballY2 = ballY1 + this->GetHeight();
+			int brickX1 = s->GetPosition().GetX(), brickY1 = s->GetPosition().GetY();
+			int brickX2 = brickX1 + s->GetWidth(), brickY2 = brickY1 + s->GetHeight();
 
-		//Rotate the ball
-		if //Ball is down, brick is up
-			( (ballX1 >= brickX1-this->GetWidth() || ballX1 <=brickX2) && ballY1 >= brickY2 ){
-				if(GoingUp()) { std::cout << "reversing vertical(1)" << std::endl; ReverseVertical();}
-		}else //Ball is up, brick is down
-			if((ballX1 >= brickX1-this->GetWidth() || ballX1 <=brickX2) && ballY2 <= brickY1 ){
-				if(!GoingUp()){ std::cout << "reversing vertical(2)" << std::endl; ReverseVertical();}
-		}else //Ball is right, brick is left
-			if ( (ballY1 >= brickY1 - this->GetHeight() || ballY1 <= brickY2) && ballX1 >= brickX2 ){
-				if(GoingLeft()) {std::cout << "reversing horizon(1)" << std::endl; ReverseHorizon();}
-		} else //Ball is left, brick is right
-			if( (ballY1 >= brickY1 - this->GetHeight() || ballY1 <= brickY2) && ballX2 <= brickX1 ){
-				if(!GoingLeft()){ std::cout << "reversing horizon(2)" << std::endl; ReverseHorizon();}
-		} else //lol, assert
-			{}//assert(0);
-
+			//Rotate the ball
+			if //Ball is down, brick is up
+				( (ballX1 >= brickX1-this->GetWidth() || ballX1 <=brickX2) && ballY1 >= brickY2 ){
+					if(GoingUp()) { std::cout << "reversing vertical(1)" << std::endl; ReverseVertical();}
+			}else //Ball is up, brick is down
+				if((ballX1 >= brickX1-this->GetWidth() || ballX1 <=brickX2) && ballY2 <= brickY1 ){
+					if(!GoingUp()){ std::cout << "reversing vertical(2)" << std::endl; ReverseVertical();}
+			}else //Ball is right, brick is left
+				if ( (ballY1 >= brickY1 - this->GetHeight() || ballY1 <= brickY2) && ballX1 >= brickX2 ){
+					if(GoingLeft()) {std::cout << "reversing horizon(1)" << std::endl; ReverseHorizon();}
+			} else //Ball is left, brick is right
+				if( (ballY1 >= brickY1 - this->GetHeight() || ballY1 <= brickY2) && ballX2 <= brickX1 ){
+					if(!GoingLeft()){ std::cout << "reversing horizon(2)" << std::endl; ReverseHorizon();}
+			} else //lol, assert
+				{}//assert(0);
+		}
 		if(dynamic_cast<Brick *>(s)->QuestionDeath()){
 			sh->MarkAsDeleted( dynamic_cast<Brick *>(s)->GetID() );
 		}
@@ -150,4 +151,8 @@ int Ball::GetSpeedX(void){
 
 int Ball::GetSpeedY(void){
 	return this->speedY;
+}
+
+void Ball::SetFuckLevel(bool v){
+	fuckEverything = v;
 }

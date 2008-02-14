@@ -18,10 +18,12 @@ private:
 	Point old;			//Auto edw den xriazetai na einai edw.
 	int speedX, speedY;
 	bool goingLeft, goingUp;
+	bool fuckEverything;
 
 	void CheckCoordinates(void);
 public:
 
+	void SetFuckLevel(bool v);
 	int GetMaxSpeed(void) const { return maxSpeed; }
 	void SetSpeedX(int _newspeed);
 	void SetSpeedY(int _newspeed);

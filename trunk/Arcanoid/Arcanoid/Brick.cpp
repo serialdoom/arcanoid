@@ -1,6 +1,9 @@
 /*
  *author: koutsop
  */
+#include <ctime> 
+#include <cstdlib>
+
 #include "Brick.h"
 
 
@@ -28,6 +31,7 @@ Brick::Brick(	int x, int y,
 	up			= false;
 	speed		= BRICK_SPEED;
 	isRunning	= false;
+	SetGift( static_cast<powerups_t>(CalculateRandomPowerUp()) );
 }
 
 
@@ -54,6 +58,7 @@ Brick::Brick(	const Point  point,
 	up			= false;
 	speed		= BRICK_SPEED;
 	isRunning	= false;
+	SetGift(static_cast<powerups_t>(CalculateRandomPowerUp()) );
 }
 
 //overload constructor 2
@@ -78,6 +83,7 @@ Brick::Brick(	const Point * const point,
 	up			= false;
 	speed		= BRICK_SPEED;
 	isRunning	= false;
+	SetGift(static_cast<powerups_t>(CalculateRandomPowerUp()) );
 }
 
 void Brick::Copy(Brick* brick){
@@ -141,4 +147,18 @@ bool Brick::QuestionDeath(){
 }
 
 
+int Brick::CalculateRandomPowerUp(){
+    srand((unsigned)time(0)); 
+    int random_integer; 
+    int lowest=0, highest=16; 
+    int range=(highest-lowest)+1;
+    random_integer = lowest+int(range*rand()/(RAND_MAX + 1.0)); 
+	
+	int giftArray[MAX_POWER+1];
 
+	for( int i = MAX; i < NONE; i++)
+		giftArray[i] = i;
+
+	return giftArray[random_integer];
+   
+}

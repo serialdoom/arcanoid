@@ -20,23 +20,23 @@ void PowerUpSpr::Collide(Sprite *s){
 	if( dynamic_cast<Board*>(s) && IsVisible()){
 		SetVisibility(false);
 		switch(kind){
-			case MAX:			//PowerUp::Max(); break;
-			case MIN:			//PowerUp::Min(); break;
-			case STIC:			break;
-			case LIFE_UP:		break;//PowerUp::LifeUp(); break;
-			case CLONE_BALL:	break;
-			case SPEED_UP:		PowerUp::SpeedUp(); break;
-			case SPEED_DOWN:	break;//PowerUp::SpeedDown(); break;
-			case DESTRUCTION:	break;
-			case EXPLOSION:		break;
-			case BUCKLER:		break;
-			case BAD:			break;
-			case MONEY:			break;//PowerUp::Money(); break;
-			case BOMB:			break;
-			case BANANA:		break;
-			case FIRE:			break;
-			case MONEY_X2:		break;
-			case NONE:			break;
+			case MAX:			PowerUp::Max();			break;	//OK
+			case MIN:			PowerUp::Min();			break;	//OK
+			case STIC:									break;	//NO
+			case LIFE_UP:		PowerUp::LifeUp();		break;	//OK
+			case CLONE_BALL:							break;	//NO
+			case SPEED_UP:		PowerUp::SpeedUp();		break;	//OK
+			case SPEED_DOWN:	PowerUp::SpeedDown();	break;	//OK
+			case DESTRUCTION:	PowerUp::Destruction(); break;	//OK
+			case EXPLOSION:		PowerUp::Explosion();	break;	//OK
+			case BUCKLER:								break;	//NO
+			case BAD:			PowerUp::Bad();			break;	//OK
+			case MONEY:			PowerUp::Money();		break;	//OK
+			case BOMB:									break;	//					
+			case BANANA:		PowerUp::Banana();		break;	//OK
+			case FIRE:									break;	//NO
+			case MONEY_X2:		PowerUp::DoubleMoney(); break;	//OK
+			case NONE:									break;	//NO
 			default: assert(0);
 		}//end of chitc
 	}

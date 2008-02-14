@@ -124,6 +124,7 @@ Board * Game::CreatingBoard(int playerNo){
 void Game::ResetBoard(void){
 	spriteH->GetSprite(BOARD)->SetPosition(
 		get_config_int("BOARD", "start_x", -1), get_config_int("BOARD", "start_y", -1));
+	theBoard->SetFrame(3);
 	return;
 }
 
@@ -412,7 +413,7 @@ void Game::GameLoop(void){
 
 	while( !key[KEY_ESC] && (currLevel < terrain->GetLevelsNo()) ) {
 		if(!GameStats::GetLife()){
-			blit(game_over, screen, 0, 0, 0, 0, game_over->w, game_over->h);
+			blit(game_over, screen, 0, 0, 140, 100, game_over->w, game_over->h);
 			continue;
 		}
 		if(GameStats::GetBricksToGo() <= 0) NextLevel();
@@ -428,24 +429,17 @@ void Game::GameLoop(void){
 		ai->AIBricks(spriteH);
 		ai->AINain(nain, theBoard->GetPosition().GetX() + (theBoard->GetWidth() / 2), 0);
 	
-
 		collisionC->CollisionCheck();
-		
+
 		AnimatorHolder::Progress( MyTime::GetGameTime() );
-		//spriteH->PrintSizeOfSpriteHolder();//Na diagrafei kata thn paradwsh
 		collisionC->CleanUp();
 		terrain->BricksCleanUp(spriteH);
 		PowerUp::ApplyBonus(spriteH, animationH);
-		//terrain->BricksCleanUp(spriteH, powerup);
-		//powerup->ApplyBonus(spriteH, animationH);		
 		
 		DisplayALL();
 		FPSCalculation(fps);
 		
 		SystemLoopDispatching();
-		//spriteH->PrintSizeOfSpriteHolder();//Na diagrafei kata thn paradwsh
-		//AnimatorHolder::printSize();//Na diagrafei kata thn paradwsh
-		//for(int i=0; i < 5000000;++i);
 	}
 	return;
 }

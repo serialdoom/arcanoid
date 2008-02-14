@@ -49,6 +49,7 @@ void PowerUp::Init( AnimationHolder *ah,
 		//add new prite to sprite holder
 		PowerUpSpr *newSprite = new PowerUpSpr(new Point(0, 0), const_cast<AnimationFilm*>(afh->GetFilm("powerupsFilm")));
 		newSprite->SetFrame(i);
+		newSprite->SetBonusType(i);
 		sp->Insert(NamePowerUp[i], newSprite);
 		ss->AddPowerUp(newSprite);
 

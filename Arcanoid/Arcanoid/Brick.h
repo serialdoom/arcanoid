@@ -68,7 +68,7 @@ public:
 	//destructor
 	~Brick(void){}
 	
-
+	int CalculateRandomPowerUp();
 	int GetSpeed(void) const { return speed; }
 	void SetSpeed(int newSpeed) { speed = newSpeed; }
 	int GetScore(void)			const { return score; }

@@ -22,11 +22,12 @@ Ball::Ball(int start_x, int start_y,
 {
 	old.SetX(start_x);
 	old.SetY(start_y);
-	speedX = BALL_SPEED;
-	speedY = BALL_SPEED;
-	maxSpeed	= 
-	goingLeft	= false;
-	goingUp		= true;
+	speedX			= BALL_SPEED;
+	speedY			= BALL_SPEED;
+	maxSpeed		= MAX_SPEED;
+	goingLeft		= false;
+	goingUp			= true;
+	fuckEverything	= false;
 }
 
 

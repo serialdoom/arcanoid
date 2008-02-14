@@ -41,6 +41,25 @@ typedef enum powerups_t {
 }powerups_t;
 
 
+/*= 
+{MAX, 
+    MIN, 
+    STIC, 
+    LIFE_UP,	
+    CLONE_BALL,	
+    SPEED_UP, 
+    SPEED_DOWN,	
+    DESTRUCTION, 
+    EXPLOSION,	
+    BUCKLER, 
+    BAD, 
+    MONEY, 
+    BOMB, 
+    BANANA, 
+    FIRE, 
+    MONEY_X2, 
+	NONE};	
+*/
 class PowerUp {
 
 private:
@@ -51,7 +70,7 @@ private:
 	static string			NamePowerUp[MAX_POWER];
 
 public:
-
+	//static int giftArray[MAX_POWER+1];
 	static void Init(AnimationHolder *ah, 
 			  AnimationFilmHolder *afh, 
 			  SpriteHolder *sp,

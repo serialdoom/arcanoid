@@ -70,7 +70,7 @@ animid_t TerrainBuilder::Load(const char *filename,
 				
 		delete(brick_id_str);
 		
-		newBrick->SetGift(MAX);
+		//newBrick->SetGift(MAX);
 
 		//add to collision Checker and to spriteholder
 		cc->AddUnmovable(dynamic_cast<Sprite *>(newBrick));

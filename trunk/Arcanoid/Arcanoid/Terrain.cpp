@@ -4,7 +4,7 @@
 
 #include "Terrain.h"
 
-
+#include "GameStats.h"
 #include <iostream>
 
 using std::cout;
@@ -117,6 +117,7 @@ void Terrain::DisplayTerrain(BITMAP *bitmap, SpriteHolder* sh){
 
 void Terrain::BricksCleanUp(SpriteHolder* sh){
 //void Terrain::BricksCleanUp(SpriteHolder* sh , PowerUp	* powerup){
+	int cnt = 0;
 	std::list<Sprite *> * theList		= sh->GetDelededList();
 	std::list<Sprite *>::iterator start = theList->begin();
 	std::list<Sprite *>::iterator end	= theList->end();
@@ -137,33 +138,17 @@ void Terrain::BricksCleanUp(SpriteHolder* sh){
 				PowerUp::AddPowerToExecute( std::pair<powerups_t, Point>(gift, new Point(x, y)));
 			//powerup->AddPowerToExecute( std::pair<powerups_t, Point>(gift, new Point(x, y)));
 			start++;
+			
+			//if(dynamic_cast<Brick *>(tmp)->GetTimesToBreak() == 1)
+			//	cnt++;
+
 			theList->remove(tmp);
+			
 			continue;
 		}
 		start++;
 	}//end while
-	
-/*	SpriteMap::iterator	start	= sh->GetFirst();
-	SpriteMap::iterator	end		= sh->GetEnd();
-
-	while( start != end ){			//blepw pio sprite einai brick kai to diagrafw apo ton sh
-		string name			= start->first;
-		Sprite * tmp		= sh->GetSprite( name );
-		if( (dynamic_cast<Brick *>(tmp) != (Sprite*)0) && dynamic_cast<Brick *>(tmp)->IsActive() ){		
-			
-			//edw elegxw an to brick einai running wtse na to kanw stop
-			Animator * anim = bricksAnimator.find(name)->second;
-			if( !anim->HasFinished() ){//einai running animator
-				anim->Stop();
-				AnimatorHolder::MarkAsSuspended(anim);
-			}
-			start++;
-			//sh->EraseSprite(name);
-			continue;
-		}
-		start++;
-	}
-*/
+	//GameStats::SetBricksToGo( GameStats::GetBricksToGo() - cnt );
 	return;
 }
 /////////////////////////////////////////////////////////////////////

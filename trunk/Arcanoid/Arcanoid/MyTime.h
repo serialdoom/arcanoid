@@ -16,6 +16,10 @@ public:
 	static timestamp_t GetGameTime(void);
 	static timestamp_t GetSystemTime(void);
 
+	static timestamp_t GetGameDiffTime(timestamp_t time1, timestamp_t time2);
+	static timestamp_t	GetGameDiffTimeInSec(timestamp_t time1, timestamp_t time2);
+
+
 	/* @target: Na aferei apo to time1 to time2
 	 * @parma : time1 ton prwto xrono, time2 ton deutero xrono
 	 * @return: Thn diafora tou time1 me to time2 se sec

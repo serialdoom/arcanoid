@@ -394,7 +394,13 @@ void Game::SystemLoopDispatching(void){
 			}
 			CheckBoardInput();
 			CheckF1();
+		}		
+		if(GameStats::IsLifeLost()) {
+			GameStats::ResetLifeLost();
+			ResetBall();
+			ResetBoard();
 		}
+
 	}//first if
 	else{ //paused
 		if(InputManager::inputKey.Key_P){//Pati8ike to P
@@ -412,16 +418,13 @@ void Game::GameLoop(void){
 	int fps = 0;
 
 	while( !key[KEY_ESC] && (currLevel < terrain->GetLevelsNo()) ) {
+		
 		if(!GameStats::GetLife()){
 			blit(game_over, screen, 0, 0, 140, 100, game_over->w, game_over->h);
 			continue;
 		}
 		if(GameStats::GetBricksToGo() <= 0) NextLevel();
-		if(GameStats::IsLifeLost()) {
-			GameStats::ResetLifeLost();
-			ResetBall();
-			ResetBoard();
-		}
+
 		MyTime::SetGameTime();
 
 		InputManager::CheckInput();
@@ -432,6 +435,7 @@ void Game::GameLoop(void){
 		collisionC->CollisionCheck();
 
 		AnimatorHolder::Progress( MyTime::GetGameTime() );
+		
 		collisionC->CleanUp();
 		terrain->BricksCleanUp(spriteH);
 		PowerUp::ApplyBonus(spriteH, animationH);
@@ -443,6 +447,8 @@ void Game::GameLoop(void){
 	}
 	return;
 }
+/////////////////////////////////////////////////////////////////////
+
 
 void Game::CreateAll(void){
 	spriteH			= new SpriteHolder();
@@ -477,18 +483,14 @@ void Game::CreateAll(void){
 
 	return;
 }
+/////////////////////////////////////////////////////////////////////
 
 void Game::PlayGame(void){
-	KeyLogger::Init("ArcanoidBigBrother.txt");
-	KeyLogger::Enable();
-
 	CreateAll();
 	StateHolder::Init();
 	InputManager::Init();
 
-	
 	GameLoop();
-	KeyLogger::Terminate();
 	return;
 }
 

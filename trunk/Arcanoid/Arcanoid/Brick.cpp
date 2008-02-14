@@ -148,21 +148,37 @@ bool Brick::QuestionDeath(){
 
 
 int Brick::CalculateRandomPowerUp(){
-
-	int arrayPowerup[50];
-	static int random_integer = 0; 
-	if(random_integer == 50)
+   
+   int arrayPowerup[100];
+   static int random_integer = 0; 
+   if(random_integer == 100)
 	   random_integer = 0;
+   
 
 	int tmp = 0;
-	for(int i=0; i<50; i++){
+	for(int i=0; i<100; i++){
 	   if(tmp == 16)
 		   tmp = 0;
 
-		if(i%2 == 0 || i%3 == 0)
+		if(i%9 != 0)
 			arrayPowerup[i] = 16;
-		else
-			arrayPowerup[i] = tmp++;
+		else{
+				arrayPowerup[i] = tmp++;
+		}
 	}
+
+	if(  arrayPowerup[random_integer] == 9){
+		arrayPowerup[random_integer] = 7;
+	}
+	if(arrayPowerup[random_integer] == 8 ){
+		arrayPowerup[random_integer] = 15;
+	}
+	if(arrayPowerup[random_integer] == 2){
+		arrayPowerup[random_integer] = 12;
+	}
+	if(arrayPowerup[random_integer] == 4 || arrayPowerup[random_integer] == 14)
+		arrayPowerup[random_integer] = 16;
+
 	return arrayPowerup[random_integer++];   
+
 }

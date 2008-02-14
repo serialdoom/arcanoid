@@ -5,15 +5,17 @@
 
 class GameStats {
 private:
-	static int score;
+	static int	score;
 	static char life;
-	static int bricksToGo;
+	static int	bricksToGo;
 	static bool scoreHasChanged;
 	static bool lifeHasChanged;
 	static bool lifeLost;
 	static bool doubleblicks;
 
 public:
+	static void SetBricksToGo(int ammount);
+
 	static int GetScore(void);
 	static int GetLife(void);
 	static int GetBricksToGo(void);

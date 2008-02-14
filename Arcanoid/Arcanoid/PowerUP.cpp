@@ -81,8 +81,10 @@ void PowerUp::ApplyBonus(SpriteHolder *sp, AnimationHolder *ah){
 	while( start != end ){
 		if(start->first != NONE && CheckPower[start->first] == 0 ){
 			Sprite* sprite = sp->GetSprite(NamePowerUp[start->first]);	//pernoume to spite
-			sprite->SetVisibility(true);								//makeAsVisibi
-			sprite->SetPosition(start->second);							//set potition
+			if( !sprite->IsVisible() ){
+				sprite->SetVisibility(true);								//makeAsVisibi
+				sprite->SetPosition(start->second);							//set potition
+			}
 			start++;
 		}
 	}

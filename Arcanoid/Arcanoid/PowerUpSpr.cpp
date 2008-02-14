@@ -17,16 +17,15 @@ PowerUpSpr::PowerUpSpr(Point point, AnimationFilm* film): Sprite(point, film){
 
 
 void PowerUpSpr::Collide(Sprite *s){
-	//TODO: wtite code.
-	if( dynamic_cast<Board*>(s) ){
+	if( dynamic_cast<Board*>(s) && IsVisible()){
 		SetVisibility(false);
 		switch(kind){
 			case MAX:			//PowerUp::Max(); break;
-			case MIN:			PowerUp::Min(); break;
+			case MIN:			//PowerUp::Min(); break;
 			case STIC:			break;
 			case LIFE_UP:		break;//PowerUp::LifeUp(); break;
 			case CLONE_BALL:	break;
-			case SPEED_UP:		break;//PowerUp::SpeedUp(); break;
+			case SPEED_UP:		PowerUp::SpeedUp(); break;
 			case SPEED_DOWN:	break;//PowerUp::SpeedDown(); break;
 			case DESTRUCTION:	break;
 			case EXPLOSION:		break;

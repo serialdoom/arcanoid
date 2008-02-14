@@ -116,6 +116,32 @@ void PowerUp::SpeedUp(void){
 	return;
 }
 
+void PowerUp::Destruction(void){
+	ball->SetFuckLevel(true);
+	return;
+}
+
+void PowerUp::Explosion(void){
+	ball->SetFuckLevel(true);
+}
+
+void PowerUp::DoubleMoney(void){
+	GameStats::SetDoubleBricks(true);
+	return;
+}
+
+void PowerUp::Banana(void){
+	ball->SetFrame((ball->GetFrame() == 3)?0:ball->GetFrame()+1);
+	return;
+}
+
+void PowerUp::Bad(void){
+	ball->SetSpeedX(ball->GetMaxSpeed());
+	ball->SetSpeedY(ball->GetMaxSpeed());
+	board->SetFrame(0);
+	return;
+}
+
 void PowerUp::SpeedDown(void){
 	int x = ball->GetSpeedX();
 	int y = ball->GetSpeedX();
@@ -148,7 +174,7 @@ void PowerUp::Max(){
 void PowerUp::Min(){
 	int frame = board->GetFrame();
 	
-	if(frame > 1)
+	if(frame > 0)
 		board->SetFrame(frame-1);
 	return;
 }

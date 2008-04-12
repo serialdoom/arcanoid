@@ -1,0 +1,22 @@
+function f(){
+	function f1 (){
+		print(3);
+		return f;
+	}
+	
+	function f2 (){
+		print(2);
+		return f1;
+	}
+	
+	function f3 (){
+		print(1);
+		return f2;
+	}
+	
+	print(0);
+	return f3;
+}
+
+f()()();
+aaaaaaaaaa

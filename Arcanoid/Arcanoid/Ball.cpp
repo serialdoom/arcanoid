@@ -98,19 +98,19 @@ void Ball::Collide(Sprite *s){
 
 			//Rotate the ball
 			if //Ball is down, brick is up
-				( (ballX1 >= brickX1-this->GetWidth() || ballX1 <=brickX2) && ballY1 >= brickY2 ){
+				( (ballX1 >= brickX1-this->GetWidth() || ballX1 <=brickX2) && (ballY1-5 >= brickY2 || ballY1+5 >= brickY2) ){
 					if(GoingUp()) {  ReverseVertical();}
 			}else //Ball is up, brick is down
-				if((ballX1 >= brickX1-this->GetWidth() || ballX1 <=brickX2) && ballY2 <= brickY1 ){
+				if((ballX1 >= brickX1-this->GetWidth() || ballX1 <=brickX2) && (ballY2-5 <= brickY1 || ballY2+5 <= brickY1) ){
 					if(!GoingUp()){  ReverseVertical();}
 			}else //Ball is right, brick is left
-				if ( (ballY1 >= brickY1 - this->GetHeight() || ballY1 <= brickY2) && ballX1 >= brickX2 ){
+				if ( (ballY1 >= brickY1 - this->GetHeight() || ballY1 <= brickY2) && (ballX1-5 >= brickX2 || ballX1+5 >= brickX2)){
 					if(GoingLeft()) { ReverseHorizon();}
 			} else //Ball is left, brick is right
-				if( (ballY1 >= brickY1 - this->GetHeight() || ballY1 <= brickY2) && ballX2 <= brickX1 ){
+				if( (ballY1 >= brickY1 - this->GetHeight() || ballY1 <= brickY2) && (ballX2-5 <= brickX1 || ballX2+5 <= brickX1) ){
 					if(!GoingLeft()){  ReverseHorizon();}
 			} else //lol, assert
-				{}//assert(0);
+				{/*assert(0);*/}
 		}
 		if(dynamic_cast<Brick *>(s)->QuestionDeath()){
 			sh->MarkAsDeleted( dynamic_cast<Brick *>(s)->GetID() );

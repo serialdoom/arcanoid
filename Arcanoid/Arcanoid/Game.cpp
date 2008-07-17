@@ -35,8 +35,8 @@ static void InitiallizingAllegro(void){
 //		std::cout << "Error while loading sound in allegro." << std::endl;
 
 	set_color_depth(16);	// Set the color depth
-	//set_gfx_mode(GFX_AUTODETECT, 640,480,0,0); 
-	set_gfx_mode(GFX_AUTODETECT_WINDOWED, 640,480,0,0); // Change our graphics mode to 640x480
+	set_gfx_mode(GFX_AUTODETECT, 640,480,0,0); 
+	//set_gfx_mode(GFX_AUTODETECT_WINDOWED, 640,480,0,0); // Change our graphics mode to 640x480
 	return;
 }
 /////////////////////////////////////////////////////////////////////
@@ -420,7 +420,7 @@ void Game::GameLoop(void){
 	while( !key[KEY_ESC] && (currLevel < terrain->GetLevelsNo()) ) {
 		
 		if(!GameStats::GetLife()){
-			blit(game_over, screen, 0, 0, 140, 100, game_over->w, game_over->h);
+			blit(game_over, screen, 0, 0, 0, 0, game_over->w, game_over->h);
 			continue;
 		}
 		if(GameStats::GetBricksToGo() <= 0) NextLevel();
